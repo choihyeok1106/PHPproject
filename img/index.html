@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>한놈두식이</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+        $(function() {
+            $("#logo").click(function() {
+                location.href = "index.html";
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-primary navbar-dark fixed-top">
+        <img class="navbar-brand" id="logo" src="./img/logo.jpg">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="board.html">월택/분실</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">과팅</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">시험족보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">스포츠</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">밥한끼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">대나무숲</a>
+                </li>
+            </ul>
+            <div class="row">
+                <button class="btn btn-success text-right">
+                로그인
+            </button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+                <!-- The slideshow -->
+                <div class="carousel-inner" id="silde">
+                    <div class="carousel-item active">
+                        <img src="./img/silde.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./img/silde1.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./img/silde2.png">
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                 </a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>파주캠 두원공대 T.031-935-7114<span>|</span>&copy;choihyeok</p>
+    </footer>
+</body>
+
+</html>
+

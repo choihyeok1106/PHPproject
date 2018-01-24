@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>한놈두식이</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <script>
+        $(function() {
+            $("#logo").click(function() {
+                location.href = "index.php";
+            });
+            $("#write1").click(function() {
+                location.href = "boardinsert.php";
+            })
+            $(".hidden").hide();
+        })
+    </script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-primary navbar-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img class="navbar-brand" alt="로고" src="./img/logo.jpg" style="width:60px;">
+        </a>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="board.php">월택/분실</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">과팅</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">시험족보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">스포츠</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">밥한끼</a>
+                </li>
+                <li class="navbar-right">
+                    <a class="nav-link" href="#">대나무숲</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav kakao">
+                <li class="nav-item">
+                    <a id="kakao-login-btn"></a>
+                    <a href="http://developers.kakao.com/logout"></a>
+                    <script type='text/javascript'>
+                        //<![CDATA[
+                        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+                        Kakao.init('42d97cde42e9b8b602b9f7ad1bbd5d6f');
+                        // 카카오 로그인 버튼을 생성합니다.
+                        Kakao.Auth.createLoginButton({
+                            container: '#kakao-login-btn',
+                            success: function(authObj) {
+                                alert(JSON.stringify(authObj));
+                            },
+                            fail: function(err) {
+                                alert(JSON.stringify(err));
+                            }
+                        });
+                        //]]>
+                    </script>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <?php echo $row['category'];?>
+                    </div>
+                    <?php
+                if($row['category']=='대나무숲(익명글)'){                   
+                ?>
+                        <div class="col-md-3 text-center"><span style="margin-right:4px;">작성자 : 익명 </span></div>
+                        <?php } else {?>
+                        <div class="col-md-3 text-center"><span style="margin-right:4px;">작성자 :</span>
+                            <?php echo $row['name']?>
+                        </div>
+                        <?php }?>
+                        <div class="col-md-3 text-right">
+                            <?php echo $row['time']?>
+                        </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <h4 class="card-title" style="margin-bottom:30px;">
+                    <?php echo $row['title']?>
+                </h4>
+                <p class="card-text">
+                    <?php echo $row['contents']?>
+                    삼겹살 드실분?                </p>
+                <?php include 'Editpopup.php';?>
+            </div>
+        </div>
+        <div class="input-group" style="border: ">
+            <textarea class="col-xs-10 border border-right-0 form-control" id="commnet" rows="5" placeholder="댓글을 달아주세요. 욕설 / 비방시에 제재 될 수 있습니다. 글자수는 400자로 제한합니다."></textarea>
+            <span class="col-xs-2 btn btn-info" style="padding-top:3%;">작성</span>
+        </div>
+        <div class="row" style="margin: 0; margin:2% 0px 1.5%; border:2px solid #87bfff; border-radius: 8px;">
+            <div class="col-md-5" style="margin: 1%;">
+                <div>작성자: 최 혁</div>
+            </div>
+            <div class="col-md-6 text-right" style="margin: 1% 0px 1% 6%;">
+                <div>2018-01-17 18:24:42</div>
+                <div class="hidden">1</div>
+            </div>
+            <div class="col-md-12" style="font-size: 20px;">
+                같이 드실래요? ㄱㄱㄱ?
+            </div>
+            <div class="col-md-12 text-right" style="margin-bottom: 5px;"><button class="btn btn-info">편집</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
