@@ -30,7 +30,7 @@ session_start();?>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <a href="#"><img src="./img/silde1.jpg"></a>
+                        <a href="http://www.doowon.ac.kr/main.do"><img src="./img/silde1.jpg"></a>
                     </div>
                     <div class="carousel-item">
                         <a href="https://kiss.doowon.ac.kr/"><img src="./img/silde2.png"></a>
