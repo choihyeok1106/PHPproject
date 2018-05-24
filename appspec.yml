@@ -1,0 +1,25 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /www/BackOffice
+permissions:
+  - object: /www/BackOffice
+    pattern: "**"
+    owner: www
+    group: www
+    mode: 755
+    type:
+      - directory
+  - object: /www/BackOffice
+    pattern: "**"
+    owner: www
+    group: www
+    mode: 644
+    type:
+      - file
+hooks:
+  AfterInstall:
+    - location: scripts/deploy/app-update.sh
+      timeout: 1800
+      runas: root
