@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 cd /www/BackOffice
-composer install --no-plugins --no-scripts
-#composer update --no-plugins --no-scripts
+
+#composer install --no-plugins --no-scripts
+composer update --no-plugins --no-scripts
 
 
 if [ -d "./bootstrap/cache" ]

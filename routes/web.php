@@ -12,9 +12,5 @@
 */
 
 Route::get('/', function () {
-    
-    Redis::set('name', 'Redis test - I am groot!');
-    
-    dd(Redis::get('name'));
-    
+    return view('welcome');
 });
