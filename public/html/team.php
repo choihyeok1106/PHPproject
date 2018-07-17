@@ -1,29 +1,23 @@
 <?php include './common/head.php' ?>
 
-<body class="horizontal-menu horizontal-app-menu account">
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
 <?php include './common/header.php' ?>
+<!-- BEGIN CONTAINER -->
 <div class="page-container">
+    <?php include './common/sidebar.php' ?>
+    <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
-        <div class="content">
-            <!-- START PAGE CONTENT -->
-            <div class="md-container">
-
-                <h3 class="page-title">Team Dashboard</h3>
-
-
-            </div>
-            <!-- END PAGE CONTENT -->
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <?php include 'blank.php' ?>
         </div>
-        <?php include './common/footer.php' ?>
+        <!-- END CONTENT BODY -->
     </div>
+    <!-- END CONTENT -->
+    <?php include './common/quick-sidebar.php' ?>
 </div>
-<?php include './common/quickview.php' ?>
+<!-- END CONTAINER -->
+<?php include './common/footer.php' ?>
 <?php include './common/script.php' ?>
-<!-- PAGE SCRIPT -->
-<!-- BEGIN CORE TEMPLATE JS -->
-<script src="/pages/js/pages.js?<?= v() ?>"></script>
-
-
 </body>
 </html>
-

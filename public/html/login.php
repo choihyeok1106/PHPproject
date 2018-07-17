@@ -1,151 +1,135 @@
-<?php include './common/head.php' ?>
-<script type="text/javascript">
-    window.onload = function () {
-        // fix for windows 8
-        if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
-            document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="/pages/css/windows.chrome.fix.css" />'
-    }
-</script>
-<body class="fixed-header ">
-<div class="login-wrapper ">
-    <!-- START Login Background Pic Wrapper-->
-    <div class="bg-pic">
-        <!-- START Background Pic-->
-        <div class="login-bg" style="background-image: url('https://livepure.com/img/vidthumb.jpg')">
-            <video id="heroVid" playsinline="" autoplay="" muted="" loop="">
-                <source src="https://livepure.com/img/vidhero2render.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+<?php include './common/inc.php' ?>
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8"/>
+    <title>Virtual Back Office</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+    <link href="<?= STATIC_SERVER ?>/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= STATIC_SERVER ?>/vendors/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= STATIC_SERVER ?>/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= STATIC_SERVER ?>/vendors/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="/css/style.css<?= v() ?>" rel="stylesheet" type="text/css"/>
+    <link href="/css/pages/login.css<?= v() ?>" rel="stylesheet" type="text/css"/>
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="/favicon.ico"/>
+</head>
+<!-- END HEAD -->
+<body class=" login">
+<!-- BEGIN : LOGIN PAGE 5-1 -->
+<div class="user-login-5">
+    <div class="row bs-reset">
+        <div class="col-md-6 bs-reset mt-login-5-bsfix">
+            <div class="login-bg" style="background-image:url('https://livepure.com/img/vidthumb.jpg')">
+                <a href="/html"><img class="login-logo" src="/img/logo_white.png"/></a>
+            </div>
         </div>
-        <!-- END Background Pic-->
-        <!-- START Background Caption-->
-        <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
-            <h2 class="semi-bold text-white">
-                People United</h2>
-            <p class="small">
-                PURE is devoted to globally empowering people to become the best version of themselves through innovative products and financial
-                opportunity.
-            </p>
-        </div>
-        <!-- END Background Caption-->
-    </div>
-    <!-- END Login Background Pic Wrapper-->
-    <!-- START Login Right Container-->
-    <div class="login-container bg-white">
-        <div class="login-wrap">
-            <div class="login-form">
-                <a href="/html">
-                    <img src="/img/logo/logo.png" alt="logo">
-                </a>
-                <p class="p-t-35">Sign into your pages account</p>
-                <!-- START Login Form -->
-                <form id="form-login" class="p-t-15" role="form" action="">
-                    <!-- START Form Control-->
-                    <div class="form-group form-group-default">
-                        <label>Username</label>
-                        <div class="controls">
-                            <input type="text" name="username" class="form-control" required>
-                        </div>
+        <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
+            <div class="login-content">
+                <h1>Virtual Back Office Login</h1>
+                <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor
+                    sit amet, coectetuer adipiscing. </p>
+                <form action="javascript:;" class="login-form" method="post">
+                    <div class="alert alert-danger display-hide">
+                        <button class="close" data-close="alert"></button>
+                        <span>Enter any username and password. </span>
                     </div>
-                    <!-- END Form Control-->
-                    <!-- START Form Control-->
-                    <div class="form-group form-group-default">
-                        <label>Password</label>
-                        <div class="controls">
-                            <input type="password" class="form-control" name="password" required>
-                        </div>
-                    </div>
-                    <!-- START Form Control-->
                     <div class="row">
-                        <div class="grid-6">
-                            <div class="checkbox ">
-                                <input type="checkbox" value="1" id="checkbox1">
-                                <label for="checkbox1">Keep Me Signed in</label>
+                        <div class="col-xs-6">
+                            <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off"
+                                   placeholder="Username" name="username" required/></div>
+                        <div class="col-xs-6">
+                            <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off"
+                                   placeholder="Password" name="password" required/></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="rem-password">
+                                <label class="rememberme mt-checkbox mt-checkbox-outline">
+                                    <input type="checkbox" name="remember" value="1"/> Remember me
+                                    <span></span>
+                                </label>
                             </div>
                         </div>
-                        <div class="grid-6 p-t-10 text-right">
-                            <a href="#" class="small">Forgotten your password?</a>
+                        <div class="col-sm-8 text-right">
+                            <div class="forgot-password">
+                                <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                            </div>
+                            <button class="btn blue" type="submit">Sign In</button>
                         </div>
                     </div>
-                    <!-- END Form Control-->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button class="btn btn-complete m-t-10 btn-block" type="submit">Login</button>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="enroll.php" class="btn btn-success m-t-10 btn-block">Join Live PURE</a>
-                        </div>
+                    <div class="login-block">
+                        <span>
+                            Don't have an account? &nbsp; <a href="enroll.php">Join Live PURE</a>
+                        </span>
                     </div>
                 </form>
-            </div>
-            <!--END Login Form-->
-            <div class="login-bottom">
-                <div class="clearfix">
-                    <div class="col-sm-12 login-info">
-                        <p>
-                            Contact us at <a href="tell:866-535-5888">(866) 535-5888</a> or <a href="mailto:info@livepure.com">info@livepure.com</a>
-                        </p>
-                        <p>
-                            For all media inquiries, contact <a href="mailto:media@livepure.com">media@livepure.com</a>
-                        </p>
-                        <small>
-                            7164 Technology Drive, Suite 100 Frisco, TX 75033
-                        </small>
+                <!-- BEGIN FORGOT PASSWORD FORM -->
+                <form class="forget-form" action="javascript:;" method="post">
+                    <h3 class="font-green">Forgot Password ?</h3>
+                    <p> Enter your e-mail address below to reset your password. </p>
+                    <div class="form-group">
+                        <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email"/>
                     </div>
-                </div>
-                <div class="login-copyright">
-                    &copy; 2018 PURE, Inc. All rights reserved.
-                    <div class="btn-group pull-right">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-youtube"></i></a>
+                    <div class="form-actions">
+                        <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
+                        <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
                     </div>
-                </div>
+                </form>
+                <!-- END FORGOT PASSWORD FORM -->
             </div>
-        </div>
-
-        <div class="dropdown locale">
-            <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-globe"></i>&nbsp;
-                English
-                <i class="fa fa-angle-down hint-text"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
-                <a href="#" class="dropdown-item">English</a>
-                <a href="#" class="dropdown-item">Korean</a>
+            <div class="login-footer">
+                <ul class="login-social">
+                    <li>
+                        <select id="locale">
+                            <option>English</option>
+                            <option>Korean</option>
+                        </select>
+                    </li>
+                </ul>
+                <div class="login-copyright margin-top-5">
+                    <p>&copy; PURE, Inc. 2019</p>
+                </div>
             </div>
         </div>
     </div>
-    <!-- END Login Right Container-->
 </div>
-<!-- START OVERLAY -->
-
-<!-- END OVERLAY -->
+<!-- END : LOGIN PAGE 5-1 -->
 <?php include './common/script.php' ?>
-<script src="/vendors/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-<script src="/pages/js/pages.js"></script>
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="<?= STATIC_SERVER ?>/vendors/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="<?= STATIC_SERVER ?>/vendors/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+<script src="<?= STATIC_SERVER ?>/vendors/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="<?= STATIC_SERVER ?>/vendors/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
+
 <script>
-    function initForm() {
-        $('#form-login').validate()
-    }
-
-    function initVideo() {
-        if ($(window).width() > 770) {
-            $("#heroVid").show();
-        } else {
-            $("#heroVid").hide();
-        }
-    }
-
-    $(function () {
-        initVideo();
-        initForm();
-    });
-
-    $(window).resize(function () {
-        initVideo();
-    });
+    var backstretch = [
+        "https://livepure.com/img/vidthumb.jpg",
+        "/assets/pages/img/login/bg1.jpg",
+        "/assets/pages/img/login/bg2.jpg",
+        "/assets/pages/img/login/bg3.jpg"
+    ];
 </script>
+
+<script src="/js/pages/login.js?<?= v() ?>" type="text/javascript"></script>
+
 </body>
+
 </html>

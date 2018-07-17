@@ -1,160 +1,169 @@
 <?php include './common/head.php' ?>
-
-<body class="horizontal-menu horizontal-app-menu orders">
-
+<link href="/css/pages/invoice.min.css" rel="stylesheet" type="text/css" />
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+<?php include './common/header.php' ?>
+<!-- BEGIN CONTAINER -->
 <div class="page-container">
+    <?php include './common/sidebar.php' ?>
+    <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
-        <div class="content">
-            <!-- START PAGE CONTENT -->
-            <div class="md-container">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <i class="icon-home"></i>
+                        <a href="/html">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li>
+                        <span>Invoice</span>
+                    </li>
+                </ul>
+            </div>
 
-                <div class="card card-default m-t-20">
-                    <div class="card-body">
-                        <div class="invoice padding-50 sm-padding-10">
-                            <div>
-                                <div class="pull-left">
-                                    <img width="235" height="47" alt="" class="invoice-logo" data-src-retina="/img/invoice/squarespace2x.png" data-src="/img/invoice/squarespace.png" src="/img/invoice/squarespace2x.png">
-                                    <address class="m-t-10">
-                                        Apple Enterprise Sales
-                                        <br>(877) 412-7753.
-                                        <br>
-                                    </address>
-                                </div>
-                                <div class="pull-right sm-m-t-20">
-                                    <h2 class="font-montserrat all-caps hint-text">Invoice</h2>
-                                </div>
-                                <div class="clearfix"></div>
+            <div class="portlet light">
+
+                <div class="portlet-body">
+                    <div class="invoice">
+                        <div class="row invoice-logo">
+                            <div class="col-xs-6 invoice-logo-space">
+                                <img src="/img/logo.png?v=1" class="img-responsive" alt=""> </div>
+                            <div class="col-xs-6">
+                                <p> #5652256 / 28 Feb 2013
+                                    <span class="muted"> Consectetuer adipiscing elit </span>
+                                </p>
                             </div>
-                            <br>
-                            <br>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-lg-9 col-sm-height sm-no-padding">
-                                        <p class="small no-margin">Invoice to</p>
-                                        <h5 class="semi-bold m-t-0">Darren Forthway</h5>
-                                        <address>
-                                            <strong>Pages Incoperated.</strong>
-                                            <br>page.inc
-                                            <br>
-                                            1600 Amphitheatre Pkwy, Mountain View,<br>
-                                            CA 94043, United States
-                                        </address>
-                                    </div>
-                                    <div class="col-lg-3 sm-no-padding sm-p-b-20 d-flex align-items-end justify-content-between">
-                                        <div>
-                                            <div class="font-montserrat bold all-caps">Invoice No :</div>
-                                            <div class="font-montserrat bold all-caps">Invoice date :</div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="">0047</div>
-                                            <div class="">29/09/14</div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <h3>Client:</h3>
+                                <ul class="list-unstyled">
+                                    <li> John Doe </li>
+                                    <li> Mr Nilson Otto </li>
+                                    <li> FoodMaster Ltd </li>
+                                    <li> Madrid </li>
+                                    <li> Spain </li>
+                                    <li> 1982 OOP </li>
+                                </ul>
                             </div>
-                            <div class="table-responsive table-invoice">
-                                <table class="table m-t-50">
+                            <div class="col-xs-4">
+                                <h3>About:</h3>
+                                <ul class="list-unstyled">
+                                    <li> Drem psum dolor sit amet </li>
+                                    <li> Laoreet dolore magna </li>
+                                    <li> Consectetuer adipiscing elit </li>
+                                    <li> Magna aliquam tincidunt erat volutpat </li>
+                                    <li> Olor sit amet adipiscing eli </li>
+                                    <li> Laoreet dolore magna </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-4 invoice-payment">
+                                <h3>Payment Details:</h3>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <strong>V.A.T Reg #:</strong> 542554(DEMO)78 </li>
+                                    <li>
+                                        <strong>Account Name:</strong> FoodMaster Ltd </li>
+                                    <li>
+                                        <strong>SWIFT code:</strong> 45454DEMO545DEMO </li>
+                                    <li>
+                                        <strong>Account Name:</strong> FoodMaster Ltd </li>
+                                    <li>
+                                        <strong>SWIFT code:</strong> 45454DEMO545DEMO </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table table-striped table-hover">
                                     <thead>
                                     <tr>
-                                        <th class="">Task Description</th>
-                                        <th class="text-center">Rate</th>
-                                        <th class="text-center">Hours</th>
-                                        <th class="text-right">Total</th>
+                                        <th> # </th>
+                                        <th> Item </th>
+                                        <th class="hidden-xs"> Description </th>
+                                        <th class="hidden-xs"> Quantity </th>
+                                        <th class="hidden-xs"> Unit Cost </th>
+                                        <th> Total </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td class="">
-                                            <p class="text-black">Character Illustration</p>
-                                            <p class="small hint-text">
-                                                Character Design projects from the latest top online portfolios on Behance.
-                                            </p>
-                                        </td>
-                                        <td class="text-center">$65.00</td>
-                                        <td class="text-center">84</td>
-                                        <td class="text-right">$5,376.00</td>
+                                        <td> 1 </td>
+                                        <td> Hardware </td>
+                                        <td class="hidden-xs"> Server hardware purchase </td>
+                                        <td class="hidden-xs"> 32 </td>
+                                        <td class="hidden-xs"> $75 </td>
+                                        <td> $2152 </td>
                                     </tr>
                                     <tr>
-                                        <td class="">
-                                            <p class="text-black">Cross Heart Charity Branding</p>
-                                            <p class="small hint-text">
-                                                Attempt to attach higher credibility to a new product by associating it with a well established company name
-                                            </p>
-                                        </td>
-                                        <td class="text-center">$89.00</td>
-                                        <td class="text-center">100</td>
-                                        <td class="text-right">$8,900.00</td>
+                                        <td> 2 </td>
+                                        <td> Furniture </td>
+                                        <td class="hidden-xs"> Office furniture purchase </td>
+                                        <td class="hidden-xs"> 15 </td>
+                                        <td class="hidden-xs"> $169 </td>
+                                        <td> $4169 </td>
                                     </tr>
                                     <tr>
-                                        <td class="">
-                                            <p class="text-black">iOs App</p>
-                                            <p class="small hint-text">
-                                                A video game franchise Inspired primarily by a sketch of stylized wingless - Including Branding / Graphics / Motion Picture &amp; Videos
-                                            </p>
-                                        </td>
-                                        <td class="text-center">$100.00</td>
-                                        <td class="text-center">500</td>
-                                        <td class="text-right">$50,000.00</td>
+                                        <td> 3 </td>
+                                        <td> Foods </td>
+                                        <td class="hidden-xs"> Company Anual Dinner Catering </td>
+                                        <td class="hidden-xs"> 69 </td>
+                                        <td class="hidden-xs"> $49 </td>
+                                        <td> $1260 </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <div>
-                                <img width="150" height="58" alt="" class="invoice-signature" data-src-retina="/img/invoice/signature2x.png" data-src="/img/invoice/signature.png" src="/img/invoice/signature2x.png">
-                                <p>Designer’s Identity</p>
-                            </div>
-                            <br>
-                            <br>
-                            <div class="p-l-15 p-r-15">
-                                <div class="row b-a b-grey">
-                                    <div class="col-md-2 p-l-15 sm-p-t-15 clearfix sm-p-b-15 d-flex flex-column justify-content-center">
-                                        <h5 class="font-montserrat all-caps small no-margin hint-text bold">Advance</h5>
-                                        <h3 class="no-margin">$21,000.00</h3>
-                                    </div>
-                                    <div class="col-md-5 clearfix sm-p-b-15 d-flex flex-column justify-content-center">
-                                        <h5 class="font-montserrat all-caps small no-margin hint-text bold">Discount (10%)</h5>
-                                        <h3 class="no-margin">$645.00</h3>
-                                    </div>
-                                    <div class="col-md-5 text-right bg-master-darker col-sm-height padding-15 d-flex flex-column justify-content-center align-items-end">
-                                        <h5 class="font-montserrat all-caps small no-margin hint-text text-white bold">Total</h5>
-                                        <h1 class="no-margin text-white">$64,276.00</h1>
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="well">
+                                    <address>
+                                        <strong>Loop, Inc.</strong>
+                                        <br> 795 Park Ave, Suite 120
+                                        <br> San Francisco, CA 94107
+                                        <br>
+                                        <abbr title="Phone">P:</abbr> (234) 145-1810 </address>
+                                    <address>
+                                        <strong>Full Name</strong>
+                                        <br>
+                                        <a href="mailto:#"> first.last@email.com </a>
+                                    </address>
                                 </div>
                             </div>
-                            <hr>
-                            <p class="small hint-text">Services will be invoiced in accordance with the Service Description. You must pay all undisputed invoices in full within 30 days of the invoice date, unless otherwise specified under the Special Terms and Conditions. All payments must reference the invoice number. Unless otherwise specified, all invoices shall be paid in the currency of the invoice</p>
-                            <p class="small hint-text">Insight retains the right to decline to extend credit and to require that the applicable purchase price be paid prior to performance of Services based on changes in insight's credit policies or your financial condition and/or payment record. Insight reserves the right to charge interest of 1.5% per month or the maximum allowable by applicable law, whichever is less, for any undisputed past due invoices. You are responsible for all costs of collection, including reasonable attorneys' fees, for any payment default on undisputed invoices. In addition, Insight may terminate all further work if payment is not received in a timely manner.</p>
-                            <br>
-                            <hr>
-                            <div>
-                                <img src="/img/logo.png" alt="logo" data-src="/img/logo.png" data-src-retina="/img/logo_2x.png" width="78" height="22">
-                                <span class="m-l-70 text-black sm-pull-right">+34 346 4546 445</span>
-                                <span class="m-l-40 text-black sm-pull-right">support@revox.io</span>
+                            <div class="col-xs-8 invoice-block">
+                                <ul class="list-unstyled amounts">
+                                    <li>
+                                        <strong>Sub - Total amount:</strong> $9265 </li>
+                                    <li>
+                                        <strong>Discount:</strong> 12.9% </li>
+                                    <li>
+                                        <strong>VAT:</strong> ----- </li>
+                                    <li>
+                                        <strong>Grand Total:</strong> $12489 </li>
+                                </ul>
+                                <br>
+                                <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+                                    <i class=" icon-printer"></i>&nbsp; Print
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <!-- END PAGE CONTENT -->
+
+
+
         </div>
+        <!-- END CONTENT BODY -->
     </div>
+    <!-- END CONTENT -->
+    <?php include './common/quick-sidebar.php' ?>
 </div>
-
+<!-- END CONTAINER -->
+<?php include './common/footer.php' ?>
 <?php include './common/script.php' ?>
-<!-- PAGE SCRIPT -->
-<!-- BEGIN CORE TEMPLATE JS -->
-<script src="/pages/js/pages.js?<?= v() ?>"></script>
-
-
 </body>
 </html>
-

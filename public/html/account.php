@@ -1,376 +1,570 @@
 <?php include './common/head.php' ?>
 
-<body class="horizontal-menu horizontal-app-menu account">
+<link href="/css/pages/profile-2.css?<?= v() ?>" rel="stylesheet" type="text/css"/>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
 <?php include './common/header.php' ?>
+<!-- BEGIN CONTAINER -->
 <div class="page-container">
+    <?php include './common/sidebar.php' ?>
+    <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
-        <div class="content">
-            <!-- START PAGE CONTENT -->
-            <div class="md-container">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <i class="icon-home"></i>
+                        <a href="/html">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li>
+                        <span>Profile</span>
+                    </li>
+                </ul>
+            </div>
 
-                <h3 class="page-title">Account</h3>
-
-                <div class="card card-borderless">
-                    <div class="card-body flex-row">
-                        <ul class="nav nav-tabs nav-tabs-simple nav-tabs-left full-height">
-                            <li class="nav-item">
-                                <a href="#" class="p-r-35 active" data-toggle="tab" data-target="#tab1">
-                                    <i class="fa fa-user"></i> Personal Info
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#"  class="p-r-35" data-toggle="tab" data-target="#tab2">
-                                    <i class="fa fa-image"></i> Change Avatar
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="p-r-35" data-toggle="tab" data-target="#tab3">
-                                    <i class="fa fa-lock"></i> Change Password
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#"  class="p-r-35" data-toggle="tab" data-target="#tab4">
-                                    <i class="fa fa-map-pin"></i> Your Address
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#"  class="p-r-35" data-toggle="tab" data-target="#tab5">
-                                    <i class="fa fa-cog"></i> Privacy Settings
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content full-height" style="min-height: 220px">
-                            <div class="tab-pane active" id="tab1">
-                                <form role="form">
-                                    <div class="form-group">
-                                        <label>Your name</label>
-                                        <input type="text" value="Brandy Costello" class="form-control" disabled>
+            <div class="portlet light profile">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject bold uppercase"> JOHN DOE</span>
+                        <span class="caption-helper">US10268798</span>
+                    </div>
+                    <div class="actions">
+                        <a href="settings.php" class="btn btn-circle btn-default">
+                            <i class="fa fa-pencil"></i> Edit </a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <ul class="list-unstyled profile-nav">
+                                <li>
+                                    <img src="/img/profile/people19.png" class="img-responsive pic-bordered" alt="">
+                                </li>
+                                <li><a href="javascript:;"> My Profile </a></li>
+                                <li><a href="javascript:;"> My Calendar </a></li>
+                                <li><a href="javascript:;"> My Orders</a></li>
+                                <li><a href="javascript:;"> My Autoship </a></li>
+                                <li><a href="javascript:;"> My Address </a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-7 profile-info">
+                                    <h1 class="font-green sbold uppercase">John Doe</h1>
+                                    <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet
+                                        dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
+                                    </p>
+                                    <p>
+                                        <a href="javascript:;"> www.livepure.com/john-doe </a>
+                                    </p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <i class="fa fa-map-marker"></i> USA
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-calendar"></i> 18 Jan 1982
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-envelope-o"></i> email@example.com
+                                        </li>
+                                        <li>
+                                            <i class="la la-phone"></i> (555) 123–5678
+                                        </li>
+                                        <li>
+                                            <i class="la la-building-o"></i> Company
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end col-md-8-->
+                                <div class="col-md-5">
+                                    <div class="portlet sale-summary">
+                                        <div class="portlet-title">
+                                            <div class="caption font-red sbold"> Summary</div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <span class="sale-info"> Rank</span>
+                                                    <span class="sale-num"> IBO </span>
+                                                </li>
+                                                <li>
+                                                    <span class="sale-info"> Placement</span>
+                                                    <span class="sale-num"> <a href="#">McGinnis, Chuck (US11259613-R)McGinnis, Chuck (US11259613-R)McGinnis, Chuck (US11259613-R)</a> </span>
+                                                </li>
+                                                <li>
+                                                    <span class="sale-info"> Sponsor </span>
+                                                    <span class="sale-num"> <a href="#">	PURE Impact LLC (US11274545)</a> </span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Company</label>
-                                        <input type="text" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="email" value="Brandy.Costello@aol.com" class="form-control" placeholder="ex: some@example.com"
-                                               required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phone</label>
-                                        <input type="email" value="(985) 969-4418" class="form-control" placeholder="ex: some@example.com"
-                                               required="">
-                                    </div>
-                                    <div class="form-actions">
-                                        <button class="btn btn-success btn-cons" type="submit">Save Changes</button>
-                                    </div>
-                                </form>
+                                </div>
+                                <!--end col-md-4-->
                             </div>
-                            <div class="tab-pane" id="tab2">
-                                <p>
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-                                    officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                                </p>
-                                <form role="form">
-                                    <div class="form-group">
-                                        <img src="/img/profiles/bd2x.jpg" class="avatar-upload">
-                                    </div>
-                                    <div class="form-group">
-                                        <span class="small hint-text m-t-5">Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</span>
-                                    </div>
-                                    <div class="form-actions">
-                                        <button class="btn btn-default btn-cons" type="submit">Select Image</button>
-                                        <button class="btn btn-success btn-cons" type="submit">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane" id="tab2">
-                                <p>
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-                                    officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                                </p>
-                                <form role="form">
-                                    <div class="form-group">
-                                        <img src="/img/profiles/bd2x.jpg" class="avatar-upload">
-                                    </div>
-                                    <div class="form-group">
-                                        <span class="small hint-text m-t-5">Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</span>
-                                    </div>
-                                    <div class="form-actions">
-                                        <button class="btn btn-default btn-cons" type="submit">Select Image</button>
-                                        <button class="btn btn-success btn-cons" type="submit">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane" id="tab3">
-                                <form role="form">
-                                    <div class="form-group">
-                                        <label>Current Password</label>
-                                        <input type="password" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>New Password</label>
-                                        <input type="password" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Re-type New Password</label>
-                                        <input type="password" class="form-control" required>
-                                    </div>
-                                    <div class="form-actions">
-                                        <button class="btn btn-success btn-cons" type="submit">Change Password</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane" id="tab4">
-                                <ul class="nav nav-tabs nav-tabs-fillup" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="active show" data-toggle="tab" role="tab" data-target="#tab2hellowWorld" href="#"
-                                           aria-selected="true">Shipping Addresses
-                                        </a>
+                            <!--end row-->
+                            <div class="tabbable-line tabbable-custom-profile">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#tab_1_11" data-toggle="tab" aria-expanded="true"> Latest Customers </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" data-toggle="tab" role="tab" data-target="#tab2FollowUs" class="" aria-selected="false">
-                                            Billing Addresses
-                                        </a>
+                                    <li>
+                                        <a href="#tab_1_22" data-toggle="tab" aria-expanded="true"> Feeds </a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div class="tab-pane active show" id="tab2hellowWorld">
-                                        <div class="pull-right m-b-10">
-                                            <button class="btn btn-complete btn-xs " type="button">
-                                                <i class="fa fa-plus"></i> Add Address
-                                            </button>
+                                    <div class="tab-pane active" id="tab_1_11">
+                                        <div class="portlet-body">
+                                            <table class="table table-striped table-bordered table-advance table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>
+                                                        <i class="fa fa-briefcase"></i> Company
+                                                    </th>
+                                                    <th class="hidden-xs">
+                                                        <i class="fa fa-question"></i> Descrition
+                                                    </th>
+                                                    <th>
+                                                        <i class="fa fa-bookmark"></i> Amount
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> Pixel Ltd </a>
+                                                    </td>
+                                                    <td class="hidden-xs"> Server hardware purchase</td>
+                                                    <td> 52560.10$
+                                                        <span class="label label-success label-sm"> Paid </span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm grey-salsa btn-outline" href="javascript:;"> View </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> Smart House </a>
+                                                    </td>
+                                                    <td class="hidden-xs"> Office furniture purchase</td>
+                                                    <td> 5760.00$
+                                                        <span class="label label-warning label-sm"> Pending </span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm grey-salsa btn-outline" href="javascript:;"> View </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> FoodMaster Ltd </a>
+                                                    </td>
+                                                    <td class="hidden-xs"> Company Anual Dinner Catering</td>
+                                                    <td> 12400.00$
+                                                        <span class="label label-success label-sm"> Paid </span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm grey-salsa btn-outline" href="javascript:;"> View </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> WaterPure Ltd </a>
+                                                    </td>
+                                                    <td class="hidden-xs"> Payment for Jan 2013</td>
+                                                    <td> 610.50$
+                                                        <span class="label label-danger label-sm"> Overdue </span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm grey-salsa btn-outline" href="javascript:;"> View </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> Pixel Ltd </a>
+                                                    </td>
+                                                    <td class="hidden-xs"> Server hardware purchase</td>
+                                                    <td> 52560.10$
+                                                        <span class="label label-success label-sm"> Paid </span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm grey-salsa btn-outline" href="javascript:;"> View </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> Smart House </a>
+                                                    </td>
+                                                    <td class="hidden-xs"> Office furniture purchase</td>
+                                                    <td> 5760.00$
+                                                        <span class="label label-warning label-sm"> Pending </span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm grey-salsa btn-outline" href="javascript:;"> View </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> FoodMaster Ltd </a>
+                                                    </td>
+                                                    <td class="hidden-xs"> Company Anual Dinner Catering</td>
+                                                    <td> 12400.00$
+                                                        <span class="label label-success label-sm"> Paid </span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm grey-salsa btn-outline" href="javascript:;"> View </a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <table class="table card-table">
-                                            <thead>
-                                            <th class="text-left">Full name</th>
-                                            <th class="text-left">Address</th>
-                                            <th class="text-center">Phone number</th>
-                                            <th class="text-right">Action</th>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td class="text-left">Brandy Costello</td>
-                                                <td class="text-left">76085 3203 Deer Path Lane, Weatherford, TX , USA</td>
-                                                <td class="text-center">(985) 969-4418</td>
-                                                <td class="text-right">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>
-                                                        </button>
-                                                        <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
-                                    <div class="tab-pane" id="tab2FollowUs">
-                                        <div class="pull-right m-b-10">
-                                            <button class="btn btn-complete btn-xs " type="button">
-                                                <i class="fa fa-plus"></i> Add Address
-                                            </button>
+                                    <!--tab-pane-->
+                                    <div class="tab-pane" id="tab_1_22">
+                                        <div class="tab-pane active" id="tab_1_1_1">
+                                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 290px;">
+                                                <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1"
+                                                     data-initialized="1" style="overflow: hidden; width: auto; height: 290px;">
+                                                    <ul class="feeds">
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-success">
+                                                                            <i class="fa fa-bell-o"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> You have 4 pending tasks.
+                                                                            <span class="label label-danger label-sm"> Take action
+                                                                                            <i class="fa fa-share"></i>
+                                                                                        </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> Just now</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <div class="col1">
+                                                                    <div class="cont">
+                                                                        <div class="cont-col1">
+                                                                            <div class="label label-success">
+                                                                                <i class="fa fa-bell-o"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="cont-col2">
+                                                                            <div class="desc"> New version v1.4 just lunched!</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col2">
+                                                                    <div class="date"> 20 mins</div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-danger">
+                                                                            <i class="fa fa-bolt"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> Database server #12 overloaded. Please fix the issue.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 24 mins</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-info">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 30 mins</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-success">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 40 mins</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-warning">
+                                                                            <i class="fa fa-plus"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New user registered.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 1.5 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-success">
+                                                                            <i class="fa fa-bell-o"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> Web server hardware needs to be upgraded.
+                                                                            <span class="label label-inverse label-sm"> Overdue </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 2 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-default">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 3 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-warning">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 5 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-info">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 18 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-default">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 21 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-info">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 22 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-default">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 21 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-info">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 22 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-default">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 21 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-info">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 22 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-default">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 21 hours</div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col1">
+                                                                <div class="cont">
+                                                                    <div class="cont-col1">
+                                                                        <div class="label label-info">
+                                                                            <i class="fa fa-bullhorn"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cont-col2">
+                                                                        <div class="desc"> New order received. Please take care of it.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="date"> 22 hours</div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="slimScrollBar"
+                                                     style="background: rgb(187, 187, 187); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div>
+                                                <div class="slimScrollRail"
+                                                     style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div>
+                                            </div>
                                         </div>
-                                        <table class="table card-table">
-                                            <thead>
-                                            <th class="text-left">Full name</th>
-                                            <th class="text-left">Address</th>
-                                            <th class="text-center">Phone number</th>
-                                            <th class="text-right">Action</th>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td class="text-left">Brandy Costello</td>
-                                                <td class="text-left">76085 3203 Deer Path Lane, Weatherford, TX , USA</td>
-                                                <td class="text-center">(985) 969-4418</td>
-                                                <td class="text-right">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>
-                                                        </button>
-                                                        <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
-
+                                    <!--tab-pane-->
                                 </div>
-                            </div>
-                            <div class="tab-pane" id="tab5">
-                                <h5>Notifications</h5>
-                                <p>Control what information you are notified about and how you receive it</p>
-                                <table class="table card-table">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th class="text-center">Back Office</th>
-                                        <th class="text-center">Text</th>
-                                        <th class="text-center">Email</th>
-                                        <th class="text-center">
-                                            Downline Levels
-                                            <i title="" data-placement="right" data-toggle="tooltip" class="tip fa fa-info-circle m-l-5"
-                                               data-original-title="Select how many levels in your downline you want to receive notifications for."></i>
-                                        </th>
-                                        <th class="text-center">
-                                            Personally Enrolled
-                                            <i title="" data-placement="right" data-toggle="tooltip" class="tip fa fa-info-circle m-l-5"
-                                               data-original-title="Select to always receive notifications for those you've personally enrolled, regardless of downline level."></i>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Comment On Community Post</td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ambassador New Enrollments (US)</td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <select class="cs-select cs-skin-slide" data-init-plugin="cs-select">
-                                                <option>All</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option selected>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                                <h5 class="m-t-30">Downline Activity Preferences</h5>
-                                <p>Receive notifications for your downline's enrollments, orders and rank advancement</p>
-                                <table class="table card-table">
-                                    <tbody>
-                                    <tr>
-                                        <td>Select how many levels in your downline you want to receive notifications for</td>
-                                        <td class="text-center">
-                                            <select class="cs-select cs-skin-slide" data-init-plugin="cs-select">
-                                                <option>All</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option selected>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Receive notifications for Ambassadors you've personally enrolled, regardless of level</td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                                <h5 class="m-t-30">Offline Messages</h5>
-                                <p>Choose how you want to receive messages when not online</p>
-                                <table class="table card-table">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th class="text-center">Text</th>
-                                        <th class="text-center">Email</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>When user is offline, send team messages via</td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="checkbox check-success  ">
-                                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
-                                                <label for="checkbox-agree"></label>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-
-                                <h5 class="m-t-30">Corporate Communication</h5>
-                                <p>Control how you receive messages from corporate</p>
-                                <table class="table card-table">
-                                    <tbody>
-                                    <tr>
-                                        <td>Corporate can contact me through email</td>
-                                        <td class="text-center">
-                                            <input type="checkbox" data-init-plugin="switchery" checked="checked"/>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-            <!-- END PAGE CONTENT -->
         </div>
-        <?php include './common/footer.php' ?>
+        <!-- END CONTENT BODY -->
     </div>
+    <!-- END CONTENT -->
+    <?php include './common/quick-sidebar.php' ?>
 </div>
-<?php include './common/quickview.php' ?>
+<!-- END CONTAINER -->
+<?php include './common/footer.php' ?>
 <?php include './common/script.php' ?>
-<!-- PAGE SCRIPT -->
-<!-- BEGIN CORE TEMPLATE JS -->
-<script src="/pages/js/pages.js?<?= v() ?>"></script>
-
-
 </body>
 </html>
-

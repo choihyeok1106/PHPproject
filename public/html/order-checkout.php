@@ -1,191 +1,279 @@
 <?php include './common/head.php' ?>
-<!-- PAGE::STYLE -->
-<body class="horizontal-menu horizontal-app-menu shopping">
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid shopping">
 <?php include './common/header.php' ?>
+<!-- BEGIN CONTAINER -->
 <div class="page-container">
-    <div class="page-content-wrapper ">
-        <div class="content">
-            <!-- START PAGE CONTENT -->
-            <div class="md-container">
-                <h3 class="page-title">Order Checkout</h3>
+    <?php include './common/sidebar.php' ?>
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
 
-                <div class="card card-borderless checkout">
-                    <div class="card-body padding-25">
-                        <div class="row row-same-height">
-                            <div class="col-lg-6 b-r b-dashed b-grey p-r-25">
-                                <h5>YOUR CART (USA)</h5>
-                                <table class="table">
-                                    <thead>
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <i class="icon-home"></i>
+                        <a href="/html">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li>
+                        <span>Checkout</span>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="caption-subject bold uppercase"> Your Cart</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <table class="table">
+                                <thead>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>PV</th>
+                                </thead>
+                                <tbody>
+                                <?php for ($i = 0; $i < 4; $i++) { ?>
                                     <tr>
-                                        <th colspan="2">Product</th>
-                                        <th class="text-right">Qty</th>
-                                        <th class="text-right">PV</th>
-                                        <th class="text-right">Price</th>
+                                        <td>Webarch UI Framework Dashboard UI Pack</td>
+                                        <td>1</td>
+                                        <td>$24.95</td>
+                                        <td>10</td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php for ($i = 0; $i < 4; $i++) { ?>
-                                        <tr>
-                                            <td class="text-center">
-                                                <a href="product.php">
-                                                    <img src="https://extranet.securefreedom.com/GenesisPure/Shopping/Images/144_GoYin-single-150-blue_1.jpg">
+                                <?php } ?>
+                                </tbody>
+                            </table>
+
+                            <table class="table">
+                                <thead>
+                                <th>Bulk Pack Promotion</th>
+                                <th class="text-right">
+                                    <span class="weight-400">Your selectable PVs: </span>
+                                    <span class="text-danger">300</span>
+                                </th>
+                                </thead>
+                                <tbody>
+                                <?php for ($i = 0; $i < 4; $i++) { ?>
+                                    <tr>
+                                        <td>Webarch UI Framework (75PV)</td>
+                                        <td class="text-right">
+                                            <div class="qty padding-0 margin-0">
+                                                <a href="javascript:;" class="minus">
+                                                    <i class="fa fa-minus"></i>
                                                 </a>
-                                            </td>
-                                            <td>
-                                                <a href="product.php">Webarch UI Framework Dashboard UI Pack</a>
-                                            </td>
-                                            <td class="text-right">1</td>
-                                            <td class="text-right">10</td>
-                                            <td class="text-right">$24.95</td>
-                                        </tr>
-                                    <?php } ?>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="2" class="text-right">SUBTOTAL</td>
-                                        <td class="text-right"></td>
-                                        <td class="text-right">40 PV</td>
-                                        <td class="text-right">$96.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="text-right">Tax Total</td>
-                                        <td colspan="3" class="text-right">$9.60</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="text-right">Handling Fee</td>
-                                        <td colspan="3" class="text-right">$0.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="text-right">Shipping Total</td>
-                                        <td colspan="3" class="text-right">$5.40</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="text-right">Discount</td>
-                                        <td colspan="3" class="text-right">$3.00</td>
-                                    </tr>
-                                    <tr class="total">
-                                        <td colspan="5" class="text-right">
-                                            <h4 class="text-primary no-margin font-montserrat">$27</h4>
+                                                <input type="text" id="qty" value="1" readonly>
+                                                <a href="javascript:;" class="plus">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
-                                    </tfoot>
-                                </table>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+
+                            <table class="table">
+                                <thead>
+                                <th>Promotions</th>
+                                <th class="text-right"></th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Rally 28 $1 Enrollment</td>
+                                    <td class="text-right">$1</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--Products-->
+                <div class="col-lg-4">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-truck"></i>
+                                <span class="caption-subject bold uppercase"> Shipping Method</span>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="padding-30 sm-padding-5">
-                                    <ul class="list-unstyled list-inline m-l-30">
-                                        <li><a href="#" class="p-r-30 text-black">Credit card</a></li>
-                                        <li><a href="#" class="p-r-30 text-black  hint-text">PayPal</a></li>
-                                        <li><a href="#" class="p-r-30 text-black  hint-text">Wire transfer</a></li>
-                                    </ul>
-                                    <form role="form">
-                                        <div class="bg-master-light padding-30 b-rad-lg">
-                                            <h2 class="pull-left no-margin">Credit Card</h2>
-                                            <ul class="list-unstyled pull-right list-inline no-margin">
-                                                <li>
-                                                    <a href="#">
-                                                        <img width="51" height="32" data-src-retina="/img/form-wizard/visa2x.png" data-src="/img/form-wizard/visa.png" class="brand" alt="logo" src="/img/form-wizard/visa.png">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="hint-text">
-                                                        <img width="51" height="32" data-src-retina="/img/form-wizard/amex2x.png" data-src="/img/form-wizard/amex.png" class="brand" alt="logo" src="/img/form-wizard/amex.png">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="hint-text">
-                                                        <img width="51" height="32" data-src-retina="/img/form-wizard/mastercard2x.png" data-src="/img/form-wizard/mastercard.png" class="brand" alt="logo" src="/img/form-wizard/mastercard.png">
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                            <div class="form-group form-group-default required m-t-25">
-                                                <label>Card holder's name</label>
-                                                <input type="text" class="form-control" placeholder="Name on the card" required>
-                                            </div>
-                                            <div class="form-group form-group-default required">
-                                                <label>Card number</label>
-                                                <input type="text" class="form-control" placeholder="8888-8888-8888-8888" required>
-                                            </div>
+                            <div class="actions">
+                                <a href="javascript:;" class="btn btn-circle btn-default">
+                                    <i class="fa fa-pencil"></i> Change
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            GROUND
+                        </div>
+                    </div>
 
-                                            <div class="row">
-                                                <div class="col-lg-8 lg-m-b-15">
-                                                    <label>Expiration</label>
-                                                    <br>
-                                                    <select class="cs-select cs-skin-slide" data-init-plugin="cs-select">
-                                                        <option>Jan (01)</option>
-                                                        <option>Feb (02)</option>
-                                                        <option>Mar (03)</option>
-                                                        <option>Apr (04)</option>
-                                                        <option>May (05)</option>
-                                                        <option>Jun (06)</option>
-                                                        <option>Jul (07)</option>
-                                                        <option>Aug (08)</option>
-                                                        <option>Sep (09)</option>
-                                                        <option>Oct (10)</option>
-                                                        <option>Nov (11)</option>
-                                                        <option>Dec (12)</option>
-                                                    </select>
-                                                    <select class="cs-select cs-skin-slide" data-init-plugin="cs-select">
-                                                        <option value="2014">2014</option>
-                                                        <option value="2015">2015</option>
-                                                        <option value="2016">2016</option>
-                                                        <option value="2017">2017</option>
-                                                        <option value="2018">2018</option>
-                                                        <option value="2019">2019</option>
-                                                        <option value="2020" selected>2020</option>
-                                                        <option value="2021">2021</option>
-                                                        <option value="2022">2022</option>
-                                                        <option value="2023">2023</option>
-                                                        <option value="2024">2024</option>
-                                                        <option value="2025">2025</option>
-                                                        <option value="2026">2026</option>
-                                                        <option value="2027">2027</option>
-                                                        <option value="2028">2028</option>
-                                                        <option value="2029">2029</option>
-                                                        <option value="2030">2030</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-4 lg-right">
-                                                    <label>CVC Code</label>
-                                                    <br>
-                                                    <input type="text" class="form-control" style="width: 100px" placeholder="000" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-credit-card "></i>
+                                <span class="caption-subject bold uppercase"> Payment</span>
+                            </div>
+                            <div class="actions">
+                                <a href="javascript:;" class="btn btn-circle btn-default">
+                                    <i class="fa fa-pencil"></i> Change
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row static-info">
+                                <div class="col-md-8 name">
+                                    <i class="fa fa-cc-mastercard font-16"></i> MasterCard ending in 6666
+                                </div>
+                                <div class="col-md-4 value text-right">
+                                    $20
+                                </div>
+                            </div>
+                            <div class="row-divider"></div>
+                            <div class="row static-info">
+                                <div class="col-md-8 name">
+                                    <i class="fa fa-cc-visa font-16"></i> Visa ending in 8888
+                                </div>
+                                <div class="col-md-4 value text-right">
+                                    $7.95
+                                </div>
+                            </div>
 
-                                    <div class="clearfix m-t-30">
-                                        <ul class="pager no-style">
-                                            <li class="next">
-                                                <a href="order-complete.php" class="btn btn-success btn-cons btn-animated from-left pull-right fa fa-check">
-                                                    <span>Place Order</span>
-                                                </a>
-                                            </li>
-                                            <li class="previous">
-                                                <button class="btn btn-default btn-cons pull-right btn-animated from-left fa fa-close" type="button">
-                                                    <span>Cancel</span>
-                                                </button>
-                                            </li>
-                                        </ul>
+                        </div>
+                    </div>
+
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-map-pin"></i>
+                                <span class="caption-subject bold uppercase"> Shipping Address</span>
+                            </div>
+                            <div class="actions">
+                                <a href="javascript:;" class="btn btn-circle btn-default">
+                                    <i class="fa fa-pencil"></i> Change
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body static-info">
+                            <div class="form-group value">
+                                Jhon Done<br>
+                                15627 S. Broadway st.<br>
+                                #KB45889<br>
+                                Gardena, CA 90248-2210
+                            </div>
+
+                            <div class="form-group form-md-radios">
+                                <label>Trading statement</label>
+                                <div class="md-radio-inline">
+                                    <div class="md-radio">
+                                        <input type="radio" id="radio1" name="statement" class="md-radiobtn" checked>
+                                        <label for="radio1">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Include
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" id="radio2" name="statement" class="md-radiobtn">
+                                        <label for="radio2">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Not included
+                                        </label>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <input type="text" class="form-control" id="form_control_1"
+                                       placeholder="Please specify your request when you are absent (30 characters or less).">
+                                <label for="form_control_1">Shipping Notice</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-file-text-o"></i>
+                                <span class="caption-subject bold uppercase"> Billing Address</span>
+                            </div>
+                            <div class="actions">
+                                <a href="javascript:;" class="btn btn-circle btn-default">
+                                    <i class="fa fa-pencil"></i> Change
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body static-info">
+                            <div class="form-group value">
+                                Jhon Done<br>
+                                15627 S. Broadway st.<br>
+                                #KB45889<br>
+                                Gardena, CA 90248-2210
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Total -->
+                <div class="col-lg-3 totals">
+                    <div class="portlet light fixed-aside" data-top="88" data-offset="15" data-class="page-fixed-aside">
+                        <div class="portlet-body">
+                            <div class="m-grid">
+                                <div class="m-grid-row total-top">
+                                    <div class="m-grid-col m-grid-col-md-6">Total PV</div>
+                                    <div class="m-grid-col m-grid-col-md-6">40</div>
+                                </div>
+                                <div class="m-grid-row">
+                                    <div class="m-grid-col m-grid-col-md-6 padding-top-15">Subtotal</div>
+                                    <div class="m-grid-col m-grid-col-md-6 padding-top-15">$24.95</div>
+                                </div>
+                                <div class="m-grid-row">
+                                    <div class="m-grid-col m-grid-col-md-6">Tax Total</div>
+                                    <div class="m-grid-col m-grid-col-md-6">$2.5</div>
+                                </div>
+                                <div class="m-grid-row">
+                                    <div class="m-grid-col m-grid-col-md-6">Handling Fee</div>
+                                    <div class="m-grid-col m-grid-col-md-6">$0</div>
+                                </div>
+                                <div class="m-grid-row">
+                                    <div class="m-grid-col m-grid-col-md-6">Shipping Total</div>
+                                    <div class="m-grid-col m-grid-col-md-6">$5.4</div>
+                                </div>
+                                <div class="m-grid-row">
+                                    <div class="m-grid-col m-grid-col-md-6">Discount</div>
+                                    <div class="m-grid-col m-grid-col-md-6">$1</div>
+                                </div>
+                                <div class="m-grid-row total-bot">
+                                    <div class="m-grid-col m-grid-col-md-6">Total</div>
+                                    <div class="m-grid-col m-grid-col-md-6 font-purple">$27.95</div>
+                                </div>
+                            </div>
+
+                            <div class="total-act">
+                                <a href="order-complete.php" class="btn green-meadow btn-lg btn-block">
+                                    <i class="icon-basket-loaded"></i> &nbsp; Place your order
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END PAGE CONTENT -->
-        </div>
-        <?php include './common/footer.php' ?>
-    </div>
-</div>
-<?php include './common/quickview.php' ?>
-<?php include './common/script.php' ?>
 
-<!-- END VENDOR JS -->
-<!-- BEGIN CORE TEMPLATE JS -->
-<script src="/pages/js/pages.js?<?= v() ?>"></script>
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+    <?php include './common/quick-sidebar.php' ?>
+</div>
+<!-- END CONTAINER -->
+<?php include './common/footer.php' ?>
+<?php include './common/script.php' ?>
 </body>
 </html>
-
