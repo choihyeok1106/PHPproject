@@ -5,7 +5,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="/html">
-                <img src="/assets/layouts/layout2/img/logo_white.png" alt="logo" class="logo-default"/> </a>
+                <img src="/img/logo_white.png" alt="logo" class="logo-default"/> </a>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
             </div>
@@ -63,7 +63,7 @@
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <img alt="" class="img-circle" src="../assets/layouts/layout2/img/avatar3_small.jpg"/>
+                            <img alt="" class="img-circle" src="/img/avatar3_small.jpg"/>
                             <span class="username username-hide-on-mobile"> Nick </span>
                             <i class="fa fa-angle-down"></i>
                         </a>

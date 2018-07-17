@@ -190,10 +190,10 @@
                                 </div>
                             </div>
 
-                            <div class="form-group form-md-line-input">
-                                <input type="text" class="form-control" id="form_control_1"
-                                       placeholder="Please specify your request when you are absent (30 characters or less).">
-                                <label for="form_control_1">Shipping Notice</label>
+                            <div class="form-group form-md-radios">
+                                <label>Shipping Notice</label>
+                                <input type="text" class="form-control">
+                                <span class="help-block">Please specify your request when you are absent (30 characters or less).</span>
                             </div>
                         </div>
                     </div>
