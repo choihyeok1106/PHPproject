@@ -13,5 +13,5 @@ yarn-error.log
 .env
 .editorconfig
 /public/.idea
-
+/public/vendors
 /public/fonts
