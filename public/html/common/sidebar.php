@@ -95,7 +95,7 @@
                             <span class="title">Calendar</span>
                         </a>
                     </li>
-                    <li class="nav-item  ">
+                    <li class="nav-item  hide">
                         <a href="prospect-managers.php" class="nav-link ">
                             <span class="title">Prospect Manager</span>
                         </a>
@@ -108,7 +108,7 @@
                     <span class="title">Enrollment</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item hide">
                 <a href="training-courses.php" class="nav-link nav-toggle">
                     <i class="icon-calendar"></i>
                     <span class="title">Training Course</span>
