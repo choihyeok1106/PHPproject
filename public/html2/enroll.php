@@ -80,7 +80,7 @@
                                             <h4 class="no-margin"><span class="semi-bold">Sponsor</span> Detail</h4>
                                             <div class="m-t-10">
                                                 <div class="profile-img-wrapper m-t-5 inline">
-                                                    <img src="/img/profiles/bd2x.jpg" width="35" height="35" alt="">
+                                                    <img src="/html2/img/profiles/bd2x.jpg" width="35" height="35" alt="">
                                                 </div>
                                                 <div class="inline m-l-20">
                                                     <p>
