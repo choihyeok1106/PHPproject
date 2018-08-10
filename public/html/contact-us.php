@@ -171,7 +171,7 @@
 <?php include './common/script.php' ?>
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-<script src="/vendors/gmaps/gmaps.min.js" type="text/javascript"></script>
+<script src="<?= STATIC_SERVER ?>/vendors/gmaps/gmaps.min.js" type="text/javascript"></script>
 <script src="/js/pages/contact.js?<?= v() ?>" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 </body>

@@ -1,5 +1,5 @@
 <?php include './common/head.php' ?>
-<link href="/vendors/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css"/>
+<link href="<?= STATIC_SERVER ?>/vendors/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL PLUGINS -->
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
 <?php include './common/header.php' ?>
@@ -79,6 +79,6 @@
 <?php include './common/footer.php' ?>
 <?php include './common/script.php' ?>
 <!-- END PAGE LEVEL PLUGINS -->
-<script src="/vendors/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
+<script src="<?= STATIC_SERVER ?>/vendors/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
 </body>
 </html>
