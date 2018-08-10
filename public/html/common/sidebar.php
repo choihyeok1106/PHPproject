@@ -122,13 +122,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="message-sponsor.php" class="nav-link ">
-                            <span class="title">Message to Sponsor</span>
+                        <a href="faq.php" class="nav-link ">
+                            <span class="title">FAQ </span>
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="email-support.php" class="nav-link ">
-                            <span class="title">Email to Supports Center</span>
+                        <a href="contact-us.php" class="nav-link ">
+                            <span class="title">Contact us</span>
                         </a>
                     </li>
                 </ul>

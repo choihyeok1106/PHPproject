@@ -1851,8 +1851,81 @@ var ComponentsBootstrapSelect = function () {
 }();
 
 var Pure = {
+
+    /**
+     * loader
+     * */
+    load: {
+        loader: '<div class="loader"></div>',
+        init: function () {
+            $(".loadingLayout").css({
+                'line-height': $(window).height() + "px"
+            })
+        },
+        show: function () {
+            this.hide();
+
+            var html = '<div class="loadingLayout" style="line-height:' + $(window).height() + 'px">' + this.loader + '</div>';
+            $("body").css({"overflow-y": "hidden"});
+            $("body").append(html);
+        },
+        hide: function () {
+            $("#loadingLayout").remove();
+            $("body").css({"overflow-y": "auto"});
+        }
+    },
+
+    get: function (url, data, args) {
+        if (typeof data !== "object") {
+            data = {};
+        }
+        var showLoader = true;
+        var success;
+        var error;
+        if (args) {
+            if (args.hasOwnProperty('loading')) {
+                showLoader = args['loading'];
+            }
+            if (args.hasOwnProperty('success')) {
+                success = args['success']
+            }
+            if (args.hasOwnProperty('error')) {
+                error = args['error']
+            }
+        }
+        if (showLoader) {
+            Pure.load.show()
+        }
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                if (typeof success == 'function') {
+                    args.success(data);
+                }
+            },
+            error: function (e) {
+                if (typeof error == 'function') {
+                    args.error(e);
+                }
+            },
+            complete: function (XHR, TS) {
+                if (showLoader) {
+                    Pure.load.hide()
+                }
+            }
+        });
+    },
     init: function () {
         this.initFixedAside();
+        this.initNote();
+        this.initResponse();
+        $(window).on("resize", function () {
+            Pure.load.init();
+            Pure.initResponse()
+        })
     },
     initFixedAside: function () {
         $('.fixed-aside').each(function () {
@@ -1863,8 +1936,6 @@ var Pure = {
             if (isNaN(offset)) {
                 offset = 0;
             }
-            log($(this).offset().top);
-            log($(this).offset().left);
             if (!isNaN(top) && cls) {
                 $(window).on('scroll', function () {
                     if ($(window).scrollTop() >= top) {
@@ -1881,6 +1952,55 @@ var Pure = {
                     $(elm).css('left', $(elm).parent().offset().left + offset);
                 });
             }
+        });
+    },
+    initNote: function () {
+        $(".note .note-close").on("click", function () {
+            $(".note").remove()
+        });
+    },
+    initResponse: function () {
+        $(".res-box").each(function () {
+            var scale = $(this).attr("data-scale");
+            var depth = $(this).attr("data-depth");
+            var target = $(this).attr("data-target");
+            var offset = $(this).attr("data-offset");
+            if (isNaN(offset)) {
+                offset = 0;
+            }
+            if (target) {
+                if (isNaN(target)) {
+                    if ($(target).length) {
+                        $(this).css({
+                            'min-height': $(target).outerHeight()
+                        });
+                    }
+                } else {
+                    var el = $(this);
+                    for (var i = 0; i < target; i++) {
+                        el = $(el).parent();
+                    }
+                    $(this).css({
+                        'min-height': ($(el).outerHeight() - offset)
+                    });
+
+                }
+            } else {
+                if (isNaN(scale) || scale < 0) {
+                    scale = 1
+                }
+                var el = $(this)
+                if (!isNaN(depth)) {
+                    for (var i = 0; i < depth; i++) {
+                        el = $(el).parent()
+                    }
+                }
+                var h = $(el).outerWidth() * scale;
+                $(this).css({
+                    height: h
+                })
+            }
+
         });
     }
 }

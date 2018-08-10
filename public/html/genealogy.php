@@ -10,8 +10,8 @@
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
             <!-- BEGIN PAGE HEADER-->
-            <h1 class="page-title"> Home
-                <small>Dashboard</small>
+            <h1 class="page-title">Genealogy
+                <small></small>
             </h1>
             <div class="page-bar">
                 <ul class="page-breadcrumb">
@@ -21,7 +21,7 @@
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <span>Dashboard</span>
+                        <span>Genealogy</span>
                     </li>
                 </ul>
                 <div class="page-toolbar">

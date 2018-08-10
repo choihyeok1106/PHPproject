@@ -1,5 +1,5 @@
 <?php include './common/head.php' ?>
-
+<link href="/vendors/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css"/>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
 <?php include './common/header.php' ?>
 <!-- BEGIN CONTAINER -->
@@ -9,7 +9,9 @@
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
-
+            <h1 class="page-title">Order History
+                <small></small>
+            </h1>
             <div class="page-bar">
                 <ul class="page-breadcrumb">
                     <li>
@@ -34,7 +36,60 @@
                 </div>
             </div>
 
-            <div class="order-list shopping">
+            <!-- END PAGE HEADER-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-social-dribbble font-dark hide"></i>
+                        <span class="caption-subject font-dark bold uppercase">Orders</span>
+                    </div>
+                    <div class="actions">
+                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                            <i class="icon-cloud-upload"></i>
+                        </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                            <i class="icon-wrench"></i>
+                        </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                            <i class="icon-trash"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table data-toggle="table">
+                        <thead>
+                        <tr>
+                            <th data-field="id">ORDER #</th>
+                            <th data-field="name">Total</th>
+                            <th data-field="price">PV</th>
+                            <th data-field="date">Date</th>
+                            <th data-field="status">Status</th>
+                            <th class="text-right" data-field="actions">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php for ($i = 0; $i < 10; $i++) { ?>
+                            <tr>
+                                <td>6490663</td>
+                                <td>$74.85</td>
+                                <td>30</td>
+                                <td>April 26, 2018</td>
+                                <td>SHIPPED</td>
+                                <td class="text-right">
+                                    <a href="order.php">Order Details</a>
+                                    <span>|</span>
+                                    <a href="#">Tracking</a>
+                                    <span>|</span>
+                                    <a href="invoice.php">Invoice</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="order-list shopping hide">
                 <?php for ($i = 0; $i < 5; $i++) { ?>
                     <div class="portlet light">
                         <div class="portlet-title margin-0 border-0">
@@ -122,7 +177,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="table">
+                            <table class="table table-hover">
                                 <tbody>
                                 <?php for ($n = 0; $n < 3; $n++) { ?>
                                     <tr>
@@ -161,5 +216,6 @@
 <!-- END CONTAINER -->
 <?php include './common/footer.php' ?>
 <?php include './common/script.php' ?>
+<script src="/vendors/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
 </body>
 </html>

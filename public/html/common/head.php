@@ -25,7 +25,7 @@
     <link href="<?= STATIC_SERVER ?>/vendors/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="/css/components.css" rel="stylesheet" id="style_components" type="text/css"/>
     <link href="/css/plugins.min.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
