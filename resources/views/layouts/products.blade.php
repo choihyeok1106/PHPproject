@@ -1,5 +1,5 @@
 @extends('layouts.common.app')
-<link href="/css/pages/todo-2.min.css" rel="stylesheet" type="text/css"/>
+
 @section('content')
     <div class="page-bar">
         <ul class="page-breadcrumb">
@@ -25,39 +25,46 @@
                 <div class="portlet-body todo-project-list-content" style="height: auto;">
                     <div class="todo-project-list">
                         <ul class="nav nav-stacked">
-                            <li class="active">
-                                <a href="javascript:;">All </a>
-                            </li>
-                            <li>
-                                <a href="#">Bestsellers</a>
-                            </li>
-                            <li>
-                                <a href="#">Weight Loss</a>
-                            </li>
-                            <li>
-                                <a href="#">Sports Performance</a>
-                            </li>
-                            <li>
-                                <a href="#">Nutrition</a>
-                            </li>
-                            <li>
-                                <a href="#">Energy</a>
-                            </li>
-                            <li>
-                                <a href="#">Superfruits</a>
-                            </li>
-                            <li>
-                                <a href="#">Skincare</a>
-                            </li>
-                            <li>
-                                <a href="#">PURE Enrollment Packs</a>
-                            </li>
-                            <li>
-                                <a href="#">Water Filtration</a>
-                            </li>
-                            <li>
-                                <a href="#">Last Chance</a>
-                            </li>
+                            @foreach($categories as $category)
+                                <li>
+                                    <a href="javascript:;">
+                                        {{$category->all}}
+                                    </a>
+                                </li>
+                            @endforeach
+                               {{-- <li class="active">
+                                    <a href="javascript:;">All </a>
+                                </li>
+                                <li>
+                                    <a href="#"">Bestsellers</a>
+                                </li>
+                                <li>
+                                    <a href="#">Weight Loss</a>
+                                </li>
+                                <li>
+                                    <a href="#">Sports Performance</a>
+                                </li>
+                                <li>
+                                    <a href="#">Nutrition</a>
+                                </li>
+                                <li>
+                                    <a href="#">Energy</a>
+                                </li>
+                                <li>
+                                    <a href="#">Superfruits</a>
+                                </li>
+                                <li>
+                                    <a href="#">Skincare</a>
+                                </li>
+                                <li>
+                                    <a href="#">PURE Enrollment Packs</a>
+                                </li>
+                                <li>
+                                    <a href="#">Water Filtration</a>
+                                </li>
+                                <li>
+                                    <a href="#">Last Chance</a>
+                                </li>--}}
                         </ul>
                     </div>
                 </div>
