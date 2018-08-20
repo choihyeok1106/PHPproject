@@ -88,7 +88,7 @@
                 <option>PURE Enrollment Packs</option>
                 <option>Water Filtration</option>
                 <option>Last Chance</option>--}}
-            </select>
+            </select>≠
         </div>
 
         <div class="todo-content">
@@ -122,24 +122,22 @@
             </div>
             <div class="row">
                 @foreach($items as $item)
-                    <?php for ($i = 0; $i < 24; $i++) { ?>
+                    <input type="hidden" value="{{$item->sku}}">
                     <div class="col-md-4 col-lg-3 col-sm-6">
                         <div class="portlet light portlet-fit portlet-product">
                             <div class="portlet-body padding-0">
-                                <a href="{{route("shop.show")}}" class="product-image">
+                                <a href="product.html" class="product-image">
                                     <img src="https://shop.livepure.co.kr/upfiles/product/main_4008_gs557k1_2.jpg">
                                 </a>
                             </div>
 
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <a class="caption-subject uppercase">PURE BlenderBottle® Classic™<?= $i % 2 ? 'BlenderBottle® Classic™
-                                                    Bottle BlenderBottle® Classic™ Bottle' : null ?></a>
+                                    <a class="caption-subject uppercase">{{$item->title}}</a>
                                 </div>
                                 <div class="m-grid">
                                     <div class="m-grid-row">
                                         <div class="m-grid-col m-grid-col-left">
-                                            <span>$114.95</span>
                                             <br>
                                             <span class="font-grey-cascade">13 PV</span>
                                         </div>
@@ -164,7 +162,6 @@
                             </div>
                         </div>
                     </div>
-                    <?php } ?>
                 @endforeach
             </div>
         </div>

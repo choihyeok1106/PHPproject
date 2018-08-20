@@ -15,7 +15,7 @@
         <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true"
             data-slide-speed="200">
             <li class="nav-item start active">
-                <a href="/html" class="nav-link nav-toggle">
+                <a href="/home" class="nav-link nav-toggle">
                     <i class="icon-home"></i>
                     <span class="title">Home</span>
                 </a>
@@ -28,22 +28,22 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="team.php" class="nav-link ">
+                        <a href="/dashboard" class="nav-link ">
                             <span class="title">MY Team Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="genealogy.php" class="nav-link ">
+                        <a href="/genealogy" class="nav-link ">
                             <span class="title">Genealogy</span>
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="commissions.php" class="nav-link ">
+                        <a href="/commissions" class="nav-link ">
                             <span class="title">Commissions</span>
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="report.php" class="nav-link ">
+                        <a href="/reports" class="nav-link ">
                             <span class="title">Report</span>
                         </a>
                     </li>
@@ -57,22 +57,22 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="{{route('shop.index')}}" class="nav-link ">
+                        <a href="/products" class="nav-link ">
                             <span class="title">Place an Order</span>
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="orders.php" class="nav-link ">
+                        <a href="/orders" class="nav-link ">
                             <span class="title">Order History</span>
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="orders.php" class="nav-link ">
+                        <a href="/orders" class="nav-link ">
                             <span class="title">View AS Order History</span>
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="autoships.php" class="nav-link ">
+                        <a href="/autoship" class="nav-link ">
                             <span class="title">View Autoship Profile</span>
                         </a>
                     </li>
@@ -86,12 +86,12 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="library.php" class="nav-link ">
+                        <a href="/tools/library" class="nav-link ">
                             <span class="title">Library</span>
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="calendar.php" class="nav-link ">
+                        <a href="/tools/calendar" class="nav-link ">
                             <span class="title">Calendar</span>
                         </a>
                     </li>
@@ -103,7 +103,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="enroll.php" class="nav-link nav-toggle">
+                <a href="/enrollment" class="nav-link nav-toggle">
                     <i class="icon-user-follow"></i>
                     <span class="title">Enrollment</span>
                 </a>
@@ -122,13 +122,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="message-sponsor.php" class="nav-link ">
-                            <span class="title">Message to Sponsor</span>
+                        <a href="/support/faq" class="nav-link ">
+                            <span class="title">FAQ</span>
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="email-support.php" class="nav-link ">
-                            <span class="title">Email to Supports Center</span>
+                        <a href="/support/contact" class="nav-link ">
+                            <span class="title">Contact us</span>
                         </a>
                     </li>
                 </ul>

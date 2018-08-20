@@ -22,12 +22,18 @@ class APIResources
 
     // Items
     const GET_ITEM_CATEGORIES = '/items/categories';
-    const GET_ITEMS = '/items/{0}';
+    const GET_ITEMS = '/items';
+    const GET_ITEM = '/items/{0}';
     const GET_ITEMS_LEGENDS = '/items/legends';
     const GET_TEST = "/test";
+    const GET_TRANSLATES = "/items/{0}/translate";
+    const GET_COUNTRIES = "/items/{0}/countries";
+    const GET_PRICES = "/items/{0}/prices";
+    const GET_PACKAGES = "/items/{0}/packages";
 
     // Reps
     const GET_REPS_UPLINES = "/reps/{0}/uplines";
+    const GET_REPS = "/reps";
 
 
     /**

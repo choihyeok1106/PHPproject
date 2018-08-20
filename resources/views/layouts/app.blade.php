@@ -1,6 +1,6 @@
 @include('layouts.common.head')
 @yield('style.plugins')
-<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid shopping">
 @include('layouts.common.header')
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
@@ -19,5 +19,6 @@
 <!-- END CONTAINER -->
 @include('layouts.common.footer')
 @include('layouts.common.script')
+@yield('style.script')
 </body>
 </html>

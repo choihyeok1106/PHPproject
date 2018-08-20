@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::resource('autoship','AutoshipController');
+Route::resource('commissions','CommissionController');
+Route::resource('dashboard','DashboardController');
+Route::resource('enrollment','EnrollmentController');
+Route::resource('genealogy','GenealogyController');
+Route::resource('home','HomeController');
+Route::resource('orders','OrderController');
+Route::resource('products','ProductController');
+Route::resource('reports','ReportController');
+Route::get('support/faq','SupportController@faq')->name('support.faq');
+Route::get('support/contact','SupportController@contact')->name('support.contact');
+Route::get('tools/library','ToolController@library')->name('tools.faq');
+Route::get('tools/calendar','ToolController@calendar')->name('tools.contact');

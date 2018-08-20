@@ -138,7 +138,7 @@
                     <li class="nav-item active">
                         <a data-toggle="tab" role="tab" data-target="#description" href="#">Description</a>
                     </li>
-                    <li class="nav-item">
+                   z <li class="nav-item">
                         <a href="#" data-toggle="tab" role="tab" data-target="#shipping-return">Shipping & Return</a>
                     </li>
                     <li class="nav-item">
