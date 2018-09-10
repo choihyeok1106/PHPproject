@@ -348,7 +348,7 @@
         <!-- END LOGIN FORM -->
     </div>
 @endsection
-@section('style.script')
+@section('script.plugins')
     <script src="<?= STATIC_SERVER ?>/vendors/jquery-validation/js/jquery.validate.min.js"
             type="text/javascript"></script>
     <script src="<?= STATIC_SERVER ?>/vendors/jquery-validation/js/additional-methods.min.js"

@@ -21,4 +21,7 @@ class OrderController extends Controller
     public function show($orderId){
         return view('orders.show');
     }
+    public function invoice(){
+        return view('orders.invoice');
+    }
 }

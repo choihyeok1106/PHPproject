@@ -159,7 +159,7 @@
         <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 615px;"></div>
     </div>
 @endsection
-@section('style.script')
+@section('script.plugins')
     <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
     <script src="<?= STATIC_SERVER ?>/vendors/gmaps/gmaps.min.js" type="text/javascript"></script>
     <script src="/js/pages/contact.js?<?= v() ?>" type="text/javascript"></script>

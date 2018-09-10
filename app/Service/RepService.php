@@ -12,16 +12,11 @@ use App\Supports\APIResources;
 
 class RepService extends Service
 {
-    public function getLocale(){
-     $this->url = APIResources::GET_LOCALE;
-     $result = $this->get();
-     $locale = $this->repository->convert($result->response['items'],'locale');
-    }
-
-    public function getReps(){
-        $this->url = APIResources::GET_REPS;
+    public function getRep($repNumber)
+    {
+        $this->url = APIResources::format(APIResources::GET_REP, $repNumber);
         $result = $this->get();
-        print_r($result->response); exit;
-        $reps = $this->repository->convert($result->response['items'],'Rep');
+        $rep = $this->repository->convert($result->response, 'Rep');
+        return $rep;
     }
 }

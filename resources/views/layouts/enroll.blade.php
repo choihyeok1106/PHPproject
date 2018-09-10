@@ -16,4 +16,4 @@
 
 </html>
 @include('layouts.common.script')
-@yield('style.script')
+@yield('script.plugins')

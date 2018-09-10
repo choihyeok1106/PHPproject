@@ -38,6 +38,11 @@ class Rep implements IRepository
                     $phones->transfer($value);
                     $this->phones = $phones;
                     break;
+                case 'shipping':
+                    $shipping = new Shipping();
+                    $shipping->transfer($value);
+                    $this->shipping = $shipping;
+                    break;
                 case 'ranks':
                     $this->ranks = new Rank();
                     foreach ($value as $_key => $_value) {

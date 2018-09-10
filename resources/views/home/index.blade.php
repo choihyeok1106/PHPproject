@@ -756,7 +756,7 @@
     </div>
     <div class="clearfix"></div>
 @endsection
-@section('style.script')
+@section('script.plugins')
     <script src="<?= STATIC_SERVER ?>/vendors/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
     <script src="<?= STATIC_SERVER ?>/vendors/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
     <script src="<?= STATIC_SERVER ?>/vendors/counterup/jquery.counterup.min.js" type="text/javascript"></script>

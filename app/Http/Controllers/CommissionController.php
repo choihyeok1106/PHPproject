@@ -16,7 +16,7 @@ class CommissionController extends Controller
         return view('commissions.index');
     }
 
-    public function show(){
-        return view('commissions.show');
+    public function show($commissionId){
+        return view('commissions.show',['commissionId'=>$commissionId]);
     }
 }

@@ -33,7 +33,7 @@ class APIResources
 
     // Reps
     const GET_REPS_UPLINES = "/reps/{0}/uplines";
-    const GET_REPS = "/reps";
+    const GET_REP = "/reps/{0}";
 
 
     /**
@@ -49,7 +49,7 @@ class APIResources
             }
         } else {
             if (is_string($replaces)) {
-                $url = preg_replace('/\{0\}/', $replaces, $url);
+                    $url = preg_replace('/\{0\}/', $replaces, $url);
             }
         }
 

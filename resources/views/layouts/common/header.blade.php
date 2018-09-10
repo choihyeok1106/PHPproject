@@ -4,7 +4,7 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="/html">
+            <a href="/">
                 <img src="/img/logo_white.png" alt="logo" class="logo-default"/> </a>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -12,7 +12,8 @@
         </div>
         <!-- END LOGO -->
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+           data-target=".navbar-collapse"> </a>
         <!-- END RESPONSIVE MENU TOGGLER -->
 
         <!-- BEGIN PAGE TOP -->
@@ -23,7 +24,8 @@
             <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
             <div class="search-form search-form-expanded" action="page_general_search_3.html" method="GET">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search..." name="query">
+                    <input type="text" class="form-control" placeholder="{{ __('layouts/common/header.search') }}"
+                           name="query">
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn submit">
                             <i class="icon-magnifier"></i>
@@ -37,7 +39,7 @@
                 <ul class="nav navbar-nav pull-right">
                     <!-- BEGIN TODO DROPDOWN -->
                     <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
-                        <a href="cart.php" class="dropdown-toggle">
+                        <a href="{{route('shopping.cart')}}" class="dropdown-toggle">
                             <i class="icon-basket"></i>
                             <span class="badge badge-default"> 3 </span>
                         </a>
@@ -69,50 +71,64 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="team.php"><i class="icon-user"></i> My Profile </a>
+                                <a href="{{route('dashboard.index')}}"><i class="icon-user"></i> My Profile </a>
                             </li>
                             <li>
-                                <a href="calendar.php"><i class="icon-calendar"></i> My Calendar </a>
+                                <a href="{{route('tools.calendar')}}"><i class="icon-calendar"></i> My Calendar </a>
                             </li>
                             <li>
-                                <a href="orders.php"><i class="icon-basket-loaded"></i> My Orders </a>
+                                <a href="{{route('orders.index')}}"><i class="icon-basket-loaded"></i> My Orders </a>
                             </li>
                             <li>
-                                <a href="autoships.php"><i class="icon-clock"></i> My Autoship </a>
+                                <a href="{{route('autoships.index')}}"><i class="icon-clock"></i> My Autoship </a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="account.php"><i class="icon-settings"></i> Settings </a>
+                                <a href="{{route('account.index')}}"><i class="icon-settings"></i> Settings </a>
                             </li>
                             <li>
-                                <a href="login.php"><i class="icon-key"></i> Log Out </a>
+                                <a href="{{route('login.index')}}"><i class="icon-key"></i> Log Out </a>
                             </li>
                         </ul>
                     </li>
                     <!-- END USER LOGIN DROPDOWN -->
                     <li class="dropdown dropdown-language">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img alt="" src="/img/flags/us.png">
-                            <span class="langname"> US </span>
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                           data-close-others="true">
+                            <img alt="" src="/img/flags/{{ __('layouts/common/header.locale') }}.png">
+                            <span class="langname">{{ strtoupper(__('layouts/common/header.locale')) }} </span>
                             <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="/img/flags/es.png"> Spanish </a>
+                                <a href="{{ route('locale', 'en') }}">
+                                    <img alt="" src="/img/flags/en.png"> English </a>
                             </li>
                             <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="/img/flags/de.png"> German </a>
+                                <a href="{{ route('locale', 'kr') }}">
+                                    <img alt="" src="/img/flags/kr.png"> 한국어 </a>
                             </li>
                             <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="/img/flags/ru.png"> Russian </a>
+                                <a href="{{ route('locale', 'cn') }}">
+                                    <img alt="" src="/img/flags/cn.png"> 中文 - 简体 </a>
                             </li>
                             <li>
-                                <a href="javascript:;">
-                                    <img alt="" src="/img/flags/fr.png"> French </a>
+                                <a href="{{ route('locale', 'mm') }}">
+                                    <img alt="" src="/img/flags/mm.png"> 中文 - 繁體 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('locale', 'jp') }}">
+                                    <img alt="" src="/img/flags/jp.png"> 日本語 </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('locale', 'mx') }}">
+                                    <img alt="" src="/img/flags/mx.png"> Español - Mexico </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('locale', 'cr') }}">
+                                    <img alt="" src="/img/flags/cr.png"> Español - Costa Rica </a>
+                            </li>
+
                         </ul>
                     </li>
                 </ul>

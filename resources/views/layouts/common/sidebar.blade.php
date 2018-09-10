@@ -72,7 +72,7 @@
                         </a>
                     </li>
                     <li class="nav-item  ">
-                        <a href="/autoship" class="nav-link ">
+                        <a href="/autoships" class="nav-link ">
                             <span class="title">View Autoship Profile</span>
                         </a>
                     </li>

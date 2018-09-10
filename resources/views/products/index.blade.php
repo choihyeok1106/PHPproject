@@ -11,7 +11,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <span>Shopping</span>
+                <span>Shopping</span>x
             </li>
         </ul>
     </div>
@@ -27,7 +27,12 @@
                 <div class="portlet-body todo-project-list-content" style="height: auto;">
                     <div class="todo-project-list">
                         <ul class="nav nav-stacked">
-                            <li class="active">
+                            @foreach($items as $item)
+                                <li>
+                                    <a href="#">{{$item->name}}</a>
+                                </li>
+                            @endforeach
+{{--                            <li class="active">
                                 <a href="javascript:;">All </a>
                             </li>
                             <li>
@@ -59,24 +64,16 @@
                             </li>
                             <li>
                                 <a href="#">Last Chance</a>
-                            </li>
+                            </li>--}}
                         </ul>
                     </div>
                 </div>
             </div>
 
             <select class="bs-select form-control default category-select">
-                <option>All</option>
-                <option>Bestsellers</option>
-                <option>Weight Loss</option>
-                <option>Sports Performance</option>
-                <option>Nutrition</option>
-                <option>Energy</option>
-                <option>Superfruits</option>
-                <option>Skincare</option>
-                <option>PURE Enrollment Packs</option>
-                <option>Water Filtration</option>
-                <option>Last Chance</option>
+                @foreach($items as $item)
+                    <option>{{$item->name}}</option>
+                @endforeach
             </select>
         </div>
 
@@ -89,10 +86,10 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search for Product">
                                 <span class="input-group-btn">
-                                            <button class="btn blue uppercase bold" type="button">
-                                                <i class="icon-magnifier"></i> &nbsp; Search
-                                            </button>
-                                        </span>
+                                    <button class="btn blue uppercase bold" type="button">
+                                        <i class="icon-magnifier"></i> &nbsp; Search
+                                    </button>
+                                </span>
                             </div>
                         </div>
                         <div class="m-grid-col m-grid-col-lg-6 m-grid-col-right m-grid-col-md-4">
@@ -115,7 +112,8 @@
 
                     <div class="portlet light portlet-fit portlet-product">
                         <div class="portlet-body padding-0">
-                            <a href="product.php" class="product-image">
+                            {{--{{route('products.show',$skuId)}}--}}
+                            <a href="#" class="product-image">
                                 <img src="https://shop.livepure.co.kr/upfiles/product/main_4008_gs557k1_2.jpg">
                             </a>
                         </div>
@@ -160,6 +158,6 @@
         <!-- END TODO CONTENT -->
     </div>
 @endsection
-@section('style.script')
+@section('script.plugins')
     <script src="<?= STATIC_SERVER ?>/vendors/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
 @endsection

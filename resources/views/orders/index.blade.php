@@ -74,7 +74,7 @@
                         <span>|</span>
                         <a href="#">Tracking</a>
                         <span>|</span>
-                        <a href="invoice.php">Invoice</a>
+                        <a href="{{route('orders.invoice')}}">Invoice</a>
                     </td>
                 </tr>
                 <?php } ?>
@@ -154,7 +154,7 @@
                     </div>
                     <div class="col-2">
                         <div class="desc">TOTAL</div>
-                        <div class="val">$74.85</div>
+             w           <div class="val">$74.85</div>
                     </div>
                     <div class="col-2">
                         <div class="desc">Order PV</div>
@@ -163,9 +163,9 @@
                     <div class="col-6 text-right">
                         <div class="desc">April 26, 2018</div>
                         <div class="val">
-                            <a href="order.php">Order Details</a>
+                            <a href="#">Order Details</a>
                             <span>|</span>
-                            <a href="invoice.php">Invoice</a>
+                            <a href="{{route('orders.invoice')}}">Invoice</a>
                         </div>
                     </div>
                 </div>
@@ -201,6 +201,6 @@
         <?php } ?>
     </div>
 @endsection
-@section('style.script')
+@section('script.plugins')
     <script src="<?= STATIC_SERVER ?>/vendors/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
 @endsection

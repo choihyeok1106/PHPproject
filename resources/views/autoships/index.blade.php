@@ -204,6 +204,6 @@
         <?php } ?>
     </div>
 @endsection
-@section('style.script')
+@section('script.plugins')
     <script src="<?= STATIC_SERVER ?>/vendors/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
 @endsection

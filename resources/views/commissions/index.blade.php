@@ -52,7 +52,7 @@
                     <td><a href="commission.php">Week 32 2018 (7/31/2018 to 08/06/2018)</a></td>
                     <td>$0.00</td>
                     <td>
-                        <a href="{{route('commissions.show')}}">View Detail</a>
+                        <a href="#">View Detail</a>
                     </td>
                 </tr>
                 <?php } ?>
@@ -61,6 +61,6 @@
         </div>
     </div>
 @endsection
-@section('style.script')
+@section('script.plugins')
     <script src="<?= STATIC_SERVER ?>/vendors/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
 @endsection
