@@ -30,6 +30,7 @@ class APIResources
     const GET_COUNTRIES = "/items/{0}/countries";
     const GET_PRICES = "/items/{0}/prices";
     const GET_PACKAGES = "/items/{0}/packages";
+    const GET_LOCALES  = "/locales";
 
     // Reps
     const GET_REPS_UPLINES = "/reps/{0}/uplines";

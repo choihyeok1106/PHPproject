@@ -11,7 +11,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <span>Shopping</span>x
+                <span>Shopping</span>
             </li>
         </ul>
     </div>

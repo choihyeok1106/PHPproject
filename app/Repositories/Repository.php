@@ -28,7 +28,6 @@ class Repository
         if (count($repositories) == 1) {
             $repositories = $repositories[0];
         }
-
         return $repositories;
     }
 

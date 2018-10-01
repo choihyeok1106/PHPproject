@@ -37,11 +37,11 @@ Route::get('/locale/{locale}', function ($locale) {
     return redirect()->back();
 })->name('locale');
 
-Route::get('invoice', 'OrderController@invoice')->name('orders.invoice');
-Route::get('support/faq', 'SupportController@faq')->name('support.faq');
-Route::get('support/contact', 'SupportController@contact')->name('support.contact');
-Route::get('tools/library', 'ToolController@library')->name('tools.library');
-Route::get('tools/calendar', 'ToolController@calendar')->name('tools.calendar');
-Route::get('shopping/cart', 'ShoppingController@cart')->name('shopping.cart');
-Route::get('shopping/checkout', 'ShoppingController@checkout')->name('shopping.checkout');
-Route::get('shopping/complete', 'ShoppingController@complete')->name('shopping.complete');
+Route::get('/invoice', 'OrderController@invoice')->name('orders.invoice');
+Route::get('/support/faq', 'SupportController@faq')->name('support.faq');
+Route::get('/support/contact', 'SupportController@contact')->name('support.contact');
+Route::get('/tools/library', 'ToolController@library')->name('tools.library');
+Route::get('/tools/calendar', 'ToolController@calendar')->name('tools.calendar');
+Route::get('/shopping/cart', 'ShoppingController@cart')->name('shopping.cart');
+Route::get('/shopping/checkout', 'ShoppingController@checkout')->name('shopping.checkout');
+Route::get('/shopping/complete', 'ShoppingController@complete')->name('shopping.complete');
