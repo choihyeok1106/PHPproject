@@ -2,14 +2,26 @@
 
 namespace App\Repositories;
 
-class Rep implements IRepository
-{
+/**
+ * @property mixed id
+ * @property mixed number
+ * @property mixed country
+ * @property mixed rep_type
+ * @property mixed market
+ * @property mixed default_locale
+ * @property mixed phones
+ * @property mixed shipping
+ * @property mixed ranks
+ * @property mixed first_name
+ * @property mixed last_name
+ */
+
+class Rep implements IRepository {
     /**
      * @param $unit array
      * @return mixed
      */
-    public function transfer($unit)
-    {
+    public function transfer($unit) {
         // TODO: Implement transfer() method.
         foreach ($unit as $key => $value) {
             switch ($key) {
@@ -59,8 +71,7 @@ class Rep implements IRepository
         return $this;
     }
 
-    public function full_name()
-    {
+    public function full_name() {
         return $this->first_name . ' ' . $this->last_name;
     }
 }

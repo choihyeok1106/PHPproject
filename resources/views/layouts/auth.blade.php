@@ -10,13 +10,14 @@
 <head>
     <meta charset="utf-8"/>
     <title>Virtual Back Office</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
           type="text/css"/>
-    <link href="<?= STATIC_SERVER ?>/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="<?= STATIC_SERVER ?>/vendors/simple-line-icons/simple-line-icons.min.css" rel="stylesheet"
+    <link href="<?= STATIC_SERVER ?>/fonts/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= STATIC_SERVER ?>/fonts/simple-line-icons/simple-line-icons.min.css" rel="stylesheet"
           type="text/css"/>
     <link href="<?= STATIC_SERVER ?>/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="<?= STATIC_SERVER ?>/vendors/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet"
@@ -27,8 +28,8 @@
     <link href="/css/plugins.min.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
-    <link href="/css/style.css<?= v() ?>" rel="stylesheet" type="text/css"/>
-    <link href="/css/pages/login.css<?= v() ?>" rel="stylesheet" type="text/css"/>
+    <link href="<?= css('/css/app.css') ?>" rel="stylesheet" type="text/css"/>
+    <link href="<?= css('/css/pages/login.css') ?>" rel="stylesheet" type="text/css"/>
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="/favicon.ico"/>
 </head>

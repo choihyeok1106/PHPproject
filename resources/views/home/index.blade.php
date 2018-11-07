@@ -4,6 +4,7 @@
     <link href="<?= STATIC_SERVER ?>/vendors/circliful/css/jquery.circliful.css" rel="stylesheet" type="text/css"/>
     <link href="<?= STATIC_SERVER ?>/vendors/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
 @endsection
+
 @section('content')
     <!-- BEGIN PAGE HEADER-->
     <h1 class="page-title"> Home

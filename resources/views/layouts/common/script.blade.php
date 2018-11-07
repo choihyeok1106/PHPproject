@@ -12,4 +12,4 @@
 <script src="<?= STATIC_SERVER ?>/vendors/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <script src="<?= STATIC_SERVER ?>/vendors/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
 
-<script src="/js/app.js?<?= v() ?>" type="text/javascript"></script>
+<script src="<?= js('/js/app.js') ?>" type="text/javascript"></script>

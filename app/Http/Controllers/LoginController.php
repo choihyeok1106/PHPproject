@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
-class LoginController extends Controller
-{
-    public function index(){
+use App\Supports\UserAccess;
+
+class LoginController extends Controller {
+    public function index() {
+        if (UserAccess::isLogin()) {
+            return redirect('/');
+        }
         return view('login.index');
     }
 }

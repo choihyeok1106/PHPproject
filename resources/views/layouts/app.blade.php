@@ -1,9 +1,3 @@
-
-<?php
-echo app()->getLocale();
-?>
-
-
 @include('layouts.common.head')
 @yield('style.plugins')
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid shopping product-detail">

@@ -14,26 +14,26 @@
                     <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam
                         erat volutpat. Lorem ipsum dolor
                         sit amet, coectetuer adipiscing. </p>
-                    <form action="javascript:;" class="login-form" method="post">
+                    <div class="login-form">
                         <div class="alert alert-danger display-hide">
                             <button class="close" data-close="alert"></button>
-                            <span>Enter any username and password. </span>
+                            <span></span>
                         </div>
                         <div class="row">
                             <div class="col-xs-6">
                                 <input class="form-control form-control-solid placeholder-no-fix form-group" type="text"
                                        autocomplete="off"
-                                       placeholder="Username" name="username" required/></div>
+                                       placeholder="Username" id="id" required/></div>
                             <div class="col-xs-6">
                                 <input class="form-control form-control-solid placeholder-no-fix form-group"
                                        type="password" autocomplete="off"
-                                       placeholder="Password" name="password" required/></div>
+                                       placeholder="Password" id="pwd" required/></div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="rem-password">
                                     <label class="rememberme mt-checkbox mt-checkbox-outline">
-                                        <input type="checkbox" name="remember" value="1"/> Remember me
+                                        <input type="checkbox" id="remember" value="1"/> Remember me
                                         <span></span>
                                     </label>
                                 </div>
@@ -43,7 +43,7 @@
                                     <a href="javascript:;" id="forget-password" class="forget-password">Forgot
                                         Password?</a>
                                 </div>
-                                <button class="btn blue" type="submit">Sign In</button>
+                                <button class="btn blue" id="login" type="button">Sign In</button>
                             </div>
                         </div>
                         <div class="login-block">
@@ -51,20 +51,21 @@
                             Don't have an account? &nbsp; <a href="{{route('enrollment.index')}}">Join Live PURE</a>
                         </span>
                         </div>
-                    </form>
+                    </div>
                     <!-- BEGIN FORGOT PASSWORD FORM -->
-                    <form class="forget-form" action="javascript:;" method="post">
+                    <div class="forget-form">
                         <h3 class="font-green">Forgot Password ?</h3>
                         <p> Enter your e-mail address below to reset your password. </p>
                         <div class="form-group">
                             <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off"
-                                   placeholder="Email" name="email"/>
+                                   placeholder="Email" id="email"/>
                         </div>
                         <div class="form-actions">
                             <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
-                            <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+                            <button type="button" id="submit" class="btn btn-success uppercase pull-right">Submit
+                            </button>
                         </div>
-                    </form>
+                    </div>
                     <!-- END FORGOT PASSWORD FORM -->
                 </div>
                 <div class="login-footer">
@@ -86,21 +87,19 @@
 @endsection
 
 @section('script.plugins')
-    <script src="<?= STATIC_SERVER ?>/vendors/jquery-validation/js/jquery.validate.min.js"
-            type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/jquery-validation/js/additional-methods.min.js"
-            type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/select2/js/select2.full.min.js" type="text/javascript"></script>
+
     <script src="<?= STATIC_SERVER ?>/vendors/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 
     <script>
         var backstretch = [
             "https://livepure.com/img/vidthumb.jpg",
-            "/assets/pages/img/login/bg1.jpg",
-            "/assets/pages/img/login/bg2.jpg",
-            "/assets/pages/img/login/bg3.jpg"
+            "/img/bg/bg1.jpg",
+            "/img/bg/bg2.jpg",
+            "/img/bg/bg3.jpg",
+            "/img/bg/bg4.jpg"
         ];
+
     </script>
 
-    <script src="/js/pages/login.js?<?= v() ?>" type="text/javascript"></script>
+    <script src="<?= js('/js/pages/login.js') ?>" type="text/javascript"></script>
 @endsection
