@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Supports\UserAccess;
+use App\Supports\UserPrefs;
 use Closure;
 
 class Auth {
@@ -14,7 +14,7 @@ class Auth {
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        if (!UserAccess::isLogin())
+        if (!UserPrefs::isLogin())
             return redirect('login?redirect=' . urlencode($request->getRequestUri()));
         return $next($request);
     }

@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Ajax;
 use App\Http\Controllers\Controller;
 use App\Service\RepService;
 use App\Supports\UserAccess;
+use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
 class LoginAjax extends Controller {
@@ -31,7 +32,7 @@ class LoginAjax extends Controller {
             $rep = RepService::Make()->login($id, $pwd);
 
             if ($rep) {
-                UserAccess::set($rep);
+                UserPrefs::set($rep);
                 return response(["message" => "ok"]);
             }
 

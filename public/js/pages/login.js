@@ -27,7 +27,7 @@ function login() {
                     show_danger(re["error"])
                 } else {
                     var redirectUrl = App.g.get('redirect');
-                    // location.replace(redirectUrl)
+                    location.replace(redirectUrl)
                 }
             },
             no: function (m) {

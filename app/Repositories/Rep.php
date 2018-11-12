@@ -15,7 +15,6 @@ namespace App\Repositories;
  * @property mixed first_name
  * @property mixed last_name
  */
-
 class Rep implements IRepository {
     /**
      * @param $unit array

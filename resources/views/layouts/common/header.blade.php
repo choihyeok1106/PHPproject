@@ -41,7 +41,7 @@
                     <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
                         <a href="{{route('shopping.cart')}}" class="dropdown-toggle">
                             <i class="icon-basket"></i>
-                            <span class="badge badge-default"> 3 </span>
+                            <span class="badge badge-default" id="head-cart-count"> 0 </span>
                         </a>
                     </li>
                     <!-- END TODO DROPDOWN -->
@@ -49,7 +49,7 @@
                     <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                         <a href="javascript:;" class="dropdown-toggle quick-sidebar-toggler">
                             <i class="icon-bell"></i>
-                            <span class="badge badge-default"> 7 </span>
+                            <span class="badge badge-default" id="head-alert-count"> 0 </span>
                         </a>
                     </li>
                     <!-- END NOTIFICATION DROPDOWN >--
@@ -57,7 +57,7 @@
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
                         <a href="javascript:;" class="dropdown-toggle quick-sidebar-toggler">
                             <i class="icon-bubble"></i>
-                            <span class="badge badge-default"> 4 </span>
+                            <span class="badge badge-default" id="head-message-count"> 0 </span>
                         </a>
                     </li>
                     <!-- END INBOX DROPDOWN -->
@@ -87,7 +87,7 @@
                                 <a href="{{route('account.index')}}"><i class="icon-settings"></i> Settings </a>
                             </li>
                             <li>
-                                <a href="{{route('login.index')}}"><i class="icon-key"></i> Log Out </a>
+                                <a href="{{route('login.logout')}}"><i class="icon-key"></i> Log Out </a>
                             </li>
                         </ul>
                     </li>

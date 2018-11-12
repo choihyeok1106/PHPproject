@@ -21,14 +21,13 @@ class RepService extends Service {
     }
 
     public function login($repNumber, $password) {
-        // Demo data
-        $rep = new Rep();
-
-        $rep->id         = '100000';
-        $rep->number     = 'KR100000';
-        $rep->country    = 'US';
-        $rep->first_name = 'Evalyn';
-        $rep->last_name  = 'Berge';
+        $rep = [
+            'id'         => '100000',
+            'number'     => 'KR100000',
+            'country'    => 'US',
+            'first_name' => 'Evalyn',
+            'last_name'  => 'Berge',
+        ];
 
         return $rep;
     }

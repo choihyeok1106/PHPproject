@@ -10,7 +10,7 @@ define('STATIC_SERVER', 'http://dev-static.puremeka.com');
 
 define('LARAVEL_START', microtime(true));
 
-//session_start();
+session_start();
 
 /*
 |--------------------------------------------------------------------------

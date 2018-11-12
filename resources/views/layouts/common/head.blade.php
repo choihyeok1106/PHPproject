@@ -29,12 +29,12 @@
           type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
-    <link href="/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= css('/css/components.css')?>" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="<?= css('/css/plugins.css')?>" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
-    <link href="/css/layout.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="<?=css('/css/layout.css')?>" rel="stylesheet" type="text/css"/>
+    <link href="<?=css('/css/themes/blue.css')?>" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="<?= css('/css/app.css') ?>" rel="stylesheet" type="text/css"/>
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="/favicon.ico"/>

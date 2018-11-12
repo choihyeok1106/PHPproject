@@ -40,6 +40,7 @@ Route::get('/locale/{locale}',
     })->name('locale');
 
 Route::get('/invoice', 'OrderController@invoice')->name('orders.invoice');
+Route::get('/logout', 'LoginController@logout')->name('login.logout');
 Route::get('/support/faq', 'SupportController@faq')->name('support.faq');
 Route::get('/support/contact', 'SupportController@contact')->name('support.contact');
 Route::get('/tools/library', 'ToolController@library')->name('tools.library');
@@ -48,26 +49,24 @@ Route::get('/shopping/cart', 'ShoppingController@cart')->name('shopping.cart');
 Route::get('/shopping/checkout', 'ShoppingController@checkout')->name('shopping.checkout');
 Route::get('/shopping/complete', 'ShoppingController@complete')->name('shopping.complete');
 
-/*
-* Ajax
-*/
-//Route::post('/a/login','Ajax\LoginController@index');
-//Route::get('/a/login',
-//    function () {
-//        if (Request::ajax()) {
-//            return Response::json($_GET);
-//        } else {
-//            return json_encode(["m" => 0]);
-//        }
-//    });
-
-//Route::post('/api/login',
-//    function () {
-//        if (Request::ajax()) {
-//            return Response::json($_POST);
-//        } else {
-//            return json_encode(["m" => 0]);
-//        }
-//    });
-Route::post('/a/login','Ajax\LoginAjax@index')->name('a.login');
-Route::post('/a/forgot-password','Ajax\LoginAjax@forgotPassword')->name('a.forgot-password');
+/*****
+ * Ajax
+ ******/
+// Login Ajax
+Route::post('/a/login', 'Ajax\LoginAjax@index');
+Route::post('/a/forgot-password', 'Ajax\LoginAjax@forgotPassword');
+// Common Ajax
+Route::get('/a/common/cart-count', 'Ajax\CommonAjax@cartCount');
+Route::get('/a/common/alert-count', 'Ajax\CommonAjax@alertCount');
+Route::get('/a/common/message-count', 'Ajax\CommonAjax@messageCount');
+// Main Ajax
+Route::get('/a/home/settings', 'Ajax\HomeAjax@getSettings');
+Route::get('/a/home/interfaces', 'Ajax\HomeAjax@interfaces');
+Route::get('/a/home/banners', 'Ajax\HomeAjax@banners');
+Route::get('/a/home/summaries', 'Ajax\HomeAjax@summaries');
+Route::get('/a/home/news', 'Ajax\HomeAjax@news');
+Route::get('/a/home/team-alerts', 'Ajax\HomeAjax@teamAlerts');
+Route::get('/a/home/tracker', 'Ajax\HomeAjax@tracker');
+Route::get('/a/home/schedules', 'Ajax\HomeAjax@schedules');
+Route::get('/a/home/activities', 'Ajax\HomeAjax@activities');
+Route::get('/a/home/communities', 'Ajax\HomeAjax@communities');

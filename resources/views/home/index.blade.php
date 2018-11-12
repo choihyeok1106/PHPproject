@@ -3,6 +3,7 @@
     <link href="<?= STATIC_SERVER ?>/vendors/flexslider/flexslider.css" rel="stylesheet" type="text/css"/>
     <link href="<?= STATIC_SERVER ?>/vendors/circliful/css/jquery.circliful.css" rel="stylesheet" type="text/css"/>
     <link href="<?= STATIC_SERVER ?>/vendors/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= css('/css/pages/home.css') ?>" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('content')
@@ -23,7 +24,7 @@
         </ul>
         <div class="page-toolbar">
             <div class="btn-group pull-right">
-                <button type="button" class="btn btn-fit-height grey-salt">
+                <button type="button" id="settings-show" class="btn btn-fit-height grey-salt">
                     Setting <i class="fa fa-cog"></i>
                 </button>
             </div>
@@ -280,50 +281,78 @@
     ?>
 
     <div class="grid">
-        <!-- Banner-->
-        <div class="grid-item widget-banner">
-            <div id="widget-banner" class="portlet portlet-sortable light">
-                <div class="portlet-body" data-scale="0.5">
-                    <div class="flexslider res-box" data-scale="0.6">
-                        <img src="/img/svg/banner.svg?v=8" class="app-svg">
-                        <ul class="slides"></ul>
+        <!-- Widget::Demo -->
+        <div class="grid-item" style="display: none">
+            <div class="grid-box">
+                <div class="grid-head">
+                    <i class="la la-bars dragger"></i>
+                    <div class="grid-caption">NEWS FEED</div>
+                </div>
+
+                <div class="grid-actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <button type="button"
+                                class="btn btn-circle btn-outline green btn-sm active">Current
+                        </button>
+                        <button type="button"
+                                class="btn btn-circle btn-outline green btn-sm">Last
+                        </button>
                     </div>
                 </div>
-                <div class="portlet-title">
-                    <div class="caption">
-                        <div class="app-svg"></div>
-                        <span class="caption-subject bold uppercase" id="banner-title"></span>
+
+                <div class="grid-body" data-scale="0.5">
+                    <div class="grid-wrap">
+                        <img src="/img/svg/banner.svg" class="svg-banner">
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Summary-->
-        <div class="grid-item widget-summary">
-            <div class="grid-item-content">
-                <div class="portlet portlet-sortable light res-box" data-target="#widget-banner">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <span class="caption-subject bold uppercase"> BUSINESS SUMMARY</span>
-                            <span class="caption-helper"></span>
-                        </div>
-                        <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <button type="button" id="summary-curr-btn"
-                                        class="btn btn-circle btn-outline green btn-sm active">Current
-                                </button>
-                                <button type="button" id="summary-last-btn"
-                                        class="btn btn-circle btn-outline green btn-sm">Last
-                                </button>
-                            </div>
+
+        <!-- Widget::Banner -->
+        <div class="grid-item" id="widget-banner" data-id="banner">
+            <div class="grid-box">
+                <div class="grid-head">
+                    <i class="la la-youtube-play dragger"></i>
+                    <div class="grid-caption widget-caption"></div>
+                </div>
+                <div class="grid-body" data-scale="0.6">
+                    <div class="grid-wrap">
+                        <div class="flexslider">
+                            <img src="/img/svg/banner.svg" class="svg-banner">
                         </div>
                     </div>
-                    <div class="portlet-body res-box" data-target="1" data-offset="95">
+                </div>
+            </div>
+        </div>
+
+        <!-- Widget::Summary-->
+        <div class="grid-item" id="widget-summary" data-id="summary">
+            <div class="grid-box widget-summary">
+                <div class="grid-head">
+                    <i class="la la-bar-chart dragger"></i>
+                    <div class="grid-caption widget-caption">
+                        BUSINESS SUMMARY
+                    </div>
+                </div>
+                <div class="grid-actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <button type="button" id="summary-curr-btn"
+                                class="btn btn-circle btn-outline green btn-sm active">Current
+                        </button>
+                        <button type="button" id="summary-last-btn"
+                                class="btn btn-circle btn-outline green btn-sm">Last
+                        </button>
+                    </div>
+                </div>
+                <div class="grid-body" data-scale="0.6" data-min="400">
+                    <div class="grid-wrap">
                         <table id="summary-curr-tb">
                             <tr>
                                 <td>
                                     <div class="tile"><b>PERSONAL VOLUME</b><span>PV</span></div>
                                     <div class="number" id="curr-pv-val"> 0</div>
-                                    <div class="desc" id="curr-pv-per"><i class="fa"></i> <i class="per">0</i>%</div>
+                                    <div class="desc" id="curr-pv-per"><i class="fa"></i> <i class="per">0</i>%
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="tile"><b>LAST 4 WEEKS PV</b><span>LAST 4</span></div>
@@ -348,10 +377,11 @@
                                 <td>
                                     <div class="tile"><b>LEFT TEAM VOLUME</b><span>LTV</span></div>
                                     <div class="number" id="curr-ltv-val"> 0</div>
-                                    <div class="desc" id="curr-ltv-per"><i class="fa"></i> <i class="per">0</i>%</div>
+                                    <div class="desc" id="curr-ltv-per"><i class="fa"></i> <i class="per">0</i>%
+                                    </div>
                                 </td>
                                 <td>
-                                    <div class="tile"><b>RIGHT TEAM VOLUME</b><span>RTV</span></div>
+                                    <div class="tile"><b>RIGHT TEAM NOTE</b><span>RTV</span></div>
                                     <div class="number" id="curr-rtv-val"> 0</div>
                                     <div class="desc" id="curr-rtv-per"><i class="fa"></i> <i class="per">0</i>%
                                     </div>
@@ -381,7 +411,8 @@
                                 <td>
                                     <div class="tile"><b>PERSONAL VOLUME</b><span>PV</span></div>
                                     <div class="number" id="last-pv-val"> 0</div>
-                                    <div class="desc" id="last-pv-per"><i class="fa"></i> <i class="per">0</i>%</div>
+                                    <div class="desc" id="last-pv-per"><i class="fa"></i> <i class="per">0</i>%
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="tile"><b>LAST 4 WEEKS PV</b><span>LAST 4</span></div>
@@ -406,7 +437,8 @@
                                 <td>
                                     <div class="tile"><b>LEFT TEAM VOLUME</b><span>LTV</span></div>
                                     <div class="number" id="last-ltv-val"> 0</div>
-                                    <div class="desc" id="last-ltv-per"><i class="fa"></i> <i class="per">0</i>%</div>
+                                    <div class="desc" id="last-ltv-per"><i class="fa"></i> <i class="per">0</i>%
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="tile"><b>RIGHT TEAM VOLUME</b><span>RTV</span></div>
@@ -438,112 +470,108 @@
                 </div>
             </div>
         </div>
-        <!-- News -->
-        <div class="grid-item widget-news">
-            <div class="grid-item-content">
-                <div id="widget-news" class="portlet portlet-sortable light ">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <span class="caption-subject bold uppercase"> NEWS FEED</span>
-                        </div>
-                        <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <a href="#" class="btn btn-circle btn-outline btn-sm blue">View all</a>
-                            </div>
-                        </div>
+
+        <!-- Widget::News -->
+        <div class="grid-item" id="widget-news" data-id="news">
+            <div class="grid-box widget-news">
+                <div class="grid-head">
+                    <i class="la la-newspaper-o dragger"></i>
+                    <div class="grid-caption widget-caption">
+                        NEWS FEED
                     </div>
-                    <div class="portlet-body">
-                        <img src="/img/svg/news.svg?v=2" class="app-svg">
-                        <img src="/img/svg/news.svg?v=2" class="app-svg">
-                        <img src="/img/svg/news.svg?v=2" class="app-svg">
-                        <div class="mt-comments">
-                            <!--
-                            <div class="mt-comment">
-                                <div class="mt-comment-img">
-                                    <img src="https://gplivepurecomsite.files.wordpress.com/2018/07/bahamas_whattopack_7_27_18.jpg"></div>
-                                <div class="mt-comment-body">
-                                    <div class="mt-comment-info">
-                                        <span class="mt-comment-author">Sales Support Holiday Hours</span>
-                                        <span class="mt-comment-date">26 Feb, 10:30AM</span>
-                                    </div>
-                                    <div class="mt-comment-text"> PURE family, just a reminder with the holiday coming up we have specific holiday
-                                        hours.
-                                        We wish you a great Labor Day weekend!
-                                    </div>
-                                    <div class="mt-comment-details">
-                                        <a href="#">View detail</a>
-                                    </div>
+                </div>
+                <div class="grid-actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <a href="#" class="btn btn-circle btn-outline btn-sm blue">View all</a>
+                    </div>
+                </div>
+                <div class="grid-body">
+                    <div class="grid-wrap">
+                        <div class="mt-comments scroller" style="height: 324px">
+                            <?php for($i=0;$i<3;$i++){?>
+                            <div class="svg-news">
+                                <div class="left"></div>
+                                <div class="right">
+                                    <div class="svg-text" style="width: 50%;margin-bottom: 15px"></div>
+                                    <div class="svg-text" style="width: 100%"></div>
+                                    <div class="svg-text" style="width: 100%"></div>
                                 </div>
                             </div>
-                            -->
+                            <?php }?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Smart Alert -->
-        <div class="grid-item widget-alert">
-            <div class="grid-item-content">
-                <div class="portlet portlet-sortable light">
-                    <div class="portlet-title">
 
-                        <div class="caption">
-                            <span class="caption-subject bold uppercase"> TEAM SMART ALERTS</span>
-                        </div>
-                        <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <a href="#" class="btn btn-circle btn-outline btn-sm blue">View all</a>
-                            </div>
-                        </div>
+        <!-- Widget::Smart Alert -->
+        <div class="grid-item" id="widget-alert" data-id="alert">
+            <div class="grid-box widget-alert">
+                <div class="grid-head">
+                    <i class="la la-bell dragger"></i>
+                    <div class="grid-caption widget-caption">
+                        TEAM SMART ALERTS
                     </div>
-                    <div class="portlet-body">
-                        <div class="scroller " style="height: 378px">
-                            <div class="mt-actions">
-                                <?php for ($i = 0; $i < 10; $i++) { ?>
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-icon ">
-                                                    <i class="icon-cup"></i>
-                                                </div>
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Autoship Credit Card Expired</span>
-                                                    <p class="mt-action-desc">Autoship orders with a credit card that
-                                                        expired last month.</p>
-                                                </div>
+                </div>
+                <div class="grid-actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <a href="#" class="btn btn-circle btn-outline btn-sm blue">View all</a>
+                    </div>
+                </div>
+                <div class="grid-body">
+                    <div class="grid-wrap">
+                        <div class="mt-actions scroller" style="height: 324px">
+                            <?php for ($i = 0; $i < 10; $i++) { ?>
+                            <div class="mt-action">
+                                <div class="mt-action-body">
+                                    <div class="mt-action-row">
+                                        <div class="mt-action-info ">
+                                            <div class="mt-action-icon ">
+                                                <i class="icon-cup"></i>
                                             </div>
-                                            <div class="mt-action-buttons">
-                                                <span class="badge badge-danger"> 3 </span>
+                                            <div class="mt-action-details ">
+                                                <span class="mt-action-author">Autoship Credit Card Expired</span>
+                                                <p class="mt-action-desc">Autoship orders with a credit card that
+                                                    expired last month.</p>
                                             </div>
+                                        </div>
+                                        <div class="mt-action-buttons">
+                                            <span class="badge badge-danger"> 3 </span>
                                         </div>
                                     </div>
                                 </div>
-                                <?php } ?>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Tracker -->
-        <div class="grid-item widget-tracker">
-            <div class="grid-item-content">
-                <div id="widget-tracker" class="portlet portlet-sortable light res-box" data-target="#widget-calendar">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <span class="caption-subject bold uppercase"> RANK TRACKER</span>
-                        </div>
-                        <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <a href="#" class="btn btn-circle btn-outline btn-sm blue">Leadership Rank</a>
-                            </div>
-                        </div>
+
+        <!-- Widget::Tracker -->
+        <div class="grid-item" id="widget-tracker" data-id="tracker">
+            <div class="grid-box widget-tracker">
+                <div class="grid-head">
+                    <i class="la la-crosshairs dragger"></i>
+                    <div class="grid-caption widget-caption">
+                        RANK TRACKER
                     </div>
-                    <div class="portlet-body">
+                </div>
+                <div class="grid-actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <a href="#" class="btn btn-circle btn-outline btn-sm blue">Leadership Rank</a>
+                    </div>
+                </div>
+                <div class="grid-body" data-scale=".75" data-min="450">
+                    <div class="grid-wrap">
                         <table>
+                            <thead>
                             <tr>
-                                <td><i class="fa fa-angle-left"></i></td>
+                                <td>
+                                    <button type="button" class="btn btn-outline btn-sm blue">
+                                        <i class="la la-angle-left"></i>
+                                    </button>
+                                </td>
                                 <td>
                                     <div class="tile">RANK GOAL</div>
                                     <div class="rank">Presidential Black Diamond</div>
@@ -553,175 +581,212 @@
                                         <span class="right">STV 75,000</span>
                                     </div>
                                 </td>
-                                <td><i class="fa fa-angle-right"></i></td>
+                                <td>
+                                    <button type="button" class="btn btn-outline btn-sm blue">
+                                        <i class="la la-angle-right"></i>
+                                    </button>
+                                </td>
                             </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="chart">
+                                        <div class="sub">LESSER TEAM VOLUME</div>
+                                        <div id="tracker-circle"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="sub">SPONSOR TREE VOLUME</div>
+                                    <div class="stv-bar">
+                                        <div>
+                                            <span class="text-success text-18">7,200</span>
+                                            <span class="text-muted">/ 75,000</span>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success" role="progressbar"
+                                                 aria-valuenow="40"
+                                                 aria-valuemin="0" aria-valuemax="100"
+                                                 style="width: 40%">
+                                                <span class="sr-only"> 40% Complete (success) </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
                         </table>
-                        <div class="sub">LESSER TEAM VOLUME</div>
-                        <div class="chart">
-                            <div id="test-circle"></div>
-                        </div>
-                        <div class="sub">SPONSOR TREE VOLUME</div>
-                        <div class="stv-bar">
-                            <div>
-                                <span class="text-success text-18">7,200</span>
-                                <span class="text-muted">/ 75,000</span>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
-                                     aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 40%">
-                                    <span class="sr-only"> 40% Complete (success) </span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Schedule -->
-        <div class="grid-item widget-calendar">
-            <div class="grid-item-content">
-                <div id="widget-calendar" class="portlet portlet-sortable light calendar">
-                    <div class="portlet-title ">
-                        <div class="caption">
-                            <i class="icon-calendar font-dark hide"></i>
-                            <span class="caption-subject font-dark bold uppercase">EVENT SCHEDULE</span>
-                        </div>
+
+        <!-- Widget::Calendar -->
+        <div class="grid-item" id="widget-calendar" data-id="calendar">
+            <div class="grid-box widget-calendar">
+                <div class="grid-head">
+                    <i class="la la-calendar dragger"></i>
+                    <div class="grid-caption widget-caption">
+                        November 2018
                     </div>
-                    <div class="portlet-body">
+                </div>
+                <div class="grid-actions">
+                    <div class="btn-group">
+                        <button type="button" id="calendar-prev" class="btn btn-default btn-sm btn-outline ">
+                            <i class="la la-angle-left"></i>
+                        </button>
+                        <button type="button" id="calendar-next" class="btn btn-default btn-sm btn-outline ">
+                            <i class="la la-angle-right"></i>
+                        </button>
+                        <button type="button" id="calendar-today" class="btn btn-default btn-sm  btn-outline">
+                            Today
+                        </button>
+                    </div>
+                </div>
+                <div class="grid-body" data-scale=".75" data-min="500">
+                    <div class="grid-wrap">
                         <div id="calendar"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Activity -->
-        <div class="grid-item widget-activity">
-            <div class="grid-item-content">
-                <div class="portlet portlet-sortable light res-box" data-target="#widget-comunity">
-                    <div class="portlet-title ">
-                        <div class="caption">
-                            <i class="icon-calendar font-dark hide"></i>
-                            <span class="caption-subject font-dark bold uppercase">ACTIVITIES</span>
-                        </div>
-                        <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <a href="#" class="btn btn-circle btn-outline btn-sm blue">Courses</a>
-                            </div>
-                        </div>
+
+        <!-- Widget::Activity -->
+        <div class="grid-item" id="widget-activity" data-id="activity">
+            <div class="grid-box widget-activity">
+                <div class="grid-head">
+                    <i class="la la-bell dragger"></i>
+                    <div class="grid-caption widget-caption">
+                        ACTIVITIES
                     </div>
-                    <div class="portlet-body">
-
-                        <div class="cd-horizontal-timeline mt-timeline-horizontal" data-spacing="120">
-                            <div class="timeline">
-                                <div class="events-wrapper">
-                                    <div class="events">
-                                        <ol>
-                                            <li>
-                                                <a href="#0" data-date="0/01/2014"
-                                                   class="border-after-red bg-after-red selected">Verbal 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="#0" data-date="1/01/2014"
-                                                   class="border-after-red bg-after-red">Verbal 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="#0" data-date="2/01/2014"
-                                                   class="border-after-red bg-after-red">Verbal 3</a>
-                                            </li>
-                                            <li>
-                                                <a href="#0" data-date="3/01/2014"
-                                                   class="border-after-red bg-after-red">Verbal 4</a>
-                                            </li>
-                                            <li>
-                                                <a href="#0" data-date="4/01/2014"
-                                                   class="border-after-red bg-after-red">Verbal 5</a>
-                                            </li>
-                                            <li>
-                                                <a href="#0" data-date="5/01/2014"
-                                                   class="border-after-red bg-after-red">Verbal 6</a>
-                                            </li>
-                                            <li>
-                                                <a href="#0" data-date="6/01/2014"
-                                                   class="border-after-red bg-after-red">Verbal 7</a>
-                                            </li>
-                                        </ol>
-                                        <span class="filling-line bg-red" aria-hidden="true"></span>
+                </div>
+                <div class="grid-actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <a href="#" class="btn btn-circle btn-outline btn-sm blue">Courses</a>
+                    </div>
+                </div>
+                <div class="grid-body">
+                    <div class="grid-wrap">
+                        <div class="scroller" style="height: 340px; ">
+                            <div class="cd-horizontal-timeline mt-timeline-horizontal" data-spacing="120">
+                                <div class="timeline">
+                                    <div class="events-wrapper">
+                                        <div class="events">
+                                            <ol>
+                                                <li>
+                                                    <a href="#0" data-date="0/01/2014"
+                                                       class="border-after-red bg-after-red selected">Verbal 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#0" data-date="1/01/2014"
+                                                       class="border-after-red bg-after-red">Verbal 2</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#0" data-date="2/01/2014"
+                                                       class="border-after-red bg-after-red">Verbal 3</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#0" data-date="3/01/2014"
+                                                       class="border-after-red bg-after-red">Verbal 4</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#0" data-date="4/01/2014"
+                                                       class="border-after-red bg-after-red">Verbal 5</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#0" data-date="5/01/2014"
+                                                       class="border-after-red bg-after-red">Verbal 6</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#0" data-date="6/01/2014"
+                                                       class="border-after-red bg-after-red">Verbal 7</a>
+                                                </li>
+                                            </ol>
+                                            <span class="filling-line bg-red" aria-hidden="true"></span>
+                                        </div>
+                                        <!-- .events -->
                                     </div>
-                                    <!-- .events -->
+                                    <!-- .events-wrapper -->
+                                    <ul class="cd-timeline-navigation mt-ht-nav-icon">
+                                        <li>
+                                            <a href="#0" class="prev inactive btn btn-outline red md-skip">
+                                                <i class="fa fa-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#0" class="next btn btn-outline red md-skip">
+                                                <i class="fa fa-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- .cd-timeline-navigation -->
                                 </div>
-                                <!-- .events-wrapper -->
-                                <ul class="cd-timeline-navigation mt-ht-nav-icon">
-                                    <li>
-                                        <a href="#0" class="prev inactive btn btn-outline red md-skip">
-                                            <i class="fa fa-chevron-left"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#0" class="next btn btn-outline red md-skip">
-                                            <i class="fa fa-chevron-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <!-- .cd-timeline-navigation -->
-                            </div>
-                            <!-- .timeline -->
-                            <div class="events-content">
-                                <ol>
-                                    <?php for ($i = 0; $i < 7; $i++) { ?>
+                                <!-- .timeline -->
+                                <div class="events-content">
+                                    <ol>
+                                        <?php for ($i = 0; $i < 7; $i++) { ?>
 
-                                    <li class="<?= $i == 0 ? 'selected' : null ?>" data-date="<?= $i ?>/01/2014">
-                                        <div class="mt-title">
-                                            <h2 class="mt-content-title">Improve your social ability <?= $i + 1 ?></h2>
-                                        </div>
-                                        <div class="mt-author">
-                                            <div class="mt-author-name">
-                                                <a href="javascript:;" class="font-blue-madison"><?= $i + 1 ?>/7
-                                                    Completed</a>
+                                        <li class="<?= $i == 0 ? 'selected' : null ?>" data-date="<?= $i ?>/01/2014">
+                                            <div class="mt-title">
+                                                <h2 class="mt-content-title">Improve your social
+                                                    ability <?= $i + 1 ?></h2>
                                             </div>
-                                            <div class="mt-author-datetime font-grey-mint">16 January 2014 : 7:45 PM
+                                            <div class="mt-author">
+                                                <div class="mt-author-name">
+                                                    <a href="javascript:;" class="font-blue-madison"><?= $i + 1 ?>/7
+                                                        Completed</a>
+                                                </div>
+                                                <div class="mt-author-datetime font-grey-mint">16 January 2014 : 7:45 PM
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="mt-content border-grey-steel">
-                                            <p>
-                                                Good social skills are an important part of building rich friendships,
-                                                enjoying yourself in public,
-                                                and succeeding in your career. If you consider yourself an introvert, it
-                                                can be hard to engage in
-                                                conversation with people you don’t know.
+                                            <div class="clearfix"></div>
+                                            <div class="mt-content border-grey-steel">
+                                                <p>
+                                                    Good social skills are an important part of building rich
+                                                    friendships,
+                                                    enjoying yourself in public,
+                                                    and succeeding in your career. If you consider yourself an
+                                                    introvert, it
+                                                    can be hard to engage in
+                                                    conversation with people you don’t know.
 
-                                            </p>
-                                            <a href="javascript:;" class="btn btn-circle btn-outline btn-sm blue">View
-                                                all Courses</a>
-                                        </div>
-                                    </li>
-                                    <?php } ?>
-                                </ol>
+                                                </p>
+                                                <a href="javascript:;" class="btn btn-circle btn-outline btn-sm blue">View
+                                                    all Courses</a>
+                                            </div>
+                                        </li>
+                                        <?php } ?>
+                                    </ol>
+                                </div>
+                                <!-- .events-content -->
                             </div>
-                            <!-- .events-content -->
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-        <!-- PURE COMMUNITY -->
-        <div class="grid-item widget-activity">
-            <div class="grid-item-content">
-                <div id="widget-comunity" class="portlet portlet-sortable light">
-                    <div class="portlet-title ">
-                        <div class="caption">
-                            <i class="icon-calendar font-dark hide"></i>
-                            <span class="caption-subject font-dark bold uppercase">PURE COMMUNITY</span>
-                        </div>
-                        <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <a href="#" class="btn btn-circle btn-outline btn-sm blue">Visit Community</a>
-                            </div>
-                        </div>
+
+        <!-- Widget::COMMUNITY -->
+        <div class="grid-item" id="widget-community" data-id="community">
+            <div class="grid-box widget-community">
+                <div class="grid-head">
+                    <i class="la la-bell dragger"></i>
+                    <div class="grid-caption widget-caption">
+                        PURE COMMUNITY
                     </div>
-                    <div class="portlet-body">
-                        <div class="scroller" style="height: 338px; ">
+                </div>
+                <div class="grid-actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <a href="#" class="btn btn-circle btn-outline btn-sm blue">Visit Community</a>
+                    </div>
+                </div>
+                <div class="grid-body">
+                    <div class="grid-wrap">
+                        <div class="scroller" style="height: 340px; ">
                             <div class="general-item-list">
                                 <?php for ($i = 0; $i < 10; $i++) { ?>
                                 <div class="item">
@@ -756,20 +821,53 @@
         </div>
     </div>
     <div class="clearfix"></div>
-@endsection
-@section('script.plugins')
-    <script src="<?= STATIC_SERVER ?>/vendors/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/counterup/jquery.counterup.min.js" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/flexslider/jquery.flexslider.js?<?= v() ?>"
-            type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/circliful/js/jquery.circliful.min.js" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/moment.min.js" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/muuri/dist/web-animations-2.3.1.min.js"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/muuri/dist/hammer-2.0.8.min.js"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/muuri/dist/muuri.js"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/horizontal-timeline/horizontal-timeline.js?<?= v() ?>"
-            type="text/javascript"></script>
-    <script src="/js/pages/dashboard.js?<?= v() ?>" type="text/javascript"></script>
+
+    <div class="modal fade" id="widget-setting" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">W Title</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        @foreach(App\Constants\HomeWidget::$list as $key=>$name)
+                            <div class="col-md-6">
+                                <label class="mt-checkbox mt-checkbox-outline"> {{$name}}
+                                    <input type="checkbox" value="{{$key}}" name="widget">
+                                    <span></span>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn green">Save changes</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        @endsection
+
+        @section('script.plugins')
+            <script src="<?= STATIC_SERVER ?>/vendors/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/counterup/jquery.waypoints.min.js"
+                    type="text/javascript"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/counterup/jquery.counterup.min.js"
+                    type="text/javascript"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/flexslider/jquery.flexslider.js"
+                    type="text/javascript"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/circliful/js/jquery.circliful.min.js"
+                    type="text/javascript"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/moment.min.js" type="text/javascript"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/muuri/dist/web-animations-2.3.1.min.js"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/muuri/dist/hammer-2.0.8.min.js"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/muuri/dist/muuri.min.js"></script>
+            <script src="<?= STATIC_SERVER ?>/vendors/horizontal-timeline/horizontal-timeline.min.js"
+                    type="text/javascript"></script>
+            <script src="<?= js('/js/pages/home.js') ?>" type="text/javascript"></script>
 @endsection
