@@ -21,6 +21,16 @@ class HomeWidget {
     const COMMUNITY = 'community';
 
     public static $list = [
+        self::BANNER,
+        self::SUMMARY,
+        self::NEWS,
+        self::ALERT,
+        self::TRACKER,
+        self::CALENDAR,
+        self::ACTIVITY,
+        self::COMMUNITY,
+    ];
+    public static $names = [
         self::BANNER    => 'Banner',
         self::SUMMARY   => 'Business Summary',
         self::NEWS      => 'News feed',

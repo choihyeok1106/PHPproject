@@ -1,17 +1,16 @@
 var Home = {
-    grid: null,
+    grid: null, // dragger grid var
     init: function () {
         this.initGridBody();
         this.widgetSetting();
-        // this.widgetBanner();
-        // this.widgetSummary();
-        // this.widgetNews();
-        // this.initDonutChart();
-        // Home.initCalendar();
-        // $("#widget-setting").modal({
-        //     show: 'true'
-        // });
+        this.widgetBanner();
+        this.widgetSummary();
+        this.widgetNews();
+        this.widgetTracker();
+        this.widgetCalendar();
+        this.widgetTeamAlert();
     },
+    // initGridBody: Responsive GridBody Height
     initGridBody: function () {
         function init() {
             $(".grid-body").each(function () {
@@ -37,14 +36,21 @@ var Home = {
             init();
         });
     },
-    // Widget::Setting
+    // widgetSetting: Open widget settings Popup
     widgetSetting: function () {
         var btn = $("#settings-show");
         $(btn).click(function () {
-            App.a.get("/a/home/settings", null, {
+            $('.modal').remove();
+            $('.modal-backdrop').remove();
+            $('body').removeClass("modal-open");
+
+            App.a.get("/a/home/interface", null, {
                 ok: function (res) {
                     if (!res.hasOwnProperty("error")) {
-                        console.log(res)
+                        $("body").append(res['view']);
+                        $("#widget-setting").modal({
+                            show: 'true'
+                        });
                     } else {
                         console.log(res["error"]);
                     }
@@ -61,7 +67,7 @@ var Home = {
             });
         });
     },
-    // Widget::Banner
+    // widgetBanner: Get banners data
     widgetBanner: function () {
         if (!$("#widget-banner").length) {
             return
@@ -127,8 +133,11 @@ var Home = {
             }
         });
     },
-    // Widget::Summary
+    // widgetSummary: Get summary data
     widgetSummary: function () {
+        if (!$("#widget-summary").length) {
+            return
+        }
         $("#summary-curr-btn").click(function (e) {
             $(e).removeClass('active').addClass("active");
             $("#summary-last-btn").removeClass("active");
@@ -220,8 +229,11 @@ var Home = {
             }
         });
     },
-    // Widget::News
+    // widgetNews: Get News data
     widgetNews: function () {
+        if (!$("#widget-news").length) {
+            return
+        }
         App.a.get("/a/home/news", null, {
             ok: function (res) {
                 var html = '';
@@ -248,8 +260,33 @@ var Home = {
             }
         });
     },
-    // Tracker
-    initDonutChart: function () {
+    // widgetTeamAlert: get un read team smart alert count
+    widgetTeamAlert: function () {
+        if (!$("#widget-alert").length) {
+            return
+        }
+        App.a.get("/a/home/team-alerts", null, {
+            ok: function (res) {
+                if (!res.hasOwnProperty('error')) {
+                    $.each(res, function (key, val) {
+                        var elm = $("#widget-alert .mt-action[data-type=" + key + "]");
+                        if (elm && val > 0) {
+                            $(elm).find(".badge").text(val).css("display", "inline-block");
+                        }
+                    });
+                }
+            },
+            no: function (err) {
+                console.log(err);
+            }
+        });
+    },
+    // widgetTracker: get Tracker data and init donut chart
+    widgetTracker: function () {
+        if (!$("#widget-tracker").length) {
+            return
+        }
+
         $("#tracker-circle").circliful({
             animation: 1,
             animationStep: 5,
@@ -268,8 +305,11 @@ var Home = {
             // progressColor: {20: '#CC9487', 40: '#FA6C00', 60: '#FF6C99'}
         });
     },
-    // Widget::Calendar
-    initCalendar: function () {
+    // widgetCalendar: get schedule data and init calendar
+    widgetCalendar: function () {
+        if (!$("#widget-calendar").length) {
+            return
+        }
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
@@ -359,11 +399,32 @@ var Home = {
             setTitle()
         });
     },
-    // dragger
+    // initDragger: init dragger and set widget sorting
+    widgetAlert: function () {
+
+    },
     initDragger: function () {
-        function move() {
-            console.log("Save Widgets")
+        function changed() {
+            var widgets = [];
+            $.each(Home.grid.getItems(), function (key, val) {
+                var widget = $(val.getElement()).attr('data-widget');
+                if (widget) {
+                    widgets[widgets.length] = widget;
+                }
+            });
+
+            App.a.post("/a/home/interface-sorting", {
+                widgets: widgets
+            }, {
+                ok: function (res) {
+                    console.log(res);
+                },
+                no: function (err) {
+                    console.log(err);
+                }
+            });
         }
+
 
         $(".grid .grid-item").css({
             position: "absolute"
@@ -383,16 +444,46 @@ var Home = {
                 handle: '.grid-head'
             }
             // dragEnabled: false,
-        }).on('move', move);
+        }).on('dragEnd', changed);
     }
 }
 
+// save user widget settings
+function saveSettings() {
+    var btn = $("#settings-save");
+    var widgets = [];
+    $("input[type=checkbox][name=widget]:checked").each(function () {
+        widgets[widgets.length] = $(this).val();
+    });
+    App.a.post("/a/home/interface", {
+        widgets: widgets
+    }, {
+        ok: function (res) {
+            if (!res.hasOwnProperty("error")) {
+                location.reload();
+            } else {
+                console.log(res["error"]);
+            }
+        },
+        no: function (err) {
+            console.log(err);
+        },
+        before: function () {
+            $(btn).attr("disabled", true);
+        },
+        end: function () {
+            $(btn).attr("disabled", false);
+        }
+    });
+}
 
 $(document).ready(function () {
-    Home.init(); // init metronic core componets
+    // Init home
+    Home.init();
 });
 
 
 $(window).load(function () {
+    // After init home Then Init Dragger
     Home.initDragger()
 });

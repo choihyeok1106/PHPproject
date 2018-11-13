@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\App;
  * @param mixed  $expression
  * @param string $subject
  */
-function printR($expression, $subject = '') {
+function pr($expression, $subject = '') {
     echo '<fieldset style="margin-bottom: .5em">';
     if (gettype($subject) === 'string' && trim($subject)) {
         echo "<legend>{$subject}</legend>";
@@ -21,8 +21,8 @@ function printR($expression, $subject = '') {
  * @param mixed  $expression
  * @param string $subject
  */
-function printE($expression, $subject = '') {
-    printR($expression, $subject);
+function pe($expression, $subject = '') {
+    pr($expression, $subject);
     exit;
 }
 

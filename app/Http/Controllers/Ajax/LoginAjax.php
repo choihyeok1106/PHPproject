@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 use App\Service\RepService;
-use App\Supports\UserAccess;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
@@ -33,7 +32,7 @@ class LoginAjax extends Controller {
 
             if ($rep) {
                 UserPrefs::set($rep);
-                return response(["message" => "ok"]);
+                return response(["message" => "OK"]);
             }
 
             return response(["error" => "This username/password combination is not quite correct"]);

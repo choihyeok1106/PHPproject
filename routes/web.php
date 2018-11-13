@@ -60,8 +60,9 @@ Route::get('/a/common/cart-count', 'Ajax\CommonAjax@cartCount');
 Route::get('/a/common/alert-count', 'Ajax\CommonAjax@alertCount');
 Route::get('/a/common/message-count', 'Ajax\CommonAjax@messageCount');
 // Main Ajax
-Route::get('/a/home/settings', 'Ajax\HomeAjax@getSettings');
-Route::get('/a/home/interfaces', 'Ajax\HomeAjax@interfaces');
+Route::get('/a/home/interface', 'Ajax\HomeAjax@getInterface');
+Route::post('/a/home/interface', 'Ajax\HomeAjax@setInterface');
+Route::post('/a/home/interface-sorting', 'Ajax\HomeAjax@sortingInterface');
 Route::get('/a/home/banners', 'Ajax\HomeAjax@banners');
 Route::get('/a/home/summaries', 'Ajax\HomeAjax@summaries');
 Route::get('/a/home/news', 'Ajax\HomeAjax@news');

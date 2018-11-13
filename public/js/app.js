@@ -1888,7 +1888,7 @@ var App = {
             }
         }
     },
-    // loader
+    // loader html
     l: {
         loader: '<div class="loader"></div>',
         init: function () {
@@ -1909,6 +1909,7 @@ var App = {
     },
     // Ajax
     a: {
+        // ajax: get
         get: function (url, data, args) {
             if (typeof data !== "object") {
                 data = {};
@@ -1961,6 +1962,7 @@ var App = {
                 }
             });
         },
+        // ajax:post
         post: function (url, data, args) {
             if (typeof data !== "object") {
                 data = {};
@@ -2014,128 +2016,126 @@ var App = {
             });
         }
     },
-    // init
-    init: function () {
-        this.initFixedAside();
-        this.initNote();
-        this.initResponse();
-        $(window).on("resize", function () {
-            App.l.init();
-            App.initResponse()
-        })
-    },
-    initFixedAside: function () {
-        $('.fixed-aside').each(function () {
-            var top = parseInt($(this).attr("data-top"));
-            var offset = parseInt($(this).attr("data-offset"));
-            var cls = $(this).attr("data-class");
-            var elm = $(this);
-            if (isNaN(offset)) {
-                offset = 0;
-            }
-            if (!isNaN(top) && cls) {
-                $(window).on('scroll', function () {
-                    if ($(window).scrollTop() >= top) {
-                        $("body").removeClass(cls).addClass(cls);
-                        $(elm).css('top', top);
+    // theme templates
+    t: {
+        // init
+        init: function () {
+            this.initFixedAside();
+            this.initNote();
+            this.initResponse();
+            $(window).on("resize", function () {
+                App.l.init();
+                App.t.initResponse()
+            })
+        },
+        // init fixed aside menu
+        initFixedAside: function () {
+            $('.fixed-aside').each(function () {
+                var top = parseInt($(this).attr("data-top"));
+                var offset = parseInt($(this).attr("data-offset"));
+                var cls = $(this).attr("data-class");
+                var elm = $(this);
+                if (isNaN(offset)) {
+                    offset = 0;
+                }
+                if (!isNaN(top) && cls) {
+                    $(window).on('scroll', function () {
+                        if ($(window).scrollTop() >= top) {
+                            $("body").removeClass(cls).addClass(cls);
+                            $(elm).css('top', top);
+                            $(elm).css('width', $(elm).parent().width());
+                            $(elm).css('left', $(elm).parent().offset().left + offset);
+                        } else {
+                            $("body").removeClass(cls);
+                        }
+                    });
+                    $(window).on('resize', function () {
                         $(elm).css('width', $(elm).parent().width());
                         $(elm).css('left', $(elm).parent().offset().left + offset);
+                    });
+                }
+            });
+        },
+        // init note
+        initNote: function () {
+            $(".note .note-close").on("click", function () {
+                $(".note").remove()
+            });
+        },
+        // responsive box height
+        initResponse: function () {
+            $(".res-box").each(function () {
+                var scale = $(this).attr("data-scale");
+                var depth = $(this).attr("data-depth");
+                var target = $(this).attr("data-target");
+                var offset = $(this).attr("data-offset");
+                var min = $(this).attr("data-min");
+                if (isNaN(offset)) {
+                    offset = 0;
+                }
+                if (isNaN(min)) {
+                    min = 0;
+                }
+                if (target) {
+                    if (isNaN(target)) {
+                        if ($(target).length) {
+                            var mh = $(target).outerHeight();
+                            if (min > 0 && min > mh) {
+                                mh = min;
+                            }
+                            $(this).css({
+                                'min-height': mh
+                            });
+                        }
                     } else {
-                        $("body").removeClass(cls);
-                    }
-                });
-                $(window).on('resize', function () {
-                    $(elm).css('width', $(elm).parent().width());
-                    $(elm).css('left', $(elm).parent().offset().left + offset);
-                });
-            }
-        });
-    },
-    initNote: function () {
-        $(".note .note-close").on("click", function () {
-            $(".note").remove()
-        });
-    },
-    initResponse: function () {
-        $(".res-box").each(function () {
-            var scale = $(this).attr("data-scale");
-            var depth = $(this).attr("data-depth");
-            var target = $(this).attr("data-target");
-            var offset = $(this).attr("data-offset");
-            var min = $(this).attr("data-min");
-            if (isNaN(offset)) {
-                offset = 0;
-            }
-            if (isNaN(min)) {
-                min = 0;
-            }
-            if (target) {
-                if (isNaN(target)) {
-                    if ($(target).length) {
-                        var mh = $(target).outerHeight();
+                        var el = $(this);
+                        for (var i = 0; i < target; i++) {
+                            el = $(el).parent();
+                        }
+                        var mh = ($(el).outerHeight() - offset);
                         if (min > 0 && min > mh) {
                             mh = min;
                         }
                         $(this).css({
                             'min-height': mh
                         });
+
                     }
                 } else {
-                    var el = $(this);
-                    for (var i = 0; i < target; i++) {
-                        el = $(el).parent();
+                    if (isNaN(scale) || scale < 0) {
+                        scale = 1
                     }
-                    var mh = ($(el).outerHeight() - offset);
-                    if (min > 0 && min > mh) {
-                        mh = min;
+                    var el = $(this);
+                    if (!isNaN(depth)) {
+                        for (var i = 0; i < depth; i++) {
+                            el = $(el).parent()
+                        }
+                    }
+                    var h = $(el).outerWidth() * scale;
+                    if (min > 0 && min > h) {
+                        h = min;
                     }
                     $(this).css({
-                        'min-height': mh
-                    });
+                        height: h
+                    })
+                }
 
-                }
-            } else {
-                if (isNaN(scale) || scale < 0) {
-                    scale = 1
-                }
-                var el = $(this);
-                if (!isNaN(depth)) {
-                    for (var i = 0; i < depth; i++) {
-                        el = $(el).parent()
-                    }
-                }
-                var h = $(el).outerWidth() * scale;
-                if (min > 0 && min > h) {
-                    h = min;
-                }
-                $(this).css({
-                    height: h
-                })
-            }
-
-        });
-    }
+            });
+        }
+    },
 };
 
 // util
 var Util = {
+    // Format a number with grouped thousands
     numberFormat: function (num, float) {
         var separator = ',';
         var parts;
-        // 判断是否为数字
         if (!isNaN(parseFloat(num)) && isFinite(num)) {
-            // 把类似 .5, 5. 之类的数据转化成0.5, 5, 为数据精度处理做准, 至于为什么
-            // 不在判断中直接写 if (!isNaN(num = parseFloat(num)) && isFinite(num))
-            // 是因为parseFloat有一个奇怪的精度问题, 比如 parseFloat(12312312.1234567119)
-            // 的值变成了 12312312.123456713
             num = Number(num);
-            // 处理小数点位数
             num = (typeof float !== 'undefined' ? num.toFixed(float) : num).toString();
-            // 分离数字的小数部分和整数部分
             parts = num.split('.');
-            // 整数部分加[separator]分隔, 借用一个著名的正则表达式
             parts[0] = parts[0].toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + (separator || ','));
-
             return parts.join('.');
         }
         return NaN;
@@ -2148,6 +2148,7 @@ var Common = {
         this.alertCount();
         this.messageCount();
     },
+    // Get user cart items count
     cartCount: function () {
         App.a.get('/a/common/cart-count', null, {
             ok: function (res) {
@@ -2159,6 +2160,7 @@ var Common = {
             }
         })
     },
+    // Get user unread alert count
     alertCount: function () {
         App.a.get('/a/common/alert-count', null, {
             ok: function (res) {
@@ -2167,9 +2169,12 @@ var Common = {
                 } else {
                     $("#head-alert-count").text(0).hide();
                 }
+                // re-get alert count
+                setTimeout('Common.alertCount()', 10000);
             }
         })
     },
+    // Get user unread message count
     messageCount: function () {
         App.a.get('/a/common/message-count', null, {
             ok: function (res) {
@@ -2188,7 +2193,7 @@ $(document).ready(function () {
     Layout.init(); // init metronic core componets
     QuickSidebar.init(); // init metronic core componets
     ComponentsBootstrapSelect.init();
-    App.init();
+    App.t.init();
 });
 
 $(window).load(function () {
