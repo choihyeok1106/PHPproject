@@ -2145,6 +2145,7 @@ var Util = {
 var Common = {
     init: function () {
         this.cartCount();
+        this.noticeCount();
         this.alertCount();
         this.messageCount();
     },
@@ -2156,6 +2157,17 @@ var Common = {
                     $("#head-cart-count").text(res['count']).show();
                 } else {
                     $("#head-cart-count").text(0).hide();
+                }
+            }
+        })
+    },
+    noticeCount: function () {
+        App.a.get('/a/common/notice-count', null, {
+            ok: function (res) {
+                if (res.hasOwnProperty('count') && res['count']) {
+                    $("#head-notice-count").text(res['count']).show();
+                } else {
+                    $("#head-notice-count").text(0).hide();
                 }
             }
         })

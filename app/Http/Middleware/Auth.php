@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Supports\UserPrefs;
 use Closure;
+use Illuminate\Http\Request;
 
 class Auth {
     /**
@@ -13,9 +14,15 @@ class Auth {
      * @param  \Closure                 $next
      * @return mixed
      */
-    public function handle($request, Closure $next) {
-        if (!UserPrefs::isLogin())
-            return redirect('login?redirect=' . urlencode($request->getRequestUri()));
+    public function handle(Request $request, Closure $next) {
+        if (!UserPrefs::isLogin()) {
+            if ($request->ajax()) {
+                return response(['error' => 'Not Allowed']);
+            } else {
+                return redirect('login?redirect=' . urlencode($request->getRequestUri()));
+            }
+
+        }
         return $next($request);
     }
 }

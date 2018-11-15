@@ -10,10 +10,10 @@
 }
 
 .grid-box .grid-head {
-    height: 48px;
-    line-height: 48px;
+    height: 64px;
+    line-height: 64px;
     /*margin: 0 15px;*/
-    border-bottom: 1px solid #eee;
+    /*border-bottom: 1px solid #eee;*/
     position: relative;
 }
 
@@ -23,10 +23,22 @@
 
 .grid-box .grid-caption {
     font-size: 16px;
-    padding: 0 16px 0 48px;
+    margin: 0 16px;
+    padding: 0;
     font-weight: 700;
-    color: #666;
+    color: #333;
+    border-bottom: 1px solid #eee;
     text-transform: uppercase;
+}
+
+.grid-box .caption-helper {
+    padding: 0;
+    margin: 0;
+    line-height: 13px;
+    color: #9eacb4;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: capitalize;
 }
 
 .grid-box .grid-head:hover {
@@ -53,8 +65,8 @@
 
 .grid-box .grid-actions {
     position: absolute;
-    top: 9px;
-    right: 15px;
+    top: 16px;
+    right: 16px;
     z-index: 2;
 }
 
@@ -425,6 +437,14 @@
     min-width: 18px;
 }
 
+.widget-alert .mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-info .mt-action-icon {
+    padding-top: 0;
+}
+
+.widget-alert .mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-info .mt-action-icon > i {
+    top: 0;
+}
+
 /** .widget-tracker */
 .widget-tracker table {
     width: 100%;
@@ -476,7 +496,7 @@
 
 .widget-tracker .tile, .widget-tracker .sub {
     font-size: 14px;
-    color: #B8C3C7;
+    color: #555;
 }
 
 .widget-tracker tbody tr td {
@@ -800,4 +820,8 @@
 /** widget-community */
 .widget-community .grid-wrap {
     padding: 15px;
+}
+
+#new-alert {
+    display: none;
 }

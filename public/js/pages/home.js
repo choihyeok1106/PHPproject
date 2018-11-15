@@ -1,14 +1,295 @@
+var timeline = {
+    init: function () {
+        var timelines = $('.cd-horizontal-timeline');
+        var eventsMinDistance;
+
+        (timelines.length > 0) && initTimeline(timelines);
+
+        function initTimeline(timelines) {
+            timelines.each(function () {
+                eventsMinDistance = $(this).data('spacing');
+                var timeline = $(this),
+                    timelineComponents = {};
+                //cache timeline components
+                timelineComponents['timelineWrapper'] = timeline.find('.events-wrapper');
+                timelineComponents['eventsWrapper'] = timelineComponents['timelineWrapper'].children('.events');
+                timelineComponents['fillingLine'] = timelineComponents['eventsWrapper'].children('.filling-line');
+                timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
+                timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
+                timelineComponents['eventsMinLapse'] = minLapse(timelineComponents['timelineDates']);
+                timelineComponents['timelineNavigation'] = timeline.find('.cd-timeline-navigation');
+                timelineComponents['eventsContent'] = timeline.children('.events-content');
+
+                //assign a left postion to the single events along the timeline
+                setDatePosition(timelineComponents, eventsMinDistance);
+                //assign a width to the timeline
+                var timelineTotWidth = setTimelineWidth(timelineComponents, eventsMinDistance);
+                //the timeline has been initialize - show it
+                timeline.addClass('loaded');
+
+                //detect click on the next arrow
+                timelineComponents['timelineNavigation'].on('click', '.next', function (event) {
+                    event.preventDefault();
+                    updateSlide(timelineComponents, timelineTotWidth, 'next');
+                });
+                //detect click on the prev arrow
+                timelineComponents['timelineNavigation'].on('click', '.prev', function (event) {
+                    event.preventDefault();
+                    updateSlide(timelineComponents, timelineTotWidth, 'prev');
+                });
+                //detect click on the a single event - show new event content
+                timelineComponents['eventsWrapper'].on('click', 'a', function (event) {
+                    event.preventDefault();
+                    timelineComponents['timelineEvents'].removeClass('selected');
+                    $(this).addClass('selected');
+                    updateOlderEvents($(this));
+                    updateFilling($(this), timelineComponents['fillingLine'], timelineTotWidth);
+                    updateVisibleContent($(this), timelineComponents['eventsContent']);
+                });
+
+                //on swipe, show next/prev event content
+                timelineComponents['eventsContent'].on('swipeleft', function () {
+                    var mq = checkMQ();
+                    (mq == 'mobile') && showNewContent(timelineComponents, timelineTotWidth, 'next');
+                });
+                timelineComponents['eventsContent'].on('swiperight', function () {
+                    var mq = checkMQ();
+                    (mq == 'mobile') && showNewContent(timelineComponents, timelineTotWidth, 'prev');
+                });
+
+                //keyboard navigation
+                $(document).keyup(function (event) {
+                    if (event.which == '37' && elementInViewport(timeline.get(0))) {
+                        showNewContent(timelineComponents, timelineTotWidth, 'prev');
+                    } else if (event.which == '39' && elementInViewport(timeline.get(0))) {
+                        showNewContent(timelineComponents, timelineTotWidth, 'next');
+                    }
+                });
+            });
+        }
+
+        function updateSlide(timelineComponents, timelineTotWidth, string) {
+            //retrieve translateX value of timelineComponents['eventsWrapper']
+            var translateValue = getTranslateValue(timelineComponents['eventsWrapper']),
+                wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
+            //translate the timeline to the left('next')/right('prev')
+            (string == 'next')
+                ? translateTimeline(timelineComponents, translateValue - wrapperWidth + eventsMinDistance, wrapperWidth - timelineTotWidth)
+                : translateTimeline(timelineComponents, translateValue + wrapperWidth - eventsMinDistance);
+        }
+
+        function showNewContent(timelineComponents, timelineTotWidth, string) {
+            //go from one event to the next/previous one
+            var visibleContent = timelineComponents['eventsContent'].find('.selected'),
+                newContent = (string == 'next') ? visibleContent.next() : visibleContent.prev();
+
+            if (newContent.length > 0) { //if there's a next/prev event - show it
+                var selectedDate = timelineComponents['eventsWrapper'].find('.selected'),
+                    newEvent = (string == 'next') ? selectedDate.parent('li').next('li').children('a') : selectedDate.parent('li').prev('li').children('a');
+
+                updateFilling(newEvent, timelineComponents['fillingLine'], timelineTotWidth);
+                updateVisibleContent(newEvent, timelineComponents['eventsContent']);
+                newEvent.addClass('selected');
+                selectedDate.removeClass('selected');
+                updateOlderEvents(newEvent);
+                updateTimelinePosition(string, newEvent, timelineComponents);
+            }
+        }
+
+        function updateTimelinePosition(string, event, timelineComponents) {
+            //translate timeline to the left/right according to the position of the selected event
+            var eventStyle = window.getComputedStyle(event.get(0), null),
+                eventLeft = Number(eventStyle.getPropertyValue("left").replace('px', '')),
+                timelineWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', '')),
+                timelineTotWidth = Number(timelineComponents['eventsWrapper'].css('width').replace('px', ''));
+            var timelineTranslate = getTranslateValue(timelineComponents['eventsWrapper']);
+
+            if ((string == 'next' && eventLeft > timelineWidth - timelineTranslate) || (string == 'prev' && eventLeft < -timelineTranslate)) {
+                translateTimeline(timelineComponents, -eventLeft + timelineWidth / 2, timelineWidth - timelineTotWidth);
+            }
+        }
+
+        function translateTimeline(timelineComponents, value, totWidth) {
+            var eventsWrapper = timelineComponents['eventsWrapper'].get(0);
+            value = (value > 0) ? 0 : value; //only negative translate value
+            value = (!(typeof totWidth === 'undefined') && value < totWidth) ? totWidth : value; //do not translate more than timeline width
+            setTransformValue(eventsWrapper, 'translateX', value + 'px');
+            //update navigation arrows visibility
+            (value == 0) ? timelineComponents['timelineNavigation'].find('.prev').addClass('inactive') : timelineComponents['timelineNavigation'].find('.prev').removeClass('inactive');
+            (value == totWidth) ? timelineComponents['timelineNavigation'].find('.next').addClass('inactive') : timelineComponents['timelineNavigation'].find('.next').removeClass('inactive');
+        }
+
+        function updateFilling(selectedEvent, filling, totWidth) {
+            //change .filling-line length according to the selected event
+            var eventStyle = window.getComputedStyle(selectedEvent.get(0), null),
+                eventLeft = eventStyle.getPropertyValue("left"),
+                eventWidth = eventStyle.getPropertyValue("width");
+            eventLeft = Number(eventLeft.replace('px', '')) + Number(eventWidth.replace('px', '')) / 2;
+            var scaleValue = eventLeft / totWidth;
+            setTransformValue(filling.get(0), 'scaleX', scaleValue);
+        }
+
+        function setDatePosition(timelineComponents, min) {
+            for (i = 0; i < timelineComponents['timelineDates'].length; i++) {
+                var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
+                    distanceNorm = Math.round(distance / timelineComponents['eventsMinLapse']) + 2;
+                var dis = distanceNorm * min;
+                if (i > 0) {
+                    dis = dis - min + (min / (timelineComponents['timelineDates'].length - 1)) * (1 + 1 / timelineComponents['timelineDates'].length) * (i + 1);
+                } else {
+                    dis = dis - min;
+                }
+                timelineComponents['timelineEvents'].eq(i).css('left', dis + 'px');
+            }
+        }
+
+        function setTimelineWidth(timelineComponents, width) {
+            var timeSpan = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][timelineComponents['timelineDates'].length - 1]),
+                timeSpanNorm = timeSpan / timelineComponents['eventsMinLapse'],
+                timeSpanNorm = Math.round(timeSpanNorm) + 4,
+                totalWidth = timeSpanNorm * width;
+            timelineComponents['eventsWrapper'].css('width', totalWidth + 'px');
+            updateFilling(timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents['fillingLine'], totalWidth);
+            updateTimelinePosition('next', timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents);
+
+            return totalWidth;
+        }
+
+        function updateVisibleContent(event, eventsContent) {
+            var eventDate = event.data('date'),
+                visibleContent = eventsContent.find('.selected'),
+                selectedContent = eventsContent.find('[data-date="' + eventDate + '"]'),
+                selectedContentHeight = selectedContent.height();
+
+            if (selectedContent.index() > visibleContent.index()) {
+                var classEnetering = 'selected enter-right',
+                    classLeaving = 'leave-left';
+            } else {
+                var classEnetering = 'selected enter-left',
+                    classLeaving = 'leave-right';
+            }
+
+            selectedContent.attr('class', classEnetering);
+            visibleContent.attr('class', classLeaving).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () {
+                visibleContent.removeClass('leave-right leave-left');
+                selectedContent.removeClass('enter-left enter-right');
+            });
+            eventsContent.css('height', selectedContentHeight + 'px');
+        }
+
+        function updateOlderEvents(event) {
+            event.parent('li').prevAll('li').children('a').addClass('older-event').end().end().nextAll('li').children('a').removeClass('older-event');
+        }
+
+        function getTranslateValue(timeline) {
+            var timelineStyle = window.getComputedStyle(timeline.get(0), null),
+                timelineTranslate = timelineStyle.getPropertyValue("-webkit-transform") ||
+                    timelineStyle.getPropertyValue("-moz-transform") ||
+                    timelineStyle.getPropertyValue("-ms-transform") ||
+                    timelineStyle.getPropertyValue("-o-transform") ||
+                    timelineStyle.getPropertyValue("transform");
+
+            if (timelineTranslate.indexOf('(') >= 0) {
+                var timelineTranslate = timelineTranslate.split('(')[1];
+                timelineTranslate = timelineTranslate.split(')')[0];
+                timelineTranslate = timelineTranslate.split(',');
+                var translateValue = timelineTranslate[4];
+            } else {
+                var translateValue = 0;
+            }
+
+            return Number(translateValue);
+        }
+
+        function setTransformValue(element, property, value) {
+            element.style["-webkit-transform"] = property + "(" + value + ")";
+            element.style["-moz-transform"] = property + "(" + value + ")";
+            element.style["-ms-transform"] = property + "(" + value + ")";
+            element.style["-o-transform"] = property + "(" + value + ")";
+            element.style["transform"] = property + "(" + value + ")";
+        }
+
+        //based on http://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
+        function parseDate(events) {
+            var dateArrays = [];
+            events.each(function () {
+                var singleDate = $(this),
+                    dateComp = singleDate.data('date').split('T');
+                if (dateComp.length > 1) { //both DD/MM/YEAR and time are provided
+                    var dayComp = dateComp[0].split('/'),
+                        timeComp = dateComp[1].split(':');
+                } else if (dateComp[0].indexOf(':') >= 0) { //only time is provide
+                    var dayComp = ["2000", "0", "0"],
+                        timeComp = dateComp[0].split(':');
+                } else { //only DD/MM/YEAR
+                    var dayComp = dateComp[0].split('/'),
+                        timeComp = ["0", "0"];
+                }
+                var newDate = new Date(dayComp[2], dayComp[1] - 1, dayComp[0], timeComp[0], timeComp[1]);
+                dateArrays.push(newDate);
+            });
+            return dateArrays;
+        }
+
+        function daydiff(first, second) {
+            return Math.round((second - first));
+        }
+
+        function minLapse(dates) {
+            //determine the minimum distance among events
+            var dateDistances = [];
+            for (i = 1; i < dates.length; i++) {
+                var distance = daydiff(dates[i - 1], dates[i]);
+                dateDistances.push(distance);
+            }
+            return Math.min.apply(null, dateDistances);
+        }
+
+        /*
+            How to tell if a DOM element is visible in the current viewport?
+            http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+        */
+        function elementInViewport(el) {
+            var top = el.offsetTop;
+            var left = el.offsetLeft;
+            var width = el.offsetWidth;
+            var height = el.offsetHeight;
+
+            while (el.offsetParent) {
+                el = el.offsetParent;
+                top += el.offsetTop;
+                left += el.offsetLeft;
+            }
+
+            return (
+                top < (window.pageYOffset + window.innerHeight) &&
+                left < (window.pageXOffset + window.innerWidth) &&
+                (top + height) > window.pageYOffset &&
+                (left + width) > window.pageXOffset
+            );
+        }
+
+        function checkMQ() {
+            //check if mobile or desktop device
+            return window.getComputedStyle(document.querySelector('.cd-horizontal-timeline'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
+        }
+    }
+};
+
 var Home = {
     grid: null, // dragger grid var
     init: function () {
         this.initGridBody();
+        this.newAlert();
         this.widgetSetting();
         this.widgetBanner();
         this.widgetSummary();
         this.widgetNews();
+        this.widgetTeamAlert();
         this.widgetTracker();
         this.widgetCalendar();
-        this.widgetTeamAlert();
+        this.widgetActivity();
+        this.widgetCommunity();
     },
     // initGridBody: Responsive GridBody Height
     initGridBody: function () {
@@ -34,6 +315,22 @@ var Home = {
         init();
         $(window).resize(function () {
             init();
+        });
+    },
+    // get last my alert
+    newAlert: function () {
+        App.a.get("/a/home/new-alert", null, {
+            ok: function (res) {
+                if (!res.hasOwnProperty("error")) {
+                    $("#new-alert").show().find("p").text(res['alert']);
+                } else {
+                    $("#new-alert").hide().find("p").text("");
+                }
+                setTimeout('Home.newAlert()', 10000);
+            },
+            no: function (err) {
+                console.log(err);
+            },
         });
     },
     // widgetSetting: Open widget settings Popup
@@ -82,7 +379,6 @@ var Home = {
 
                     if (html) {
                         html = "<div class='slides'>" + html + "</div>";
-                        $("#widget-banner").addClass("active");
                         $("#widget-banner .flexslider").html(html);
                         var mainslider;
                         $('.flexslider').flexslider({
@@ -105,10 +401,10 @@ var Home = {
                                 var title = $(el).attr("data-title");
                                 var text = $(el).attr("data-text");
                                 if (title) {
-                                    $("#widget-banner .widget-caption").text(title)
+                                    $("#widget-banner .grid-caption").text(title)
                                 }
                                 if (text) {
-                                    $("#widget-banner .widget-caption").text(text)
+                                    $("#widget-banner .grid-caption").text(text)
                                 }
                             }
 
@@ -236,24 +532,7 @@ var Home = {
         }
         App.a.get("/a/home/news", null, {
             ok: function (res) {
-                var html = '';
-                $.each(res, function (k, v) {
-                    html += '<div class="mt-comment">' +
-                        '                                <div class="mt-comment-img">' +
-                        '                                    <img src="' + v.image + '"></div>' +
-                        '                                <div class="mt-comment-body">' +
-                        '                                    <div class="mt-comment-info">' +
-                        '                                        <span class="mt-comment-author">' + v.title + '</span>' +
-                        '                                        <span class="mt-comment-date">' + v.date + '</span>' +
-                        '                                    </div>' +
-                        '                                    <div class="mt-comment-text">' + v.text + '</div>' +
-                        '                                    <div class="mt-comment-details">' +
-                        '                                        <a href="#">View detail</a>' +
-                        '                                    </div>' +
-                        '                                </div>' +
-                        '                            </div>';
-                });
-                $(".widget-news .mt-comments").html(html);
+                $("#widget-news .scroller").html(res['view']);
             },
             no: function (err) {
                 console.log(err);
@@ -290,20 +569,141 @@ var Home = {
         $("#tracker-circle").circliful({
             animation: 1,
             animationStep: 5,
-            percent: 19.9,
-            text: '/ 30,000',
-            replacePercentageByText: '5,980',
+            percent: 0, // donut pie
+            text: '/ 0', // max
+            replacePercentageByText: '0', // current
             textSize: 28,
             textStyle: 'font-size: 12px;',
             textColor: '#666',
+            textStyle: 'track-ltv-cond',
             fontColor: '#3498DB',
             backgroundColor: '#eee',
             textY: 120,
             description: '#description',
             title: '#title',
-            percentageY: 105,
+            percentageY: 105
             // progressColor: {20: '#CC9487', 40: '#FA6C00', 60: '#FF6C99'}
+        }, function () {
+            getData();
         });
+
+        var curr = 0;
+        var ltv = 0;
+        var stv = 0;
+        var ranks = [];
+        var pie = 0;
+        var flag = false;
+
+        function circlePie() {
+            if (flag) {
+                var elm = $("#tracker-circle .circle");
+                var dasharray = parseInt($(elm).attr("stroke-dasharray"));
+                if (!isNaN(dasharray)) {
+                    if (pie > dasharray) {
+                        dasharray += 5;
+                        if (dasharray > pie) {
+                            dasharray = pie
+                        }
+                    } else {
+                        dasharray -= 5;
+                        if (dasharray < pie) {
+                            dasharray = pie
+                        }
+                    }
+                    $("#tracker-circle .circle").attr("stroke-dasharray", dasharray + ", 20000");
+
+                    if (dasharray === pie) {
+                        flag = false;
+                    } else {
+                        setTimeout(circlePie, 20);
+                    }
+                }
+            }
+        }
+
+        function changeTracker(i) {
+            curr += i;
+            if (curr < -1) {
+                curr = -1;
+            }
+            if (curr > ranks.length - 1) {
+                curr = ranks.length - 1;
+            }
+            var traget = curr + 1;
+            if (!ranks[traget]) {
+                traget = curr;
+            }
+
+            $("#tracker-circle text[style=track-ltv-cond]").eq(0).text('/ ' + Util.numberFormat(ranks[traget]['ltv']));
+            $("#tracker-circle .timer .number").text(Util.numberFormat(ltv));
+            $("#track-stv-curr").text(Util.numberFormat(stv));
+            $("#track-stv-cond").text(Util.numberFormat(ranks[traget]['stv']));
+            $("#track-name").text(ranks[traget]['name']);
+            $("#track-ltv").text(Util.numberFormat(ranks[traget]['ltv']));
+            $("#track-stv").text(Util.numberFormat(ranks[traget]['stv']));
+            // ltv circle
+            var per = 0;
+            if (ltv > ranks[traget]['ltv']) {
+                per = 360;
+            } else {
+                if (ltv > 0) {
+                    per = parseInt(ltv / ranks[traget]['ltv'] * 360)
+                }
+            }
+            if (per > 0) {
+                if (per !== pie) {
+                    pie = per;
+                    if (!flag) {
+                        flag = true;
+                        circlePie();
+                    }
+
+                }
+                // $("#tracker-circle .circle").attr("stroke-dasharray", per + ", 20000");
+            }
+            // stv bar
+            per = 100;
+            if (stv > ranks[traget]['stv']) {
+                per = 100;
+            } else {
+                if (stv > 0) {
+                    per = stv / ranks[traget]['stv'] * 100;
+                }
+            }
+            if (per > 0) {
+                $("#track-stv-bar").css("width", per + "%");
+            }
+        }
+
+        $("#track-prev").click(function () {
+            if (!flag) {
+                changeTracker(-1);
+            }
+        });
+
+        $("#track-next").click(function () {
+            if (!flag) {
+                changeTracker(1);
+            }
+        });
+
+        function getData() {
+            App.a.get("/a/home/tracker", null, {
+                ok: function (res) {
+                    if (!res.hasOwnProperty('error')) {
+                        curr = res['curr'];
+                        ltv = res['ltv'];
+                        stv = res['stv'];
+                        ranks = res['ranks'];
+                        changeTracker(0)
+                    }
+                },
+                no: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
     },
     // widgetCalendar: get schedule data and init calendar
     widgetCalendar: function () {
@@ -370,9 +770,12 @@ var Home = {
             disableDragging: false,
             header: false,
             editable: true,
-            events: events,
+            // events: events,
             dayClick: function () {
                 alert('a day has been clicked!');
+            },
+            eventAfterAllRender: function (calendar) {
+
             }
         });
 
@@ -381,7 +784,7 @@ var Home = {
         var view = $('#calendar').fullCalendar('getView');
 
         function setTitle() {
-            $("#widget-calendar .widget-caption").text(view.title)
+            $("#widget-calendar .grid-caption").text(view.title)
         }
 
         $("#calendar-prev").click(function () {
@@ -398,11 +801,54 @@ var Home = {
             calendar.today();
             setTitle()
         });
-    },
-    // initDragger: init dragger and set widget sorting
-    widgetAlert: function () {
+
+        App.a.get("/a/home/schedules", null, {
+            ok: function (res) {
+                if (!res.hasOwnProperty('error')) {
+                    // calendar.updateEvent(res);
+                    $('#calendar').fullCalendar('addEventSource', res);
+                    // $('#calendar').fullCalendar('updateEvent', res);
+                }
+            },
+            no: function (err) {
+                console.log(err);
+            }
+        });
 
     },
+    // widgetActivity: get activity data
+    widgetActivity: function () {
+        if (!$("#widget-activity").length) {
+            return
+        }
+        App.a.get("/a/home/activities", null, {
+            ok: function (res) {
+                if (!res.hasOwnProperty('error')) {
+                    $("#widget-activity .scroller").html(res['view']);
+                    if ($("#widget-activity .events li").length) {
+                        timeline.init();
+                    }
+                }
+            },
+            no: function (err) {
+                console.log(err);
+            }
+        });
+    },
+    // widgetCommunity: get pure community data
+    widgetCommunity: function () {
+        App.a.get("/a/home/communities", null, {
+            ok: function (res) {
+                if (!res.hasOwnProperty('error')) {
+                    $("#widget-community .scroller").html(res['view']);
+                }
+            },
+            no: function (err) {
+                console.log(err);
+            }
+        });
+    },
+    // initDragger: init dragger and set widget sorting
     initDragger: function () {
         function changed() {
             var widgets = [];
@@ -446,7 +892,7 @@ var Home = {
             // dragEnabled: false,
         }).on('dragEnd', changed);
     }
-}
+};
 
 // save user widget settings
 function saveSettings() {

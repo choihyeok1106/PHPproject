@@ -11,7 +11,7 @@ namespace App\Constants;
 
 /**
  * @property mixed type
- * @property mixed icon
+ * @property mixed style
  * @property mixed myAlert
  * @property mixed teamAlert
  * @property mixed title
@@ -41,7 +41,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::AutoshipNotProcessed;
-        $type->icon        = '';
+        $type->style        = 'la la-history';
         $type->myAlert     = 'Your autoship failed to process on {DateNextRun:MMMM d}.';
         $type->teamAlert   = 'Autoship failed to process on {DateNextRun:MMMM d}.';
         $type->title       = 'Autoships Not Processed';
@@ -50,7 +50,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::AutoshipLowPV;
-        $type->icon        = '';
+        $type->style        = 'la la-arrow-circle-down';
         $type->myAlert     = 'Your autoship volume is below the recommended 100 PV level.';
         $type->teamAlert   = 'Next autoship on {nextAutoshipDate:MMMM d} is {nextAutoshipPV:N} PV.';
         $type->title       = 'Autoships Under 100 PV';
@@ -59,7 +59,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::AutoshipNotConfigured;
-        $type->icon        = '';
+        $type->style        = 'la la-calendar-times-o';
         $type->myAlert     = 'You currently do not have an autoship configured.';
         $type->teamAlert   = 'Autoship not configured.';
         $type->title       = 'Recent IBOs w/o Autoship';
@@ -68,7 +68,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::NewIBO;
-        $type->icon        = '';
+        $type->style        = 'la la-user-plus';
         $type->myAlert     = 'Congratulations on joining the Genesis PURE team.';
         $type->teamAlert   = 'New IBO joined {daysSinceJoin:0} day(s) ago on {joinDate:MMMM d}.';
         $type->title       = 'New Enrollments';
@@ -77,7 +77,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::RenewalExpiring;
-        $type->icon        = '';
+        $type->style        = 'la la-hourglass-half';
         $type->myAlert     = 'Your yearly renewal will expire on {RenewalDate:MMMM d}.';
         $type->teamAlert   = 'Yearly renewal will expire on {RenewalDate:MMMM d}.';
         $type->title       = 'Renewals About to Expire';
@@ -86,7 +86,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::RenewalExpired;
-        $type->icon        = '';
+        $type->style        = 'la la-hourglass-end';
         $type->myAlert     = 'Your yearly renewal is past due';
         $type->teamAlert   = 'Yearly renewal expired on {RenewalDate:MMMM d}';
         $type->title       = 'Renewals Past Due';
@@ -95,7 +95,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::AutoshipNotConfiguredNewIBO;
-        $type->icon        = '';
+        $type->style        = 'la la-calendar-times-o';
         $type->myAlert     = 'You currently do not have an autoship configured.';
         $type->teamAlert   = 'Autoship not configured.';
         $type->title       = 'New IBOs w/o Autoship';
@@ -104,7 +104,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::PotentialNewBronzeIBO;
-        $type->icon        = '';
+        $type->style        = 'la la-certificate';
         $type->myAlert     = 'Personally sponsor 2 people to achieve Bronze rank.';
         $type->teamAlert   = 'IBO rank after first {daysSinceJoin:0} day(s) as a new IBO.';
         $type->title       = 'Potential Bronze Ranks';
@@ -113,7 +113,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::AutoshipCCExpiring;
-        $type->icon        = '';
+        $type->style        = 'la la-credit-card';
         $type->myAlert     = 'Your autoship credit card expires at the end of this month.';
         $type->teamAlert   = 'Autoship credit card expires on {CCExpiryDate}.';
         $type->title       = 'Autoship Credit Card Expiring';
@@ -122,7 +122,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::AutoshipCCExpired;
-        $type->icon        = '';
+        $type->style        = 'la la-credit-card';
         $type->myAlert     = 'Your autoship credit card has expired.';
         $type->teamAlert   = 'Autoship credit card expired on {CCExpiryDate}.';
         $type->title       = 'Autoship Credit Card Expired';
@@ -131,7 +131,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::NewBronzeIBO;
-        $type->icon        = '';
+        $type->style        = 'la la-trophy';
         $type->myAlert     = 'Congratulations on reaching Bronze rank!';
         $type->teamAlert   = 'IBO reached Bronze rank in first 28 days.';
         $type->title       = 'New Bronze IBOs';
@@ -140,7 +140,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::NewBronzeIBO2;
-        $type->icon        = '';
+        $type->style        = 'la la-trophy';
         $type->myAlert     = 'Congratulations on reaching Bronze rank!';
         $type->teamAlert   = 'IBO reached Bronze rank in first 28 days.';
         $type->title       = 'New Bronze IBO2s';
@@ -149,7 +149,7 @@ class SmartAlertType {
 
         $type              = new SmartAlertType();
         $type->type        = self::AutoshipDiscontinuedProduct;
-        $type->icon        = '';
+        $type->style        = 'la la-gift';
         $type->myAlert     = '{productName} is being discontinued. Please update your autoship.';
         $type->teamAlert   = '{productName} is being discontinued.';
         $type->title       = 'Discontinued Product on Autoship';

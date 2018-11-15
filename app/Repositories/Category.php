@@ -8,11 +8,18 @@
 
 namespace App\Repositories;
 
-
-class Category implements IRepository
-{
-    public function transfer($unit)
-    {
+/**
+ * @property mixed id
+ * @property mixed parent_id
+ * @property mixed country
+ * @property mixed name
+ * @property mixed explanation
+ * @property mixed sorting
+ * @property mixed children
+ * @property mixed translates
+ */
+class Category implements IRepository {
+    public function transfer($unit) {
         // TODO: Implement transfer() method.
         foreach ($unit as $key => $value) {
             switch ($key) {
@@ -20,7 +27,7 @@ class Category implements IRepository
                     $children = new Children();
                     $children->transfer($value);
                     $this->children = $children;
-                break;
+                    break;
                 case 'Item':
                     $item = new Item();
                     $item->transfer($value);

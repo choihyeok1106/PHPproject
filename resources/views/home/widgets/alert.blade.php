@@ -2,7 +2,6 @@
 <div class="grid-item" id="widget-alert" data-widget="alert">
     <div class="grid-box widget-alert">
         <div class="grid-head">
-            <i class="la la-bell dragger"></i>
             <div class="grid-caption widget-caption">
                 TEAM SMART ALERTS
             </div>
@@ -21,7 +20,7 @@
                                 <div class="mt-action-row">
                                     <div class="mt-action-info ">
                                         <div class="mt-action-icon ">
-                                            <i class="icon-cup"></i>
+                                            <i class="{{$type->style}}"></i>
                                         </div>
                                         <div class="mt-action-details ">
                                             <a href="#" class="mt-action-author">{{$type->title}}</a>

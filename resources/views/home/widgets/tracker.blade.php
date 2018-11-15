@@ -2,7 +2,6 @@
 <div class="grid-item" id="widget-tracker" data-widget="tracker">
     <div class="grid-box widget-tracker">
         <div class="grid-head">
-            <i class="la la-crosshairs dragger"></i>
             <div class="grid-caption widget-caption">
                 RANK TRACKER
             </div>
@@ -18,21 +17,21 @@
                     <thead>
                     <tr>
                         <td>
-                            <button type="button" class="btn btn-outline btn-sm blue">
+                            <button type="button" id="track-prev" class="btn btn-outline btn-sm blue">
                                 <i class="la la-angle-left"></i>
                             </button>
                         </td>
                         <td>
                             <div class="tile">RANK GOAL</div>
-                            <div class="rank">Presidential Black Diamond</div>
+                            <div class="rank" id="track-name">IBO</div>
                             <div class="desc">
-                                <span class="left">LTV 30,000</span>
+                                <span class="left">LTV <span id="track-ltv">0</span></span>
                                 <span>|</span>
-                                <span class="right">STV 75,000</span>
+                                <span class="right">STV <span id="track-stv">0</span></span>
                             </div>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline btn-sm blue">
+                            <button type="button" id="track-next" class="btn btn-outline btn-sm blue">
                                 <i class="la la-angle-right"></i>
                             </button>
                         </td>
@@ -54,15 +53,14 @@
                             <div class="sub">SPONSOR TREE VOLUME</div>
                             <div class="stv-bar">
                                 <div>
-                                    <span class="text-success text-18">7,200</span>
-                                    <span class="text-muted">/ 75,000</span>
+                                    <span class="text-success text-18" id="track-stv-curr">0</span>
+                                    <span class="text-muted">/ <span id="track-stv-cond">0</span></span>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-success" role="progressbar"
-                                         aria-valuenow="40"
+                                    <div id="track-stv-bar" class="progress-bar progress-bar-success" role="progressbar"
+                                         aria-valuenow="0"
                                          aria-valuemin="0" aria-valuemax="100"
-                                         style="width: 40%">
-                                        <span class="sr-only"> 40% Complete (success) </span>
+                                         style="width: 0">
                                     </div>
                                 </div>
                             </div>

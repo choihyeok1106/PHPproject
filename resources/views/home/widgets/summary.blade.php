@@ -2,9 +2,9 @@
 <div class="grid-item" id="widget-summary" data-widget="summary">
     <div class="grid-box widget-summary">
         <div class="grid-head">
-            <i class="la la-bar-chart dragger"></i>
             <div class="grid-caption widget-caption">
                 BUSINESS SUMMARY
+                <span class="caption-helper">monthly stats...</span>
             </div>
         </div>
         <div class="grid-actions">

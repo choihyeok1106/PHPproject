@@ -57,9 +57,11 @@ Route::post('/a/login', 'Ajax\LoginAjax@index');
 Route::post('/a/forgot-password', 'Ajax\LoginAjax@forgotPassword');
 // Common Ajax
 Route::get('/a/common/cart-count', 'Ajax\CommonAjax@cartCount');
+Route::get('/a/common/notice-count', 'Ajax\CommonAjax@noticeCount');
 Route::get('/a/common/alert-count', 'Ajax\CommonAjax@alertCount');
 Route::get('/a/common/message-count', 'Ajax\CommonAjax@messageCount');
 // Main Ajax
+Route::get('/a/home/new-alert', 'Ajax\HomeAjax@newAlert');
 Route::get('/a/home/interface', 'Ajax\HomeAjax@getInterface');
 Route::post('/a/home/interface', 'Ajax\HomeAjax@setInterface');
 Route::post('/a/home/interface-sorting', 'Ajax\HomeAjax@sortingInterface');

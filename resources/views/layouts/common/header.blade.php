@@ -18,11 +18,9 @@
 
         <!-- BEGIN PAGE TOP -->
         <div class="page-top">
-
-
             <!-- BEGIN HEADER SEARCH BOX -->
             <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-            <div class="search-form search-form-expanded" action="page_general_search_3.html" method="GET">
+            <div class="search-form search-form-expanded">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="{{ __('layouts/common/header.search') }}"
                            name="query">
@@ -40,24 +38,24 @@
                     <!-- BEGIN TODO DROPDOWN -->
                     <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
                         <a href="{{route('shopping.cart')}}" class="dropdown-toggle">
-                            <i class="icon-basket"></i>
+                            <i class="la la-shopping-cart"></i>
                             <span class="badge badge-default" id="head-cart-count"> 0 </span>
                         </a>
                     </li>
                     <!-- END TODO DROPDOWN -->
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
-                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                    <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
                         <a href="javascript:;" class="dropdown-toggle quick-sidebar-toggler">
-                            <i class="icon-bell"></i>
-                            <span class="badge badge-default" id="head-alert-count"> 0 </span>
+                            <i class="la la-bullhorn"></i>
+                            <span class="badge badge-default" id="head-notice-count"> 0 </span>
                         </a>
                     </li>
                     <!-- END NOTIFICATION DROPDOWN >--
                     <!-- BEGIN INBOX DROPDOWN -->
-                    <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                         <a href="javascript:;" class="dropdown-toggle quick-sidebar-toggler">
-                            <i class="icon-bubble"></i>
-                            <span class="badge badge-default" id="head-message-count"> 0 </span>
+                            <i class="la la-bell"></i>
+                            <span class="badge badge-default" id="head-alert-count"> 0 </span>
                         </a>
                     </li>
                     <!-- END INBOX DROPDOWN -->

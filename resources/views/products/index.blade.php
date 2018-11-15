@@ -20,18 +20,21 @@
         <div class="todo-sidebar">
             <div class="portlet light category-sidebar">
                 <div class="portlet-title">
-                    <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
+                    <div class="caption">
                         <span class="caption-subject font-green-sharp bold uppercase">Categories </span>
                     </div>
                 </div>
                 <div class="portlet-body todo-project-list-content" style="height: auto;">
                     <div class="todo-project-list">
                         <ul class="nav nav-stacked">
-                            @foreach($items as $item)
-                                <li>
-                                    <a href="#">{{$item->name}}</a>
-                                </li>
-                            @endforeach
+                            <li>
+                                <a href="/products">All</a>
+                            </li>
+                            {{--@foreach($items as $item)--}}
+                                {{--<li>--}}
+                                    {{--<a href="#">{{$item->name}}</a>--}}
+                                {{--</li>--}}
+                            {{--@endforeach--}}
 {{--                            <li class="active">
                                 <a href="javascript:;">All </a>
                             </li>
@@ -71,9 +74,9 @@
             </div>
 
             <select class="bs-select form-control default category-select">
-                @foreach($items as $item)
-                    <option>{{$item->name}}</option>
-                @endforeach
+                {{--@foreach($items as $item)--}}
+                    {{--<option>{{$item->name}}</option>--}}
+                {{--@endforeach--}}
             </select>
         </div>
 

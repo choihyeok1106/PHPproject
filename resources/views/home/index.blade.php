@@ -31,14 +31,14 @@
         </div>
     </div>
     <!-- END PAGE HEADER-->
-    <div class="row">
+    <div class="row" id="new-alert">
         <div class="col-lg-12">
             <div class="note note-danger">
                 <button type="button" class="note-close close-button close" data-dismiss="modal" aria-hidden="true"
                         style="margin-top: -10px;">×
                 </button>
                 <h5 class="bold"><i class="icon-bell"></i> &nbsp; MY SMART ALERTS</h5>
-                <p>Your autoship volume is below the recommended 100 PV level.</p>
+                <p></p>
             </div>
         </div>
     </div>
@@ -306,7 +306,6 @@
     <script src="<?= STATIC_SERVER ?>/vendors/muuri/dist/web-animations-2.3.1.min.js"></script>
     <script src="<?= STATIC_SERVER ?>/vendors/muuri/dist/hammer-2.0.8.min.js"></script>
     <script src="<?= STATIC_SERVER ?>/vendors/muuri/dist/muuri.min.js"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/horizontal-timeline/horizontal-timeline.min.js"
-            type="text/javascript"></script>
+
     <script src="<?= js('/js/pages/home.js') ?>" type="text/javascript"></script>
 @endsection

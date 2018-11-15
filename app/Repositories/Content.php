@@ -15,7 +15,7 @@ namespace App\Repositories;
  * @property mixed text
  * @property mixed image
  * @property mixed link
- * @property mixed date
+ * @property mixed created_at
  */
 class Content implements IRepository {
 

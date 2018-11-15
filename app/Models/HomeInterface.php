@@ -30,19 +30,19 @@ class HomeInterface extends Model {
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getWidgets() {
         return explode('|', $this->widgets);
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getMyWidgets() {
         if (!$this->activated) {
             $this->activated = 1;
-            $this->widgets   = implode('|', HomeWidget::$list);
+            $this->widgets   = implode('|', array_unique(HomeWidget::$list));
             $this->save();
         }
         return explode('|', $this->widgets);
@@ -57,28 +57,20 @@ class HomeInterface extends Model {
         switch ($widget) {
             case HomeWidget::BANNER:
                 return view('home.widgets.banner')->render();
-                break;
             case HomeWidget::SUMMARY:
                 return view('home.widgets.summary')->render();
-                break;
             case HomeWidget::NEWS:
                 return view('home.widgets.news')->render();
-                break;
             case HomeWidget::ALERT:
                 return view('home.widgets.alert')->render();
-                break;
             case HomeWidget::TRACKER:
                 return view('home.widgets.tracker')->render();
-                break;
             case HomeWidget::CALENDAR:
                 return view('home.widgets.calendar')->render();
-                break;
             case HomeWidget::ACTIVITY:
                 return view('home.widgets.activity')->render();
-                break;
             case HomeWidget::COMMUNITY:
                 return view('home.widgets.community')->render();
-                break;
             default:
                 return '';
         }

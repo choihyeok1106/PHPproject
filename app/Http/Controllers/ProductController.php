@@ -5,29 +5,28 @@ namespace App\Http\Controllers;
 use App\Service\ItemService;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
-{
-    private $item_service;
+class ProductController extends Controller {
+    private $service;
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->item_service = new ItemService();
+    public function __construct() {
+        $this->middleware('auth');
+        $this->service = new ItemService();
     }
 
-    public function index()
-    {
-        $items = $this->item_service->getCategories();
-        return view('products.index',['items'=>$items]);
+    public function index() {
+        $categories = $this->service->getCategories();
+        return view('products.index',
+            [
+                'categories' => $categories,
+            ]);
     }
 
-    public function show($skuId)
-    {
+    public function show($skuId) {
 
-        return view('products.show',['skuid'=>$skuId]);
+        return view('products.show', ['skuid' => $skuId]);
     }
 }

@@ -2,7 +2,6 @@
 <div class="grid-item" id="widget-calendar" data-widget="calendar">
     <div class="grid-box widget-calendar">
         <div class="grid-head">
-            <i class="la la-calendar dragger"></i>
             <div class="grid-caption widget-caption">
                 November 2018
             </div>

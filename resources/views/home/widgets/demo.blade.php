@@ -2,8 +2,8 @@
 <div class="grid-item" data-widget="demo">
     <div class="grid-box">
         <div class="grid-head">
-            <i class="la la-bars dragger"></i>
             <div class="grid-caption">NEWS FEED</div>
+            <span class="caption-helper">monthly stats...</span>
         </div>
 
         <div class="grid-actions">
