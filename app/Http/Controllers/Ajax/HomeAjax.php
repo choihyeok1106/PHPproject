@@ -150,7 +150,7 @@ class HomeAjax extends Controller {
                 $res[] = $c;
             }
 
-            return $this->ok($data);
+            return $this->ok($res);
         }
         return $this->badRequest();
     }

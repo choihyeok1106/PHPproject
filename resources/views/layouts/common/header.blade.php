@@ -69,7 +69,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="{{route('dashboard.index')}}"><i class="icon-user"></i> My Profile </a>
+                                <a href="{{route('team.index')}}"><i class="icon-user"></i> My Profile </a>
                             </li>
                             <li>
                                 <a href="{{route('tools.calendar')}}"><i class="icon-calendar"></i> My Calendar </a>

@@ -31,43 +31,43 @@
                                 <a href="/products">All</a>
                             </li>
                             {{--@foreach($items as $item)--}}
-                                {{--<li>--}}
-                                    {{--<a href="#">{{$item->name}}</a>--}}
-                                {{--</li>--}}
+                            {{--<li>--}}
+                            {{--<a href="#">{{$item->name}}</a>--}}
+                            {{--</li>--}}
                             {{--@endforeach--}}
-{{--                            <li class="active">
-                                <a href="javascript:;">All </a>
-                            </li>
-                            <li>
-                                <a href="#"">Bestsellers</a>
-                            </li>
-                            <li>
-                                <a href="#">Weight Loss</a>
-                            </li>
-                            <li>
-                                <a href="#">Sports Performance</a>
-                            </li>
-                            <li>
-                                <a href="#">Nutrition</a>
-                            </li>
-                            <li>
-                                <a href="#">Energy</a>
-                            </li>
-                            <li>
-                                <a href="#">Superfruits</a>
-                            </li>
-                            <li>
-                                <a href="#">Skincare</a>
-                            </li>
-                            <li>
-                                <a href="#">PURE Enrollment Packs</a>
-                            </li>
-                            <li>
-                                <a href="#">Water Filtration</a>
-                            </li>
-                            <li>
-                                <a href="#">Last Chance</a>
-                            </li>--}}
+                            {{--                            <li class="active">
+                                                            <a href="javascript:;">All </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"">Bestsellers</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Weight Loss</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Sports Performance</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Nutrition</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Energy</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Superfruits</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Skincare</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">PURE Enrollment Packs</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Water Filtration</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Last Chance</a>
+                                                        </li>--}}
                         </ul>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
 
             <select class="bs-select form-control default category-select">
                 {{--@foreach($items as $item)--}}
-                    {{--<option>{{$item->name}}</option>--}}
+                {{--<option>{{$item->name}}</option>--}}
                 {{--@endforeach--}}
             </select>
         </div>
@@ -162,5 +162,5 @@
     </div>
 @endsection
 @section('script.plugins')
-    <script src="<?= STATIC_SERVER ?>/vendors/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
+    <script src="<?= js('/js/pages/product.js') ?>" type="text/javascript"></script>
 @endsection

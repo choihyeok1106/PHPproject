@@ -17,7 +17,7 @@ Route::get('/',
     });
 Route::resource('autoships', 'AutoshipController');
 Route::resource('commissions', 'CommissionController');
-Route::resource('dashboard', 'DashboardController');
+Route::resource('team', 'TeamController');
 Route::resource('enrollment', 'EnrollmentController');
 Route::resource('genealogy', 'GenealogyController');
 Route::resource('home', 'HomeController');
@@ -73,3 +73,5 @@ Route::get('/a/home/tracker', 'Ajax\HomeAjax@tracker');
 Route::get('/a/home/schedules', 'Ajax\HomeAjax@schedules');
 Route::get('/a/home/activities', 'Ajax\HomeAjax@activities');
 Route::get('/a/home/communities', 'Ajax\HomeAjax@communities');
+// Product Ajax
+Route::get('/a/product/categories', 'Ajax\ProductAjax@categories');
