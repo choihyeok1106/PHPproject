@@ -40,7 +40,8 @@ function v($prefix = '?') {
  */
 function css($path) {
     if (isDev()) {
-        $path .= v();
+//        $path = str_replace('/css/', '/css.dev/', $path) . v();
+        $path.=  v();
     } else {
         $path = str_replace('.css', '.min.css?v=' . env('APP_VERSION', 1), $path);
     }
@@ -53,7 +54,8 @@ function css($path) {
  */
 function js($path) {
     if (isDev()) {
-        $path .= v();
+//        $path = str_replace('/js/', '/js.dev/', $path) . v();
+        $path.=  v();
     } else {
         $path = str_replace('.js', '.min.js' . env('APP_VERSION', 1), $path);
     }
@@ -65,4 +67,11 @@ function js($path) {
  */
 function isDev() {
     return App::environment('dev');
+}
+
+/**
+ * @return bool
+ */
+function isLocal() {
+    return strtolower(env('APP_ENV')) == 'local';
 }

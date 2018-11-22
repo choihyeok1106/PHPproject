@@ -8,7 +8,11 @@
 
 namespace App\Constants;
 
-
+/**
+ * @property mixed id
+ * @property mixed name
+ * @property mixed checked
+ */
 class HomeWidget {
 
     const BANNER    = 'banner';
@@ -27,9 +31,10 @@ class HomeWidget {
         self::ALERT,
         self::TRACKER,
         self::CALENDAR,
-        self::ACTIVITY,
-        self::COMMUNITY,
+        //        self::ACTIVITY,
+        //        self::COMMUNITY,
     ];
+
     public static $names = [
         self::BANNER    => 'Banner',
         self::SUMMARY   => 'Business Summary',
@@ -40,5 +45,21 @@ class HomeWidget {
         self::ACTIVITY  => 'Activities',
         self::COMMUNITY => 'PURE Community',
     ];
+
+    /**
+     * @param string $widget
+     * @return string
+     */
+    public static function getName($widget) {
+        return array_key_exists($widget, self::$names) ? self::$names[$widget] : ucfirst($widget);
+    }
+
+    /**
+     * @param string $widget
+     * @return bool
+     */
+    public static function show($widget) {
+        return $widget && in_array($widget, self::$list);
+    }
 
 }

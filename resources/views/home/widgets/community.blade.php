@@ -17,6 +17,7 @@
                     <div class="svg-loader">
                         <div class="loader"></div>
                     </div>
+                    <div class="general-item-list"></div>
                 </div>
             </div>
         </div>

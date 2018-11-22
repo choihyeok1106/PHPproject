@@ -6,7 +6,7 @@
  * Time: 12:29
  */
 
-namespace App\Models;
+namespace App\Repositories;
 
 
 /**

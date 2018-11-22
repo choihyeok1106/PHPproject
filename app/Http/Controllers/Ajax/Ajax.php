@@ -26,7 +26,7 @@ trait Ajax {
      * @param string $error
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    function error($error) {
+    function no($error) {
         return response(['error' => $error]);
     }
 
@@ -34,7 +34,7 @@ trait Ajax {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     function badRequest() {
-        return $this->error('bad request');
+        return $this->no('bad request');
     }
 
 }

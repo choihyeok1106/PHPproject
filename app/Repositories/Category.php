@@ -7,6 +7,7 @@
  */
 
 namespace App\Repositories;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property mixed id
@@ -18,7 +19,8 @@ namespace App\Repositories;
  * @property mixed children
  * @property mixed translates
  */
-class Category implements IRepository {
+class Category  implements IRepository {
+
     public function transfer($unit) {
         // TODO: Implement transfer() method.
         foreach ($unit as $key => $value) {
@@ -39,4 +41,5 @@ class Category implements IRepository {
         }
         return $this;
     }
+
 }

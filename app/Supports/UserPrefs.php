@@ -42,4 +42,33 @@ class UserPrefs {
         return $val;
     }
 
+    /**
+     * @return int
+     */
+    public static function getID() {
+        return self::get('id');
+    }
+
+    /**
+     * @return string
+     */
+    public static function getNumber() {
+        return self::get('number');
+    }
+
+    /**
+     * @return string
+     */
+    public static function getCountry() {
+        return self::get('country');
+    }
+
+    /**
+     * @return string
+     */
+    public static function getCountryLow() {
+        return strtolower(self::get('country'));
+    }
+
+
 }

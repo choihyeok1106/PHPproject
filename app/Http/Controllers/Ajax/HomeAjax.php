@@ -9,13 +9,15 @@
 namespace App\Http\Controllers\Ajax;
 
 
+use App\Cache\HomeCache;
+use App\Constants\HomeWidget;
 use App\Constants\SmartAlertType;
 use App\Constants\TrackRank;
 use App\Http\Controllers\Controller;
 use App\Models\HomeInterface;
-use App\Models\PureCommunity;
-use App\Models\ScheduleEvent;
-use App\Models\UserCourse;
+use App\Repositories\PureCommunity;
+use App\Repositories\ScheduleEvent;
+use App\Repositories\UserCourse;
 use App\Repositories\Content;
 use App\Repositories\SmartAlert;
 use App\Supports\UserPrefs;
@@ -55,11 +57,18 @@ class HomeAjax extends Controller {
      */
     public function getInterface(Request $request) {
         if ($request->ajax()) {
-            /** @var HomeInterface $user */
+            /** @var HomeInterface $interface */
             $interface = HomeInterface::find(UserPrefs::get('id'));
             if ($interface) {
-                $view = view('home.popup.widget-setting')->with(['interface' => $interface])->render();
-                return $this->ok(['view' => $view]);
+                $data = [];
+                foreach (HomeWidget::$list as $val) {
+                    $widget          = new HomeWidget();
+                    $widget->id      = $val;
+                    $widget->name    = HomeWidget::getName($val);
+                    $widget->checked = $interface->getChecked($val);
+                    $data[]          = $widget;
+                }
+                return $this->ok($data);
             }
         }
         return $this->badRequest();
@@ -212,21 +221,8 @@ class HomeAjax extends Controller {
      */
     public function news(Request $request) {
         if ($request->ajax()) {
-            $news = [];
-            for ($i = 0; $i < 5; $i++) {
-                $c = new Content();
-
-                $c->title      = "Sales Support Holiday Hours {$i}";
-                $c->image      = 'https://gplivepurecomsite.files.wordpress.com/2018/07/bahamas_whattopack_7_27_18.jpg';
-                $c->created_at = date('Y-m-d H:i');
-                $c->text       =
-                    "PURE family, just a reminder with the holiday coming up we have specific holiday hours. We wish you a great Labor Day weekend!";
-
-                $news[] = $c;
-            }
-
-            $view = view('home.response.news')->with(['news' => $news])->render();
-            return $this->ok(['view' => $view]);
+            $news = HomeCache::getNews();
+            return $this->ok($news);
         }
 
         return $this->badRequest();
@@ -333,8 +329,7 @@ class HomeAjax extends Controller {
 
                 $courses[] = $c;
             }
-            $view = view('home.response.activity')->with(['courses' => $courses])->render();
-            return response(['view' => $view]);
+            return response($courses);
         }
         return $this->badRequest();
     }
@@ -362,8 +357,7 @@ class HomeAjax extends Controller {
 
                 $communities[] = $c;
             }
-            $view = view('home.response.community')->with(['communities' => $communities])->render();
-            return response(['view' => $view]);
+            return response($communities);
         }
         return $this->badRequest();
     }

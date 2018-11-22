@@ -22,6 +22,7 @@ Route::resource('enrollment', 'EnrollmentController');
 Route::resource('genealogy', 'GenealogyController');
 Route::resource('home', 'HomeController');
 Route::resource('orders', 'OrderController');
+Route::get('products/{cat}', 'ProductController@index');
 Route::resource('products', 'ProductController');
 Route::resource('reports', 'ReportController');
 Route::resource('account', 'AccountController');
@@ -74,4 +75,5 @@ Route::get('/a/home/schedules', 'Ajax\HomeAjax@schedules');
 Route::get('/a/home/activities', 'Ajax\HomeAjax@activities');
 Route::get('/a/home/communities', 'Ajax\HomeAjax@communities');
 // Product Ajax
-Route::get('/a/product/categories', 'Ajax\ProductAjax@categories');
+Route::get('/a/item/categories', 'Ajax\ItemAjax@categories');
+Route::get('/a/item/items', 'Ajax\ItemAjax@items');

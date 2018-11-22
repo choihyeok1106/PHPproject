@@ -9,56 +9,13 @@
 namespace App\Service;
 
 
+use App\Demos\ItemData;
 use App\Repositories\Category;
 use App\Supports\APIResources;
 
 class ItemService extends Service {
 
     public function getCategories() {
-        $categories = [];
-
-        $c            = new Category();
-        $c->name      = 'Bestsellers';
-        $categories[] = $c;
-
-        $c            = new Category();
-        $c->name      = 'Weight Loss';
-        $categories[] = $c;
-
-        $c            = new Category();
-        $c->name      = 'Sports Performance';
-        $categories[] = $c;
-
-        $c            = new Category();
-        $c->name      = 'Nutrition';
-        $categories[] = $c;
-
-        $c            = new Category();
-        $c->name      = 'Energy';
-        $categories[] = $c;
-
-        $c            = new Category();
-        $c->name      = 'Superfruits';
-        $categories[] = $c;
-
-        $c            = new Category();
-        $c->name      = 'Skincare';
-        $categories[] = $c;
-
-        $c            = new Category();
-        $c->name      = 'PURE Enrollment Packs';
-        $categories[] = $c;
-
-        $c            = new Category();
-        $c->name      = 'Water Filtration';
-        $categories[] = $c;
-
-        $c            = new Category();
-        $c->name      = 'Last Chance';
-        $categories[] = $c;
-
-        return $categories;
-
         $this->url  = APIResources::GET_ITEM_CATEGORIES;
         $result     = $this->get();
         $categories = $this->repository->convert($result->response['items'], 'Category');

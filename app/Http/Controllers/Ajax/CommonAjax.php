@@ -31,7 +31,7 @@ class CommonAjax extends Controller {
      */
     public function cartCount(Request $request) {
         if ($request->ajax()) {
-            $count = rand(0, 9);
+            $count = rand(0, 99);
             return response(['count' => $count]);
         }
         return $this->badRequest();

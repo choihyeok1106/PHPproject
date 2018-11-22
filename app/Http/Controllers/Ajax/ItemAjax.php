@@ -9,23 +9,20 @@
 namespace App\Http\Controllers\Ajax;
 
 
+use App\Cache\Cache;
+use App\Cache\ItemCache;
 use App\Http\Controllers\Controller;
-use App\Service\ItemService;
 use Illuminate\Http\Request;
 
-class ProductAjax extends Controller {
+class ItemAjax extends Controller {
 
     use Ajax;
-
-    /** @var ItemService $service */
-    private $service;
 
     /**
      * HomeAjax constructor.
      */
     public function __construct() {
         $this->middleware('auth');
-        $this->service = new ItemService();
     }
 
     /**
@@ -34,8 +31,21 @@ class ProductAjax extends Controller {
      */
     public function categories(Request $request) {
         if ($request->ajax()) {
-            $categories = $this->service->getCategories();
+            $categories = ItemCache::getCategories();
             return $this->ok($categories);
+        }
+        return $this->badRequest();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @throws \Throwable
+     */
+    public function items(Request $request) {
+        if ($request->ajax()) {
+            $data = ItemCache::getProducts();
+            return $this->ok($data);
         }
         return $this->badRequest();
     }

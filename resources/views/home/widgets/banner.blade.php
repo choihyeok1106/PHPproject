@@ -7,7 +7,9 @@
         <div class="grid-body" data-scale="0.6">
             <div class="grid-wrap">
                 <div class="flexslider">
-                    <img src="/img/svg/banner.svg" class="svg-banner">
+                    <div class='slides'>
+                        <img src="/img/svg/banner.svg" class="svg-banner">
+                    </div>
                 </div>
             </div>
         </div>

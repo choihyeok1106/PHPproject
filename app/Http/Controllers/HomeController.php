@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Cache\Cache;
 use App\Models\HomeInterface;
 use App\Supports\UserPrefs;
 

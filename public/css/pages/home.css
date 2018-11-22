@@ -822,6 +822,15 @@
     padding: 15px;
 }
 
+.widget-community .link {
+    margin-top: 10px;
+    text-align: right;
+}
+
 #new-alert {
     display: none;
+}
+
+.grid-item{
+    position: absolute;
 }

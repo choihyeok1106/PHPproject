@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Service\ItemService;
-use Illuminate\Http\Request;
+
+use App\Cache\Cache;
 
 class ProductController extends Controller {
 
@@ -15,11 +15,14 @@ class ProductController extends Controller {
         $this->middleware('auth');
     }
 
-    public function index() {
-        return view('products.index');
+    public function index($cat = '') {
+        //        dd(Cache::get('us:products:0:id:desc:1'));
+        //        dd(Cache::keys());
+        //        Cache::clear();
+        return view('products.index', ['cat' => $cat]);
     }
 
-    public function show($skuId) {
-        return view('products.show', ['skuid' => $skuId]);
-    }
+    //    public function show($skuId) {
+    //        return view('products.show', ['skuid' => $skuId]);
+    //    }
 }

@@ -9,10 +9,17 @@
 namespace App\Repositories;
 
 
-class Item implements IRepository
-{
-    public function transfer($unit)
-    {
+/**
+ * @property mixed id
+ * @property mixed sku
+ * @property mixed country
+ * @property mixed title
+ * @property mixed image
+ * @property mixed price
+ * @property mixed pv
+ */
+class Item implements IRepository {
+    public function transfer($unit) {
         // TODO: Implement transfer() method.
         foreach ($unit as $key => $value) {
             switch ($key) {
@@ -42,9 +49,9 @@ class Item implements IRepository
                         $this->prices->$key = $price;
                     }
                     break;
-                    default:
-                        $this->$key = $value;
-                        break;
+                default:
+                    $this->$key = $value;
+                    break;
             }
         }
         return $this;

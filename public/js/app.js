@@ -1937,7 +1937,6 @@ var App = {
                 type: 'GET',
                 data: data,
                 dataType: 'json',
-
                 beforeSend: function (r) {
                     var scrf = $("meta[name=csrf-token]").attr("content");
                     r.setRequestHeader("X-CSRF-TOKEN", scrf);
@@ -2014,6 +2013,27 @@ var App = {
                     }
                 }
             });
+        }
+    },
+    // event
+    e: {
+        onScrollBottom: function (event, elm, target) {
+            if (typeof event == 'function') {
+                if (elm == undefined) {
+                    elm = window;
+                }
+                if (target == undefined) {
+                    target = document;
+                }
+                $(elm).scroll(function () {
+                    var scrollTop = $(this).scrollTop();
+                    var scrollHeight = $(target).height();
+                    var windowHeight = $(window).height();
+                    if (scrollTop + windowHeight >= scrollHeight) {
+                        event();
+                    }
+                });
+            }
         }
     },
     // theme templates
@@ -2144,59 +2164,69 @@ var Util = {
 
 var Common = {
     init: function () {
-        this.cartCount();
-        this.noticeCount();
-        this.alertCount();
-        this.messageCount();
+        setTimeout(Common.cartCount);
+        setTimeout(Common.noticeCount);
+        setTimeout(Common.alertCount);
+        setTimeout(Common.messageCount);
     },
     // Get user cart items count
     cartCount: function () {
-        App.a.get('/a/common/cart-count', null, {
-            ok: function (res) {
-                if (res.hasOwnProperty('count') && res['count']) {
-                    $("#head-cart-count").text(res['count']).show();
-                } else {
-                    $("#head-cart-count").text(0).hide();
+        if ($("#head-cart-count").length) {
+            App.a.get('/a/common/cart-count', null, {
+                ok: function (res) {
+                    if (res.hasOwnProperty('count') && res['count']) {
+                        $("#head-cart-count").text(res['count']).show();
+                    } else {
+                        $("#head-cart-count").text(0).hide();
+                    }
                 }
-            }
-        })
+            })
+        }
     },
     noticeCount: function () {
-        App.a.get('/a/common/notice-count', null, {
-            ok: function (res) {
-                if (res.hasOwnProperty('count') && res['count']) {
-                    $("#head-notice-count").text(res['count']).show();
-                } else {
-                    $("#head-notice-count").text(0).hide();
+        if ($("#head-notice-count").length) {
+            App.a.get('/a/common/notice-count', null, {
+                ok: function (res) {
+                    if (res.hasOwnProperty('count') && res['count']) {
+                        $("#head-notice-count").text(res['count']).show();
+                    } else {
+                        $("#head-notice-count").text(0).hide();
+                    }
                 }
-            }
-        })
+            })
+        }
     },
     // Get user unread alert count
     alertCount: function () {
-        App.a.get('/a/common/alert-count', null, {
-            ok: function (res) {
-                if (res.hasOwnProperty('count') && res['count']) {
-                    $("#head-alert-count").text(res['count']).show();
-                } else {
-                    $("#head-alert-count").text(0).hide();
+        if ($("#head-alert-count").length) {
+            App.a.get('/a/common/alert-count', null, {
+                ok: function (res) {
+                    if (res.hasOwnProperty('count') && res['count']) {
+                        $("#head-alert-count").text(res['count']).show();
+                    } else {
+                        $("#head-alert-count").text(0).hide();
+                    }
+                    // re-get alert count
+                    setTimeout(function () {
+                        Common.alertCount();
+                    }, 60000);
                 }
-                // re-get alert count
-                setTimeout('Common.alertCount()', 10000);
-            }
-        })
+            })
+        }
     },
     // Get user unread message count
     messageCount: function () {
-        App.a.get('/a/common/message-count', null, {
-            ok: function (res) {
-                if (res.hasOwnProperty('count') && res['count']) {
-                    $("#head-message-count").text(res['count']).show();
-                } else {
-                    $("#head-message-count").text(0).hide();
+        if ($("#head-message-count").length) {
+            App.a.get('/a/common/message-count', null, {
+                ok: function (res) {
+                    if (res.hasOwnProperty('count') && res['count']) {
+                        $("#head-message-count").text(res['count']).show();
+                    } else {
+                        $("#head-message-count").text(0).hide();
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 }
 
