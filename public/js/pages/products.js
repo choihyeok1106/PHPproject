@@ -1,8 +1,8 @@
-var Product = {
+var Products = {
     init: function () {
-        setTimeout(Product.initCategories);
-        setTimeout(Product.initProducts);
-        setTimeout(Product.initSearch);
+        setTimeout(Products.initCategories);
+        setTimeout(Products.initProducts);
+        setTimeout(Products.initSearch);
     },
     initCategories: function () {
         var li_ui = '<li><a href="{{$link}}">{{$name}}</a></li>';
@@ -65,9 +65,9 @@ var Product = {
             '            <div class="m-grid">\n' +
             '                <div class="m-grid-row">\n' +
             '                    <div class="m-grid-col m-grid-col-left">\n' +
-            '                        <span>{{$price}}</span>\n' +
+            '                        <span class="price">${{$price}}</span>\n' +
             '                        <br>\n' +
-            '                        <span class="font-grey-cascade">{{$pv}} PV</span>\n' +
+            '                        <span class="pv font-grey-cascade">{{$pv}} PV</span>\n' +
             '                    </div>\n' +
             '                    <div class="m-grid-col m-grid-col-right">\n' +
             '                        <button class="btn btn-success add-cart" data-sku="{{$sku}}" type="button">\n' +
@@ -226,5 +226,5 @@ var Product = {
 }
 
 window.onload = function () {
-    Product.init();
+    Products.init();
 };

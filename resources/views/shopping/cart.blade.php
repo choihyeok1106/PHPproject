@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
+@section('style.plugins')
+    <link href="{{css('/css/pages/shopping.css')}}" rel="stylesheet" type="text/css"/>
+@endsection
+
 @section('content')
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
                 <i class="icon-home"></i>
-                <a href="/html">Home</a>
+                <a href="/home">Home</a>
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>

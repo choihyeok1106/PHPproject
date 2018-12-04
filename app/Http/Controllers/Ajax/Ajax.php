@@ -12,12 +12,20 @@ namespace App\Http\Controllers\Ajax;
 trait Ajax {
 
     /**
-     * @param mixed|null $response
+     * @param mixed|null|object $response
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     function ok($response = null) {
         if ($response === null) {
             $response['message'] = 'ok';
+        } else {
+            if (gettype($response) === 'object') {
+                if (method_exists($response, 'getAttributes')) {
+                    $response = $response->getAttributes();
+                } else {
+                    $response = get_object_vars($response);
+                }
+            }
         }
         return response($response);
     }

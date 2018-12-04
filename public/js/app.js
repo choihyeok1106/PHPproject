@@ -1855,7 +1855,7 @@ var App = {
         decrypt: true,
         d: function (decrypt) {
             this.decrypt = decrypt;
-            return this
+            return this;
         },
         data: (function () {
             var url = window.document.location.href.toString();
@@ -2084,63 +2084,7 @@ var App = {
         },
         // responsive box height
         initResponse: function () {
-            $(".res-box").each(function () {
-                var scale = $(this).attr("data-scale");
-                var depth = $(this).attr("data-depth");
-                var target = $(this).attr("data-target");
-                var offset = $(this).attr("data-offset");
-                var min = $(this).attr("data-min");
-                if (isNaN(offset)) {
-                    offset = 0;
-                }
-                if (isNaN(min)) {
-                    min = 0;
-                }
-                if (target) {
-                    if (isNaN(target)) {
-                        if ($(target).length) {
-                            var mh = $(target).outerHeight();
-                            if (min > 0 && min > mh) {
-                                mh = min;
-                            }
-                            $(this).css({
-                                'min-height': mh
-                            });
-                        }
-                    } else {
-                        var el = $(this);
-                        for (var i = 0; i < target; i++) {
-                            el = $(el).parent();
-                        }
-                        var mh = ($(el).outerHeight() - offset);
-                        if (min > 0 && min > mh) {
-                            mh = min;
-                        }
-                        $(this).css({
-                            'min-height': mh
-                        });
-
-                    }
-                } else {
-                    if (isNaN(scale) || scale < 0) {
-                        scale = 1
-                    }
-                    var el = $(this);
-                    if (!isNaN(depth)) {
-                        for (var i = 0; i < depth; i++) {
-                            el = $(el).parent()
-                        }
-                    }
-                    var h = $(el).outerWidth() * scale;
-                    if (min > 0 && min > h) {
-                        h = min;
-                    }
-                    $(this).css({
-                        height: h
-                    })
-                }
-
-            });
+            Util.toggleResponse();
         }
     },
 };
@@ -2159,6 +2103,65 @@ var Util = {
             return parts.join('.');
         }
         return NaN;
+    },
+    toggleResponse: function () {
+        $("[data-toggle=res-box]").each(function () {
+            var scale = $(this).attr("data-scale");
+            var depth = $(this).attr("data-depth");
+            var target = $(this).attr("data-target");
+            var offset = $(this).attr("data-offset");
+            var min = $(this).attr("data-min");
+            if (isNaN(offset)) {
+                offset = 0;
+            }
+            if (isNaN(min)) {
+                min = 0;
+            }
+            if (target) {
+                if (isNaN(target)) {
+                    if ($(target).length) {
+                        var mh = $(target).outerHeight();
+                        if (min > 0 && min > mh) {
+                            mh = min;
+                        }
+                        $(this).css({
+                            'min-height': mh
+                        });
+                    }
+                } else {
+                    var el = $(this);
+                    for (var i = 0; i < target; i++) {
+                        el = $(el).parent();
+                    }
+                    var mh = ($(el).outerHeight() - offset);
+                    if (min > 0 && min > mh) {
+                        mh = min;
+                    }
+                    $(this).css({
+                        'min-height': mh
+                    });
+
+                }
+            } else {
+                if (isNaN(scale) || scale < 0) {
+                    scale = 1
+                }
+                var el = $(this);
+                if (!isNaN(depth)) {
+                    for (var i = 0; i < depth; i++) {
+                        el = $(el).parent()
+                    }
+                }
+                var h = $(el).outerWidth() * scale;
+                if (min > 0 && min > h) {
+                    h = min;
+                }
+                $(this).css({
+                    height: h
+                })
+            }
+
+        });
     }
 }
 

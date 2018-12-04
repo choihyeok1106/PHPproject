@@ -22,7 +22,6 @@ Route::resource('enrollment', 'EnrollmentController');
 Route::resource('genealogy', 'GenealogyController');
 Route::resource('home', 'HomeController');
 Route::resource('orders', 'OrderController');
-Route::get('products/{cat}', 'ProductController@index');
 Route::resource('products', 'ProductController');
 Route::resource('reports', 'ReportController');
 Route::resource('account', 'AccountController');
@@ -46,6 +45,8 @@ Route::get('/support/faq', 'SupportController@faq')->name('support.faq');
 Route::get('/support/contact', 'SupportController@contact')->name('support.contact');
 Route::get('/tools/library', 'ToolController@library')->name('tools.library');
 Route::get('/tools/calendar', 'ToolController@calendar')->name('tools.calendar');
+Route::get('products/{cat}', 'ProductController@index');
+Route::get('product/{sku}', 'ProductController@show');
 Route::get('/shopping/cart', 'ShoppingController@cart')->name('shopping.cart');
 Route::get('/shopping/checkout', 'ShoppingController@checkout')->name('shopping.checkout');
 Route::get('/shopping/complete', 'ShoppingController@complete')->name('shopping.complete');
@@ -77,3 +78,10 @@ Route::get('/a/home/communities', 'Ajax\HomeAjax@communities');
 // Product Ajax
 Route::get('/a/item/categories', 'Ajax\ItemAjax@categories');
 Route::get('/a/item/items', 'Ajax\ItemAjax@items');
+Route::get('/a/item/{sku}', 'Ajax\ItemAjax@item');
+Route::get('/a/item/{sku}/price', 'Ajax\ItemAjax@price');
+Route::get('/a/item/{sku}/resource', 'Ajax\ItemAjax@resource');
+Route::get('/a/item/{sku}/options', 'Ajax\ItemAjax@options');
+Route::get('/a/item/{sku}/relates', 'Ajax\ItemAjax@relates');
+// Shopping Ajax
+Route::post('/a/shopping/cart', 'Ajax\ShoppingAjax@addCart');

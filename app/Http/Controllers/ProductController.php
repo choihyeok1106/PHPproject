@@ -16,13 +16,10 @@ class ProductController extends Controller {
     }
 
     public function index($cat = '') {
-        //        dd(Cache::get('us:products:0:id:desc:1'));
-        //        dd(Cache::keys());
-        //        Cache::clear();
         return view('products.index', ['cat' => $cat]);
     }
 
-    //    public function show($skuId) {
-    //        return view('products.show', ['skuid' => $skuId]);
-    //    }
+    public function show($sku) {
+        return view('products.show', ['sku' => $sku]);
+    }
 }

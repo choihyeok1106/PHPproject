@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('style.plugins')
     <link href="{{css('/css/pages/todo-2.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{css('/css/pages/product.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{css('/css/pages/shopping.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
     <div class="page-bar">
@@ -78,7 +78,7 @@
 
                             <div class="portlet light portlet-fit portlet-product">
                                 <div class="portlet-body padding-0">
-                                    <div class="svg-product-image res-box"></div>
+                                    <div class="svg-product-image" data-toggle="res-box"></div>
                                 </div>
 
                                 <div class="portlet-title svg-product-title">

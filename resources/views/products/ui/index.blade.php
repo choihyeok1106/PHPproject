@@ -12,9 +12,9 @@
             <div class="m-grid">
                 <div class="m-grid-row">
                     <div class="m-grid-col m-grid-col-left">
-                        <span>{{$price}}</span>
+                        <span class="price">{{$price}}</span>
                         <br>
-                        <span class="font-grey-cascade">{{$pv}} PV</span>
+                        <span class="pv font-grey-cascade">{{$pv}} PV</span>
                     </div>
                     <div class="m-grid-col m-grid-col-right">
                         <button class="btn btn-success add-cart" data-sku="{{$sku}}" type="button">
