@@ -84,4 +84,7 @@ Route::get('/a/item/{sku}/resource', 'Ajax\ItemAjax@resource');
 Route::get('/a/item/{sku}/options', 'Ajax\ItemAjax@options');
 Route::get('/a/item/{sku}/relates', 'Ajax\ItemAjax@relates');
 // Shopping Ajax
-Route::post('/a/shopping/cart', 'Ajax\ShoppingAjax@addCart');
+Route::get('/a/cart/items', 'Ajax\CartAjax@items');
+Route::post('/a/cart/add', 'Ajax\CartAjax@add');
+Route::post('/a/cart/update', 'Ajax\CartAjax@update');
+Route::get('/a/shopping/promotions', 'Ajax\ShoppingAjax@promotions');

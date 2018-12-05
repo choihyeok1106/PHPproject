@@ -12,6 +12,21 @@ namespace App\Http\Controllers\Ajax;
 trait Ajax {
 
     /**
+     * @param mixed $obj
+     * @return mixed
+     */
+    function getObj($obj) {
+        if (gettype($obj) === 'object') {
+            if (method_exists($obj, 'getAttributes')) {
+                $obj = $obj->getAttributes();
+            } else {
+                $obj = get_object_vars($obj);
+            }
+        }
+        return $obj;
+    }
+
+    /**
      * @param mixed|null|object $response
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
@@ -19,12 +34,12 @@ trait Ajax {
         if ($response === null) {
             $response['message'] = 'ok';
         } else {
-            if (gettype($response) === 'object') {
-                if (method_exists($response, 'getAttributes')) {
-                    $response = $response->getAttributes();
-                } else {
-                    $response = get_object_vars($response);
+            if (is_array($response) && isset($response[0])) {
+                foreach ($response as $k => $v) {
+                    $response[$k] = $this->getObj($v);
                 }
+            } else {
+                $response = $this->getObj($response);
             }
         }
         return response($response);
@@ -34,7 +49,7 @@ trait Ajax {
      * @param string $error
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    function no($error) {
+    function no(string $error) {
         return response(['error' => $error]);
     }
 

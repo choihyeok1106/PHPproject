@@ -26,6 +26,7 @@
 .shopping .list-name {
     color: #333;
     text-decoration: none;
+    padding-top: 5px;
 }
 
 .shopping .list-name a {
@@ -39,6 +40,11 @@
 }
 
 .shopping .list-val {
+    color: #888;
+    text-align: right;
+}
+
+.shopping .list-qty {
     color: #888;
     text-align: right;
 }
@@ -652,4 +658,68 @@
     #modal-cart .btn.green {
         margin-top: 5px;
     }
+}
+
+.cart .table p {
+    margin-bottom: 0;
+}
+
+.cart p.price {
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.cart p.pv {
+    color: #888;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.cart .col-md-2.list-qty {
+    margin-top: 5px;
+}
+
+.cart .qty {
+    margin-top: 0;
+    position: static !important;
+}
+
+.cart select.qty {
+    min-width: 48px;
+    height: 24px;
+}
+
+.cart .del {
+    display: inline-block;
+    height: 24px;
+    /*padding: 0 5px;*/
+    line-height: 24px;
+}
+
+@media (max-width: 991px) {
+    .mobile-hide {
+        display: none;
+    }
+
+    .shopping .cart .list-price {
+        margin-top: 0;
+    }
+
+    .cart .col-md-2.list-qty {
+        width: auto;
+        float: left;
+        margin-top: 0;
+    }
+
+    .cart .col-md-6.list-action {
+        width: auto;
+        float: left;
+        /*margin-top: 6px;*/
+        margin-top: 5px;
+    }
+}
+
+.promotions {
+    display: none;
 }

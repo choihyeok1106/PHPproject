@@ -286,7 +286,7 @@ var Product = {
         var btn = $("#add-cart");
         btn.click(function () {
             if (Product.curr) {
-                App.a.post("/a/shopping/cart", {
+                App.a.post("/a/cart/add", {
                     sku: Product.curr,
                     qty: $("#qty").val()
                 }, {
@@ -295,6 +295,7 @@ var Product = {
                             $("#modal-cart").modal({
                                 show: 'true'
                             });
+                            $("#qty").val(1)
                         }
                     },
                     no: function (err) {

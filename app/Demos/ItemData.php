@@ -9,6 +9,7 @@
 namespace App\Demos;
 
 
+use App\Models\Total;
 use App\Repositories\Category;
 use App\Repositories\Item;
 use App\Repositories\ItemPrice;
@@ -156,6 +157,22 @@ class ItemData {
         $p->qv    = 28;
         $p->cv    = 28;
         return $p;
+    }
+
+    /**
+     * @return Total
+     */
+    public static function getTotal() {
+        $t           = new Total();
+        $t->items = rand(100, 999);
+        $t->cv       = $t->items / 10;
+        $t->qv       = $t->cv;
+        $t->tax      = $t->items / 10;
+        $t->handling = rand(0, 10);
+        $t->shipping = rand(0, 10);
+        $t->discount = rand(0, 5);
+        $t->total    = $t->items + $t->handling + $t->tax + $t->shipping - $t->discount;
+        return $t;
     }
 
 }
