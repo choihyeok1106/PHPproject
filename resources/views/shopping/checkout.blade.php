@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
+@section('style.plugins')
+    <link href="{{css('/css/pages/shopping.css')}}" rel="stylesheet" type="text/css"/>
+@endsection
+
 @section('content')
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
                 <i class="icon-home"></i>
-                <a href="/html">Home</a>
+                <a href="{{route('home.index')}}">Home</a>
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
@@ -257,4 +261,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script.plugins')
+    <script src="{{js('/js/pages/checkout.js')}}" type="text/javascript"></script>
 @endsection

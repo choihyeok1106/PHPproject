@@ -164,7 +164,8 @@ class ItemData {
      */
     public static function getTotal() {
         $t           = new Total();
-        $t->items = rand(100, 999);
+        $t->items    = rand(100, 999);
+        $t->count    = rand(1, 99);
         $t->cv       = $t->items / 10;
         $t->qv       = $t->cv;
         $t->tax      = $t->items / 10;

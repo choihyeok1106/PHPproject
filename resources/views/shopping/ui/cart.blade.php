@@ -1,4 +1,4 @@
-<tr class="product-row">
+<tr class="product-row" data-sku="{{$sku}}">
     <td class="text-center">
         <a href="/product/{{$sku}}" class="thumbnail">
             <img src="{{$image}}">
@@ -19,7 +19,7 @@
                 <select class="qty" data-sku="{{$sku}}" data-count="{{$qty}}"></select>
             </div>
             <div class="col-md-6 list-action">
-                <a href="javascript:;" class="del" data-sku="{{$sku}}">Delete</a>
+                <button type="button" class="del" data-sku="{{$sku}}">Delete</button>
             </div>
         </div>
     </td>

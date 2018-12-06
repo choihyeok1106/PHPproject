@@ -13,6 +13,7 @@ namespace App\Models;
  * @property float cv
  * @property float qv
  * @property float items
+ * @property float count
  * @property float tax
  * @property float handling
  * @property float shipping

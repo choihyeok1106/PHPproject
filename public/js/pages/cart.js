@@ -28,18 +28,38 @@ var Cart = {
         App.a.get("/a/cart/items", null, {
             ok: function (res) {
                 console.log(res);
+                var delItem = function (btn, sku) {
+                    App.a.post("/a/cart/delete", {
+                        sku: sku
+                    }, {
+                        ok: function (res) {
+                            if (!res.hasOwnProperty("error")) {
+                                $(".product-row[data-sku=" + sku + "]").remove();
+                            }
+                        },
+                        no: function (err) {
+                            console.log(err);
+                        },
+                        before: function () {
+                            btn.attr("disabled", 'true');
+                        },
+                        end: function () {
+                            btn.removeAttr("disabled");
+                        }
+                    });
+                };
                 if (!res.hasOwnProperty('error') && res.hasOwnProperty('items') && res.hasOwnProperty('total')) {
                     // totals
-                    $("#pv-total").text('$' + res['total']['qv']);
+                    $("#pv-total").text(res['total']['qv']);
                     $("#sub-total").text('$' + res['total']['items']);
-                    $("#tax-total").text('$' + res['total']['tax']);
-                    $("#handling-total").text('$' + res['total']['handling']);
-                    $("#shipping-total").text('$' + res['total']['shipping']);
-                    $("#discount-total").text('$' + res['total']['discount']);
-                    $("#order-total").text('$' + res['total']['total']);
+                    // $("#tax-total").text('$' + res['total']['tax']);
+                    // $("#handling-total").text('$' + res['total']['handling']);
+                    // $("#shipping-total").text('$' + res['total']['shipping']);
+                    // $("#discount-total").text('$' + res['total']['discount']);
+                    // $("#order-total").text('$' + res['total']['total']);
                     // item-list
                     var html = '';
-                    var ui = '<tr class="product-row">\n' +
+                    var ui = '<tr class="product-row" data-sku="{{$sku}}">\n' +
                         '    <td class="text-center">\n' +
                         '        <a href="/product/{{$sku}}" class="thumbnail">\n' +
                         '            <img src="{{$image}}">\n' +
@@ -51,7 +71,7 @@ var Cart = {
                         '                <a href="/product/{{$sku}}">{{$title}}</a>\n' +
                         '            </div>\n' +
                         '            <div class="col-md-2 list-price">\n' +
-                        '                <p class="price text-danger">${{$price}}</p>\n' +
+                        '                <p class="price text-danger">{{$price}}</p>\n' +
                         '            </div>\n' +
                         '            <div class="col-md-2 list-val">\n' +
                         '                <p class="pv">{{$pv}} PV</p>\n' +
@@ -60,7 +80,7 @@ var Cart = {
                         '                <select class="qty" data-sku="{{$sku}}" data-count="{{$qty}}"></select>\n' +
                         '            </div>\n' +
                         '            <div class="col-md-6 list-action">\n' +
-                        '                <a href="javascript:;" class="del" data-sku="{{$sku}}">Delete</a>\n' +
+                        '                <button type="button" class="del" data-sku="{{$sku}}">Delete</button>\n' +
                         '            </div>\n' +
                         '        </div>\n' +
                         '    </td>\n' +
@@ -93,6 +113,12 @@ var Cart = {
                                     update($(this), sku, $(this).val());
                                 }
                             });
+                        });
+                        $("#cart-items .del").click(function () {
+                            var sku = $(this).attr('data-sku');
+                            if (sku) {
+                                delItem($(this), sku);
+                            }
                         });
                     }
                 }

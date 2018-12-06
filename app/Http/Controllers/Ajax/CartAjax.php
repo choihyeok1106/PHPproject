@@ -72,6 +72,10 @@ class CartAjax extends Controller {
         return $this->badRequest();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function update(Request $request) {
         if ($request->ajax()) {
             $sku = $request->get('sku');
@@ -83,7 +87,23 @@ class CartAjax extends Controller {
                 if ($i->save()) {
                     return $this->ok();
                 }
-                return $this->no('Update cart item error');
+                return $this->no('Update error');
+            }
+            return $this->no('Not found');
+        }
+        return $this->badRequest();
+    }
+
+    public function delete(Request $request) {
+        if ($request->ajax()) {
+            $sku = $request->get('sku');
+            /** @var CartItem $i */
+            $i = CartItem::where('user_id', UserPrefs::getID())->where('sku', $sku)->first();
+            if ($i) {
+                if ($i->delete()) {
+                    return $this->ok();
+                }
+                return $this->no('Delete error');
             }
             return $this->no('Not found');
         }

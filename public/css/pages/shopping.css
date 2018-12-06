@@ -691,10 +691,19 @@
 }
 
 .cart .del {
-    display: inline-block;
+    display: inline;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    color: #337ab7;
     height: 24px;
+    outline: none;
     /*padding: 0 5px;*/
     line-height: 24px;
+}
+
+.cart .del:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 991px) {
