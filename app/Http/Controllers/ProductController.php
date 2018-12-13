@@ -2,32 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Service\ItemService;
-use Illuminate\Http\Request;
 
-class ProductController extends Controller
-{
-    private $item_service;
+use App\Cache\Cache;
+
+class ProductController extends Controller {
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->item_service = new ItemService();
+    public function __construct() {
+        $this->middleware('auth');
     }
 
-    public function index()
-    {
-        $items = $this->item_service->getCategories();
-        return view('products.index',['items'=>$items]);
+    public function index($cat = '') {
+        return view('products.index', ['cat' => $cat]);
     }
 
-    public function show($skuId)
-    {
-
-        return view('products.show',['skuid'=>$skuId]);
+    public function show($sku) {
+        return view('products.show', ['sku' => $sku]);
     }
 }

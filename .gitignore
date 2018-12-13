@@ -15,3 +15,5 @@ yarn-error.log
 /public/.idea
 /public/vendors
 /public/fonts
+/public/css.dev
+/public/js.dev

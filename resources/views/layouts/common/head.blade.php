@@ -12,6 +12,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Virtual Back Office</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
           type="text/css"/>
 
@@ -28,13 +29,13 @@
           type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
-    <link href="/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= css('/css/components.css')?>" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="<?= css('/css/plugins.css')?>" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
-    <link href="/css/layout.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color"/>
-    <link href="/css/app.css<?= v() ?>" rel="stylesheet" type="text/css"/>
+    <link href="<?=css('/css/layout.css')?>" rel="stylesheet" type="text/css"/>
+    <link href="<?=css('/css/themes/blue.css')?>" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="<?= css('/css/app.css') ?>" rel="stylesheet" type="text/css"/>
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="/favicon.ico"/>
 </head>

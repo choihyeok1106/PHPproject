@@ -9,7 +9,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Service\RepService;
+use App\Services\RepService;
 
 class AccountController extends Controller
 {

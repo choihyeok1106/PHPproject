@@ -12,7 +12,8 @@
         <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 
-        <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true"
+        <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false"
+            data-auto-scroll="true"
             data-slide-speed="200">
             <li class="nav-item start active">
                 <a href="/home" class="nav-link nav-toggle">
@@ -28,7 +29,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="/dashboard" class="nav-link ">
+                        <a href="/team" class="nav-link ">
                             <span class="title">MY Team Dashboard</span>
                         </a>
                     </li>
