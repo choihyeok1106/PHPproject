@@ -10,7 +10,7 @@ define('STATIC_SERVER', 'http://dev-static.puremeka.com');
 
 define('LARAVEL_START', microtime(true));
 
-session_start();
+isset($_SESSION) || session_start();
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ session_start();
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +54,7 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
+$response = $kernel->handle($request = Illuminate\Http\Request::capture());
 
 $response->send();
 

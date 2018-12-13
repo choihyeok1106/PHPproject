@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Item;
 use Illuminate\Http\Request;
-use App\Service\ItemService;
+use App\Services\ItemService;
 
 class OrderController extends Controller
 {

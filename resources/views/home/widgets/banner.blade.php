@@ -1,5 +1,5 @@
 <!-- Widget::Banner -->
-<div class="grid-item" id="widget-banner" data-widget="banner">
+<div class="grid-item" id="widget-banner" data-widget="{{$id}}">
     <div class="grid-box">
         <div class="grid-head">
             <div class="grid-caption widget-caption"></div>

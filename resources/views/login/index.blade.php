@@ -22,6 +22,7 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <input class="form-control form-control-solid placeholder-no-fix form-group" type="text"
+                                       value="{{cookieget('username')}}"
                                        autocomplete="off"
                                        placeholder="Username" id="id" required/></div>
                             <div class="col-xs-6">

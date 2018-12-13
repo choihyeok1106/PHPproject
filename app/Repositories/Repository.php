@@ -9,35 +9,55 @@
 namespace App\Repositories;
 
 
-class Repository
-{
-    public function convert($array, $class_name)
-    {
-        $repositories = array();
-        if (class_exists('\\App\\Repositories\\' . $class_name) && is_array($array)) {
-            if (empty($array[0]))
-                $array = array($array);
-            if (count($array) > 0) {
-                foreach ($array as $key => $unit) {
-                    if (is_array($unit))
-                        $repositories[] = $this->put($unit, $class_name);
+trait Repository {
+
+    /**
+     * @param array $obj
+     * @param mixed $fields
+     * @return $this
+     */
+    function make(array $obj, $fields = null) {
+        if (is_string($fields)) {
+            $fields = explode(',', $fields);
+        }
+        if (is_array($obj) && $obj) {
+            foreach ($obj as $key => $val) {
+                if (is_array($fields) && isset($fields[$key])) {
+                    $key = $fields[$key];
                 }
+                $this->$key = $val;
             }
         }
-
-        if (count($repositories) == 1) {
-            $repositories = $repositories[0];
-        }
-        return $repositories;
+        return $this;
     }
 
-    private function put($unit, $class_name)
-    {
-        $class_name = 'App\\Repositories\\' . $class_name;
-        $repository = new $class_name();
-        if (method_exists($repository, 'transfer')) {
-            $repository = $repository->transfer($unit);
+    /**
+     * @param null|string|array $keys
+     * @return array
+     */
+    function vars($keys = null) {
+        if (is_string($keys)) {
+            $keys = explode(',', $keys);
         }
-        return $repository;
+        if (is_array($keys) && $keys) {
+            $data = null;
+            foreach ($keys as $key => $replace) {
+                $replace = trim($replace);
+                if (is_string($key)) {
+                    $key = trim($key);
+                    if (isset($this->$key)) {
+                        $data[$replace] = $this->$key;
+                    }
+                } else {
+                    $key = $replace;
+                    if (isset($this->$key)) {
+                        $data[$key] = $this->$key;
+                    }
+                }
+            }
+            return $data;
+        }
+        return get_object_vars($this);
     }
+
 }

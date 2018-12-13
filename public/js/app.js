@@ -1016,10 +1016,8 @@ var Core = function () {
 
 }();
 
-<!-- END THEME LAYOUT SCRIPTS -->
-
 /**
- Core script to handle the entire theme and core functions
+ Core script to handle the Layout functions
  **/
 var Layout = function () {
 
@@ -1656,7 +1654,7 @@ var Layout = function () {
 }();
 
 /**
- Core script to handle the entire theme and core functions
+ Core script to handle the QuickSidebar functions
  **/
 var QuickSidebar = function () {
 
@@ -1828,268 +1826,9 @@ var QuickSidebar = function () {
 
 }();
 
-var ComponentsBootstrapSelect = function () {
-
-    var handleBootstrapSelect = function () {
-        $('.bs-select').selectpicker({
-            iconBase: 'fa',
-            tickIcon: 'fa-check'
-        });
-    }
-
-    return {
-        //main function to initiate the module
-        init: function () {
-            handleBootstrapSelect();
-        }
-    };
-
-}();
-
 /**
- * App script to LivePURE handle the functions
- * */
-var App = {
-    // $_GET
-    g: {
-        decrypt: true,
-        d: function (decrypt) {
-            this.decrypt = decrypt;
-            return this;
-        },
-        data: (function () {
-            var url = window.document.location.href.toString();
-            var u = url.split("?");
-            if (typeof(u[1]) === "string") {
-                u = u[1].split("&");
-                var get = {};
-                for (var i in u) {
-                    var j = u[i].split("=");
-                    get[j[0]] = j[1];
-                }
-                return get;
-            } else {
-                return {};
-            }
-        })(),
-        get: function (key, def) {
-            if (this.data.hasOwnProperty(key)) {
-                if (this.decrypt) {
-                    return decodeURIComponent(this.data[key]);
-                } else {
-                    return this.data[key]
-                }
-            } else {
-                if (def) {
-                    return def;
-                } else {
-                    return null;
-                }
-            }
-        }
-    },
-    // loader html
-    l: {
-        loader: '<div class="loader"></div>',
-        init: function () {
-            $(".loadingLayout").css({
-                'line-height': $(window).height() + "px"
-            })
-        },
-        show: function () {
-            this.hide();
-            var html = '<div id="loadingLayout" class="loadingLayout" style="line-height:' + $(window).height() + 'px">' + this.loader + '</div>';
-            $("body").css({"overflow-y": "hidden"});
-            $("body").append(html);
-        },
-        hide: function () {
-            $("#loadingLayout").remove();
-            $("body").css({"overflow-y": "auto"});
-        }
-    },
-    // Ajax
-    a: {
-        // ajax: get
-        get: function (url, data, args) {
-            if (typeof data !== "object") {
-                data = {};
-            }
-            var before;
-            var end;
-            var ok;
-            var no;
-            if (args) {
-                if (args.hasOwnProperty('before')) {
-                    before = args['before']
-                }
-                if (args.hasOwnProperty('end')) {
-                    end = args['end']
-                }
-                if (args.hasOwnProperty('ok')) {
-                    ok = args['ok']
-                }
-                if (args.hasOwnProperty('no')) {
-                    no = args['no']
-                }
-            }
-            $.ajax({
-                url: url,
-                type: 'GET',
-                data: data,
-                dataType: 'json',
-                beforeSend: function (r) {
-                    var scrf = $("meta[name=csrf-token]").attr("content");
-                    r.setRequestHeader("X-CSRF-TOKEN", scrf);
-                    if (typeof before === 'function') {
-                        before(r);
-                    }
-                },
-                success: function (t) {
-                    if (typeof ok === 'function') {
-                        ok(t);
-                    }
-                },
-                error: function (t, e, i) {
-                    if (typeof no === 'function') {
-                        no(e, t, i);
-                    }
-                },
-                complete: function () {
-                    if (typeof end === 'function') {
-                        end();
-                    }
-                }
-            });
-        },
-        // ajax:post
-        post: function (url, data, args) {
-            if (typeof data !== "object") {
-                data = {};
-            }
-            var before;
-            var end;
-            var ok;
-            var no;
-            if (args) {
-                if (args.hasOwnProperty('before')) {
-                    before = args['before']
-                }
-                if (args.hasOwnProperty('end')) {
-                    end = args['end']
-                }
-                if (args.hasOwnProperty('ok')) {
-                    ok = args['ok']
-                }
-                if (args.hasOwnProperty('no')) {
-                    no = args['no']
-                }
-            }
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: data,
-                dataType: 'json',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                beforeSend: function () {
-                    if (typeof before === 'function') {
-                        before();
-                    }
-                },
-                success: function (t) {
-                    if (typeof ok === 'function') {
-                        ok(t);
-                    }
-                },
-                error: function (t, e, m) {
-                    if (typeof no === 'function') {
-                        no(m, e, t);
-                    }
-                },
-                complete: function () {
-                    if (typeof end === 'function') {
-                        end();
-                    }
-                }
-            });
-        }
-    },
-    // event
-    e: {
-        onScrollBottom: function (event, elm, target) {
-            if (typeof event == 'function') {
-                if (elm == undefined) {
-                    elm = window;
-                }
-                if (target == undefined) {
-                    target = document;
-                }
-                $(elm).scroll(function () {
-                    var scrollTop = $(this).scrollTop();
-                    var scrollHeight = $(target).height();
-                    var windowHeight = $(window).height();
-                    if (scrollTop + windowHeight >= scrollHeight) {
-                        event();
-                    }
-                });
-            }
-        }
-    },
-    // theme templates
-    t: {
-        // init
-        init: function () {
-            this.initFixedAside();
-            this.initNote();
-            this.initResponse();
-            $(window).on("resize", function () {
-                App.l.init();
-                App.t.initResponse()
-            })
-        },
-        // init fixed aside menu
-        initFixedAside: function () {
-            $('.fixed-aside').each(function () {
-                var top = parseInt($(this).attr("data-top"));
-                var offset = parseInt($(this).attr("data-offset"));
-                var cls = $(this).attr("data-class");
-                var elm = $(this);
-                if (isNaN(offset)) {
-                    offset = 0;
-                }
-                if (!isNaN(top) && cls) {
-                    $(window).on('scroll', function () {
-                        if ($(window).scrollTop() >= top) {
-                            $("body").removeClass(cls).addClass(cls);
-                            $(elm).css('top', top);
-                            $(elm).css('width', $(elm).parent().width());
-                            $(elm).css('left', $(elm).parent().offset().left + offset);
-                        } else {
-                            $("body").removeClass(cls);
-                        }
-                    });
-                    $(window).on('resize', function () {
-                        $(elm).css('width', $(elm).parent().width());
-                        $(elm).css('left', $(elm).parent().offset().left + offset);
-                    });
-                }
-            });
-        },
-        // init note
-        initNote: function () {
-            $(".note .note-close").on("click", function () {
-                $(".note").remove()
-            });
-        },
-        // responsive box height
-        initResponse: function () {
-            Util.toggleResponse();
-        }
-    },
-};
-
-// util
+ Util script functions
+ **/
 var Util = {
     // Format a number with grouped thousands
     numberFormat: function (num, float) {
@@ -2163,7 +1902,227 @@ var Util = {
 
         });
     }
-}
+};
+
+/**
+ UI script functions
+ **/
+var UI = {
+    init: function () {
+        this.handleBootstrapSelect();
+        this.initFixedAside();
+        this.initNote();
+        this.initResponse();
+        $(window).on("resize", function () {
+            UI.initResponse()
+        })
+    },
+    handleBootstrapSelect: function () {
+        $('.bs-select').selectpicker({
+            iconBase: 'fa',
+            tickIcon: 'fa-check'
+        });
+    },
+    // init fixed aside menu
+    initFixedAside: function () {
+        $('.fixed-aside').each(function () {
+            var top = parseInt($(this).attr("data-top"));
+            var offset = parseInt($(this).attr("data-offset"));
+            var cls = $(this).attr("data-class");
+            var elm = $(this);
+            if (isNaN(offset)) {
+                offset = 0;
+            }
+            if (!isNaN(top) && cls) {
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() >= top) {
+                        $("body").removeClass(cls).addClass(cls);
+                        $(elm).css('top', top);
+                        $(elm).css('width', $(elm).parent().width());
+                        $(elm).css('left', $(elm).parent().offset().left + offset);
+                    } else {
+                        $("body").removeClass(cls);
+                    }
+                });
+                $(window).on('resize', function () {
+                    $(elm).css('width', $(elm).parent().width());
+                    $(elm).css('left', $(elm).parent().offset().left + offset);
+                });
+            }
+        });
+    },
+    // init note
+    initNote: function () {
+        $(".note .note-close").on("click", function () {
+            $(".note").remove()
+        });
+    },
+    // responsive box height
+    initResponse: function () {
+        Util.toggleResponse();
+    }
+};
+
+/**
+ $_GET script functions
+ **/
+var Get = {
+    decrypt: true,
+    decode: function (decrypt) {
+        this.decrypt = decrypt;
+        return this;
+    },
+    data: (function () {
+        var url = window.document.location.href.toString();
+        var u = url.split("?");
+        if (typeof(u[1]) === "string") {
+            u = u[1].split("&");
+            var get = {};
+            for (var i in u) {
+                var j = u[i].split("=");
+                get[j[0]] = j[1];
+            }
+            return get;
+        } else {
+            return {};
+        }
+    })(),
+    get: function (key, def) {
+        if (this.data.hasOwnProperty(key)) {
+            if (this.decrypt) {
+                return decodeURIComponent(this.data[key]);
+            } else {
+                return this.data[key]
+            }
+        } else {
+            if (def) {
+                return def;
+            } else {
+                return null;
+            }
+        }
+    }
+};
+
+/**
+ Loader script functions
+ **/
+var Loader = {
+    loader: '<div class="loader"></div>',
+    init: function () {
+        $(window).on("resize", function () {
+            Loader.initHeight();
+        })
+    },
+    initHeight: function () {
+        $(".loadingLayout").css({
+            'line-height': $(window).height() + "px"
+        })
+    },
+    show: function () {
+        this.hide();
+        var html = '<div id="loadingLayout" class="loadingLayout" style="line-height:' + $(window).height() + 'px">' + this.loader + '</div>';
+        $("body").css({"overflow-y": "hidden"});
+        $("body").append(html);
+    },
+    hide: function () {
+        $("#loadingLayout").remove();
+        $("body").css({"overflow-y": "auto"});
+    }
+};
+
+/**
+ Ajax script functions
+ **/
+var Ajax = {
+    request: function (url, data, args, type) {
+        if (typeof data !== "object") {
+            data = {};
+        }
+        var before;
+        var end;
+        var ok;
+        var no;
+        if (args) {
+            if (args.hasOwnProperty('before')) {
+                before = args['before']
+            }
+            if (args.hasOwnProperty('end')) {
+                end = args['end']
+            }
+            if (args.hasOwnProperty('ok')) {
+                ok = args['ok']
+            }
+            if (args.hasOwnProperty('no')) {
+                no = args['no']
+            }
+        }
+        if (type !== 'POST') {
+            type = 'GET';
+        }
+        $.ajax({
+            url: url,
+            type: type,
+            data: data,
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function (r) {
+                if (typeof before === 'function') {
+                    before(r);
+                }
+            },
+            success: function (t) {
+                if (typeof ok === 'function') {
+                    ok(t);
+                }
+            },
+            error: function (t, e, m) {
+                if (typeof no === 'function') {
+                    no(m, e, t);
+                }
+            },
+            complete: function () {
+                if (typeof end === 'function') {
+                    end();
+                }
+            }
+        });
+    },
+    // ajax: get
+    get: function (url, data, args) {
+        this.request(url, data, args, 'GET')
+    },
+    // ajax:post
+    post: function (url, data, args) {
+        this.request(url, data, args, 'POST')
+    }
+};
+
+/**
+ Handler script functions
+ **/
+var Handler = {
+    onScrollBottom: function (event, elm, target) {
+        if (typeof event == 'function') {
+            if (elm == undefined) {
+                elm = window;
+            }
+            if (target == undefined) {
+                target = document;
+            }
+            $(elm).scroll(function () {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(target).height();
+                var windowHeight = $(window).height();
+                if (scrollTop + windowHeight >= scrollHeight) {
+                    event();
+                }
+            });
+        }
+    }
+};
 
 var Common = {
     init: function () {
@@ -2175,7 +2134,7 @@ var Common = {
     // Get user cart items count
     cartCount: function () {
         if ($("#head-cart-count").length) {
-            App.a.get('/a/common/cart-count', null, {
+            Ajax.get('/a/common/cart-count', null, {
                 ok: function (res) {
                     if (res.hasOwnProperty('count') && res['count']) {
                         $("#head-cart-count").text(res['count']).show();
@@ -2188,7 +2147,7 @@ var Common = {
     },
     noticeCount: function () {
         if ($("#head-notice-count").length) {
-            App.a.get('/a/common/notice-count', null, {
+            Ajax.get('/a/common/notice-count', null, {
                 ok: function (res) {
                     if (res.hasOwnProperty('count') && res['count']) {
                         $("#head-notice-count").text(res['count']).show();
@@ -2202,7 +2161,7 @@ var Common = {
     // Get user unread alert count
     alertCount: function () {
         if ($("#head-alert-count").length) {
-            App.a.get('/a/common/alert-count', null, {
+            Ajax.get('/a/common/alert-count', null, {
                 ok: function (res) {
                     if (res.hasOwnProperty('count') && res['count']) {
                         $("#head-alert-count").text(res['count']).show();
@@ -2220,7 +2179,7 @@ var Common = {
     // Get user unread message count
     messageCount: function () {
         if ($("#head-message-count").length) {
-            App.a.get('/a/common/message-count', null, {
+            Ajax.get('/a/common/message-count', null, {
                 ok: function (res) {
                     if (res.hasOwnProperty('count') && res['count']) {
                         $("#head-message-count").text(res['count']).show();
@@ -2234,13 +2193,13 @@ var Common = {
 }
 
 $(document).ready(function () {
-    Core.init(); // init metronic core componets
-    Layout.init(); // init metronic core componets
-    QuickSidebar.init(); // init metronic core componets
-    ComponentsBootstrapSelect.init();
-    App.t.init();
+    Core.init(); // init core components
+    Layout.init(); // init layout components
+    QuickSidebar.init(); // init quick side bar components
+    UI.init(); // init ui components
+    Loader.init(); // init loader components
 });
 
 $(window).load(function () {
-    Common.init();
+    Common.init(); // init common components
 });

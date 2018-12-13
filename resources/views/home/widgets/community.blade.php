@@ -1,5 +1,5 @@
 <!-- Widget::COMMUNITY -->
-<div class="grid-item" id="widget-community" data-widget="community">
+<div class="grid-item" id="widget-community" data-widget="{{$id}}">
     <div class="grid-box widget-community">
         <div class="grid-head">
             <div class="grid-caption widget-caption">

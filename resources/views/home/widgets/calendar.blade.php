@@ -1,5 +1,5 @@
 <!-- Widget::Calendar -->
-<div class="grid-item" id="widget-calendar" data-widget="calendar">
+<div class="grid-item" id="widget-calendar" data-widget="{{$id}}">
     <div class="grid-box widget-calendar">
         <div class="grid-head">
             <div class="grid-caption widget-caption">

@@ -1,5 +1,5 @@
 <!-- Widget::Activity -->
-<div class="grid-item" id="widget-activity" data-widget="activity">
+<div class="grid-item" id="widget-activity" data-widget="{{$id}}">
     <div class="grid-box widget-activity">
         <div class="grid-head">
             <div class="grid-caption widget-caption">

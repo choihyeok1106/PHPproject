@@ -1,5 +1,5 @@
 <!-- Widget::Summary-->
-<div class="grid-item" id="widget-summary" data-widget="summary">
+<div class="grid-item" id="widget-summary" data-widget="{{$id}}">
     <div class="grid-box widget-summary">
         <div class="grid-head">
             <div class="grid-caption widget-caption">

@@ -9,85 +9,38 @@
 namespace App\Models;
 
 
-use App\Constants\HomeWidget;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property mixed widgets
- * @property mixed activated
+ * @property mixed      id
+ * @property mixed      user_id
+ * @property mixed      widget_id
+ * @property mixed      enable
+ * @property mixed      sorting
+ * @property HomeWidget widget
  */
 class HomeInterface extends Model {
 
-    protected $fillable = ['widgets'];
+    use ModelTrait;
 
     /**
-     * @param $widget
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function hasWidget($widget) {
-        $widgets = $this->getWidgets();
-        return in_array($widget, $widgets);
+    public function widget() {
+        return $this->hasOne(HomeWidget::class, 'id', 'widget_id');
     }
 
     /**
-     * @return string[]
+     * echo widget view html
      */
-    public function getWidgets() {
-        return explode('|', $this->widgets);
-    }
+    public function render() {
+        if ($this->enable) {
+            try {
+                echo view("home.widgets.{$this->widget->widget}")->with('id', $this->widget_id)->render();
+            } catch (\Throwable $e) {
 
-    /**
-     * @return string[]
-     */
-    public function getMyWidgets() {
-        if (!$this->activated) {
-            $this->activated = 1;
-            $this->widgets   = implode('|', array_unique(HomeWidget::$list));
-            $this->save();
-        }
-        return explode('|', $this->widgets);
-    }
-
-    /**
-     * @param $widget
-     * @return int
-     */
-    public function getChecked($widget) {
-        if (!$this->activated) {
-            return 1;
-        } else {
-            $widgets = explode('|', $this->widgets);
-            return in_array($widget, $widgets) ? 1 : 0;
-        }
-    }
-
-    /**
-     * @param string $widget
-     * @return string
-     * @throws \Throwable
-     */
-    public function getView($widget) {
-        if (HomeWidget::show($widget)) {
-            switch ($widget) {
-                case HomeWidget::BANNER:
-                    return view('home.widgets.banner')->render();
-                case HomeWidget::SUMMARY:
-                    return view('home.widgets.summary')->render();
-                case HomeWidget::NEWS:
-                    return view('home.widgets.news')->render();
-                case HomeWidget::ALERT:
-                    return view('home.widgets.alert')->render();
-                case HomeWidget::TRACKER:
-                    return view('home.widgets.tracker')->render();
-                case HomeWidget::CALENDAR:
-                    return view('home.widgets.calendar')->render();
-                case HomeWidget::ACTIVITY:
-                    return view('home.widgets.activity')->render();
-                case HomeWidget::COMMUNITY:
-                    return view('home.widgets.community')->render();
             }
         }
-        return '';
     }
 
 }

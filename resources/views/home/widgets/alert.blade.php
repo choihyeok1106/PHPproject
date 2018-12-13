@@ -1,5 +1,5 @@
 <!-- Widget::Smart Alert -->
-<div class="grid-item" id="widget-alert" data-widget="alert">
+<div class="grid-item" id="widget-alert" data-widget="{{$id}}">
     <div class="grid-box widget-alert">
         <div class="grid-head">
             <div class="grid-caption widget-caption">

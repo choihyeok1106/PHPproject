@@ -1,5 +1,5 @@
 <!-- Widget::Demo -->
-<div class="grid-item" data-widget="demo">
+<div class="grid-item" data-widget="{{$id}}">
     <div class="grid-box">
         <div class="grid-head">
             <div class="grid-caption">NEWS FEED</div>

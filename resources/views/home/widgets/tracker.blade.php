@@ -1,5 +1,5 @@
 <!-- Widget::Tracker -->
-<div class="grid-item" id="widget-tracker" data-widget="tracker">
+<div class="grid-item" id="widget-tracker" data-widget="{{$id}}">
     <div class="grid-box widget-tracker">
         <div class="grid-head">
             <div class="grid-caption widget-caption">

@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/',
     function () {
         return redirect('/home');
@@ -89,3 +90,42 @@ Route::post('/a/cart/add', 'Ajax\CartAjax@add');
 Route::post('/a/cart/update', 'Ajax\CartAjax@update');
 Route::post('/a/cart/delete', 'Ajax\CartAjax@delete');
 Route::get('/a/shopping/promotions', 'Ajax\ShoppingAjax@promotions');
+
+
+Route::get('/test',
+    function () {
+
+        //        dd($con);
+//        $svc = \App\Services\Service::make();
+//        exit;
+        $curl = new \Ixudra\Curl\CurlService();
+
+        $builder = $curl->to('http://loc-core.puremeka.com/v1/vbo/authorize');
+
+
+        $response = $builder->withHeaders([
+            'Authorization: Basic ' . base64_encode('{dev-vbo}:{942FB0E6EAC78C99F410DAB57B55385D2C242B2D$2Y$10$FT.0PB.K8VM7LRPUADI4XETWY9OSNWVHB}'),
+            'Content-Type: application/json',
+            'Accept: application/json'
+        ])->withData([
+            'parameters' => [
+                'username'              => 'KR100000',
+                'password'              => '4297f44b13955235245b2497399d7a93',
+                'validity_period_hours' => '168',
+            ]
+        ])->asJsonRequest()->post();
+
+        //        $response = \Ixudra\Curl\Facades\Curl::to('http://loc-core.puremeka.com/v1/vbo/authorize')
+        //                                             ->withHeader('Content-Type: application/json')
+        //                                             ->withHeader('Accept: application/json')
+        //                                             ->withData([
+        //                                                 'parameters' => [
+        //                                                     'username'              => 'KR100000',
+        //                                                     'password'              => '4297f44b13955235245b2497399d7a93',
+        //                                                     'validity_period_hours' => '168',
+        //                                                 ]
+        //                                             ])
+        //            ->asJson()
+        //                                             ->post();
+        dd($response);
+    });

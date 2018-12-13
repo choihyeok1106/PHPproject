@@ -40,7 +40,7 @@ var Home = {
     },
     // get last my alert
     newAlert: function () {
-        App.a.get("/a/home/new-alert", null, {
+        Ajax.get("/a/home/new-alert", null, {
             ok: function (res) {
                 if (!res.hasOwnProperty("error")) {
                     $("#new-alert").show().find("p").text(res['alert']);
@@ -66,7 +66,7 @@ var Home = {
             '</div>';
         $("#settings-show").click(function () {
             var btn = $(this);
-            App.a.get("/a/home/interface", null, {
+            Ajax.get("/a/home/interface", null, {
                 ok: function (res) {
                     if (!res.hasOwnProperty("error")) {
                         var html = '';
@@ -78,7 +78,7 @@ var Home = {
                             html += item;
 
                         });
-                        $("#modal-widget .modal-body .row").append(html);
+                        $("#modal-widget .modal-body .row").html(html);
                         $("#modal-widget").modal({
                             show: 'true'
                         });
@@ -100,11 +100,11 @@ var Home = {
 
         $("#widget-save").click(function () {
             var btn = $(this);
-            var widgets = [];
-            $("input[type=checkbox][name=widget]:checked").each(function () {
-                widgets[widgets.length] = $(this).val();
+            var widgets = {};
+            $("input[type=checkbox][name=widget]").each(function () {
+                widgets[$(this).val()] = $(this).is(":checked") ? 1 : 0;
             });
-            App.a.post("/a/home/interface", {
+            Ajax.post("/a/home/interface", {
                 widgets: widgets
             }, {
                 ok: function (res) {
@@ -137,7 +137,7 @@ var Home = {
             '    </a>\n' +
             '</li>';
 
-        App.a.get("/a/home/banners", null, {
+        Ajax.get("/a/home/banners", null, {
             ok: function (res) {
                 if (!res.hasOwnProperty("error")) {
                     var html = "";
@@ -202,7 +202,7 @@ var Home = {
             $("#summary-last-tb").show();
         });
 
-        App.a.get("/a/home/summaries", null, {
+        Ajax.get("/a/home/summaries", null, {
             ok: function (res) {
                 function setCounter(el, val, count, float) {
                     count = count == undefined ? true : false
@@ -296,7 +296,7 @@ var Home = {
             '    </div>\n' +
             '</div>';
 
-        App.a.get("/a/home/news", null, {
+        Ajax.get("/a/home/news", null, {
             ok: function (res) {
                 if (!res.hasOwnProperty("error")) {
                     var html = '';
@@ -328,7 +328,7 @@ var Home = {
         if (!$("#widget-alert").length) {
             return
         }
-        App.a.get("/a/home/team-alerts", null, {
+        Ajax.get("/a/home/team-alerts", null, {
             ok: function (res) {
                 if (!res.hasOwnProperty('error')) {
                     $.each(res, function (key, val) {
@@ -419,20 +419,20 @@ var Home = {
                 traget = curr;
             }
 
-            $("#tracker-circle text[style=track-ltv-cond]").eq(0).text('/ ' + Util.numberFormat(ranks[traget]['ltv']));
+            $("#tracker-circle text[style=track-ltv-cond]").eq(0).text('/ ' + Util.numberFormat(ranks[traget]['cond_ltv']));
             $("#tracker-circle .timer .number").text(Util.numberFormat(ltv));
             $("#track-stv-curr").text(Util.numberFormat(stv));
-            $("#track-stv-cond").text(Util.numberFormat(ranks[traget]['stv']));
+            $("#track-stv-cond").text(Util.numberFormat(ranks[traget]['cond_stv']));
             $("#track-name").text(ranks[traget]['name']);
-            $("#track-ltv").text(Util.numberFormat(ranks[traget]['ltv']));
-            $("#track-stv").text(Util.numberFormat(ranks[traget]['stv']));
+            $("#track-ltv").text(Util.numberFormat(ranks[traget]['cond_ltv']));
+            $("#track-stv").text(Util.numberFormat(ranks[traget]['cond_stv']));
             // ltv circle
             var per = 0;
-            if (ltv > ranks[traget]['ltv']) {
+            if (ltv > ranks[traget]['cond_ltv']) {
                 per = 360;
             } else {
                 if (ltv > 0) {
-                    per = parseInt(ltv / ranks[traget]['ltv'] * 360)
+                    per = parseInt(ltv / ranks[traget]['cond_ltv'] * 360)
                 }
             }
             if (per > 0) {
@@ -446,11 +446,11 @@ var Home = {
             }
             // stv bar
             per = 100;
-            if (stv > ranks[traget]['stv']) {
+            if (stv > ranks[traget]['cond_stv']) {
                 per = 100;
             } else {
                 if (stv > 0) {
-                    per = stv / ranks[traget]['stv'] * 100;
+                    per = stv / ranks[traget]['cond_stv'] * 100;
                 }
             }
             if (per > 0) {
@@ -471,7 +471,7 @@ var Home = {
         });
 
         function getData() {
-            App.a.get("/a/home/tracker", null, {
+            Ajax.get("/a/home/tracker", null, {
                 ok: function (res) {
                     if (!res.hasOwnProperty('error')) {
                         curr = res['curr'];
@@ -585,7 +585,7 @@ var Home = {
             setTitle()
         });
 
-        App.a.get("/a/home/schedules", null, {
+        Ajax.get("/a/home/schedules", null, {
             ok: function (res) {
                 if (!res.hasOwnProperty('error')) {
                     // calendar.updateEvent(res);
@@ -627,7 +627,7 @@ var Home = {
             '        </a>\n' +
             '    </div>\n' +
             '</li>';
-        App.a.get("/a/home/activities", null, {
+        Ajax.get("/a/home/activities", null, {
             ok: function (res) {
                 if (!res.hasOwnProperty('error')) {
                     var timelines = '';
@@ -694,7 +694,7 @@ var Home = {
             '        <div class="link"><a href="{{$link}}">View detail</a></div>\n' +
             '    </div>\n' +
             '</div>';
-        App.a.get("/a/home/communities", null, {
+        Ajax.get("/a/home/communities", null, {
             ok: function (res) {
                 if (!res.hasOwnProperty('error')) {
                     var html = '';
@@ -746,7 +746,7 @@ var Home = {
                     widgets[widgets.length] = widget;
                 }
             });
-            App.a.post("/a/home/interface-sorting", {
+            Ajax.post("/a/home/interface-sorting", {
                 widgets: widgets
             }, {
                 ok: function (res) {

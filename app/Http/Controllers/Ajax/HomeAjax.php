@@ -10,17 +10,18 @@ namespace App\Http\Controllers\Ajax;
 
 
 use App\Cache\HomeCache;
-use App\Constants\HomeWidget;
+use App\Cache\RepRankCache;
 use App\Constants\SmartAlertType;
-use App\Constants\TrackRank;
 use App\Http\Controllers\Controller;
 use App\Models\HomeInterface;
+use App\Models\HomeWidget;
 use App\Repositories\PureCommunity;
 use App\Repositories\ScheduleEvent;
 use App\Repositories\UserCourse;
 use App\Repositories\Content;
 use App\Repositories\SmartAlert;
 use App\Supports\UserPrefs;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeAjax extends Controller {
@@ -57,19 +58,15 @@ class HomeAjax extends Controller {
      */
     public function getInterface(Request $request) {
         if ($request->ajax()) {
-            /** @var HomeInterface $interface */
-            $interface = HomeInterface::find(UserPrefs::get('id'));
-            if ($interface) {
-                $data = [];
-                foreach (HomeWidget::$list as $val) {
-                    $widget          = new HomeWidget();
-                    $widget->id      = $val;
-                    $widget->name    = HomeWidget::getName($val);
-                    $widget->checked = $interface->getChecked($val);
-                    $data[]          = $widget;
-                }
-                return $this->ok($data);
+            $data = [];
+            /** @var HomeWidget[] $widgets */
+            $widgets = HomeWidget::where('active', 1)->orderBy('sorting', 'asc')->get();
+            foreach ($widgets as $widget) {
+                $interface       = HomeInterface::where('user_id', UserPrefs::getID())->where('widget_id', $widget->id)->where('enable', 1)->first();
+                $widget->checked = $interface ? 1 : 0;
+                $data[]          = $widget;
             }
+            return $this->ok($data);
         }
         return $this->badRequest();
     }
@@ -81,18 +78,23 @@ class HomeAjax extends Controller {
      */
     public function setInterface(Request $request) {
         if ($request->ajax()) {
-            $widgets = $request->get('widgets');
-            /** @var HomeInterface $interface */
-            $interface = HomeInterface::find(UserPrefs::get('id'));
-            if ($interface) {
-                $old                = $interface->getWidgets();
-                $intersect          = array_intersect($old, $widgets);
-                $diff               = array_diff($widgets, $intersect);
-                $new                = array_merge($intersect, $diff);
-                $interface->widgets = implode('|', $new);
-                $interface->save();
-                return $this->ok();
+            $widgets = $request->get('widgets', []);
+            if (is_array($widgets)) {
+                foreach ($widgets as $id => $enable) {
+                    /** @var HomeInterface $interface */
+                    $interface = HomeInterface::where('user_id', UserPrefs::getID())->where('widget_id', $id)->first();
+                    if (!$interface) {
+                        $interface            = new HomeInterface;
+                        $interface->user_id   = UserPrefs::getID();
+                        $interface->widget_id = $id;
+
+                        $interface->sorting = $interface->resort();
+                    }
+                    $interface->enable = $enable;
+                    $interface->save();
+                }
             }
+            return $this->ok();
         }
         return $this->badRequest();
     }
@@ -105,13 +107,8 @@ class HomeAjax extends Controller {
     public function sortingInterface(Request $request) {
         if ($request->ajax()) {
             $widgets = $request->get('widgets');
-            /** @var HomeInterface $interface */
-            $interface = HomeInterface::find(UserPrefs::get('id'));
-            if ($interface) {
-                $interface->widgets = implode('|', $widgets);
-                $interface->save();
-                return $this->ok();
-            }
+            dd($widgets);
+
         }
         return $this->badRequest();
     }
@@ -251,17 +248,16 @@ class HomeAjax extends Controller {
      */
     public function tracker(Request $request) {
         if ($request->ajax()) {
-            $ranks = TrackRank::ranks();
+            $ranks = RepRankCache::getRanks('id,name,abbreviation,cond_ltv,cond_stv');
             $curr  = 0;
             $ltv   = rand(0, 9999);
             $stv   = rand(0, 9999);
             foreach ($ranks as $k => $r) {
-                if ($ltv >= $r->ltv && $stv >= $r->stv) {
+                if ($ltv >= $r['cond_ltv'] && $stv >= $r['cond_stv']) {
                     $curr = $k;
                 }
             }
-
-            return response([
+            return $this->ok([
                 'curr'  => $curr,
                 'ltv'   => $ltv,
                 'stv'   => $stv,

@@ -46,8 +46,9 @@
     <div class="grid">
         <?php
         /** @var \App\Models\HomeInterface $interface */
-        foreach ($interface->getMyWidgets() as $widget) {
-            echo $interface->getView($widget);
+        $interfaces = \App\Supports\UserPrefs::getInterfaces();
+        foreach ($interfaces as $interface) {
+            $interface->render();
         }
         ?>
     </div>

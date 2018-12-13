@@ -17,7 +17,7 @@ function hide_danger() {
 function login() {
     if (loginFlag) {
         var btn = $("#login");
-        App.a.post("/a/login", {
+        Ajax.post("/a/login", {
             id: $("#id").val(),
             pwd: $("#pwd").val(),
             remember: $("#remember:checked").length
@@ -26,7 +26,7 @@ function login() {
                 if (re.hasOwnProperty("error")) {
                     show_danger(re["error"])
                 } else {
-                    var redirectUrl = App.g.get('redirect');
+                    var redirectUrl = Get.get('redirect');
                     location.replace(redirectUrl)
                 }
             },
@@ -48,7 +48,7 @@ function login() {
 
 function send() {
     var btn = $("#submit")
-    App.a.post("/a/forgot-password", {
+    Ajax.post("/a/forgot-password", {
         email: $("email").val()
     }, {
         ok: function (re) {

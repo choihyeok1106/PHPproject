@@ -10,11 +10,18 @@ namespace App\Http\Controllers\Ajax;
 
 
 use App\Http\Controllers\Controller;
-use App\Service\RepService;
+use App\Repositories\Passport;
+use App\Repositories\Rep;
+use App\Services\AuthenticateService;
+use App\Services\RepService;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+
 
 class LoginAjax extends Controller {
+
+    use Ajax;
 
     /**
      * Ajax response Rep Login
@@ -24,20 +31,37 @@ class LoginAjax extends Controller {
     public function index(Request $request) {
         if ($request->ajax()) {
             //            session()->put('locale', $locale);
-            $id       = $request->get("id");
-            $pwd      = $request->get("pwd");
+            $id       = trim($request->get("id"));
+            $pwd      = trim($request->get("pwd"));
             $remember = $request->get("remember") ? true : false;
-
-            $rep = RepService::Make()->login($id, $pwd);
-
-            if ($rep) {
-                UserPrefs::set($rep);
-                return response(["message" => "OK"]);
+            if (!$id || !$pwd) {
+                return $this->no("This username/password combination is not quite correct");
+            }
+            $svc = AuthenticateService::login($id, $pwd);
+            if (!$svc->succeed()) {
+                return $this->no($svc->error());
+            }
+            /** @var Passport $pass */
+            $pass = $svc->result(Passport::class);
+            if ($pass) {
+                UserPrefs::setPassport($pass);
+                $svc = RepService::getRep($pass->number);
+                if (!$svc->succeed()) {
+                    UserPrefs::clear();
+                    return $this->no($svc->error());
+                }
+                UserPrefs::setRep($svc->result());
+                if ($remember) {
+                    cookieset('username', $pass->number, 60 * 24 * 30);
+                } else {
+                    cookiedel('username');
+                }
+                return $this->ok();
             }
 
-            return response(["error" => "This username/password combination is not quite correct"]);
+            return $this->no('This username/password combination is not quite correct');
         }
-        return response(["error" => "Bad Request"]);
+        return $this->badRequest();
     }
 
     /**
