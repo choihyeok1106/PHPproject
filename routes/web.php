@@ -37,7 +37,8 @@ Route::get('/locale/{locale}', function ($locale) {
     return redirect()->back();
 })->name('locale');
 
-Route::get('/invoice', 'OrderController@invoice')->name('orders.invoice');
+Route::get('autoships/invoice', 'AutoshipController@invoice')->name('autoships.invoice');
+Route::get('orders/invoice', 'OrderController@invoice')->name('orders.invoice');
 Route::get('/support/faq', 'SupportController@faq')->name('support.faq');
 Route::get('/support/contact', 'SupportController@contact')->name('support.contact');
 Route::get('/tools/library', 'ToolController@library')->name('tools.library');

@@ -49,10 +49,10 @@
                 <tbody>
                 <?php for ($i = 0; $i < 10; $i++) { ?>
                 <tr>
-                    <td><a href="commission.php">Week 32 2018 (7/31/2018 to 08/06/2018)</a></td>
+                    <td><a href="{{route('commissions.show',123456)}}">Week 32 2018 (7/31/2018 to 08/06/2018)</a></td>
                     <td>$0.00</td>
                     <td>
-                        <a href="#">View Detail</a>
+                        <a href="{{route('commissions.show',123456)}}">View Detail</a>
                     </td>
                 </tr>
                 <?php } ?>

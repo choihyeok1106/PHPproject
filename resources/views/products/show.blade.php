@@ -13,7 +13,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="products.php">Shopping</a>
+                <a href="{{route('products.index')}}">Shopping</a>
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
@@ -251,7 +251,7 @@
                     <li>
                         <div class="card social-card share share-other card-product" data-social="item">
                             <div class="card-content full-height">
-                                <a href="product.php" class="thumbnail">
+                                <a href="{{route('products.show',123456)}}" class="thumbnail">
                                     <img alt="Person photo"
                                          src="https://shop.livepure.co.kr/upfiles/product/main_4008_gs557k1_2.jpg">
                                 </a>

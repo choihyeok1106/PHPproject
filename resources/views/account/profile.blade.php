@@ -22,7 +22,7 @@
         <div class="portlet-title">
             <div class="caption">
                 <span class="caption-subject bold uppercase"></span>
-                <span class="caption-helper">{{$rep->left_leg}}</span>
+                <span class="caption-helper">{{--{{$rep->left_leg}}--}}</span>
             </div>
             <div class="actions">
                 <a href="settings.php" class="btn btn-circle btn-default">
@@ -46,7 +46,7 @@
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-7 profile-info">
-                            <h1 class="font-green sbold uppercase">{{$rep->full_name()}}</h1>
+                            <h1 class="font-green sbold uppercase">{{--{{$rep->full_name()}}--}}</h1>
                             <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
                                 tincidunt laoreet
                                 dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat
@@ -58,19 +58,19 @@
                             <ul class="list-inline">
 
                                 <li>
-                                    <i class="fa fa-map-marker"></i>{{$rep->shipping->country}}
+                                    <i class="fa fa-map-marker"></i>{{--{{$rep->shipping->country}}--}}
                                 </li>
                                 <li>
-                                    <i class="fa fa-calendar"></i>{{$rep->birth_date}}
+                                    <i class="fa fa-calendar"></i>{{--{{$rep->birth_date}}--}}
                                 </li>
                                 <li>
-                                    <i class="fa fa-envelope-o"></i>{{$rep->email}}
+                                    <i class="fa fa-envelope-o"></i>{{--{{$rep->email}}--}}
                                 </li>
                                 <li>
-                                    <i class="la la-phone"></i> {{$rep->phones->Cell}}
+                                    <i class="la la-phone"></i> {{--{{$rep->phones->Cell}}--}}
                                 </li>
                                 <li>
-                                    <i class="la la-building-o"></i> {{$rep->company}}
+                                    <i class="la la-building-o"></i> {{--{{$rep->company}}--}}
                                 </li>
                             </ul>
                         </div>
@@ -84,7 +84,7 @@
                                     <ul class="list-unstyled">
                                         <li>
                                             <span class="sale-info"> Rank</span>
-                                            <span class="sale-num">{{$rep->ranks->display->name}}</span>
+                                            <span class="sale-num">{{--{{$rep->ranks->display->name}}--}}</span>
                                         </li>
                                         <li>
                                             <span class="sale-info"> Placement</span>
@@ -93,7 +93,7 @@
                                         <li>
                                             <span class="sale-info"> Sponsor </span>
                                             <span class="sale-num"> <a
-                                                        href="#">	{{$rep->sponsor}}</a> </span>
+                                                        href="#">	{{--{{$rep->sponsor}}--}}</a> </span>
                                         </li>
                                     </ul>
                                 </div>

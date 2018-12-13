@@ -113,7 +113,7 @@
                     <div class="portlet light portlet-fit portlet-product">
                         <div class="portlet-body padding-0">
                             {{--{{route('products.show',$skuId)}}--}}
-                            <a href="#" class="product-image">
+                            <a href="{{route('products.show',123456)}}" class="product-image">
                                 <img src="https://shop.livepure.co.kr/upfiles/product/main_4008_gs557k1_2.jpg">
                             </a>
                         </div>

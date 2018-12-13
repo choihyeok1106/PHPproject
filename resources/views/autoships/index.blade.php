@@ -27,7 +27,7 @@
             <button type="button" class="btn btn-default active">1 Week</button>
             <button type="button" class="btn btn-default">2 Week</button>
             <button type="button" class="btn btn-default">1 Month</button>
-            <button type="button" class="btn btn-default">3 Month</button>
+            <b1ton type="button" class="btn btn-default">3 Month</b1ton>
             <button type="button" class="btn btn-default">6 Month</button>
             <button type="button" class="btn btn-default">1 year</button>
         </div>
@@ -73,11 +73,11 @@
                     <td>April 26, 2018</td>
                     <td>SHIPPED</td>
                     <td class="text-right">
-                        <a href="#">Order Details</a>
+                        <a href="{{route('autoships.show',6178353)}}">Order Details</a>
                         <span>|</span>
                         <a href="#">Tracking</a>
                         <span>|</span>
-                        <a href="invoice.php">Invoice</a>
+                        <a href="{{route('autoships.invoice')}}">Invoice</a>
                     </td>
                 </tr>
                 <?php } ?>
@@ -106,7 +106,7 @@
                     <div class="col-md-6 text-right">
                         <div class="name">April 26, 2018</div>
                         <div class="value">
-                            <a href="order.php">Order Details</a>
+                            <a href="{{route('autoships.show',6490663)}}">Order Details</a>
                             <span>|</span>
                             <a href="#">Tracking</a>
                             <span>|</span>

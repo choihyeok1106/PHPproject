@@ -70,7 +70,7 @@
                     <td>April 26, 2018</td>
                     <td>SHIPPED</td>
                     <td class="text-right">
-                        <a href="order.php">Order Details</a>
+                        <a href="{{route('orders.show',123456)}}">Order Details</a>
                         <span>|</span>
                         <a href="#">Tracking</a>
                         <span>|</span>

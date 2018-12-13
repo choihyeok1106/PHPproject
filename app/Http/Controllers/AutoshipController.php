@@ -27,4 +27,8 @@ class AutoshipController extends Controller
     public function show(Request $orderId){
         return view('autoships.show',['orderId'=>$orderId]);
     }
+
+    public function invoice(){
+        return view('autoships.invoice');
+    }
 }

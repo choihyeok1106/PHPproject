@@ -14,11 +14,12 @@ use App\Service\RepService;
 class AccountController extends Controller
 {
     public function index(){
-        $repNumber = 'US100030';
+/*        $repNumber = 'US100030';
 
         $rep_service = new RepService();
-        $rep = $rep_service->getRep($repNumber);
+        $rep = $rep_service->getRep($repNumber);*/
 
-        return view('account.profile',['rep'=>$rep]);
+        return view('account.profile');
+        /*return view('account.profile',['rep'=>$rep]);*/
     }
 }

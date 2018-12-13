@@ -18,7 +18,7 @@ class OrderController extends Controller
     {
         return view('orders.index');
     }
-    public function show($orderId){
+    public function show(){
         return view('orders.show');
     }
     public function invoice(){
