@@ -12,6 +12,7 @@ namespace App\Repositories;
  * @property mixed id
  * @property mixed type
  * @property mixed number
+ * @property mixed country
  * @property mixed passport
  * @property mixed issued_at
  * @property mixed expires_at
