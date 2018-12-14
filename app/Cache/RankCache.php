@@ -8,9 +8,9 @@
 namespace App\Cache;
 
 
-use App\Services\RepRankService;
+use App\Services\RankService;
 
-class RepRankCache {
+class RankCache {
 
     /**
      * @param string $fields
@@ -20,7 +20,7 @@ class RepRankCache {
         $key   = "rank:{$fields}";
         $ranks = Cache::get($key);
         if (!$ranks) {
-            $svc = RepRankService::getRanks($fields);
+            $svc = RankService::getRanks($fields);
             if ($svc->succeed()) {
                 $ranks = $svc->result();
                 Cache::set($key, $ranks);

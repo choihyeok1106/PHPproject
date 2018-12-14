@@ -111,7 +111,7 @@ class UserPrefs {
      * @return array
      */
     public static function pass() {
-        $pass = (new Passport())->transfer(self::get('passport'));
+        $pass = (new Passport)->make(self::get('passport'));
         if ($pass->expired()) {
             $svc = AuthenticateService::refresh($pass->passport, $pass->number);
             if ($svc->succeed()) {

@@ -57,7 +57,7 @@ function js(string $path) {
         //        $path = str_replace('/js/', '/js.dev/', $path) . v();
         $path .= v();
     } else {
-        $path = str_replace('.js', '.min.js' . env('APP_VERSION', 1), $path);
+        $path = str_replace('.js', '.min.js?v=' . env('APP_VERSION', 1), $path);
     }
     return $path;
 }

@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Ajax;
 
 
 use App\Cache\HomeCache;
-use App\Cache\RepRankCache;
+use App\Cache\RankCache;
 use App\Constants\SmartAlertType;
 use App\Http\Controllers\Controller;
 use App\Models\HomeInterface;
@@ -248,7 +248,7 @@ class HomeAjax extends Controller {
      */
     public function tracker(Request $request) {
         if ($request->ajax()) {
-            $ranks = RepRankCache::getRanks('id,name,abbreviation,cond_ltv,cond_stv');
+            $ranks = RankCache::getRanks('id,name,abbreviation,cond_ltv,cond_stv');
             $curr  = 0;
             $ltv   = rand(0, 9999);
             $stv   = rand(0, 9999);
