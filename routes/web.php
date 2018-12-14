@@ -110,7 +110,7 @@ Route::get('/test',
         ])->withData([
             'parameters' => [
                 'username'              => 'KR100000',
-                'password'              => '4297f44b13955235245b2497399d7a93',
+                'password'              => 'e10adc3949ba59abbe56e057f20f883e',
                 'validity_period_hours' => '168',
             ]
         ])->asJsonRequest()->post();
