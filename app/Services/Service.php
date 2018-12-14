@@ -131,8 +131,8 @@ namespace App\Services {
          */
         private function getObject(array $arr, string $cls) {
             $obj = new $cls();
-            if (method_exists($obj, 'transfer')) {
-                $obj->transfer($arr);
+            if (method_exists($obj, 'make')) {
+                $obj->make($arr);
                 return $obj;
             }
             return null;
@@ -146,8 +146,8 @@ namespace App\Services {
             if ($json) {
                 if (isset($json['error'])) {
                     $this->error          = new Error();
-                    $this->error->code    = isset($json['error']['code']) ? $json['error']['code'] : 200;
-                    $this->error->message = isset($json['error']['message']) ? $json['error']['message'] : null;
+                    $this->error->code    = isset($json['error']['code']) ? $json['error']['code'] : 0;
+                    $this->error->message = isset($json['error']['message']) ? $json['error']['message'] : 'Unknown';
                 } else {
                     $this->result = $json;
                 }
