@@ -8,14 +8,15 @@
 namespace App\Services;
 
 
+use App\Supports\UserPrefs;
+
 class RankService {
 
     /**
-     * @param string $fields
      * @return Service
      */
-    public static function getRanks(string $fields = '') {
-        return Service::make()->get("/v1/vbo/ranks?fields={$fields}");
+    public static function getRanks() {
+        return Service::make(UserPrefs::pass())->get("/v1/vbo/ranks");
     }
 
 }

@@ -42,7 +42,10 @@ class UserPrefs {
      * clear user session
      */
     public static function clear() {
-        session_unset($_SESSION[self::FIELD]);
+        if (isset($_SESSION[self::FIELD])) {
+            unset($_SESSION[self::FIELD]);
+            session_unset();
+        }
     }
 
     /**
@@ -124,7 +127,8 @@ class UserPrefs {
         }
         $data = [
             'X-Passport'          => $pass->passport,
-            'X-Passport-Identity' => $pass->number
+            'X-Passport-Identity' => $pass->number,
+            'X-Passport-Country'  => $pass->country
         ];
         return $data;
     }

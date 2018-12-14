@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use App\Supports\UserAccess;
 use App\Supports\UserPrefs;
 
 class LoginController extends Controller {
