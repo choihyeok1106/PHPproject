@@ -8,7 +8,7 @@
 namespace App\Services;
 
 
-class RepRankService {
+class RankService {
 
     /**
      * @param string $fields
