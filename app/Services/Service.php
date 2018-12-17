@@ -33,6 +33,8 @@ namespace App\Services {
         private $response;
         /** @var Builder $builder */
         private $builder;
+        /** @var bool $asJsonResponse */
+        private $asJsonResponse = true;
 
         /**
          * @param mixed $headers
@@ -73,7 +75,10 @@ namespace App\Services {
                     }
                 }
                 // set json request & json response
-                $builder->asJsonResponse(true)->asJsonRequest();
+                $builder->asJsonRequest();
+                if ($this->asJsonResponse) {
+                    $builder->asJsonResponse(true);
+                }
                 // save log to local
                 $log = env('API_LOG');
                 if ($log) {
@@ -183,6 +188,14 @@ namespace App\Services {
          */
         public function response() {
             return $this->response;
+        }
+
+        /**
+         * @return Service
+         */
+        public function htmlResponse() {
+            $this->asJsonResponse = false;
+            return $this;
         }
 
         /**
