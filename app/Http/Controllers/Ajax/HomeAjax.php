@@ -249,6 +249,7 @@ class HomeAjax extends Controller {
     public function tracker(Request $request) {
         if ($request->ajax()) {
             $ranks = RankCache::getRanks('id,name,abbreviation,cond_ltv,cond_stv');
+
             $curr  = 0;
             $ltv   = rand(0, 9999);
             $stv   = rand(0, 9999);

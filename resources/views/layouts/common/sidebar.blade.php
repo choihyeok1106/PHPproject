@@ -115,7 +115,7 @@
                     <span class="title">Training Course</span>
                 </a>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-support"></i>
                     <span class="title">Support</span>

@@ -11,7 +11,6 @@ namespace App\Cache;
 use App\Services\RankService;
 
 class RankCache {
-
     /**
      * @param string $fields
      * @return \App\Repositories\Rank[]
@@ -28,5 +27,4 @@ class RankCache {
         }
         return $ranks;
     }
-
 }

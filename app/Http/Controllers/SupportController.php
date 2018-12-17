@@ -13,7 +13,6 @@ class SupportController extends Controller
 
     public function contact()
     {
-
         return view('support.contact');
     }
 }
