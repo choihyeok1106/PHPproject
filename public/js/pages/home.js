@@ -41,7 +41,7 @@ var Home = {
     // get last my alert
     newAlert: function () {
         Ajax.get("/a/home/new-alert", null, {
-            ok: function (res) {
+            ok: function (res, meta) {
                 if (!res.hasOwnProperty("error")) {
                     $("#new-alert").show().find("p").text(res['alert']);
                 } else {
@@ -292,31 +292,30 @@ var Home = {
             '            <span class="mt-comment-date">{{$date}}</span>\n' +
             '        </div>\n' +
             '        <div class="mt-comment-text">{{$content}}</div>\n' +
-            '        <div class="mt-comment-details"><a href="{{$link}}">View detail</a></div>\n' +
+            '        <div class="mt-comment-details"><a href="/news/{{$id}}">View detail</a></div>\n' +
             '    </div>\n' +
             '</div>';
 
         Ajax.get("/a/home/news", null, {
-            ok: function (res) {
-                if (!res.hasOwnProperty("error")) {
-                    var html = '';
-                    $.each(res, function (k, v) {
-                        var item = ui;
-                        item = item.replace('{{$image}}', v['image']);
-                        item = item.replace('{{$title}}', v['title']);
-                        item = item.replace('{{$date}}', v['created_at']);
-                        item = item.replace('{{$content}}', v['text']);
-                        item = item.replace('{{$link}}', '/news/' + v['id']);
-                        html += item;
-                    });
-                    if (html) {
-                        $("#widget-news .mt-comments").html(html);
-                    }
+            ok: function (items) {
+                var html = '';
+                $.each(items, function (k, v) {
+                    var item = ui;
+                    item = item.replace('{{$image}}', v.cover);
+                    item = item.replace('{{$title}}', v.title);
+                    item = item.replace('{{$date}}', v.created_at);
+                    item = item.replace('{{$content}}', v.description);
+                    item = item.replace('{{$id}}', v.id);
+                    html += item;
+                });
+                if (html) {
+                    $("#widget-news .mt-comments").html(html);
+                }else{
+                    UI.noResult($("#widget-news .mt-comments"),Lang.get("records not found"));
                 }
-                // $("#widget-news .mt-comments").html(res['view']);
             },
             no: function (err) {
-                console.log(err);
+                UI.noResult($("#widget-news .mt-comments"),Lang.get("records not found"));
             },
             end: function () {
                 $("#widget-news .svg-loader").remove();

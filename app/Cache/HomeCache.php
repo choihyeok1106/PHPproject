@@ -11,6 +11,7 @@ namespace App\Cache;
 
 use App\Demos\HomeData;
 use App\Repositories\Content;
+use App\Services\NewsService;
 use App\Supports\UserPrefs;
 
 class HomeCache {
@@ -22,8 +23,8 @@ class HomeCache {
         $key  = UserPrefs::getCountryLow() . ':home:news';
         $news = Cache::get($key);
         if (!$news) {
-            $news = HomeData::getNews();
-            Cache::set($key, $news);
+            $svc = NewsService::getLatest(3);
+            return Cache::set($key, $svc->response());
         }
         return $news;
     }

@@ -73,7 +73,7 @@ var Core = function () {
                 }
                 resize = setTimeout(function () {
                     _runResizeHandlers();
-                }, 50); // wait 50ms until window resize finishes.                
+                }, 50); // wait 50ms until window resize finishes.
                 currheight = document.documentElement.clientHeight; // store last body client height
             });
         } else {
@@ -223,7 +223,7 @@ var Core = function () {
 
         if ($('body').hasClass('page-md')) {
             // Material design click effect
-            // credit where credit's due; http://thecodeplayer.com/walkthrough/ripple-click-effect-google-material-design       
+            // credit where credit's due; http://thecodeplayer.com/walkthrough/ripple-click-effect-google-material-design
             var element, circle, d, x, y;
             $('body').on('click', 'a.btn, button.btn, input.btn, label.btn', function (e) {
                 element = $(this);
@@ -346,7 +346,7 @@ var Core = function () {
 
     // Handles Bootstrap Modals.
     var handleModals = function () {
-        // fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class. 
+        // fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class.
         $('body').on('hide.bs.modal', function () {
             if ($('.modal:visible').size() > 1 && $('html').hasClass('modal-open') === false) {
                 $('html').addClass('modal-open');
@@ -367,7 +367,7 @@ var Core = function () {
             $('body').removeClass("modal-open-noscroll");
         });
 
-        // remove ajax content and remove cache on modal closed 
+        // remove ajax content and remove cache on modal closed
         $('body').on('hidden.bs.modal', '.modal:not(.modal-cached)', function () {
             $(this).removeData('bs.modal');
         });
@@ -409,7 +409,7 @@ var Core = function () {
     // Handles Bootstrap Dropdowns
     var handleDropdowns = function () {
         /*
-          Hold dropdown on click  
+          Hold dropdown on click
         */
         $('body').on('click', '.dropdown-menu.hold-on-click', function (e) {
             e.stopPropagation();
@@ -434,7 +434,7 @@ var Core = function () {
         });
     };
 
-    // Handle textarea autosize 
+    // Handle textarea autosize
     var handleTextareaAutosize = function () {
         if (typeof(autosize) == "function") {
             autosize(document.querySelectorAll('textarea.autosizeme'));
@@ -583,13 +583,13 @@ var Core = function () {
 
             //Core handlers
             handleInit(); // initialize core variables
-            handleOnResize(); // set and handle responsive    
+            handleOnResize(); // set and handle responsive
 
-            //UI Component handlers     
-            handleMaterialDesign(); // handle material design       
+            //UI Component handlers
+            handleMaterialDesign(); // handle material design
             handleiCheck(); // handles custom icheck radio and checkboxes
             handleBootstrapSwitch(); // handle bootstrap switch plugin
-            handleScrollers(); // handles slim scrolling contents 
+            handleScrollers(); // handles slim scrolling contents
             handleFancybox(); // handle fancy box
             handleSelect2(); // handle custom Select2 dropdowns
             handlePortletTools(); // handles portlet action bar functionality(refresh, configure, toggle, remove)
@@ -598,7 +598,7 @@ var Core = function () {
             handleTabs(); // handle tabs
             handleTooltips(); // handle bootstrap tooltips
             handlePopovers(); // handles bootstrap popovers
-            handleAccordions(); //handles accordions 
+            handleAccordions(); //handles accordions
             handleModals(); // handle modals
             handleBootstrapConfirmation(); // handle bootstrap confirmations
             handleTextareaAutosize(); // handle autosize textareas
@@ -613,20 +613,20 @@ var Core = function () {
 
         //main function to initiate core javascript after ajax complete
         initAjax: function () {
-            //handleUniform(); // handles custom radio & checkboxes     
+            //handleUniform(); // handles custom radio & checkboxes
             handleiCheck(); // handles custom icheck radio and checkboxes
             handleBootstrapSwitch(); // handle bootstrap switch plugin
-            handleScrollers(); // handles slim scrolling contents 
+            handleScrollers(); // handles slim scrolling contents
             handleSelect2(); // handle custom Select2 dropdowns
             handleFancybox(); // handle fancy box
             handleDropdowns(); // handle dropdowns
             handleTooltips(); // handle bootstrap tooltips
             handlePopovers(); // handles bootstrap popovers
-            handleAccordions(); //handles accordions 
+            handleAccordions(); //handles accordions
             handleBootstrapConfirmation(); // handle bootstrap confirmations
         },
 
-        //init main components 
+        //init main components
         initComponents: function () {
             this.initAjax();
         },
@@ -836,7 +836,7 @@ var Core = function () {
 
             options = $.extend(true, {
                 container: "", // alerts parent container(by default placed after the page breadcrumbs)
-                place: "append", // "append" or "prepend" in container 
+                place: "append", // "append" or "prepend" in container
                 type: 'success', // alert's type
                 message: "", // alert's message
                 close: true, // make alert closable
@@ -1960,6 +1960,21 @@ var UI = {
     // responsive box height
     initResponse: function () {
         Util.toggleResponse();
+    },
+    noResult: function (elm, message) {
+        var html = '<div class="no-result">' + message + '</div>';
+        var iniHeight = function () {
+            var h = $(".no-result").parent().outerHeight();
+            $(".no-result").css({
+                "height": h + "px",
+                "line-height": h + "px"
+            });
+        }
+        $(elm).html(html);
+        iniHeight();
+        $(window).resize(function () {
+            iniHeight();
+        });
     }
 };
 
@@ -2034,6 +2049,54 @@ var Loader = {
 /**
  Ajax script functions
  **/
+var Meta = function () {
+};
+Meta.prototype.pagination = {
+    total: 0,
+    count: 0,
+    per_page: 0,
+    current_page: 0,
+    total_pages: 0,
+    noresult: '',
+    links: {
+        previous: null,
+        next: null
+    }
+};
+Meta.prototype.collection = function (data, func) {
+    var meta = this;
+    if (typeof data === 'object') {
+        if (data.hasOwnProperty(0)) {
+            var items = [];
+            $.each(data, function (k, v) {
+                var item = meta.collection(v, func);
+                if (item) {
+                    items[k] = item;
+                }
+            });
+            return items;
+        } else {
+            if (typeof func === "string") {
+                func = window[func];
+            }
+            if (typeof func === 'function') {
+                var item = new func();
+                $.each(data, function (k, v) {
+                    item[k] = v;
+                });
+                return item;
+            }
+        }
+    }
+    return null;
+};
+var Error = function () {
+
+}
+Error.prototype.code = 500;
+Error.prototype.data = null;
+Error.prototype.message = "";
+
 var Ajax = {
     request: function (url, data, args, type) {
         if (typeof data !== "object") {
@@ -2043,7 +2106,7 @@ var Ajax = {
         var end;
         var ok;
         var no;
-        if (args) {
+        if (typeof args === "object") {
             if (args.hasOwnProperty('before')) {
                 before = args['before']
             }
@@ -2073,14 +2136,41 @@ var Ajax = {
                     before(r);
                 }
             },
-            success: function (t) {
-                if (typeof ok === 'function') {
-                    ok(t);
+            success: function (r) {
+                if (r.hasOwnProperty("error")) {
+                    if (typeof no === 'function') {
+                        var error = new Error();
+                        if (typeof r["error"] === 'object') {
+                            $.each(r["error"], function (k, v) {
+                                error[k] = v;
+                            });
+                        }
+                        if (typeof r["error"] === 'string') {
+                            error.message = r["error"];
+                        }
+                        no(error, Ajax.parseMeta(r));
+                    }
+                } else {
+                    if (typeof ok === 'function') {
+                        ok(Ajax.parseResult(r), Ajax.parseMeta(r));
+                    }
                 }
             },
             error: function (t, e, m) {
                 if (typeof no === 'function') {
-                    no(m, e, t);
+                    var error = new Error();
+                    if (typeof t === 'object') {
+                        if (t.hasOwnProperty("status")) {
+                            error.code = t['status'];
+                        }
+                        if (t.hasOwnProperty("statusText")) {
+                            error.message = t['statusText'];
+                        }
+                    }
+                    if (!error.message) {
+                        error.message = m;
+                    }
+                    no(error, Ajax.parseMeta(null));
                 }
             },
             complete: function () {
@@ -2097,6 +2187,23 @@ var Ajax = {
     // ajax:post
     post: function (url, data, args) {
         this.request(url, data, args, 'POST')
+    },
+    parseResult: function (r) {
+        return typeof r === 'object' && r && r.hasOwnProperty("items") ? r["items"] : r;
+    },
+    parseMeta: function (r) {
+        var m = new Meta();
+        if (r && typeof r === "object") {
+            if (r.hasOwnProperty("meta")) {
+                var meta = r['meta'];
+                if (typeof meta === 'object' && meta) {
+                    $.each(meta, function (k, v) {
+                        m[k] = v;
+                    });
+                }
+            }
+        }
+        return m;
     }
 };
 
@@ -2121,6 +2228,23 @@ var Handler = {
                 }
             });
         }
+    }
+};
+
+/**
+ Lang script functions
+ **/
+var Lang = {
+    data: {},
+    init: function () {
+        Ajax.get('/a/common/lang', null, {
+            ok: function (data) {
+                Lang.data = data;
+            }
+        })
+    },
+    get: function (key) {
+        return this.data.hasOwnProperty(key) ? this.data[key] : key;
     }
 };
 
@@ -2193,6 +2317,7 @@ var Common = {
 }
 
 $(document).ready(function () {
+    Lang.init();  // init Lang components
     Core.init(); // init core components
     Layout.init(); // init layout components
     QuickSidebar.init(); // init quick side bar components

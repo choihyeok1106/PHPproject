@@ -12,6 +12,16 @@ namespace App\Http\Controllers\Ajax;
 trait Ajax
 {
 
+    protected $meta = [];
+
+    /**
+     * @param string $key
+     * @param mixed  $val
+     */
+    function meta(string $key, $val) {
+        $this->meta[$key] = $val;
+    }
+
     /**
      * @param mixed $obj
      * @return mixed
@@ -23,6 +33,11 @@ trait Ajax
                 $obj = $obj->getAttributes();
             } else {
                 $obj = get_object_vars($obj);
+            }
+        }
+        if (is_array($obj)) {
+            foreach ($obj as $k => $v) {
+                $obj[$k] = $this->getObj($v);
             }
         }
         return $obj;
@@ -45,24 +60,54 @@ trait Ajax
                 $response = $this->getObj($response);
             }
         }
-        return response($response);
+        return $this->response($response);
     }
 
     /**
-     * @param string $error
+     * @param string $message
+     * @param int    $code
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
+<<<<<<< HEAD
     function no(string $error)
     {
         return response(['error' => $error]);
+=======
+    function no(string $message, int $code = 500) {
+        return $this->response([
+            'error' => [
+                'code'    => $code,
+                'message' => $message,
+            ]
+        ]);
+>>>>>>> 08051744fe007e6a0ed510ee725a3ef0828804c2
     }
 
     /**
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
+<<<<<<< HEAD
     function badRequest()
     {
         return $this->no('bad request');
+=======
+    function badRequest() {
+        return $this->no('bad request', 400);
+    }
+
+    /**
+     * @param $data
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    function response($data) {
+        if ($this->meta && is_array($this->meta)) {
+            foreach ($this->meta as $key => $meta) {
+                $data['meta'][$key] = $meta;
+            }
+
+        }
+        return response($data);
+>>>>>>> 08051744fe007e6a0ed510ee725a3ef0828804c2
     }
 
 }

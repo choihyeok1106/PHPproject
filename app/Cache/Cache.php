@@ -17,13 +17,13 @@ class Cache {
      * @param string $key
      * @param mixed  $val
      * @param int    $expire Seconds
-     * @return bool
+     * @return mixed
      */
     public static function set($key, $val, $expire = 7200) {
-        if (self::enable()) {
+        if (self::enable() && $val && !isset($val['error'])) {
             return Redis::set($key, json_encode($val), 'EX', $expire);
         }
-        return false;
+        return $val;
     }
 
     /**
@@ -71,12 +71,12 @@ class Cache {
      * @param string $cls
      * @return array|object|null
      */
-    public static function getObject($arr, $cls) {
+    public static function convert($arr, $cls) {
         if ($arr && $cls && is_array($arr) && class_exists($cls)) {
             if (isset($arr[0])) {
                 $data = [];
                 foreach ($arr as $v) {
-                    $data[] = self::getObject($v, $cls);
+                    $data[] = self::convert($v, $cls);
                 }
                 return $data;
             } else {

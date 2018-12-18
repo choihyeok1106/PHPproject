@@ -12,18 +12,14 @@ use App\Services\RankService;
 
 class RankCache {
     /**
-     * @param string $fields
      * @return \App\Repositories\Rank[]
      */
-    public static function getRanks(string $fields) {
-        $key   = "rank:{$fields}";
+    public static function getRanks() {
+        $key   = "rank";
         $ranks = Cache::get($key);
         if (!$ranks) {
-            $svc = RankService::getRanks($fields);
-            if ($svc->succeed()) {
-                $ranks = $svc->result();
-                Cache::set($key, $ranks);
-            }
+            $svc = RankService::getRanks();
+            return Cache::set($key, $svc->items());
         }
         return $ranks;
     }

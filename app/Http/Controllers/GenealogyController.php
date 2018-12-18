@@ -13,6 +13,6 @@ class GenealogyController extends Controller
      */
     public function index()
     {
-       return view('Genealogy.index');
+       return view('genealogy.index');
     }
 }
