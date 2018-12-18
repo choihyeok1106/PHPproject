@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use League\Flysystem\Adapter\Local;
 
 class CommonAjax extends Controller {
 
@@ -24,6 +26,13 @@ class CommonAjax extends Controller {
         $this->middleware('auth');
     }
 
+    public function lang(Request $request) {
+        if ($request->ajax()) {
+            return $this->ok(__('common'));
+        }
+        return $this->badRequest();
+    }
+
     /**
      * get cart item count
      * @param Request $request
@@ -32,7 +41,7 @@ class CommonAjax extends Controller {
     public function cartCount(Request $request) {
         if ($request->ajax()) {
             $count = rand(0, 99);
-            return response(['count' => $count]);
+            return $this->ok(['count' => $count]);
         }
         return $this->badRequest();
     }
@@ -45,7 +54,7 @@ class CommonAjax extends Controller {
     public function alertCount(Request $request) {
         if ($request->ajax()) {
             $count = rand(0, 99);
-            return response(['count' => $count]);
+            return $this->ok(['count' => $count]);
         }
         return $this->badRequest();
     }
@@ -58,7 +67,7 @@ class CommonAjax extends Controller {
     public function noticeCount(Request $request) {
         if ($request->ajax()) {
             $count = rand(0, 99);
-            return response(['count' => $count]);
+            return $this->ok(['count' => $count]);
         }
         return $this->badRequest();
     }
@@ -71,7 +80,7 @@ class CommonAjax extends Controller {
     public function messageCount(Request $request) {
         if ($request->ajax()) {
             $count = rand(0, 99);
-            return response(['count' => $count]);
+            return $this->ok(['count' => $count]);
         }
         return $this->badRequest();
     }

@@ -282,7 +282,6 @@
     border-color: #93a1bb;
 }
 
-
 /** fixed-aside */
 .fixed-aside {
     position: static;
@@ -494,4 +493,9 @@
 
 .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle > i.la {
     font-size: 22px;
+}
+
+.no-result {
+    width: 100%;
+    text-align: center;
 }

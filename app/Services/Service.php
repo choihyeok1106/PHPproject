@@ -18,6 +18,32 @@ namespace App\Services {
     class Error {
     }
 
+    /**
+     * @property string previous
+     * @property string next
+     */
+    class Links {
+    }
+
+    /**
+     * @property int   total
+     * @property int   count
+     * @property int   per_page
+     * @property int   current_page
+     * @property int   total_pages
+     * @property Links links
+     */
+    class Pagination {
+    }
+
+    /**
+     * @property string     prev
+     * @property Pagination pagination
+     */
+    class Meta {
+
+    }
+
     class Service {
 
         /** @var string $authorization */
@@ -25,12 +51,14 @@ namespace App\Services {
 
         /** @var Error $error */
         private $error;
-        /** @var mixed result */
-        private $result;
+        /** @var Meta result */
+        private $meta;
+        /** @var mixed $items */
+        private $items;
         /** @var array $passport */
-        private $headers = [];
-        /** @var mixed $response */
-        private $response;
+        private $headers;
+        /** @var mixed $body */
+        private $body;
         /** @var Builder $builder */
         private $builder;
         /** @var bool $asJsonResponse */
@@ -58,14 +86,14 @@ namespace App\Services {
          * @return Builder
          */
         private function init(Builder $builder) {
-            $this->error    = null;
-            $this->result   = null;
-            $this->response = null;
-            $this->builder  = $builder;
+            $this->error   = null;
+            $this->meta    = null;
+            $this->items   = null;
+            $this->body    = null;
+            $this->builder = $builder;
             if ($builder) {
                 // set basic headers
                 $builder->withHeaders([
-                    //                    'Content-Type: application/json',
                     'Accept: application/json',
                     'Authorization: ' . $this->getAuthorize(),
                 ]);
@@ -119,6 +147,10 @@ namespace App\Services {
          * @return string
          */
         private function parseUri(string $uri) {
+            $pattern = '/^https?:\/\/(www\.)?\w+\.[a-z]{2,6}(\/)?$/';
+            if (preg_match($pattern, $uri)) {
+                return $uri;
+            }
             $server = env('API_SERVER');
             if (substr($server, -1) !== '/') {
                 $server .= '/';
@@ -144,17 +176,17 @@ namespace App\Services {
         }
 
         /**
-         * @param mixed $json
+         * Parse Response
          */
-        private function parseResponse($json) {
-            $this->response = $json;
-            if ($json) {
-                if (isset($json['error'])) {
+        private function parseResponse() {
+            if ($this->body) {
+                if (isset($this->body['error'])) {
                     $this->error          = new Error();
-                    $this->error->code    = isset($json['error']['code']) ? $json['error']['code'] : 0;
-                    $this->error->message = isset($json['error']['message']) ? $json['error']['message'] : 'Unknown';
+                    $this->error->code    = isset($this->body['error']['code']) ? $this->body['error']['code'] : 0;
+                    $this->error->message = isset($this->body['error']['message']) ? $this->body['error']['message'] : 'Unknown';
                 } else {
-                    $this->result = $json;
+                    $this->parseItems();
+                    $this->parseMeta();
                 }
             }
         }
@@ -186,8 +218,8 @@ namespace App\Services {
         /**
          * @return mixed
          */
-        public function response() {
-            return $this->response;
+        public function body() {
+            return $this->body;
         }
 
         /**
@@ -231,30 +263,57 @@ namespace App\Services {
         }
 
         /**
-         * @param string $cls
-         * @return mixed
+         * Parse Items
          */
-        public function result(string $cls = '') {
-            if ($cls && class_exists($cls) && is_array($this->result)) {
-                if (isset($this->result[0])) {
-                    $result = null;
-                    foreach ($this->result as $v) {
+        private function parseItems() {
+            $this->items = isset($this->body['items']) ? $this->body['items'] : $this->body;
+        }
+
+        /**
+         * @param string $cls
+         * @return array|mixed|null
+         */
+        public function items(string $cls = '') {
+            if ($cls && class_exists($cls) && is_array($this->items)) {
+                if (isset($result[0])) {
+                    $data = null;
+                    foreach ($this->items as $v) {
                         if (is_array($v)) {
                             $obj = $this->getObject($v, $cls);
                             if ($obj) {
-                                $result[] = $obj;
+                                $data[] = $obj;
                             }
                         } else {
-                            $result = $v;
+                            $data = $v;
                         }
                     }
-                    return $result;
+                    return $data;
                 } else {
-                    return $this->getObject($this->result, $cls);
+                    return $this->getObject($this->items, $cls);
                 }
             } else {
-                return $this->result;
+                return $this->items;
             }
+        }
+
+        /**
+         * Parse Meta
+         */
+        private function parseMeta() {
+            $meta             = new Meta();
+            $meta->pagination = new Pagination();
+            if (isset($this->body['meta']['pagination'])) {
+                $page                              = $this->body['meta']['pagination'];
+                $meta->pagination->total           = isset($page['total']) ? $page['total'] : 0;
+                $meta->pagination->count           = isset($page['count']) ? $page['count'] : 0;
+                $meta->pagination->per_page        = isset($page['per_page']) ? $page['per_page'] : 0;
+                $meta->pagination->current_page    = isset($page['current_page']) ? $page['current_page'] : 0;
+                $meta->pagination->total_pages     = isset($page['total_pages']) ? $page['total_pages'] : 0;
+                $meta->pagination->links           = new Links();
+                $meta->pagination->links->previous = isset($page['links']['previous']) ? $page['links']['previous'] : '';
+                $meta->pagination->links->next     = isset($page['links']['next']) ? $page['links']['next'] : '';
+            }
+            $this->meta = $meta;
         }
 
         /**
@@ -262,9 +321,10 @@ namespace App\Services {
          * @return Service
          */
         public function get(string $uri) {
-            $builder = (new CurlService)->to($this->parseUri($uri));
-            $builder = $this->init($builder);
-            $this->parseResponse($builder->get());
+            $builder    = (new CurlService)->to($this->parseUri($uri));
+            $builder    = $this->init($builder);
+            $this->body = $builder->get();
+            $this->parseResponse();
             return $this;
         }
 
@@ -273,9 +333,10 @@ namespace App\Services {
          * @return Service
          */
         public function delete(string $uri) {
-            $builder = (new CurlService)->to($this->parseUri($uri));
-            $builder = $this->init($builder);
-            $this->parseResponse($builder->delete());
+            $builder    = (new CurlService)->to($this->parseUri($uri));
+            $builder    = $this->init($builder);
+            $this->body = $builder->delete();
+            $this->parseResponse();
             return $this;
         }
 
@@ -290,8 +351,27 @@ namespace App\Services {
             if ($data) {
                 $builder->withData($data);
             }
-            $this->parseResponse($builder->post());
+            $this->body = $builder->post();
+            $this->parseResponse();
             return $this;
+        }
+
+        /**
+         * @param string $cls
+         * @return Error|array
+         */
+        public function response(string $cls = '') {
+            if ($this->error) {
+                $this->error->message = $this->error();
+                return [
+                    'error' => $this->error
+                ];
+            } else {
+                return [
+                    'items' => $this->items($cls),
+                    'meta'  => $this->meta
+                ];
+            }
         }
     }
 }
