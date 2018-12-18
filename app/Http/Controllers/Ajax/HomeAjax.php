@@ -21,7 +21,6 @@ use App\Repositories\UserCourse;
 use App\Repositories\Content;
 use App\Repositories\SmartAlert;
 use App\Supports\UserPrefs;
-use App\User;
 use Illuminate\Http\Request;
 
 class HomeAjax extends Controller {
@@ -248,7 +247,7 @@ class HomeAjax extends Controller {
      */
     public function tracker(Request $request) {
         if ($request->ajax()) {
-            $ranks = RankCache::getRanks('id,name,abbreviation,cond_ltv,cond_stv');
+            $ranks = RankCache::getRanks();
             $curr  = 0;
             $ltv   = rand(0, 9999);
             $stv   = rand(0, 9999);

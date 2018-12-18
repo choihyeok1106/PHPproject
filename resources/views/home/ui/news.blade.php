@@ -9,7 +9,7 @@
             <span class="mt-comment-date">{{$date}}</span>
         </div>
         <div class="mt-comment-text">{{$content}}</div>
-        <div class="mt-comment-details"><a href="{{$link}}">View detail</a></div>
+        <div class="mt-comment-details"><a href="/news/{{$id}}">View detail</a></div>
     </div>
 </div>
 {{--  @endforeach --}}

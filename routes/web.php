@@ -59,6 +59,7 @@ Route::get('/shopping/complete', 'ShoppingController@complete')->name('shopping.
 Route::post('/a/login', 'Ajax\LoginAjax@index');
 Route::post('/a/forgot-password', 'Ajax\LoginAjax@forgotPassword');
 // Common Ajax
+Route::get('/a/common/lang', 'Ajax\CommonAjax@lang');
 Route::get('/a/common/cart-count', 'Ajax\CommonAjax@cartCount');
 Route::get('/a/common/notice-count', 'Ajax\CommonAjax@noticeCount');
 Route::get('/a/common/alert-count', 'Ajax\CommonAjax@alertCount');
@@ -96,8 +97,8 @@ Route::get('/test',
     function () {
 
         //        dd($con);
-//        $svc = \App\Services\Service::make();
-//        exit;
+        //        $svc = \App\Services\Service::make();
+        //        exit;
         $curl = new \Ixudra\Curl\CurlService();
 
         $builder = $curl->to('http://loc-core.puremeka.com/v1/vbo/authorize');
