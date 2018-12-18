@@ -25,16 +25,11 @@ class FaqAjax extends Controller
         $this->middleware('auth');
     }
 
-    public function getFaq(Request $request) {
-        dd(UserPrefs::pass());
-        $faqs = FaqCache::getFaq();
-        dd($faqs);
-
-//        if($request->ajax()){
-//            $key = "faq";
-//            $faqs = json_decode($key);
-//            return $faqs;
-//        }
+    public function faqs(Request $request) {
+        if($request->ajax()){
+            $faqs = FaqCache::getFaq();
+            return $this->ok(['faqs'=>$faqs]);
+        }
         return $this->badRequest();
     }
 }

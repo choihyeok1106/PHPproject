@@ -123,7 +123,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="/support/faq" class="nav-link ">
+                        <a href="/support/faqs" class="nav-link ">
                             <span class="title">FAQ</span>
                         </a>
                     </li>

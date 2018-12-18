@@ -71,7 +71,6 @@
                 </div>
             </div>
 
-<<<<<<< HEAD
                     <div class="portlet light portlet-fit portlet-product">
                         <div class="portlet-body padding-0">
                             {{--{{route('products.show',$skuId)}}--}}
@@ -79,13 +78,10 @@
                                 <img src="https://shop.livepure.co.kr/upfiles/product/main_4008_gs557k1_2.jpg">
                             </a>
                         </div>
-=======
             <div id="products" class="row active">
                 <div id="svg">
                     @for($i = 0; $i < 12; $i++)
                         <div class="col-md-4 col-lg-3 col-sm-6">
->>>>>>> 3980d62a486a68b8cb773c44b590c4825a83b0e7
-
                             <div class="portlet light portlet-fit portlet-product">
                                 <div class="portlet-body padding-0">
                                     <div class="svg-product-image" data-toggle="res-box"></div>
