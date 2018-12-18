@@ -9,7 +9,8 @@
 namespace App\Http\Controllers\Ajax;
 
 
-trait Ajax {
+trait Ajax
+{
 
     protected $meta = [];
 
@@ -25,7 +26,8 @@ trait Ajax {
      * @param mixed $obj
      * @return mixed
      */
-    function getObj($obj) {
+    function getObj($obj)
+    {
         if (gettype($obj) === 'object') {
             if (method_exists($obj, 'getAttributes')) {
                 $obj = $obj->getAttributes();
@@ -45,7 +47,8 @@ trait Ajax {
      * @param mixed|null|object $response
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    function ok($response = null) {
+    function ok($response = null)
+    {
         if ($response === null) {
             $response['message'] = 'ok';
         } else {
@@ -65,6 +68,11 @@ trait Ajax {
      * @param int    $code
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
+<<<<<<< HEAD
+    function no(string $error)
+    {
+        return response(['error' => $error]);
+=======
     function no(string $message, int $code = 500) {
         return $this->response([
             'error' => [
@@ -72,11 +80,17 @@ trait Ajax {
                 'message' => $message,
             ]
         ]);
+>>>>>>> 08051744fe007e6a0ed510ee725a3ef0828804c2
     }
 
     /**
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
+<<<<<<< HEAD
+    function badRequest()
+    {
+        return $this->no('bad request');
+=======
     function badRequest() {
         return $this->no('bad request', 400);
     }
@@ -93,6 +107,7 @@ trait Ajax {
 
         }
         return response($data);
+>>>>>>> 08051744fe007e6a0ed510ee725a3ef0828804c2
     }
 
 }

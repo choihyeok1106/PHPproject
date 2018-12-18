@@ -6,14 +6,13 @@ use Illuminate\Http\Request;
 
 class SupportController extends Controller
 {
-    public function faq()
+    public function faqs()
     {
-        return view('support.faq');
+        return view('support.faqs');
     }
 
     public function contact()
     {
-
         return view('support.contact');
     }
 }

@@ -42,7 +42,7 @@ Route::get('/locale/{locale}',
 
 Route::get('/invoice', 'OrderController@invoice')->name('orders.invoice');
 Route::get('/logout', 'LoginController@logout')->name('login.logout');
-Route::get('/support/faq', 'SupportController@faq')->name('support.faq');
+Route::get('/support/faqs', 'SupportController@faqs')->name('support.faqs');
 Route::get('/support/contact', 'SupportController@contact')->name('support.contact');
 Route::get('/tools/library', 'ToolController@library')->name('tools.library');
 Route::get('/tools/calendar', 'ToolController@calendar')->name('tools.calendar');
@@ -92,6 +92,9 @@ Route::post('/a/cart/update', 'Ajax\CartAjax@update');
 Route::post('/a/cart/delete', 'Ajax\CartAjax@delete');
 Route::get('/a/shopping/promotions', 'Ajax\ShoppingAjax@promotions');
 
+// Faq Ajax
+Route::get('/a/support/faqs','Ajax\FaqAjax@faqs');
+
 
 Route::get('/test',
     function () {
@@ -111,7 +114,7 @@ Route::get('/test',
         ])->withData([
             'parameters' => [
                 'username'              => 'KR100000',
-                'password'              => '4297f44b13955235245b2497399d7a93',
+                'password'              => 'e10adc3949ba59abbe56e057f20f883e',
                 'validity_period_hours' => '168',
             ]
         ])->asJsonRequest()->post();
