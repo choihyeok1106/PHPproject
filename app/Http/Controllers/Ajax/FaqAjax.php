@@ -26,6 +26,7 @@ class FaqAjax extends Controller
     }
 
     public function faqs(Request $request) {
+        $faqs = FaqCache::getFaq();
         if($request->ajax()){
             $faqs = FaqCache::getFaq();
             return $this->ok(['faqs'=>$faqs]);

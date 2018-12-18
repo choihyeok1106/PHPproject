@@ -21,6 +21,7 @@ class FaqCache
             $service = FaqService::getFaq();
             if($service->succeed()){
                 $faqs = $service->result();
+                Cache::set($key,$faqs);
             }
         }
         return $faqs;

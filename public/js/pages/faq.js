@@ -3,15 +3,12 @@ var Support_Faq = {
         setTimeout(Support_Faq.initFaqs);
     },
     initFaqs: function () {
-        var ui = '<div class="col-md-6">\n' +
-            '            <div class="faq-section">\n' +
-            '                <h2 class="faq-title uppercase font-blue">{{$name}}</h2>\n' +
-            '                <div class="panel-group accordion faq-content" id="accordion{{$id}}">\n' +
+        var chilren_ui =
             '                    <div class="panel panel-default">\n' +
             '                        <div class="panel-heading">\n' +
             '                            <h4 class="panel-title">\n' +
             '                                <i class="fa fa-circle"></i>\n' +
-            '                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion{{$id2}}"\n' +
+            '                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion{{$id}}"\n' +
             '                                   href="#collapse_{{$children->id}}_{{$children->faqs->id}}">{{$children->faqs->question}}</a>\n' +
             '                            </h4>\n' +
             '                        </div>\n' +
@@ -20,41 +17,45 @@ var Support_Faq = {
             '                                <p>{{$children->faqs->answer}}</p>\n' +
             '                            </div>\n' +
             '                        </div>\n' +
-            '                    </div>\n' +
-            '                </div>\n' +
+            '                    </div>\n';
+
+
+        var faq_ui = '<div class="col-md-6">\n' +
+            '            <div class="faq-section">\n' +
+            '                <h2 class="faq-title uppercase font-blue">{{$name}}</h2>\n' +
+            '                <div class="panel-group accordion faq-content" id="accordion{{$id}}">{{$children_ui}}</div>\n' +
             '            </div>\n' +
             '        </div>';
         // Ajax request data flag
         var loading = false;
 
         var render = function (faqs) {
-                var html = '';
-                $.each(faqs, function (k, v) {
-                    var item = ui;
-                    item = item.replace('{{$name}}', v['name']);
-                    item = item.replace('{{$id}}', v['id']);
-                    item = item.replace('{{$id2}}', v['id']);
-                    if (v['children'].length != 0) {
-                        $.each(v['children'], function (children_k, children_v) {
-                            item = item.replace('{{$children->id}}', children_v['id']);
-                            item = item.replace('{{$children->faqs->id}}', children_v['faqs'][0]['id']);
-                            item = item.replace('{{$children->id2}}', children_v['id']);
-                            item = item.replace('{{$children->faqs->id2}}', children_v['faqs'][0]['id']);
-                            item = item.replace('{{$children->faqs->question}}', children_v['faqs'][0]['question']);
-                            item = item.replace('{{$children->faqs->answer}}', children_v['faqs'][0]['answer']);
-                        });
-                    }else {
-                        item = item.replace('{{$children->id}}', "");
-                        item = item.replace('{{$children->faqs->id}}', "");
-                        item = item.replace('{{$children->id2}}',"");
-                        item = item.replace('{{$children->faqs->id2}}', "");
-                        item = item.replace('{{$children->faqs->question}}', "");
-                        item = item.replace('{{$children->faqs->answer}}', "");
-                    }
-                    html += item;
-                });
-                $("#faqs").append(html);
-            };
+            var html = '';
+            var html_children = '';
+            $.each(faqs, function (k, v) {
+                var faqs = faq_ui;
+                var faqs_children = chilren_ui;
+                console.log(v['children']);
+                if (v['children'].length != 0) {
+                    $.each(v['children'], function (children_k, children_v) {
+                        console.log(faqs_children);
+                        faqs_children = faqs_children.replace('{{$id}}', v['id']);
+                        faqs_children = faqs_children.replace('{{$children->id}}', children_v['id']);
+                        faqs_children = faqs_children.replace('{{$children->faqs->id}}', children_v['faqs'][0]['id']);
+                        faqs_children = faqs_children.replace('{{$children->id2}}', children_v['id']);
+                        faqs_children = faqs_children.replace('{{$children->faqs->id2}}', children_v['faqs'][0]['id']);
+                        faqs_children = faqs_children.replace('{{$children->faqs->question}}', children_v['faqs'][0]['question']);
+                        faqs_children = faqs_children.replace('{{$children->faqs->answer}}', children_v['faqs'][0]['answer']);
+                    });
+                } else {
+                    faqs = faqs.replace('{{$children_ui}}', "");
+                }
+                faqs = faqs.replace('{{$name}}', v['name']);
+                faqs = faqs.replace('{{$children_ui}}', html_children);
+                html += faqs;
+            });
+            $("#faqs").append(html);
+        };
 // ajax request faqs
         var getFaqs = function (firstLoad) {
             if (!loading) {

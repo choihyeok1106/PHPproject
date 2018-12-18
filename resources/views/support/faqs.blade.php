@@ -30,6 +30,7 @@
         </div>
         <div class="faq-content-container">
             <div class="row">
+                <div id="faqs"></div>
                 <div class="col-md-6">
                     <div class="faq-section ">
                         <h2 class="faq-title uppercase font-blue">General</h2>
@@ -74,67 +75,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <i class="fa fa-circle"></i>
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1"
-                                           href="#collapse_3"> How many responses per poll (which plan) do I need?</a>
-                                    </h4>
-                                </div>
-                                <div id="collapse_3" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <p> Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad
-                                            minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-                                            ut. </p>
-                                        <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor brunch. Food truck quinoa nesciunt laborum
-                                            eiusmod. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <i class="fa fa-circle"></i>
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1"
-                                           href="#collapse_4"> What if my audience does not have a phone or a
-                                            web-enabled device with internet access?</a>
-                                    </h4>
-                                </div>
-                                <div id="collapse_4" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <p> Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad
-                                            minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-                                            ut. </p>
-                                        <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor brunch. Food truck quinoa nesciunt laborum
-                                            eiusmod. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <i class="fa fa-circle"></i>
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1"
-                                           href="#collapse_6"> How fast do responses show up?</a>
-                                    </h4>
-                                </div>
-                                <div id="collapse_6" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <p> Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad
-                                            minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-                                            ut. </p>
-                                        <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor brunch. Food truck quinoa nesciunt laborum
-                                            eiusmod. </p>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="faq-section ">
@@ -497,8 +438,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="faqs">
                 </div>
             </div>
         </div>
