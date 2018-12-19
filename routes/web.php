@@ -27,12 +27,6 @@ Route::resource('products', 'ProductController');
 Route::resource('reports', 'ReportController');
 Route::resource('account', 'AccountController');
 Route::resource('login', 'LoginController');
-/*Route::get('/asd',function(){
-    $repNumber = 'KR100000';
-   $asd = new \App\Service\RepService();
-   $cvb = $asd->getRep($repNumber);
-   return $cvb;
-});*/
 
 Route::get('/locale/{locale}',
     function ($locale) {

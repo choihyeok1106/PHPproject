@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Cache\FaqCache;
 use App\Http\Controllers\Controller;
-use App\Models\Faq;
 use App\Services\FaqService;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
@@ -25,11 +24,11 @@ class FaqAjax extends Controller
         $this->middleware('auth');
     }
 
-    public function faqs(Request $request) {
-        $faqs = FaqCache::getFaq();
-        if($request->ajax()){
+    public function faqs(Request $request)
+    {
+        if ($request->ajax()) {
             $faqs = FaqCache::getFaq();
-            return $this->ok(['faqs'=>$faqs]);
+            return $this->ok($faqs);
         }
         return $this->badRequest();
     }

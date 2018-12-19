@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Ajax;
 
 
 use App\Http\Controllers\Controller;
+use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use League\Flysystem\Adapter\Local;
