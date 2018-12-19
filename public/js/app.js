@@ -2152,7 +2152,7 @@ var Ajax = {
                     }
                 } else {
                     if (typeof ok === 'function') {
-                        ok(Ajax.parseResult(r), Ajax.parseMeta(r));
+                        ok(Ajax.parseData(r), Ajax.parseMeta(r));
                     }
                 }
             },
@@ -2188,8 +2188,16 @@ var Ajax = {
     post: function (url, data, args) {
         this.request(url, data, args, 'POST')
     },
-    parseResult: function (r) {
-        return typeof r === 'object' && r && r.hasOwnProperty("items") ? r["items"] : r;
+    parseData: function (r) {
+        if (typeof r === 'object') {
+            if (r.hasOwnProperty("data")) {
+                return r["data"];
+            }
+            if (r.hasOwnProperty("items")) {
+                return r["items"];
+            }
+        }
+        return r;
     },
     parseMeta: function (r) {
         var m = new Meta();

@@ -20,7 +20,7 @@ class RankCache {
         $ranks = Cache::get($key);
         if (!$ranks) {
             $svc = RankService::getRanks();
-            return Cache::set($key, $svc->items());
+            return Cache::set($key, $svc->data());
         }
         return $ranks;
     }

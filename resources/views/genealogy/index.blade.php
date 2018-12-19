@@ -59,7 +59,7 @@
         /*}*/
 
         #tree > svg {
-            background-color: transparent !important;
+            /*background-color: transparent !important;*/
         }
 
         .bg-search-table {
