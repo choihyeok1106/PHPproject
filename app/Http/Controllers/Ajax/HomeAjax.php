@@ -23,14 +23,16 @@ use App\Repositories\SmartAlert;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
-class HomeAjax extends Controller {
+class HomeAjax extends Controller
+{
 
     use Ajax;
 
     /**
      * HomeAjax constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -38,7 +40,8 @@ class HomeAjax extends Controller {
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAlert(Request $request) {
+    public function newAlert(Request $request)
+    {
         if ($request->ajax()) {
             /** @var SmartAlert $alert */
             $alert = new SmartAlert();
@@ -55,15 +58,16 @@ class HomeAjax extends Controller {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \Throwable
      */
-    public function getInterface(Request $request) {
+    public function getInterface(Request $request)
+    {
         if ($request->ajax()) {
             $data = [];
             /** @var HomeWidget[] $widgets */
             $widgets = HomeWidget::where('active', 1)->orderBy('sorting', 'asc')->get();
             foreach ($widgets as $widget) {
-                $interface       = HomeInterface::where('user_id', UserPrefs::getID())->where('widget_id', $widget->id)->where('enable', 1)->first();
+                $interface = HomeInterface::where('user_id', UserPrefs::getID())->where('widget_id', $widget->id)->where('enable', 1)->first();
                 $widget->checked = $interface ? 1 : 0;
-                $data[]          = $widget;
+                $data[] = $widget;
             }
             return $this->ok($data);
         }
@@ -75,7 +79,8 @@ class HomeAjax extends Controller {
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function setInterface(Request $request) {
+    public function setInterface(Request $request)
+    {
         if ($request->ajax()) {
             $widgets = $request->get('widgets', []);
             if (is_array($widgets)) {
@@ -83,8 +88,8 @@ class HomeAjax extends Controller {
                     /** @var HomeInterface $interface */
                     $interface = HomeInterface::where('user_id', UserPrefs::getID())->where('widget_id', $id)->first();
                     if (!$interface) {
-                        $interface            = new HomeInterface;
-                        $interface->user_id   = UserPrefs::getID();
+                        $interface = new HomeInterface;
+                        $interface->user_id = UserPrefs::getID();
                         $interface->widget_id = $id;
 
                         $interface->sorting = $interface->resort();
@@ -103,7 +108,8 @@ class HomeAjax extends Controller {
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function sortingInterface(Request $request) {
+    public function sortingInterface(Request $request)
+    {
         if ($request->ajax()) {
             $widgets = $request->get('widgets');
             dd($widgets);
@@ -117,29 +123,30 @@ class HomeAjax extends Controller {
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function banners(Request $request) {
+    public function banners(Request $request)
+    {
         if ($request->ajax()) {
             $data = [
                 [
                     'title' => "READY. SET. RECRUIT.1",
-                    'text'  => 'Jump-start your business and join fellow IBOs in the Race to Recruit, from July 17-30, 2018. This is your time to shine and earn
+                    'text' => 'Jump-start your business and join fellow IBOs in the Race to Recruit, from July 17-30, 2018. This is your time to shine and earn
                     free registration to PURE Xcelerate in October! We...1',
                     'image' => 'https://gplivepurecomsite.files.wordpress.com/2018/08/watermelon_8_2_18-002.jpg',
-                    'url'   => '#'
+                    'url' => '#'
                 ],
                 [
                     'title' => "READY. SET. RECRUIT.2",
-                    'text'  => 'Jump-start your business and join fellow IBOs in the Race to Recruit, from July 17-30, 2018. This is your time to shine and earn
+                    'text' => 'Jump-start your business and join fellow IBOs in the Race to Recruit, from July 17-30, 2018. This is your time to shine and earn
                     free registration to PURE Xcelerate in October! We...2',
                     'image' => 'https://gplivepurecomsite.files.wordpress.com/2018/07/autoship2_7_30_18.jpg',
-                    'url'   => '#'
+                    'url' => '#'
                 ],
                 [
                     'title' => "READY. SET. RECRUIT.3",
-                    'text'  => 'Jump-start your business and join fellow IBOs in the Race to Recruit, from July 17-30, 2018. This is your time to shine and earn
+                    'text' => 'Jump-start your business and join fellow IBOs in the Race to Recruit, from July 17-30, 2018. This is your time to shine and earn
                     free registration to PURE Xcelerate in October! We...3',
                     'image' => 'https://gplivepurecomsite.files.wordpress.com/2018/07/bahamas_whattopack_7_27_18.jpg',
-                    'url'   => '#'
+                    'url' => '#'
                 ],
             ];
 
@@ -148,9 +155,9 @@ class HomeAjax extends Controller {
                 $c = new Content();
 
                 $c->title = $v['title'];
-                $c->text  = $v['text'];
+                $c->text = $v['text'];
                 $c->image = $v['image'];
-                $c->link  = $v['url'];
+                $c->link = $v['url'];
 
                 $res[] = $c;
             }
@@ -165,32 +172,33 @@ class HomeAjax extends Controller {
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function summaries(Request $request) {
+    public function summaries(Request $request)
+    {
         if ($request->ajax()) {
             $data = [];
             for ($i = 0; $i < 2; $i++) {
                 $data[] = [
-                    'pv'    => [
+                    'pv' => [
                         'val' => rand(0, 999),
                         'per' => rand(-100, 100),
                     ],
                     'last4' => [
-                        'val'    => rand(0, 999),
+                        'val' => rand(0, 999),
                         'active' => rand(0, 1),
                     ],
-                    'rank'  => [
-                        'name'  => 'Ambassador Black Diamond',
+                    'rank' => [
+                        'name' => 'Ambassador Black Diamond',
                         'short' => 'AMBD',
                     ],
-                    'stv'   => [
+                    'stv' => [
                         'val' => rand(0, 9999),
                         'per' => rand(-100, 100),
                     ],
-                    'ltv'   => [
+                    'ltv' => [
                         'val' => rand(0, 9999),
                         'per' => rand(-100, 100),
                     ],
-                    'rtv'   => [
+                    'rtv' => [
                         'val' => rand(0, 9999999),
                         'per' => rand(-100, 100),
                     ],
@@ -198,8 +206,8 @@ class HomeAjax extends Controller {
                         'val' => rand(0, 999),
                         'per' => rand(-100, 100),
                     ],
-                    'psa'   => [
-                        'left'  => rand(0, 99),
+                    'psa' => [
+                        'left' => rand(0, 99),
                         'right' => rand(0, 99),
                     ],
                 ];
@@ -215,7 +223,8 @@ class HomeAjax extends Controller {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \Throwable
      */
-    public function news(Request $request) {
+    public function news(Request $request)
+    {
         if ($request->ajax()) {
             $news = HomeCache::getNews();
             return $this->ok($news);
@@ -229,7 +238,8 @@ class HomeAjax extends Controller {
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function teamAlerts(Request $request) {
+    public function teamAlerts(Request $request)
+    {
         if ($request->ajax()) {
             $alerts = [];
             foreach (SmartAlertType::types() as $type) {
@@ -245,8 +255,13 @@ class HomeAjax extends Controller {
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function tracker(Request $request) {
+    public function tracker(Request $request)
+    {
         if ($request->ajax()) {
+            $ranks = RankCache::getRanks('id,name,abbreviation,cond_ltv,cond_stv');
+            $curr = 0;
+            $ltv = rand(0, 9999);
+            $stv = rand(0, 9999);
             $ranks = RankCache::getRanks();
             $curr  = 0;
             $ltv   = rand(0, 9999);
@@ -257,9 +272,9 @@ class HomeAjax extends Controller {
                 }
             }
             return $this->ok([
-                'curr'  => $curr,
-                'ltv'   => $ltv,
-                'stv'   => $stv,
+                'curr' => $curr,
+                'ltv' => $ltv,
+                'stv' => $stv,
                 'ranks' => $ranks
             ]);
         }
@@ -271,25 +286,26 @@ class HomeAjax extends Controller {
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function schedules(Request $request) {
+    public function schedules(Request $request)
+    {
         if ($request->ajax()) {
             $events = [];
 
-            $e                  = new ScheduleEvent();
-            $e->title           = 'All Day';
-            $e->start           = date('c', strtotime('-1 month'));
-            $e->end             = '';
+            $e = new ScheduleEvent();
+            $e->title = 'All Day';
+            $e->start = date('c', strtotime('-1 month'));
+            $e->end = '';
             $e->backgroundColor = '#F8CB00';
-            $e->url             = '';
-            $events[]           = $e;
+            $e->url = '';
+            $events[] = $e;
 
-            $e        = new ScheduleEvent();
+            $e = new ScheduleEvent();
             $e->title = 'Global Convention';
             $e->start = date('c', strtotime(date('Y-m-05 13:28:03')));
-            $e->end   = date('c', strtotime(date('Y-m-10')));;
+            $e->end = date('c', strtotime(date('Y-m-10')));;
             $e->backgroundColor = '#89C4F4';
-            $e->url             = '#';
-            $events[]           = $e;
+            $e->url = '#';
+            $events[] = $e;
 
             return response($events);
         }
@@ -301,16 +317,17 @@ class HomeAjax extends Controller {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \Throwable
      */
-    public function activities(Request $request) {
+    public function activities(Request $request)
+    {
         if ($request->ajax()) {
             $courses = [];
             for ($i = 0; $i < 7; $i++) {
-                $c         = new UserCourse();
-                $c->id     = $i;
-                $c->goal   = "Verbal {$i}";
-                $c->title  = "Improve your social ability {$i}";
-                $c->date   = date("m/1{$i}/Y");
-                $c->end    = "16 January 2014 : 7:45 PM";
+                $c = new UserCourse();
+                $c->id = $i;
+                $c->goal = "Verbal {$i}";
+                $c->title = "Improve your social ability {$i}";
+                $c->date = date("m/1{$i}/Y");
+                $c->end = "16 January 2014 : 7:45 PM";
                 $c->detail = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod
                                             eleifend ipsum, at posuere augue. Pellentesque mi felis, aliquam at iaculis
                                             eu, finibus eu ex. Integer efficitur leo eget
@@ -334,18 +351,19 @@ class HomeAjax extends Controller {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \Throwable
      */
-    public function communities(Request $request) {
+    public function communities(Request $request)
+    {
         if ($request->ajax()) {
             $communities = [];
             for ($i = 0; $i < 7; $i++) {
-                $c             = new PureCommunity();
-                $c->id         = $i;
-                $c->photo      = '/img/users/avatar4.jpg';
-                $c->name       = "Nick Larson {$i}";
-                $c->likes      = '3.7k';
-                $c->comments   = '2.6k';
+                $c = new PureCommunity();
+                $c->id = $i;
+                $c->photo = '/img/users/avatar4.jpg';
+                $c->name = "Nick Larson {$i}";
+                $c->likes = '3.7k';
+                $c->comments = '2.6k';
                 $c->created_at = '3 hrs ago';
-                $c->content    = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                $c->content = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod
                                 tincidunt ut laoreet dolore magna aliquam erat volutpat.';
 

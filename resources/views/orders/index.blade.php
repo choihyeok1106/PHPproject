@@ -154,7 +154,7 @@
                     </div>
                     <div class="col-2">
                         <div class="desc">TOTAL</div>
-             w           <div class="val">$74.85</div>
+                        <div class="val">$74.85</div>
                     </div>
                     <div class="col-2">
                         <div class="desc">Order PV</div>

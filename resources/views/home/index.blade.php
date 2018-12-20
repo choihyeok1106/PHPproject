@@ -37,7 +37,7 @@
                 <button type="button" class="note-close close-button close" data-dismiss="modal" aria-hidden="true"
                         style="margin-top: -10px;">×
                 </button>
-                <h5 class="bold"><i class="icon-bell"></i> &nbsp; MY SMART ALERTS</h5>
+                <h5 class="bold"><i class="icon-bell"></i> MY SMART ALERTS</h5>
                 <p></p>
             </div>
         </div>

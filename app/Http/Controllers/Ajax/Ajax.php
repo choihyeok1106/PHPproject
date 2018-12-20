@@ -9,15 +9,17 @@
 namespace App\Http\Controllers\Ajax;
 
 
-trait Ajax {
+trait Ajax
+{
 
     protected $meta = [];
 
     /**
      * @param string $key
-     * @param mixed  $val
+     * @param mixed $val
      */
-    function meta(string $key, $val) {
+    function meta(string $key, $val)
+    {
         $this->meta[$key] = $val;
     }
 
@@ -25,7 +27,8 @@ trait Ajax {
      * @param mixed $obj
      * @return mixed
      */
-    function getObj($obj) {
+    function getObj($obj)
+    {
         if (gettype($obj) === 'object') {
             if (method_exists($obj, 'getAttributes')) {
                 $obj = $obj->getAttributes();
@@ -45,7 +48,8 @@ trait Ajax {
      * @param mixed|null|object $response
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    function ok($response = null) {
+    function ok($response = null)
+    {
         if ($response === null) {
             $response['message'] = 'ok';
         } else {
@@ -62,30 +66,44 @@ trait Ajax {
 
     /**
      * @param string $message
-     * @param int    $code
+     * @param int $code
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    function no(string $message, int $code = 500) {
-        return $this->response([
-            'error' => [
-                'code'    => $code,
-                'message' => $message,
-            ]
-        ]);
+
+    function no(string $error)
+    {
+        return response(['error' => $error]);
+
+        function no(string $message, int $code = 500)
+        {
+            return $this->response([
+                'error' => [
+                    'code' => $code,
+                    'message' => $message,
+                ]
+            ]);
+        }
     }
 
     /**
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    function badRequest() {
-        return $this->no('bad request', 400);
+
+    function badRequest()
+    {
+        return $this->no('bad request');
+        function badRequest()
+        {
+            return $this->no('bad request', 400);
+        }
     }
 
     /**
      * @param $data
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    function response($data) {
+    function response($data)
+    {
         if ($this->meta && is_array($this->meta)) {
             foreach ($this->meta as $key => $meta) {
                 $data['meta'][$key] = $meta;

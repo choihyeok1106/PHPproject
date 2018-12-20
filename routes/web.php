@@ -20,18 +20,13 @@ Route::resource('autoships', 'AutoshipController');
 Route::resource('commissions', 'CommissionController');
 Route::resource('team', 'TeamController');
 Route::resource('enrollment', 'EnrollmentController');
+Route::resource('genealogy', 'GenealogyController');
 Route::resource('home', 'HomeController');
 Route::resource('orders', 'OrderController');
 Route::resource('products', 'ProductController');
 Route::resource('reports', 'ReportController');
 Route::resource('account', 'AccountController');
 Route::resource('login', 'LoginController');
-/*Route::get('/asd',function(){
-    $repNumber = 'KR100000';
-   $asd = new \App\Service\RepService();
-   $cvb = $asd->getRep($repNumber);
-   return $cvb;
-});*/
 
 Route::get('/locale/{locale}',
     function ($locale) {
@@ -39,22 +34,18 @@ Route::get('/locale/{locale}',
         return redirect()->back();
     })->name('locale');
 
-Route::get('/invoice', 'OrderController@invoice')->name('orders.invoice');
+Route::get('/orders/invoice', 'OrderController@invoice')->name('orders.invoice');
+Route::get('/autoships/invoice', 'AutoshipController@invoice')->name('autoships.invoice');
 Route::get('/logout', 'LoginController@logout')->name('login.logout');
-Route::get('/support/faq', 'SupportController@faq')->name('support.faq');
+Route::get('/support/faqs', 'SupportController@faqs')->name('support.faqs');
 Route::get('/support/contact', 'SupportController@contact')->name('support.contact');
 Route::get('/tools/library', 'ToolController@library')->name('tools.library');
 Route::get('/tools/calendar', 'ToolController@calendar')->name('tools.calendar');
-// product
-Route::get('products/{cat}', 'ProductController@index');
-Route::get('product/{sku}', 'ProductController@show');
-// shopping
+Route::get('/products/{cat}', 'ProductController@index');
+Route::get('/product/{sku}', 'ProductController@show');
 Route::get('/shopping/cart', 'ShoppingController@cart')->name('shopping.cart');
 Route::get('/shopping/checkout', 'ShoppingController@checkout')->name('shopping.checkout');
 Route::get('/shopping/complete', 'ShoppingController@complete')->name('shopping.complete');
-// genealogy
-Route::get('/genealogy', 'GenealogyController@binary')->name('genealogy.binary');
-Route::get('/genealogy/sponsor', 'GenealogyController@sponsor')->name('genealogy.sponsor');
 
 /*****
  * Ajax
@@ -95,13 +86,10 @@ Route::post('/a/cart/add', 'Ajax\CartAjax@add');
 Route::post('/a/cart/update', 'Ajax\CartAjax@update');
 Route::post('/a/cart/delete', 'Ajax\CartAjax@delete');
 Route::get('/a/shopping/promotions', 'Ajax\ShoppingAjax@promotions');
-// genealogy
-Route::group(['prefix' => '/a/genealogy'], function () use ($router) {
-    // [GET] v1/reps/{repNumber}/binary
-    $router->get('/binary', 'Ajax\GenealogyAjax@binary');
-    $router->get('/binary/{repNumber}', 'Ajax\GenealogyAjax@binary');
-    $router->get('/{repNumber}', 'Ajax\GenealogyAjax@view');
-});
+
+// Faq Ajax
+Route::get('/a/support/faqs','Ajax\FaqAjax@faqs');
+
 
 Route::get('/test',
     function () {
@@ -121,7 +109,7 @@ Route::get('/test',
         ])->withData([
             'parameters' => [
                 'username'              => 'KR100000',
-                'password'              => '4297f44b13955235245b2497399d7a93',
+                'password'              => 'e10adc3949ba59abbe56e057f20f883e',
                 'validity_period_hours' => '168',
             ]
         ])->asJsonRequest()->post();

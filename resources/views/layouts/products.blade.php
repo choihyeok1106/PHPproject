@@ -87,7 +87,6 @@
 
         <div class="todo-content">
             <div class="search-bar ">
-
                 <div class="m-grid margin-bottom-15">
                     <div class="m-grid-row">
                         <div class="m-grid-col m-grid-col-lg-6 m-grid-col-md-8">

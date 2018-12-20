@@ -115,7 +115,7 @@
                     <span class="title">Training Course</span>
                 </a>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-support"></i>
                     <span class="title">Support</span>
@@ -123,7 +123,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="/support/faq" class="nav-link ">
+                        <a href="/support/faqs" class="nav-link ">
                             <span class="title">FAQ</span>
                         </a>
                     </li>

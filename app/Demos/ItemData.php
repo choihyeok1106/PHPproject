@@ -23,7 +23,7 @@ class ItemData {
     public static function getCategories() {
         $categories = [];
 
-        $c            = new Category();
+        $c        = new Category();
         $c->id        = 1;
         $c->name      = 'Bestsellers';
         $categories[] = $c;

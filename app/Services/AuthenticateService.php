@@ -8,19 +8,21 @@
 namespace App\Services;
 
 
-class AuthenticateService {
+class AuthenticateService
+{
 
     /**
      * @param string $username
      * @param string $password
      * @return Service
      */
-    public static function login(string $username, string $password) {
+    public static function login(string $username, string $password)
+    {
         return Service::make()->post('/v1/vbo/authorize',
             [
                 'parameters' => [
-                    "username"              => $username,
-                    "password"              => md5($password),
+                    "username" => $username,
+                    "password" => md5($password),
                     "validity_period_hours" => env('API_EXPIRE_DAYS', 1)
                 ]
             ]);
@@ -31,11 +33,12 @@ class AuthenticateService {
      * @param string $number
      * @return Service
      */
-    public static function refresh(string $passport, string $number) {
+    public static function refresh(string $passport, string $number)
+    {
         return Service::make([
-            'X-Passport'          => $passport,
+            'X-Passport' => $passport,
             'X-Passport-Identity' => $number,
-            'X-Passport-Period'   => env('API_EXPIRE_DAYS', 1)
+            'X-Passport-Period' => env('API_EXPIRE_DAYS', 1)
         ])->post('/v1/vbo/authorize/refresh');
     }
 
