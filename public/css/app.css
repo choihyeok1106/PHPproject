@@ -188,6 +188,12 @@
     }
 }
 
+@media (max-width: 768px) {
+    .page-footer-inner .terms {
+        display: none;
+    }
+}
+
 /** dropdown-menu */
 .dropdown-menu {
     box-shadow: none;
@@ -498,4 +504,105 @@
 .no-result {
     width: 100%;
     text-align: center;
+}
+
+.page-container-bg-solid .page-title small {
+    margin-left: 15px;
+}
+
+@media (max-width: 767px) {
+    .page-container-bg-solid .page-title small {
+        margin-left: 0;
+    }
+}
+
+/** profile side */
+.profile-side {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 360px;
+    right: -360px;
+    height: 100%;
+    /*overflow: hidden;*/
+    overflow-y: auto;
+    background: #fff;
+    box-shadow: -5px 0 15px rgba(50, 50, 50, 0.15);
+    moz-transition: all 0.25s ease-in;
+    -webkit-transition: all 0.25s ease-in;
+    -o-transition: all 0.25s ease-in;
+    transition: all 0.25s ease-in;
+}
+
+.profile-side.active {
+    right: 0;
+}
+
+.profile-side .profile-side-header {
+    text-align: center;
+    background-color: #17C4BB;
+    position: relative;
+}
+
+.profile-side .profile-side-header:after {
+    content: "\f121";
+    font: normal normal normal 32px/1 LineAwesome;
+    display: block;
+    width: 32px;
+    text-align: center;
+    height: 32px;
+    line-height: 32px;
+    color: #fff;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+}
+
+.profile-side .profile-side-photo {
+    width: 100px;
+    height: 100px;
+    margin: 15px;
+    border-radius: 100px !important;
+    background-color: #eee;
+}
+
+.profile-side .profile-side-body {
+    padding: 15px 20px;
+}
+
+.profile-side .profile-side-body h1 {
+    margin: 10px 0 20px;
+}
+
+.profile-side .form-control {
+    resize: none;
+}
+
+.profile-side .form-group.form-md-line-input .form-control[readonly], .profile-side .form-group.form-md-line-input .form-control[disabled] {
+    cursor: default;
+}
+
+@media (max-width: 640px) {
+    .profile-side {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+/** OrgChart */
+.OrgChart .center {
+    display: block;
+    width: 42px;
+    height: 42px;
+    position: absolute;
+    fill: #757575;
+    top: 30px;
+    right: 45px;
+    z-index: 99;
+    /*background-color: red;*/
+    cursor: pointer;
+    /*font: normal normal normal 16px/1 LineAwesome;*/
+
 }

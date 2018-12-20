@@ -15,7 +15,16 @@ class GenealogyController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        return view('genealogy.index');
+    public function binary() {
+        return view('genealogy.binary');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sponsor() {
+        return view('genealogy.sponsor');
     }
 }

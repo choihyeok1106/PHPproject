@@ -108,3 +108,17 @@ function cookieget(string $name, $deft = null) {
 function cookiedel(string $name) {
     setcookie($name, null, 0, '/');
 }
+
+/**
+ * @param  string $str
+ * @param int     $chars
+ * @param string  $tail
+ * @return string
+ */
+function cutstr(string $str, int $chars = 32, string $tail = '...') {
+    if (mb_strlen($str) > $chars) {
+        $str = mb_substr($str, 0, $chars) . $tail;
+    }
+
+    return $str;
+}

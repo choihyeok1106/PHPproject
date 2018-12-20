@@ -20,7 +20,6 @@ Route::resource('autoships', 'AutoshipController');
 Route::resource('commissions', 'CommissionController');
 Route::resource('team', 'TeamController');
 Route::resource('enrollment', 'EnrollmentController');
-Route::resource('genealogy', 'GenealogyController');
 Route::resource('home', 'HomeController');
 Route::resource('orders', 'OrderController');
 Route::resource('products', 'ProductController');
@@ -46,11 +45,16 @@ Route::get('/support/faq', 'SupportController@faq')->name('support.faq');
 Route::get('/support/contact', 'SupportController@contact')->name('support.contact');
 Route::get('/tools/library', 'ToolController@library')->name('tools.library');
 Route::get('/tools/calendar', 'ToolController@calendar')->name('tools.calendar');
+// product
 Route::get('products/{cat}', 'ProductController@index');
 Route::get('product/{sku}', 'ProductController@show');
+// shopping
 Route::get('/shopping/cart', 'ShoppingController@cart')->name('shopping.cart');
 Route::get('/shopping/checkout', 'ShoppingController@checkout')->name('shopping.checkout');
 Route::get('/shopping/complete', 'ShoppingController@complete')->name('shopping.complete');
+// genealogy
+Route::get('/genealogy', 'GenealogyController@binary')->name('genealogy.binary');
+Route::get('/genealogy/sponsor', 'GenealogyController@sponsor')->name('genealogy.sponsor');
 
 /*****
  * Ajax
@@ -91,7 +95,13 @@ Route::post('/a/cart/add', 'Ajax\CartAjax@add');
 Route::post('/a/cart/update', 'Ajax\CartAjax@update');
 Route::post('/a/cart/delete', 'Ajax\CartAjax@delete');
 Route::get('/a/shopping/promotions', 'Ajax\ShoppingAjax@promotions');
-
+// genealogy
+Route::group(['prefix' => '/a/genealogy'], function () use ($router) {
+    // [GET] v1/reps/{repNumber}/binary
+    $router->get('/binary', 'Ajax\GenealogyAjax@binary');
+    $router->get('/binary/{repNumber}', 'Ajax\GenealogyAjax@binary');
+    $router->get('/{repNumber}', 'Ajax\GenealogyAjax@view');
+});
 
 Route::get('/test',
     function () {
