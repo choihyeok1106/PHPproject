@@ -34,14 +34,15 @@ Route::get('/locale/{locale}',
         return redirect()->back();
     })->name('locale');
 
-Route::get('/invoice', 'OrderController@invoice')->name('orders.invoice');
+Route::get('/orders/invoice', 'OrderController@invoice')->name('orders.invoice');
+Route::get('/autoships/invoice', 'AutoshipController@invoice')->name('autoships.invoice');
 Route::get('/logout', 'LoginController@logout')->name('login.logout');
 Route::get('/support/faqs', 'SupportController@faqs')->name('support.faqs');
 Route::get('/support/contact', 'SupportController@contact')->name('support.contact');
 Route::get('/tools/library', 'ToolController@library')->name('tools.library');
 Route::get('/tools/calendar', 'ToolController@calendar')->name('tools.calendar');
-Route::get('products/{cat}', 'ProductController@index');
-Route::get('product/{sku}', 'ProductController@show');
+Route::get('/products/{cat}', 'ProductController@index');
+Route::get('/product/{sku}', 'ProductController@show');
 Route::get('/shopping/cart', 'ShoppingController@cart')->name('shopping.cart');
 Route::get('/shopping/checkout', 'ShoppingController@checkout')->name('shopping.checkout');
 Route::get('/shopping/complete', 'ShoppingController@complete')->name('shopping.complete');

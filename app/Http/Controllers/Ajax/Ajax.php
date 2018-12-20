@@ -69,9 +69,11 @@ trait Ajax
      * @param int $code
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
+
     function no(string $error)
     {
         return response(['error' => $error]);
+
         function no(string $message, int $code = 500)
         {
             return $this->response([
@@ -86,6 +88,7 @@ trait Ajax
     /**
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
+
     function badRequest()
     {
         return $this->no('bad request');
@@ -93,7 +96,6 @@ trait Ajax
         {
             return $this->no('bad request', 400);
         }
-
     }
 
     /**

@@ -3,14 +3,14 @@
     <link href="/css/pages/faq.min.css" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
-    <h1 class="page-title"> FAQx
+    <h1 class="page-title"> FAQ
         <small>general faq page</small>
     </h1>
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
                 <i class="icon-home"></i>
-                <a href="/html">Home</a>
+                <a href="/home">Home</a>
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
@@ -18,7 +18,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <span>FAQ</span>
+                <a href="/support/faqs">FAQ</a>
             </li>
         </ul>
     </div>
@@ -26,7 +26,7 @@
     <div class="faq-page faq-content-1">
         <div class="search-bar ">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for..."></div>
+                <input type="text" class="form-control" placeholder="Search for..." id="faqSearch"></div>
         </div>
         <div class="faq-content-container">
             <div class="row">

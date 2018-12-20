@@ -11,8 +11,6 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Cache\FaqCache;
 use App\Http\Controllers\Controller;
-use App\Services\FaqService;
-use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
 class FaqAjax extends Controller
