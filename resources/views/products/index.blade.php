@@ -71,35 +71,36 @@
                 </div>
             </div>
 
-                    <div class="portlet light portlet-fit portlet-product">
-                        <div class="portlet-body padding-0">
-                            {{--{{route('products.show',$skuId)}}--}}
-                            <a href="{{route('products.show',123456)}}" class="product-image">
-                                <img src="https://shop.livepure.co.kr/upfiles/product/main_4008_gs557k1_2.jpg">
-                            </a>
-                        </div>
-            <div id="products" class="row active">
-                <div id="svg">
-                    @for($i = 0; $i < 12; $i++)
-                        <div class="col-md-4 col-lg-3 col-sm-6">
-                            <div class="portlet light portlet-fit portlet-product">
-                                <div class="portlet-body padding-0">
-                                    <div class="svg-product-image" data-toggle="res-box"></div>
-                                </div>
 
-                                <div class="portlet-title svg-product-title">
-                                    <div class="svg-product-text" style="margin-bottom: 10px"></div>
-                                    <div class="svg-product-text" style="width: 60%;"></div>
+            <div class="portlet light portlet-fit portlet-product">
+                <div class="portlet-body padding-0">
+                    {{--{{route('products.show',$skuId)}}--}}
+                    <a href="{{route('products.show',123456)}}" class="product-image">
+                        <img src="https://shop.livepure.co.kr/upfiles/product/main_4008_gs557k1_2.jpg">
+                    </a>
+                </div>
+                <div id="products" class="row active">
+                    <div id="svg">
+                        @for($i = 0; $i < 12; $i++)
+                            <div class="col-md-4 col-lg-3 col-sm-6">
+                                <div class="portlet light portlet-fit portlet-product">
+                                    <div class="portlet-body padding-0">
+                                        <div class="svg-product-image" data-toggle="res-box"></div>
+                                    </div>
+
+                                    <div class="portlet-title svg-product-title">
+                                        <div class="svg-product-text" style="margin-bottom: 10px"></div>
+                                        <div class="svg-product-text" style="width: 60%;"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endfor
+                        @endfor
+                    </div>
                 </div>
             </div>
+            <!-- END TODO CONTENT -->
         </div>
-        <!-- END TODO CONTENT -->
-    </div>
-@endsection
-@section('script.plugins')
-    <script src="{{js('/js/pages/products.js')}}" type="text/javascript"></script>
+        @endsection
+        @section('script.plugins')
+            <script src="{{js('/js/pages/products.js')}}" type="text/javascript"></script>
 @endsection
