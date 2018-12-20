@@ -11,7 +11,7 @@
     <h1 class="page-title"> Home
         <small>Dashboard, your current business reports</small>
     </h1>
-    <div class="page-bar">
+    <div class="page-bar hide">
         <ul class="page-breadcrumb">
             <li>
                 <i class="icon-home"></i>

@@ -9,6 +9,7 @@
 namespace App\Cache;
 
 
+use App\Supports\UserPrefs;
 use Illuminate\Support\Facades\Redis;
 
 class Cache {
@@ -67,37 +68,20 @@ class Cache {
     }
 
     /**
-     * @param array  $arr
-     * @param string $cls
-     * @return array|object|null
-     */
-    public static function convert($arr, $cls) {
-        if ($arr && $cls && is_array($arr) && class_exists($cls)) {
-            if (isset($arr[0])) {
-                $data = [];
-                foreach ($arr as $v) {
-                    $data[] = self::convert($v, $cls);
-                }
-                return $data;
-            } else {
-                $obj = new $cls();
-                if (method_exists($obj, 'setRawAttributes')) {
-                    $obj->setRawAttributes($arr);
-                } else {
-                    foreach ($arr as $k => $v) {
-                        $obj->$k = $v;
-                    }
-                }
-                return $obj;
-            }
-        }
-        return null;
-    }
-
-    /**
      * @return bool
      */
     public static function enable() {
         return env('REDIS', 0);
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public static function key(string $key) {
+        if (substr($key, 0, 1) != ':') {
+            $key = ":{$key}";
+        }
+        return ':' . UserPrefs::getCountryLow() . $key;
     }
 }

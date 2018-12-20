@@ -15,11 +15,11 @@ class RankCache {
      * @return \App\Repositories\Rank[]
      */
     public static function getRanks() {
-        $key   = "rank";
+        $key   = ":rank";
         $ranks = Cache::get($key);
         if (!$ranks) {
             $svc = RankService::getRanks();
-            return Cache::set($key, $svc->items());
+            return Cache::set($key, $svc->data());
         }
         return $ranks;
     }

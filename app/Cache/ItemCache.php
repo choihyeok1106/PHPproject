@@ -21,7 +21,7 @@ class ItemCache {
      * @return Category[]
      */
     public static function getCategories() {
-        $key        = UserPrefs::getCountryLow() . ':item:categories';
+        $key        = Cache::key(':item:categories');
         $categories = Cache::get($key);
         if (!$categories) {
             $categories = ItemData::getCategories();
@@ -39,7 +39,7 @@ class ItemCache {
      * @return mixed
      */
     public static function getItems($category_id = 0, $page = 1, $oder = 'id', $by = 'desc', $query = '') {
-        $key   = UserPrefs::getCountryLow() . ":item:{$category_id}:{$oder}:{$by}:$query:{$page}";
+        $key   = Cache::key(":item:{$category_id}:{$oder}:{$by}:$query:{$page}");
         $items = Cache::get($key);
         if (!$items) {
             $items = ItemData::getProducts();
@@ -49,7 +49,7 @@ class ItemCache {
     }
 
     public static function getItem($sku) {
-        $key       = UserPrefs::getCountryLow() . ":item:{$sku}";
+        $key       = Cache::key(":item:{$sku}");
         $resources = Cache::get($key);
         if (!$resources) {
             $resources = ItemData::getItem($sku);
@@ -62,7 +62,7 @@ class ItemCache {
      * @return \App\Repositories\ItemResource[]
      */
     public static function getResources($sku) {
-        $key       = UserPrefs::getCountryLow() . ":item:{$sku}:resource";
+        $key       = Cache::key(":item:{$sku}:resource");
         $resources = Cache::get($key);
         if (!$resources) {
             $resources = ItemData::getResources();
@@ -75,7 +75,7 @@ class ItemCache {
      * @return \App\Repositories\ItemPrice
      */
     public static function getPrice($sku) {
-        $key   = UserPrefs::getCountryLow() . ":item:{$sku}:price";
+        $key   = Cache::key(":item:{$sku}:price");
         $price = Cache::get($key);
         if (!$price) {
             $price = ItemData::getPrice();
