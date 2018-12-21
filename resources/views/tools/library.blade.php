@@ -24,39 +24,52 @@
     </div>
     <!-- END PAGE HEADER-->
     <div class="profile">
+        <span class="caption-subject font-dark bold uppercase">Library</span>
+        <div class="col-md-4 search-bar pull-right">
+            <div class="input-group">
+                <div class="input-group-addon" style="border:0; background-color: #e0e0e0">
+                    <span class="glyphicon glyphicon-search"></span>
+                </div>
+                <input type="text" placeholder="Search ..." class="form-control" style="border:0; background-color:#e0e0e0; border-color: #e0e0e0">
+                <div class="input-group-btn">
+                    <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" style="border:1; background-color:#e0e0e0;">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="#">Action</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
         <div class="row">
             <div class="col-md-2">
                 <ul class="ver-inline-menu tabbable margin-bottom-10">
-                    <li class="active">
-                        <a data-toggle="tab" href="#tab_1" aria-expanded="false">
-                            <i class="fa fa-briefcase"></i> General Questions </a>
-                        <span class="after"> </span>
+                    <li style="line-height:37px;">
+                        <a data-toggle="tab" href="#tab_1" aria-expanded="false">General Questions </a>
                     </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#tab_2" aria-expanded="false">
-                            <i class="fa fa-group"></i> Membership </a>
+                    <li style="line-height:37px;">
+                        <a data-toggle="tab" href="#tab_2" aria-expanded="false">Membership </a>
                     </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#tab_3" aria-expanded="false">
-                            <i class="fa fa-leaf"></i> Terms Of Service </a>
+                    <li style="line-height:37px;">
+                        <a data-toggle="tab" href="#tab_3" aria-expanded="false">Terms Of Service </a>
                     </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#tab_1" aria-expanded="false">
-                            <i class="fa fa-info-circle"></i> License Terms </a>
+                    <li style="line-height:37px;">
+                        <a data-toggle="tab" href="#tab_1" aria-expanded="false">License Terms </a>
                     </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#tab_2" aria-expanded="false">
-                            <i class="fa fa-tint"></i> Payment Rules </a>
+                    <li style="line-height:37px;">
+                        <a data-toggle="tab" href="#tab_2" aria-expanded="false">Payment Rules </a>
                     </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#tab_3" aria-expanded="true">
-                            <i class="fa fa-plus"></i> Other Questions </a>
+                    <li style="line-height:37px;">
+                        <a data-toggle="tab" href="#tab_3" aria-expanded="true">Other Questions </a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-10">
                 <div class="mt-comments libs">
-                    <input type="text" value="12312334242324324" id="input_clipboard" style="position: absolute;opacity: 0">
+                    <input type="text" value="12312334242324324" id="input_clipboard"
+                           style="position: absolute;opacity: 0">
                     <div class="mt-comment">
                         <div class="mt-comment-img">
                             <img src="/img/files/mp4.svg" class="file-icon">
@@ -81,10 +94,11 @@
                                                     class="icon-link"></i> Copy link </a>
                                     </li>
                                     <li>
-                                        <a href="#"> <i class="icon-envelope"></i> Send to Email </a>
+                                        <a href="mailto:chlgur18@naver.com"> <i class="icon-envelope"></i> Send to Email
+                                        </a>
                                     </li>
                                     {{--<li>--}}
-                                        {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
+                                    {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
                                     {{--</li>--}}
                                 </ul>
                             </div>
@@ -116,7 +130,7 @@
                                         <a href="#"> <i class="icon-envelope"></i> Send to Email </a>
                                     </li>
                                     {{--<li>--}}
-                                        {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
+                                    {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
                                     {{--</li>--}}
                                 </ul>
                             </div>
@@ -149,7 +163,7 @@
                                         <a href="#"> <i class="icon-envelope"></i> Send to Email </a>
                                     </li>
                                     {{--<li>--}}
-                                        {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
+                                    {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
                                     {{--</li>--}}
                                 </ul>
                             </div>
@@ -182,7 +196,7 @@
                                         <a href="#"> <i class="icon-envelope"></i> Send to Email </a>
                                     </li>
                                     {{--<li>--}}
-                                        {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
+                                    {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
                                     {{--</li>--}}
                                 </ul>
                             </div>
@@ -208,6 +222,19 @@
                 $(this).attr('data-original-title', 'Copied!').tooltip('show');
                 $('#input_clipboard').select();
                 var successful = document.execCommand('copy');
+            });
+
+            var availableCity = ["1", "2", "3", "4", "5"];
+
+            $("#test").autocomplete({
+                source: availableCity,
+                select: function (event, ui) {
+                    console.log(ui.item);
+                },
+                focus: function (event, ui) {
+                    return false;
+                    //              event.preventDefault();
+                }
             });
         })
     </script>
