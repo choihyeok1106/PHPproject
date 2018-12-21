@@ -15,6 +15,6 @@ class FaqService extends Service
 {
     public static function getFaq()
     {
-       return Service::make(UserPrefs::pass())->get("/v1/vbo/faqs");
+        return Service::make(UserPrefs::pass())->get("/v1/vbo/faqs");
     }
 }

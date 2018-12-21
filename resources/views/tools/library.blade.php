@@ -56,6 +56,7 @@
             </div>
             <div class="col-md-10">
                 <div class="mt-comments libs">
+                    <input type="text" value="12312334242324324" id="input_clipboard" style="position: absolute;opacity: 0">
                     <div class="mt-comment">
                         <div class="mt-comment-img">
                             <img src="/img/files/mp4.svg" class="file-icon">
@@ -76,14 +77,15 @@
                                         <a href="#"> <i class="icon-eye"></i> View</a>
                                     </li>
                                     <li>
-                                        <a href="#"> <i class="icon-link"></i> Copy link </a>
+                                        <a href="#" data-toggle="tooltip" title="Copy to clipboard"> <i
+                                                    class="icon-link"></i> Copy link </a>
                                     </li>
                                     <li>
                                         <a href="#"> <i class="icon-envelope"></i> Send to Email </a>
                                     </li>
-                                    <li>
-                                        <a href="#"> <i class="icon-share-alt"></i> Share </a>
-                                    </li>
+                                    {{--<li>--}}
+                                        {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
+                                    {{--</li>--}}
                                 </ul>
                             </div>
                         </div>
@@ -113,9 +115,9 @@
                                     <li>
                                         <a href="#"> <i class="icon-envelope"></i> Send to Email </a>
                                     </li>
-                                    <li>
-                                        <a href="#"> <i class="icon-share-alt"></i> Share </a>
-                                    </li>
+                                    {{--<li>--}}
+                                        {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
+                                    {{--</li>--}}
                                 </ul>
                             </div>
                         </div>
@@ -146,9 +148,9 @@
                                     <li>
                                         <a href="#"> <i class="icon-envelope"></i> Send to Email </a>
                                     </li>
-                                    <li>
-                                        <a href="#"> <i class="icon-share-alt"></i> Share </a>
-                                    </li>
+                                    {{--<li>--}}
+                                        {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
+                                    {{--</li>--}}
                                 </ul>
                             </div>
                         </div>
@@ -179,9 +181,9 @@
                                     <li>
                                         <a href="#"> <i class="icon-envelope"></i> Send to Email </a>
                                     </li>
-                                    <li>
-                                        <a href="#"> <i class="icon-share-alt"></i> Share </a>
-                                    </li>
+                                    {{--<li>--}}
+                                        {{--<a href="#"> <i class="icon-share-alt"></i> Share </a>--}}
+                                    {{--</li>--}}
                                 </ul>
                             </div>
                         </div>
@@ -190,4 +192,23 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script.plugins')
+    <script>
+        $(function () {
+            $("[data-toggle='tooltip']").tooltip();
+            $("[data-toggle='tooltip']").hover(
+                function () {
+                    $(this).attr('data-original-title', 'Copy to clipboard').tooltip('show');
+                }, function () {
+                    $(this).attr('data-original-title', 'Copy to clipboard').tooltip('hide');
+                });
+
+            $("[data-toggle='tooltip']").click(function () {
+                $(this).attr('data-original-title', 'Copied!').tooltip('show');
+                $('#input_clipboard').select();
+                var successful = document.execCommand('copy');
+            });
+        })
+    </script>
 @endsection

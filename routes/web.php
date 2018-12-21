@@ -87,8 +87,11 @@ Route::post('/a/cart/update', 'Ajax\CartAjax@update');
 Route::post('/a/cart/delete', 'Ajax\CartAjax@delete');
 Route::get('/a/shopping/promotions', 'Ajax\ShoppingAjax@promotions');
 
-// Faq Ajax
+// Support Ajax
 Route::get('/a/support/faqs','Ajax\FaqAjax@faqs');
+
+// Tools Ajax
+Route::get('/a/tools/library', 'Ajax\libraryAjax@library');
 
 
 Route::get('/test',
