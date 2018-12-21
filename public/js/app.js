@@ -1846,65 +1846,6 @@ var Util = {
         }
         return NaN;
     },
-    toggleResponse: function () {
-        $("[data-toggle=res-box]").each(function () {
-            var scale = $(this).attr("data-scale");
-            var depth = $(this).attr("data-depth");
-            var target = $(this).attr("data-target");
-            var offset = $(this).attr("data-offset");
-            var min = $(this).attr("data-min");
-            if (isNaN(offset)) {
-                offset = 0;
-            }
-            if (isNaN(min)) {
-                min = 0;
-            }
-            if (target) {
-                if (isNaN(target)) {
-                    if ($(target).length) {
-                        var mh = $(target).outerHeight();
-                        if (min > 0 && min > mh) {
-                            mh = min;
-                        }
-                        $(this).css({
-                            'min-height': mh
-                        });
-                    }
-                } else {
-                    var el = $(this);
-                    for (var i = 0; i < target; i++) {
-                        el = $(el).parent();
-                    }
-                    var mh = ($(el).outerHeight() - offset);
-                    if (min > 0 && min > mh) {
-                        mh = min;
-                    }
-                    $(this).css({
-                        'min-height': mh
-                    });
-
-                }
-            } else {
-                if (isNaN(scale) || scale < 0) {
-                    scale = 1
-                }
-                var el = $(this);
-                if (!isNaN(depth)) {
-                    for (var i = 0; i < depth; i++) {
-                        el = $(el).parent()
-                    }
-                }
-                var h = $(el).outerWidth() * scale;
-                if (min > 0 && min > h) {
-                    h = min;
-                }
-                $(this).css({
-                    height: h
-                })
-            }
-
-        });
-    }
 };
 
 /**
@@ -1916,9 +1857,9 @@ var UI = {
         this.handleBootstrapSelect();
         this.initFixedAside();
         this.initNote();
-        this.initResponse();
+        this.toggleResponse();
         $(window).on("resize", function () {
-            UI.initResponse()
+            UI.toggleResponse()
         })
     },
     initMenu: function () {
@@ -1968,10 +1909,6 @@ var UI = {
             $(".note").remove()
         });
     },
-    // responsive box height
-    initResponse: function () {
-        Util.toggleResponse();
-    },
     noResult: function (elm, message) {
         var html = '<div class="no-result">' + message + '</div>';
         var iniHeight = function () {
@@ -1990,25 +1927,47 @@ var UI = {
     svgLoader: function (elm) {
         $(elm).append('<div class="svg-loader"><div class="loader"></div></div>');
     },
-    profile: {
+    aside: {
         show: function (elm) {
             var e = $(elm);
             if (e.length) {
                 e.removeClass('active').addClass('active');
-                e.find(".profile-side-header").after().click(function () {
-                    UI.profile.hide();
+                e.find(".aside-header").after().click(function () {
+                    UI.aside.hide();
                 });
                 $(document).mouseup(function (event) {
-                    if ($(event.target).parents(".profile-side").length == 0) {
-                        UI.profile.hide();
+                    if ($(event.target).parents(".aside").length == 0) {
+                        UI.aside.hide();
                     }
                 });
             }
         },
         hide: function () {
-            $('.profile-side').removeClass('active');
+            $('.aside').removeClass('active');
         }
     },
+    toggleResponse: function () {
+        var data = [];
+        $("[data-toggle=res-box]").each(function (i) {
+            var scale = $(this).attr("data-scale");
+            var min = $(this).attr("data-min");
+            if (isNaN(min)) {
+                min = 0;
+            }
+            if (isNaN(scale) || scale < 0) {
+                scale = 1
+            }
+            var elm = $(this);
+            var h = $(elm).outerWidth() * scale;
+            if (min > 0 && min > h) {
+                h = min;
+            }
+            data[i] = h;
+        });
+        $("[data-toggle=res-box]").each(function (i) {
+            $(this).css('height', data[i]);
+        });
+    }
 };
 
 /**

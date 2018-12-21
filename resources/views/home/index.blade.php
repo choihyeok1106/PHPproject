@@ -8,8 +8,17 @@
 
 @section('content')
     <!-- BEGIN PAGE HEADER-->
-    <h1 class="page-title"> Home
-        <small>Dashboard, your current business reports</small>
+    <h1 class="page-title"> Dashboard
+        <small>
+            <a href="/">Home</a>
+            <i class="fa fa-angle-right"></i>
+            Dashboard
+        </small>
+        <div class="actions">
+            <button type="button" id="settings-show" class="btn btn-icon-only blue">
+                <i class="fa fa-cog"></i>
+            </button>
+        </div>
     </h1>
     <div class="page-bar hide">
         <ul class="page-breadcrumb">

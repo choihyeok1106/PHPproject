@@ -16,7 +16,7 @@ var Products = {
             }
             location.replace(loc);
         });
-        App.a.get("/a/item/categories", null, {
+        Ajax.get("/a/item/categories", null, {
             ok: function (res) {
                 if (!res.hasOwnProperty("error")) {
                     var side = "";
@@ -130,6 +130,7 @@ var Products = {
         }
         // render items list html
         var render = function (items) {
+            console.log(items);
             var html = '';
             $.each(items, function (k, v) {
                 var item = ui;
@@ -153,14 +154,12 @@ var Products = {
         // ajax request items
         var getItems = function (firstLoad) {
             if (!loading) {
-                App.a.get("/a/item/items", null, {
+                Ajax.get("/a/item/items", null, {
                     ok: function (res) {
-                        if (!res.hasOwnProperty("error")) {
-                            loading = false;
-                            render(res['items']);
-                            if (firstLoad) {
-                                onScrollBottom();
-                            }
+                        loading = false;
+                        render(res);
+                        if (firstLoad) {
+                            onScrollBottom();
                         }
                     },
                     no: function (err) {
@@ -183,8 +182,8 @@ var Products = {
         getItems(true);
     },
     initSearch: function () {
-        var q = App.g.get('query');
-        var s = App.g.get('sort');
+        var q = Get.get('query');
+        var s = Get.get('sort');
         $("#product-search-input").val(q);
         $("#product-order-by").find('option[value=' + s + ']').attr('selected', 'selected');
         $("#product-order-by").change();

@@ -79,9 +79,7 @@ var Home = {
 
                         });
                         $("#modal-widget .modal-body .row").html(html);
-                        $("#modal-widget").modal({
-                            show: 'true'
-                        });
+                        $("#modal-widget").modal('show');
                     } else {
                         console.log(res["error"]);
                     }
@@ -310,12 +308,12 @@ var Home = {
                 });
                 if (html) {
                     $("#widget-news .mt-comments").html(html);
-                }else{
-                    UI.noResult($("#widget-news .mt-comments"),Lang.get("records not found"));
+                } else {
+                    UI.noResult($("#widget-news .mt-comments"), Lang.get("records not found"));
                 }
             },
             no: function (err) {
-                UI.noResult($("#widget-news .mt-comments"),Lang.get("records not found"));
+                UI.noResult($("#widget-news .mt-comments"), Lang.get("records not found"));
             },
             end: function () {
                 $("#widget-news .svg-loader").remove();
@@ -722,7 +720,6 @@ var Home = {
     // initDragger: init dragger and set widget sorting
     initDragger: function () {
         var grid = new Muuri('.grid', {
-            // items: generateElements(20),
             layoutDuration: 400,
             layoutEasing: 'ease',
             dragEnabled: true,
@@ -734,7 +731,6 @@ var Home = {
             dragStartPredicate: {
                 handle: '.grid-head'
             }
-            // dragEnabled: false,
         }).on('dragEnd', changed);
 
         function changed() {
