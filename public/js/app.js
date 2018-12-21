@@ -1065,6 +1065,9 @@ var Layout = function () {
                     height = Core.getViewPort().height - headerHeight - footerHeight;
                 }
             }
+            if ($(window).width() > 992) {
+                height = height - 53;
+            }
             content.css('min-height', height);
         }
     };
@@ -1909,6 +1912,7 @@ var Util = {
  **/
 var UI = {
     init: function () {
+        this.initMenu();
         this.handleBootstrapSelect();
         this.initFixedAside();
         this.initNote();
@@ -1916,6 +1920,13 @@ var UI = {
         $(window).on("resize", function () {
             UI.initResponse()
         })
+    },
+    initMenu: function () {
+        var id = $(".page-title").attr('data-menu');
+        if (!id) {
+            id = 'home';
+        }
+        $('.page-sidebar-menu li[data-id=' + id + ']').addClass('active');
     },
     handleBootstrapSelect: function () {
         $('.bs-select').selectpicker({
@@ -1975,7 +1986,29 @@ var UI = {
         $(window).resize(function () {
             iniHeight();
         });
-    }
+    },
+    svgLoader: function (elm) {
+        $(elm).append('<div class="svg-loader"><div class="loader"></div></div>');
+    },
+    profile: {
+        show: function (elm) {
+            var e = $(elm);
+            if (e.length) {
+                e.removeClass('active').addClass('active');
+                e.find(".profile-side-header").after().click(function () {
+                    UI.profile.hide();
+                });
+                $(document).mouseup(function (event) {
+                    if ($(event.target).parents(".profile-side").length == 0) {
+                        UI.profile.hide();
+                    }
+                });
+            }
+        },
+        hide: function () {
+            $('.profile-side').removeClass('active');
+        }
+    },
 };
 
 /**
@@ -2152,7 +2185,7 @@ var Ajax = {
                     }
                 } else {
                     if (typeof ok === 'function') {
-                        ok(Ajax.parseResult(r), Ajax.parseMeta(r));
+                        ok(Ajax.parseData(r), Ajax.parseMeta(r));
                     }
                 }
             },
@@ -2188,8 +2221,16 @@ var Ajax = {
     post: function (url, data, args) {
         this.request(url, data, args, 'POST')
     },
-    parseResult: function (r) {
-        return typeof r === 'object' && r && r.hasOwnProperty("items") ? r["items"] : r;
+    parseData: function (r) {
+        if (typeof r === 'object') {
+            if (r.hasOwnProperty("data")) {
+                return r["data"];
+            }
+            if (r.hasOwnProperty("items")) {
+                return r["items"];
+            }
+        }
+        return r;
     },
     parseMeta: function (r) {
         var m = new Meta();

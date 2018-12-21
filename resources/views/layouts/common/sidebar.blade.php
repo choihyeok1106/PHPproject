@@ -15,13 +15,13 @@
         <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false"
             data-auto-scroll="true"
             data-slide-speed="200">
-            <li class="nav-item start active">
+            <li class="nav-item start" data-id="home">
                 <a href="/home" class="nav-link nav-toggle">
                     <i class="icon-home"></i>
                     <span class="title">Home</span>
                 </a>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item" data-id="my-business">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-bar-chart"></i>
                     <span class="title">My Business</span>

@@ -274,6 +274,22 @@ namespace App\Services {
          * @return array|mixed|null
          */
         public function items(string $cls = '') {
+            return $this->data($cls);
+        }
+
+        /**
+         * @param string $cls
+         * @return array|mixed|null
+         */
+        public function result(string $cls = '') {
+            return $this->data($cls);
+        }
+
+        /**
+         * @param string $cls
+         * @return array|mixed|null
+         */
+        public function data(string $cls = '') {
             if ($cls && class_exists($cls) && is_array($this->items)) {
                 if (isset($result[0])) {
                     $data = null;
@@ -367,10 +383,11 @@ namespace App\Services {
                     'error' => $this->error
                 ];
             } else {
-                return [
-                    'items' => $this->items($cls),
-                    'meta'  => $this->meta
-                ];
+                $return['data'] = $this->data($cls);
+                if ($this->meta) {
+                    $return['meta'] = $this->meta;
+                }
+                return $return;
             }
         }
     }

@@ -42,7 +42,7 @@ class LoginAjax extends Controller {
                 return $this->no($svc->error());
             }
             /** @var Passport $pass */
-            $pass = $svc->result(Passport::class);
+            $pass = $svc->data(Passport::class);
             if ($pass) {
                 UserPrefs::setPassport($pass);
                 $svc = RepService::getRep($pass->number);
@@ -50,7 +50,7 @@ class LoginAjax extends Controller {
                     UserPrefs::clear();
                     return $this->no($svc->error());
                 }
-                UserPrefs::setRep($svc->result());
+                UserPrefs::setRep($svc->data());
                 if ($remember) {
                     cookieset('username', $pass->number, 60 * 24 * 30);
                 } else {
