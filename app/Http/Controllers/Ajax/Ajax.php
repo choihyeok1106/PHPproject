@@ -16,9 +16,10 @@ trait Ajax
 
     /**
      * @param string $key
-     * @param mixed  $val
+     * @param mixed $val
      */
-    function meta(string $key, $val) {
+    function meta(string $key, $val)
+    {
         $this->meta[$key] = $val;
     }
 
@@ -65,41 +66,44 @@ trait Ajax
 
     /**
      * @param string $message
-     * @param int    $code
+     * @param int $code
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-<<<<<<< HEAD
+
     function no(string $error)
     {
         return response(['error' => $error]);
-=======
-    function no(string $message, int $code = 500) {
-        return $this->response([
-            'error' => [
-                'code'    => $code,
-                'message' => $message,
-            ]
-        ]);
->>>>>>> 08051744fe007e6a0ed510ee725a3ef0828804c2
+
+        function no(string $message, int $code = 500)
+        {
+            return $this->response([
+                'error' => [
+                    'code' => $code,
+                    'message' => $message,
+                ]
+            ]);
+        }
     }
 
     /**
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-<<<<<<< HEAD
+
     function badRequest()
     {
         return $this->no('bad request');
-=======
-    function badRequest() {
-        return $this->no('bad request', 400);
+        function badRequest()
+        {
+            return $this->no('bad request', 400);
+        }
     }
 
     /**
      * @param $data
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    function response($data) {
+    function response($data)
+    {
         if ($this->meta && is_array($this->meta)) {
             foreach ($this->meta as $key => $meta) {
                 $data['meta'][$key] = $meta;
@@ -107,7 +111,6 @@ trait Ajax
 
         }
         return response($data);
->>>>>>> 08051744fe007e6a0ed510ee725a3ef0828804c2
     }
 
 }

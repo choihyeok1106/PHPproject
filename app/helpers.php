@@ -122,3 +122,23 @@ function cutstr(string $str, int $chars = 32, string $tail = '...') {
 
     return $str;
 }
+
+/**
+ * @param array $dirs
+ */
+function include_routes(array $dirs) {
+    foreach ($dirs as $dir) {
+        $path = base_path('routes' . DIRECTORY_SEPARATOR . $dir);
+        if (file_exists($path) && is_dir($path)) {
+            $files = scandir(base_path('routes' . DIRECTORY_SEPARATOR . $dir));
+            foreach ($files as $file) {
+                if (substr($file, -4) == '.php') {
+                    $filename = $path . DIRECTORY_SEPARATOR . $file;
+                    if (!in_array($filename, get_included_files())) {
+                        include $filename;
+                    }
+                }
+            }
+        }
+    }
+}
