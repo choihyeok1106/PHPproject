@@ -1,3 +1,54 @@
+body{
+    /*overflow-x: hidden;*/
+}
+
+/** sortable grid **/
+.grid {
+    position: relative;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.grid-item {
+    display: block;
+    float: left;
+    position: absolute;
+    width: 49.5%;
+    height: auto;
+    margin: 0 0 25px;
+    padding: 0 15px;
+    z-index: 1;
+}
+
+.grid-item .portlet {
+    margin-bottom: 0 !important;
+}
+
+.grid-item.muuri-item-dragging {
+    z-index: 3;
+}
+
+.grid-item.muuri-item-releasing {
+    z-index: 2;
+}
+
+.grid-item.muuri-item-hidden {
+    z-index: 0;
+}
+
+.grid-item-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 1200px) {
+    .grid-item {
+        width: 100%;
+        /*position: static !important;*/
+    }
+}
+
 .grid-box {
     background-color: #fff;
     position: relative;
@@ -830,6 +881,8 @@
 #new-alert {
     display: none;
 }
+
+
 
 .grid-item{
     position: absolute;

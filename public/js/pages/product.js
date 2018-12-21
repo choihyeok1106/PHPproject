@@ -58,7 +58,7 @@ var Product = {
         });
     },
     initProduct: function () {
-        App.a.get("/a/item/" + Product.sku, null, {
+        Ajax.get("/a/item/" + Product.sku, null, {
             ok: function (res) {
                 if (!res.hasOwnProperty("error")) {
                     console.log(res)
@@ -70,7 +70,7 @@ var Product = {
         });
     },
     initPrice: function () {
-        App.a.get("/a/item/" + Product.sku + '/price', null, {
+        Ajax.get("/a/item/" + Product.sku + '/price', null, {
             ok: function (res) {
                 if (!res.hasOwnProperty("error")) {
                     console.log("initPrice", res)
@@ -82,7 +82,7 @@ var Product = {
         });
     },
     initResource: function () {
-        App.a.get("/a/item/" + Product.sku + '/resource', null, {
+        Ajax.get("/a/item/" + Product.sku + '/resource', null, {
             ok: function (res) {
                 var ui = '<li><img src="{{$url}}" data-url="{{$url}}"></li>';
                 if (!res.hasOwnProperty("error")) {
@@ -118,7 +118,7 @@ var Product = {
             });
         };
 
-        App.a.get("/a/item/" + Product.sku + '/options', null, {
+        Ajax.get("/a/item/" + Product.sku + '/options', null, {
             ok: function (res) {
                 var ui = '<a href="javascript:void (0);" title="{{$title}}" data-sku="{{$sku}}">\n' +
                     '    <div class="opt-img">\n' +
@@ -242,7 +242,7 @@ var Product = {
             // slider.flexslider(0);
         });
 
-        App.a.get("/a/item/" + Product.sku + '/relates', null, {
+        Ajax.get("/a/item/" + Product.sku + '/relates', null, {
             ok: function (res) {
                 var ui = '<li>\n' +
                     '    <div class="card social-card share share-other card-product" data-social="item">\n' +
@@ -286,7 +286,7 @@ var Product = {
         var btn = $("#add-cart");
         btn.click(function () {
             if (Product.curr) {
-                App.a.post("/a/cart/add", {
+                Ajax.post("/a/cart/add", {
                     sku: Product.curr,
                     qty: $("#qty").val()
                 }, {

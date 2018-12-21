@@ -50,7 +50,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item" data-id="orders">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-basket"></i>
                     <span class="title">Orders</span>
@@ -79,7 +79,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item" data-id="tools">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class=" icon-wrench"></i>
                     <span class="title">Tools</span>
@@ -103,19 +103,19 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-id="enroll">
                 <a href="/enrollment" class="nav-link nav-toggle">
                     <i class="icon-user-follow"></i>
                     <span class="title">Enrollment</span>
                 </a>
             </li>
-            <li class="nav-item hide">
+            <li class="nav-item hidden" data-id="training-courses">
                 <a href="training-courses.php" class="nav-link nav-toggle">
                     <i class="icon-calendar"></i>
                     <span class="title">Training Course</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-id="support">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-support"></i>
                     <span class="title">Support</span>

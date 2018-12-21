@@ -24,6 +24,7 @@ var Genealogy = {
                 this.initSponsorTree("sponsor-tree");
             }
         }
+        this.initModal();
     },
     initTreeSelect() {
         $("#tree-select").change(function () {
@@ -115,17 +116,27 @@ var Genealogy = {
             Genealogy.tree.searchUI.obj.center(Genealogy.root)
         }
     },
+    initModal: function () {
+        $("#alert").find('#modal-ok').click(function () {
+            var id = $(this).attr("data-id");
+            if (id) {
+                window.open('/enrollment?rep=' + id, '_blank');
+            }
+            $('#alert').modal('hide');
+        });
+    },
     nodeClick: function (node) {
-        UI.profile.hide();
+        UI.aside.hide();
         if (node.tags.indexOf('add') < 0) {
             Ajax.get('/a/genealogy/' + node.id, null, {
                 ok: function (items) {
-                    console.log(items);
-                    UI.profile.show('#tree-profile');
+                    $("#tree-profile").find("input[name=number]").val(node.id);
+                    UI.aside.show('#tree-profile');
                 }
             });
         } else {
-            window.open('/enrollment?rep=' + node.pid, '_blank');
+            $("#alert").find('#modal-ok').attr('data-id', node.pid);
+            $("#alert").modal('show');
         }
     },
     initBinaryTree(elm) {
