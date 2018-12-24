@@ -45,6 +45,6 @@
 
 
 @section('script.plugins')
-    <script src="<?= js('/vendors/OrgChartJS/orgchart.js') ?>" type="text/javascript"></script>
+    <script src="<?= js('/assets/OrgChartJS/orgchart.js') ?>" type="text/javascript"></script>
     <script src="<?= js('/js/pages/genealogy.js') ?>" type="text/javascript"></script>
 @endsection
