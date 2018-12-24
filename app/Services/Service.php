@@ -8,6 +8,7 @@
 
 namespace App\Services {
 
+    use Illuminate\Support\Facades\App;
     use Ixudra\Curl\Builder;
     use Ixudra\Curl\CurlService;
 
@@ -96,6 +97,7 @@ namespace App\Services {
                 $builder->withHeaders([
                     'Accept: application/json',
                     'Authorization: ' . $this->getAuthorize(),
+                    'X-App-Locale: ' . App::getLocale()
                 ]);
                 if (is_array($this->headers)) {
                     foreach ($this->headers as $header) {
