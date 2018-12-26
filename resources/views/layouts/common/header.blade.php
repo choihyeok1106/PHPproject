@@ -22,7 +22,7 @@
             <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
             <div class="search-form search-form-expanded">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="{{ __('layouts/common/header.search') }}"
+                    <input type="text" class="form-control" placeholder="{{ __('layouts/common/header.search_for_product') }}"
                            name="query">
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn submit">
@@ -69,7 +69,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="{{route('team.index')}}"><i class="icon-user"></i> My Profile </a>
+                                <a href="{{route('account.index')}}"><i class="icon-user"></i> My Profile </a>
                             </li>
                             <li>
                                 <a href="{{route('tools.calendar')}}"><i class="icon-calendar"></i> My Calendar </a>

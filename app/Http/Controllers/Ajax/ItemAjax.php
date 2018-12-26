@@ -9,7 +9,6 @@
 namespace App\Http\Controllers\Ajax;
 
 
-use App\Cache\Cache;
 use App\Cache\ItemCache;
 use App\Demos\ItemData;
 use App\Http\Controllers\Controller;

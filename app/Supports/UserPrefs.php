@@ -79,7 +79,7 @@ class UserPrefs {
      * @return string
      */
     public static function getNumber() {
-        return self::get('repNumber');
+        return self::get('number');
     }
 
     /**

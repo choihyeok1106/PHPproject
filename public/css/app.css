@@ -414,8 +414,6 @@
     }
 }
 
-
-
 .mt-comments.libs .mt-comment {
     border-bottom: 1px solid #eee;
     margin-bottom: 0;
@@ -465,7 +463,7 @@
     margin-left: 15px;
 }
 
-.page-container-bg-solid .page-title small:before{
+.page-container-bg-solid .page-title small:before {
     content: "\f237";
     display: inline-block;
     width: 18px;
@@ -481,7 +479,7 @@
     float: right;
 }
 
-.page-container-bg-solid .page-title .actions .fa{
+.page-container-bg-solid .page-title .actions .fa {
     font-size: 18px;
     line-height: 17px;
 }
@@ -596,5 +594,8 @@
     /*background-color: red;*/
     cursor: pointer;
     /*font: normal normal normal 16px/1 LineAwesome;*/
+}
 
+.page-header.navbar .search-form .input-group .input-group-btn .btn.submit {
+    width: 48px;
 }

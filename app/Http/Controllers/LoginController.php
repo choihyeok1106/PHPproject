@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Supports\UserPrefs;
+use Illuminate\Support\Facades\Config;
 
 class LoginController extends Controller {
 
@@ -11,6 +12,7 @@ class LoginController extends Controller {
         if (UserPrefs::isLogin()) {
             return redirect('/');
         }
+
         return view('login.index');
     }
 
