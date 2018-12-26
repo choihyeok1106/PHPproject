@@ -19,32 +19,6 @@ namespace App\Services {
     class Error {
     }
 
-    /**
-     * @property string previous
-     * @property string next
-     */
-    class Links {
-    }
-
-    /**
-     * @property int   total
-     * @property int   count
-     * @property int   per_page
-     * @property int   current_page
-     * @property int   total_pages
-     * @property Links links
-     */
-    class Pagination {
-    }
-
-    /**
-     * @property string     prev
-     * @property Pagination pagination
-     */
-    class Meta {
-
-    }
-
     class Service {
 
         /** @var string $authorization */
@@ -64,6 +38,8 @@ namespace App\Services {
         private $builder;
         /** @var bool $asJsonResponse */
         private $asJsonResponse = true;
+        /** @var bool $debug */
+        private $debug = false;
 
         /**
          * @param mixed $headers
@@ -191,6 +167,12 @@ namespace App\Services {
                     $this->parseMeta();
                 }
             }
+            if($this->debug){
+                echo '<pre>';
+                print_r($this);
+                echo '</pre>';
+                exit;
+            }
         }
 
         /**
@@ -215,6 +197,15 @@ namespace App\Services {
                 return $this->error->message;
             }
             return '';
+        }
+
+        /**
+         * @param bool $debug
+         * @return Service
+         */
+        public function debug(bool $debug) {
+            $this->debug = $debug;
+            return $this;
         }
 
         /**
@@ -318,20 +309,9 @@ namespace App\Services {
          * Parse Meta
          */
         private function parseMeta() {
-            $meta             = new Meta();
-            $meta->pagination = new Pagination();
-            if (isset($this->body['meta']['pagination'])) {
-                $page                              = $this->body['meta']['pagination'];
-                $meta->pagination->total           = isset($page['total']) ? $page['total'] : 0;
-                $meta->pagination->count           = isset($page['count']) ? $page['count'] : 0;
-                $meta->pagination->per_page        = isset($page['per_page']) ? $page['per_page'] : 0;
-                $meta->pagination->current_page    = isset($page['current_page']) ? $page['current_page'] : 0;
-                $meta->pagination->total_pages     = isset($page['total_pages']) ? $page['total_pages'] : 0;
-                $meta->pagination->links           = new Links();
-                $meta->pagination->links->previous = isset($page['links']['previous']) ? $page['links']['previous'] : '';
-                $meta->pagination->links->next     = isset($page['links']['next']) ? $page['links']['next'] : '';
+            if(isset($this->body['meta'])){
+                $this->meta = $this->body['meta'];
             }
-            $this->meta = $meta;
         }
 
         /**

@@ -61,6 +61,11 @@
     line-height: 22px;
 }
 
+.user-login-5 .login-container > .login-content p.desc {
+    max-height: 110px;
+    overflow-y: auto;
+}
+
 .user-login-5 .login-container > .login-content > .login-form {
     margin-top: 80px;
     color: #a4aab2;
@@ -127,6 +132,10 @@
 
 .user-login-5 .login-container > .login-footer .login-social {
     padding-right: 0;
+}
+
+.user-login-5 .login-container > .login-footer .login-social #locale {
+    display: none;
 }
 
 .user-login-5 .login-container > .login-footer .login-social li {
