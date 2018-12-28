@@ -9,11 +9,14 @@
 namespace App\Cache;
 
 
+use App\Criterias\ItemsCriteria;
 use App\Demos\ItemData;
 use App\Models\HomeInterface;
 use App\Repositories\Category;
 use App\Repositories\Item;
+use App\Services\ItemService;
 use App\Supports\UserPrefs;
+use App\Transformers\ItemCategoryTransformer;
 
 class ItemCache {
 
@@ -24,26 +27,38 @@ class ItemCache {
         $key        = Cache::key(':item:categories');
         $categories = Cache::get($key);
         if (!$categories) {
-            $categories = ItemData::getCategories();
-            Cache::set($key, $categories);
+            $svc = ItemService::getCategories();
+            return Cache::set($key, $svc->response());
         }
         return $categories;
     }
 
     /**
-     * @param int    $category_id
-     * @param int    $page
-     * @param string $oder
-     * @param string $by
-     * @param string $query
+     * @param ItemsCriteria $c
      * @return mixed
      */
-    public static function getItems($category_id = 0, $page = 1, $oder = 'id', $by = 'desc', $query = '') {
-        $key   = Cache::key(":item:{$category_id}:{$oder}:{$by}:$query:{$page}");
+    public static function getItems(ItemsCriteria $c) {
+        $key = Cache::key([
+            'item',
+            $c->category,
+            $c->legend,
+            $c->type,
+            $c->level,
+            $c->virtual,
+            $c->enrollment,
+            $c->search,
+            $c->targetneed,
+            $c->tag,
+            $c->order,
+            $c->by,
+            $c->limit,
+            $c->page,
+        ]);
+        pe($key);
         $items = Cache::get($key);
         if (!$items) {
-            $items = ItemData::getProducts();
-            Cache::set($key, $items, 1800);
+            $svc = ItemService::getItems();
+            return Cache::set($key, $svc->response());
         }
         return $items;
     }

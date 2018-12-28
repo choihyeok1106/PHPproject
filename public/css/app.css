@@ -475,6 +475,10 @@
     top: 1px;
 }
 
+.page-container-bg-solid .page-title small i{
+    margin: 0 4px;
+}
+
 .page-container-bg-solid .page-title .actions {
     float: right;
 }

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Supports\UserPrefs;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class Auth {
     /**

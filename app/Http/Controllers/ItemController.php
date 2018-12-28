@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 
-use App\Cache\Cache;
 
-class ProductController extends Controller {
+class ItemController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -15,11 +14,11 @@ class ProductController extends Controller {
         $this->middleware('auth');
     }
 
-    public function index($cat = '') {
-        return view('products.index', ['cat' => $cat]);
+    public function index() {
+        return view('item.index');
     }
 
     public function show($sku) {
-        return view('products.show', ['sku' => $sku]);
+        return view('item.show', ['sku' => $sku]);
     }
 }

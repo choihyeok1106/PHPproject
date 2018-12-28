@@ -10,13 +10,15 @@ namespace App\Http\Controllers\Ajax;
 
 
 use App\Cache\ItemCache;
+use App\Constants\ItemLegend;
+use App\Constants\ItemPriceType;
+use App\Criterias\ItemsCriteria;
 use App\Demos\ItemData;
-use App\Http\Controllers\Controller;
+use App\Repositories\Category;
+use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
-class ItemAjax extends Controller {
-
-    use Ajax;
+class ItemAjax extends AjaxController {
 
     /**
      * HomeAjax constructor.
@@ -31,8 +33,9 @@ class ItemAjax extends Controller {
      */
     public function categories(Request $request) {
         if ($request->ajax()) {
-            $categories = ItemCache::getCategories();
-            return $this->ok($categories);
+            $data = ItemCache::getCategories();
+            $data = Category::Items($data);
+            return $this->ok($data);
         }
         return $this->badRequest();
     }
@@ -42,9 +45,23 @@ class ItemAjax extends Controller {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \Throwable
      */
-    public function items(Request $request) {
+    public function index(Request $request) {
         if ($request->ajax()) {
-            $data = ItemCache::getItems();
+            /** @var ItemsCriteria $c */
+            $c             = ItemsCriteria::new();
+            $c->page       = 1;
+            $c->category   = $this->int('category', 0, 0);
+            $c->search     = $this->string('search');
+            $c->sorting    = $this->string('sorting');
+            $c->tag        = '';
+            $c->limit      = 24;
+            $c->level      = UserPrefs::level();
+            $c->type       = ItemPriceType::Wholesale;
+            $c->legend     = ItemLegend::Product;
+            $c->targetneed = '';
+            $c->virtual    = 0;
+            $c->enrollment = 0;
+            $data          = ItemCache::getItems($c);
             return $this->ok($data);
         }
         return $this->badRequest();

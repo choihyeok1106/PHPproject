@@ -8,6 +8,7 @@
 
 namespace App\Services {
 
+    use App\Transformers\TransformerAbstract;
     use Illuminate\Support\Facades\App;
     use Ixudra\Curl\Builder;
     use Ixudra\Curl\CurlService;
@@ -140,20 +141,6 @@ namespace App\Services {
         }
 
         /**
-         * @param array  $arr
-         * @param string $cls
-         * @return null
-         */
-        private function getObject(array $arr, string $cls) {
-            $obj = new $cls();
-            if (method_exists($obj, 'make')) {
-                $obj->make($arr);
-                return $obj;
-            }
-            return null;
-        }
-
-        /**
          * Parse Response
          */
         private function parseResponse() {
@@ -167,7 +154,7 @@ namespace App\Services {
                     $this->parseMeta();
                 }
             }
-            if($this->debug){
+            if ($this->debug) {
                 echo '<pre>';
                 print_r($this);
                 echo '</pre>';
@@ -263,53 +250,31 @@ namespace App\Services {
         }
 
         /**
-         * @param string $cls
          * @return array|mixed|null
          */
-        public function items(string $cls = '') {
-            return $this->data($cls);
+        public function items() {
+            return $this->data();
         }
 
         /**
-         * @param string $cls
          * @return array|mixed|null
          */
-        public function result(string $cls = '') {
-            return $this->data($cls);
+        public function result() {
+            return $this->data();
         }
 
         /**
-         * @param string $cls
          * @return array|mixed|null
          */
-        public function data(string $cls = '') {
-            if ($cls && class_exists($cls) && is_array($this->items)) {
-                if (isset($result[0])) {
-                    $data = null;
-                    foreach ($this->items as $v) {
-                        if (is_array($v)) {
-                            $obj = $this->getObject($v, $cls);
-                            if ($obj) {
-                                $data[] = $obj;
-                            }
-                        } else {
-                            $data = $v;
-                        }
-                    }
-                    return $data;
-                } else {
-                    return $this->getObject($this->items, $cls);
-                }
-            } else {
-                return $this->items;
-            }
+        public function data() {
+            return $this->items;
         }
 
         /**
          * Parse Meta
          */
         private function parseMeta() {
-            if(isset($this->body['meta'])){
+            if (isset($this->body['meta'])) {
                 $this->meta = $this->body['meta'];
             }
         }
@@ -355,17 +320,16 @@ namespace App\Services {
         }
 
         /**
-         * @param string $cls
          * @return Error|array
          */
-        public function response(string $cls = '') {
+        public function response() {
             if ($this->error) {
                 $this->error->message = $this->error();
                 return [
                     'error' => $this->error
                 ];
             } else {
-                $return['data'] = $this->data($cls);
+                $return['data'] = $this->data();
                 if ($this->meta) {
                     $return['meta'] = $this->meta;
                 }

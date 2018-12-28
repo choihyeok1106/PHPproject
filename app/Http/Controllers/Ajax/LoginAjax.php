@@ -9,19 +9,14 @@
 namespace App\Http\Controllers\Ajax;
 
 
-use App\Http\Controllers\Controller;
 use App\Repositories\Passport;
-use App\Repositories\Rep;
 use App\Services\AuthenticateService;
 use App\Services\RepService;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 
 
-class LoginAjax extends Controller {
-
-    use Ajax;
+class LoginAjax extends AjaxController {
 
     /**
      * Ajax response Rep Login
@@ -42,7 +37,7 @@ class LoginAjax extends Controller {
                 return $this->no($svc->error());
             }
             /** @var Passport $pass */
-            $pass = $svc->data(Passport::class);
+            $pass = Passport::Item($svc->data(),false);
             if ($pass) {
                 UserPrefs::setPassport($pass);
                 $svc = RepService::getRep($pass->number);

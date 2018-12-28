@@ -75,13 +75,26 @@ class Cache {
     }
 
     /**
-     * @param string $key
+     * @param mixed $fields
+     * @param bool  $countryKey
      * @return string
      */
-    public static function key(string $key) {
-        if (substr($key, 0, 1) != ':') {
-            $key = ":{$key}";
+    public static function key($fields, $countryKey = true) {
+        $keys = [];
+        if ($countryKey) {
+            $keys[] = UserPrefs::country();
         }
-        return ':' . UserPrefs::getCountryLow() . $key;
+        if (is_string($fields)) {
+            if (substr($fields, 0, 1) === ':') {
+                $fields = substr($fields, 1);
+            }
+            $fields = explode(':', $fields);
+        }
+        if (is_array($fields)) {
+            foreach ($fields as $field) {
+                $keys[] = trim($field);
+            }
+        }
+        return $keys ? ':' . implode(':', $keys) : '';
     }
 }

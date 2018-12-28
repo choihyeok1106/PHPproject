@@ -40,7 +40,7 @@ trait Repository {
             $keys = explode(',', $keys);
         }
         if (is_array($keys) && $keys) {
-            $data = null;
+            $data = [];
             foreach ($keys as $key => $replace) {
                 $replace = trim($replace);
                 if (is_string($key)) {

@@ -9,14 +9,15 @@ namespace App\Http\Controllers\Ajax;
 
 
 use App\Cache\LocaleCache;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
-class LocaleAjax extends Controller {
+class LocaleAjax extends AjaxController {
 
-    use Ajax;
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function index(Request $request) {
         if ($request->ajax()) {
             $locales                   = LocaleCache::getLocales();

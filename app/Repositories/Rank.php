@@ -38,4 +38,7 @@ class Rank {
 
     use Repository;
 
+    const IBO = 100;
+
+
 }

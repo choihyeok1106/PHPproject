@@ -607,6 +607,10 @@
     font-weight: 600;
 }
 
+#products{
+    min-height: 240px;
+}
+
 #modal-cart table {
     width: 100%;
 }

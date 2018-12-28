@@ -58,7 +58,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="/products" class="nav-link ">
+                        <a href="/shopping" class="nav-link ">
                             <span class="title">Place an Order</span>
                         </a>
                     </li>

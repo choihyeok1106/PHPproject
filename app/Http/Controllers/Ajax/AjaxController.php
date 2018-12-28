@@ -1,34 +1,39 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: hook0
- * Date: 2018-11-15
- * Time: 10:03
+ * Author: R.j
+ * Date: 2018-12-28 17:32
+ * File: AjaxController.php
  */
 
 namespace App\Http\Controllers\Ajax;
 
 
-trait Ajax
-{
+use App\Http\Controllers\Controller;
+use App\Supports\Requests;
 
-    protected $meta = [];
+class AjaxController extends Controller {
+
+    use Requests;
+
+    protected $_meta = [];
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     /**
      * @param string $key
-     * @param mixed $val
+     * @param mixed  $val
      */
-    function meta(string $key, $val)
-    {
-        $this->meta[$key] = $val;
+    protected function meta(string $key, $val) {
+        $this->_meta[$key] = $val;
     }
 
     /**
      * @param mixed $obj
      * @return mixed
      */
-    function getObj($obj)
-    {
+    private function _vars($obj) {
         if (gettype($obj) === 'object') {
             if (method_exists($obj, 'getAttributes')) {
                 $obj = $obj->getAttributes();
@@ -38,7 +43,7 @@ trait Ajax
         }
         if (is_array($obj)) {
             foreach ($obj as $k => $v) {
-                $obj[$k] = $this->getObj($v);
+                $obj[$k] = $this->_vars($v);
             }
         }
         return $obj;
@@ -48,17 +53,16 @@ trait Ajax
      * @param mixed|null|object $response
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    function ok($response = null)
-    {
+    protected function ok($response = null) {
         if ($response === null) {
             $response['message'] = 'ok';
         } else {
-            if (is_array($response) && isset($response[0])) {
+            if (islist($response)) {
                 foreach ($response as $k => $v) {
-                    $response[$k] = $this->getObj($v);
+                    $response[$k] = $this->_vars($v);
                 }
             } else {
-                $response = $this->getObj($response);
+                $response = $this->_vars($response);
             }
         }
         return $this->response($response);
@@ -66,49 +70,34 @@ trait Ajax
 
     /**
      * @param string $message
-     * @param int $code
+     * @param int    $code
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-
-    function no(string $error)
-    {
-        return response(['error' => $error]);
-
-        function no(string $message, int $code = 500)
-        {
-            return $this->response([
-                'error' => [
-                    'code' => $code,
-                    'message' => $message,
-                ]
-            ]);
-        }
+    protected function no(string $message, int $code = 500) {
+        return $this->response([
+            'error' => [
+                'code'    => $code,
+                'message' => $message,
+            ]
+        ]);
     }
 
     /**
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-
-    function badRequest()
-    {
-        return $this->no('bad request');
-        function badRequest()
-        {
-            return $this->no('bad request', 400);
-        }
+    protected function badRequest() {
+        return $this->no('bad request', 400);
     }
 
     /**
      * @param $data
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    function response($data)
-    {
-        if ($this->meta && is_array($this->meta)) {
-            foreach ($this->meta as $key => $meta) {
+    protected function response($data) {
+        if (is_array($this->_meta)) {
+            foreach ($this->_meta as $key => $meta) {
                 $data['meta'][$key] = $meta;
             }
-
         }
         return response($data);
     }
