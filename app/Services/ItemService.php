@@ -8,6 +8,7 @@
 namespace App\Services;
 
 
+use App\Criterias\ItemsCriteria;
 use App\Supports\UserPrefs;
 
 class ItemService {
@@ -16,8 +17,8 @@ class ItemService {
         return Service::make(UserPrefs::pass())->get("/v1/vbo/items/categories");
     }
 
-    public static function getItems() {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/items");
+    public static function getItems(ItemsCriteria $c) {
+        return Service::make(UserPrefs::pass())->get("/v1/vbo/items", $c->vars());
     }
 
 }

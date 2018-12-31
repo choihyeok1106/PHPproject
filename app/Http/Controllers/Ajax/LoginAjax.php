@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 
 class LoginAjax extends AjaxController {
 
+    public $skipActions = 'all';
+
     /**
      * Ajax response Rep Login
      * @param Request $request

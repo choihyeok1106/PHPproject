@@ -51,20 +51,20 @@ var Items = {
             '<div class="col-md-4 col-lg-3 col-sm-6">\n' +
             '    <div class="portlet light portlet-fit portlet-product">\n' +
             '        <div class="portlet-body padding-0">\n' +
-            '            <a href="{{$link}}" class="product-image">\n' +
+            '            <a href="/shopping/{{$sku}}" class="product-image">\n' +
             '                <img src="{{$image}}" data-sku="{{$sku}}">\n' +
             '            </a>\n' +
             '        </div>\n' +
             '        <div class="portlet-title">\n' +
             '            <div class="caption">\n' +
-            '                <a href="{{$link}}" class="caption-subject uppercase">{{$title}}</a>\n' +
+            '                <a href="/shopping/{{$sku}}" class="caption-subject uppercase">{{$title}}</a>\n' +
             '            </div>\n' +
             '            <div class="m-grid">\n' +
             '                <div class="m-grid-row">\n' +
             '                    <div class="m-grid-col m-grid-col-left">\n' +
-            '                        <span class="price">${{$price}}</span>\n' +
+            '                        <span class="price">{{$price}}</span>\n' +
             '                        <br>\n' +
-            '                        <span class="pv font-grey-cascade">{{$pv}} PV</span>\n' +
+            '                        <span class="pv font-grey-cascade">{{$qv}} PV</span>\n' +
             '                    </div>\n' +
             '                    <div class="m-grid-col m-grid-col-right">\n' +
             '                        <button class="btn btn-success add-cart" data-sku="{{$sku}}" type="button">\n' +
@@ -126,16 +126,14 @@ var Items = {
         }
         // render items list html
         var render = function (items) {
-            console.log(items);
             var html = '';
             $.each(items, function (k, v) {
                 var item = ui;
                 // /{{\$link}}/g RegExp replace all
-                item = item.replace(/{{\$link}}/g, '/product/' + v['sku']);
                 item = item.replace('{{$image}}', v['image']);
                 item = item.replace('{{$title}}', v['title']);
                 item = item.replace('{{$price}}', v['price']);
-                item = item.replace('{{$pv}}', v['pv']);
+                item = item.replace('{{$qv}}', v['qv']);
                 item = item.replace(/{{\$sku}}/g, v['sku']);
                 html += item;
             });
@@ -183,18 +181,19 @@ var Items = {
                     sorting: sorting,
                 }, {
                     ok: function (items, meta) {
+                        console.log(meta);
                         console.log(items);
+                        render(items);
                     },
                     no: function (err) {
                         console.log(err);
                     },
                     before: function () {
                         Items.loadable = false;
-                        console.log('before');
                     },
                     end: function () {
                         Items.loadable = true;
-                        UI.noResult("#products");
+                        // UI.noResult("#products");
                         $("#products #svg").remove();
                         $(".products-loader").remove();
                     }

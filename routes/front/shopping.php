@@ -5,7 +5,7 @@
  * File: shopping.php
  */
 
-Route::resource('orders', 'OrderController');
+
 
 
 // shopping

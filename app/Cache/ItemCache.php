@@ -11,12 +11,8 @@ namespace App\Cache;
 
 use App\Criterias\ItemsCriteria;
 use App\Demos\ItemData;
-use App\Models\HomeInterface;
 use App\Repositories\Category;
-use App\Repositories\Item;
 use App\Services\ItemService;
-use App\Supports\UserPrefs;
-use App\Transformers\ItemCategoryTransformer;
 
 class ItemCache {
 
@@ -38,7 +34,7 @@ class ItemCache {
      * @return mixed
      */
     public static function getItems(ItemsCriteria $c) {
-        $key = Cache::key([
+        $key   = Cache::key([
             'item',
             $c->category,
             $c->legend,
@@ -54,10 +50,9 @@ class ItemCache {
             $c->limit,
             $c->page,
         ]);
-        pe($key);
         $items = Cache::get($key);
         if (!$items) {
-            $svc = ItemService::getItems();
+            $svc = ItemService::getItems($c);
             return Cache::set($key, $svc->response());
         }
         return $items;

@@ -281,11 +281,15 @@ namespace App\Services {
 
         /**
          * @param string $uri
+         * @param null   $data
          * @return Service
          */
-        public function get(string $uri) {
-            $builder    = (new CurlService)->to($this->parseUri($uri));
-            $builder    = $this->init($builder);
+        public function get(string $uri, $data = null) {
+            $builder = (new CurlService)->to($this->parseUri($uri));
+            $builder = $this->init($builder);
+            if (is_array($data) && $data) {
+                $builder->withData($data);
+            }
             $this->body = $builder->get();
             $this->parseResponse();
             return $this;
@@ -311,7 +315,7 @@ namespace App\Services {
         public function post(string $uri, $data = null) {
             $builder = (new CurlService)->to($this->parseUri($uri));
             $builder = $this->init($builder);
-            if ($data) {
+            if (is_array($data) && $data) {
                 $builder->withData($data);
             }
             $this->body = $builder->post();

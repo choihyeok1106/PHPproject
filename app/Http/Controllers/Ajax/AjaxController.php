@@ -8,14 +8,16 @@
 namespace App\Http\Controllers\Ajax;
 
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller as BaseController;
 use App\Supports\Requests;
 
-class AjaxController extends Controller {
+class AjaxController extends BaseController {
 
     use Requests;
 
     protected $_meta = [];
+
+    public $skipActions;
 
     public function __construct() {
         $this->middleware('auth');

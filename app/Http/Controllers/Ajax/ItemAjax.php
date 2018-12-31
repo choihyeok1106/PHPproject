@@ -15,17 +15,12 @@ use App\Constants\ItemPriceType;
 use App\Criterias\ItemsCriteria;
 use App\Demos\ItemData;
 use App\Repositories\Category;
+use App\Repositories\Item;
+use App\Repositories\Rank;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
 class ItemAjax extends AjaxController {
-
-    /**
-     * HomeAjax constructor.
-     */
-    public function __construct() {
-        $this->middleware('auth');
-    }
 
     /**
      * @param Request $request
@@ -34,8 +29,7 @@ class ItemAjax extends AjaxController {
     public function categories(Request $request) {
         if ($request->ajax()) {
             $data = ItemCache::getCategories();
-            $data = Category::Items($data);
-            return $this->ok($data);
+            return $this->ok(Category::Items($data));
         }
         return $this->badRequest();
     }
@@ -49,20 +43,20 @@ class ItemAjax extends AjaxController {
         if ($request->ajax()) {
             /** @var ItemsCriteria $c */
             $c             = ItemsCriteria::new();
-            $c->page       = 1;
             $c->category   = $this->int('category', 0, 0);
             $c->search     = $this->string('search');
             $c->sorting    = $this->string('sorting');
             $c->tag        = '';
-            $c->limit      = 24;
-            $c->level      = UserPrefs::level();
+            $c->limit      = 6;
+            $c->level      = Rank::IBO;
             $c->type       = ItemPriceType::Wholesale;
             $c->legend     = ItemLegend::Product;
             $c->targetneed = '';
             $c->virtual    = 0;
             $c->enrollment = 0;
+            $c->page       = 1;
             $data          = ItemCache::getItems($c);
-            return $this->ok($data);
+            return $this->ok(Item::Items($data));
         }
         return $this->badRequest();
     }

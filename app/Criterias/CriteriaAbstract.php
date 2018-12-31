@@ -41,4 +41,11 @@ abstract class CriteriaAbstract {
         return null;
     }
 
+    /**
+     * @return array
+     */
+    public function vars(){
+        return get_object_vars($this);
+    }
+
 }

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class EnrollmentController extends Controller
 {
+
+    public $skipActions = 'all';
+
     /**
      * Display a listing of the resource.
      *
