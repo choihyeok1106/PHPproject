@@ -10,15 +10,11 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Cache\GenealogyCache;
 use App\Cache\RepCache;
-use App\Http\Controllers\Controller;
-use App\Services\RepService;
 use App\Supports\GenealogyNode;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
-class GenealogyAjax extends Controller {
-
-    use Ajax;
+class GenealogyAjax extends AjaxController {
 
     /**
      * HomeAjax constructor.

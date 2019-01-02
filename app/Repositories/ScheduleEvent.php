@@ -9,8 +9,6 @@
 namespace App\Repositories;
 
 
-use Illuminate\Database\Eloquent\Model;
-
 
 /**
  * @property mixed id
@@ -20,6 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed backgroundColor
  * @property mixed url
  */
-class ScheduleEvent extends Model {
+class ScheduleEvent extends RepositoryAbstract {
 
 }

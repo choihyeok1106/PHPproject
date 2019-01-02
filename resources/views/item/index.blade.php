@@ -4,18 +4,15 @@
     <link href="{{css('/css/pages/shopping.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Shopping</span>
-            </li>
-        </ul>
-    </div>
+    <h1 class="page-title" data-menu="my-business">Shopping
+        <small>
+            <a href="/">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Orders</span>
+            <i class="fa fa-angle-right"></i>
+            <span>Shopping</span>
+        </small>
+    </h1>
 
     <div class="todo-ui">
         <div class="todo-sidebar">
@@ -28,15 +25,15 @@
                 <div class="portlet-body todo-project-list-content" style="height: auto;">
                     <div class="todo-project-list">
                         <ul id="category-side" class="nav nav-stacked">
-                            <li>
-                                <a href="/products">All</a>
+                            <li class="active" data-id="0">
+                                <a href="javascript:void(0)">All</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <select id="category-mobi" data-selected="{{$cat}}" class="form-control default category-select">
+            <select id="category-mobi" class="form-control default category-select">
                 <option value="0">All</option>
             </select>
         </div>
@@ -58,11 +55,11 @@
                         </div>
                         <div class="m-grid-col m-grid-col-lg-6 m-grid-col-right m-grid-col-md-4">
                             <select id="product-order-by" class="bs-select form-control input-small default">
-                                <option value="">New Item</option>
+                                <option value="id">New Item</option>
                                 <option value="na">Item Name: A-Z</option>
                                 <option value="nd">Item Name: Z-A</option>
-                                <option value="vd">PV: High to low</option>
-                                <option value="va">PV: Low to high</option>
+                                <option value="qd">PV: High to low</option>
+                                <option value="qa">PV: Low to high</option>
                                 <option value="pd">Price: High to low</option>
                                 <option value="pa">Price: Low to high</option>
                             </select>
@@ -92,7 +89,10 @@
             </div>
             <!-- END TODO CONTENT -->
         </div>
-        @endsection
-        @section('script.plugins')
-            <script src="{{js('/js/pages/products.js')}}" type="text/javascript"></script>
+
+        <div class="clearfix"></div>
+    </div>
+@endsection
+@section('script.plugins')
+    <script src="{{js('/js/pages/items.js')}}" type="text/javascript"></script>
 @endsection

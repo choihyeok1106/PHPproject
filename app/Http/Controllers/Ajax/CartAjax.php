@@ -10,14 +10,11 @@ namespace App\Http\Controllers\Ajax;
 
 
 use App\Demos\ItemData;
-use App\Http\Controllers\Controller;
 use App\Models\CartItem;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
-class CartAjax extends Controller {
-
-    use Ajax;
+class CartAjax extends AjaxController {
 
     /**
      * @param Request $request

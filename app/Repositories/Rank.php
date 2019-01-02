@@ -34,8 +34,9 @@ namespace App\Repositories;
  * @property mixed created_at
  * @property mixed updated_at
  */
-class Rank {
+class Rank extends RepositoryAbstract{
 
-    use Repository;
+    const IBO = 100;
+
 
 }

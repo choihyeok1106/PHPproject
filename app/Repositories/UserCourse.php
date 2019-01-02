@@ -17,6 +17,6 @@ namespace App\Repositories;
  * @property mixed end
  * @property mixed detail
  */
-class UserCourse {
+class UserCourse extends RepositoryAbstract{
 
 }

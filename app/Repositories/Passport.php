@@ -17,9 +17,7 @@ namespace App\Repositories;
  * @property mixed issued_at
  * @property mixed expires_at
  */
-class Passport {
-
-    use Repository;
+class Passport extends RepositoryAbstract {
 
     /**
      * @return bool

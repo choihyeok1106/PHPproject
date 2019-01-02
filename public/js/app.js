@@ -1910,6 +1910,9 @@ var UI = {
         });
     },
     noResult: function (elm, message) {
+        if(message === undefined){
+            message = 'No matching records found';
+        }
         var html = '<div class="no-result">' + message + '</div>';
         var iniHeight = function () {
             var h = $(".no-result").parent().outerHeight();

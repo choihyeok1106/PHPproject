@@ -1,73 +1,70 @@
-var Products = {
+var Items = {
+    id: -1,
+    loadable: true,
+    meta: {},
     init: function () {
-        setTimeout(Products.initCategories);
-        setTimeout(Products.initProducts);
-        setTimeout(Products.initSearch);
+        setTimeout(Items.initCategories);
+        setTimeout(Items.initItems);
+        setTimeout(Items.initSearch);
     },
     initCategories: function () {
-        var li_ui = '<li><a href="{{$link}}">{{$name}}</a></li>';
+        var li_ui = '<li data-id="{{$id}}"><a href="javascript:void(0)">{{$name}}</a></li>';
         var opt_ui = '<option value="{{$val}}" {{$selected}}>{{$name}}</option>';
-        // in mobile category select on change
-        $("#category-mobi").change(function () {
-            var id = $(this).val();
-            var loc = '/products';
-            if (id) {
-                loc += '/' + id;
-            }
-            location.replace(loc);
-        });
         Ajax.get("/a/item/categories", null, {
-            ok: function (res) {
-                if (!res.hasOwnProperty("error")) {
-                    var side = "";
-                    var mobi = "";
-                    $.each(res, function (k, v) {
-                        var id = v['name'].toLowerCase().replace(/ /g, '-');
-                        var li = li_ui;
-                        li = li.replace('{{$name}}', v['name']);
-                        li = li.replace('{{$link}}', '/products/' + id);
-                        side += li;
+            ok: function (items) {
+                var side = "";
+                var mobi = "";
+                $.each(items, function (k, v) {
+                    var li = li_ui;
+                    li = li.replace('{{$name}}', v.name);
+                    li = li.replace('{{$id}}', v.id);
+                    side += li;
 
-                        var opt = opt_ui;
-                        var selected = $("#category-mobi").attr("data-selected");
-                        opt = opt.replace('{{$val}}', id);
-                        opt = opt.replace('{{$name}}', v['name']);
-                        opt = opt.replace('{{$selected}}', selected === id ? 'selected' : '');
-                        mobi += opt;
-                    });
-                    if (side) {
-                        $("#category-side").append(side);
-                    }
-                    if (mobi) {
-                        $("#category-mobi").append(mobi);
-                        $('#category-mobi').selectpicker();
-                    }
+                    var opt = opt_ui;
+                    opt = opt.replace('{{$val}}', v.id);
+                    opt = opt.replace('{{$name}}', v.name);
+                    mobi += opt;
+                });
+                if (side) {
+                    $("#category-side").append(side);
                 }
-            },
-            no: function (err) {
-                console.log(err);
+                if (mobi) {
+                    $("#category-mobi").append(mobi);
+                    $('#category-mobi').selectpicker();
+                }
+
+                // in mobile category select on change
+                $("#category-mobi").change(function () {
+                    var id = $(this).val();
+                    $("#category-side li").removeClass("active");
+                    $("#category-side li[data-id=" + id + "]").addClass("active");
+                });
+                $("#category-side li").click(function () {
+                    $("#category-mobi").val($(this).attr('data-id')).change();
+                });
             }
         });
     },
-    initProducts: function () {
+    initItems: function () {
         // product box html ui
-        var ui = '<div class="col-md-4 col-lg-3 col-sm-6">\n' +
+        var ui =
+            '<div class="col-md-4 col-lg-3 col-sm-6">\n' +
             '    <div class="portlet light portlet-fit portlet-product">\n' +
             '        <div class="portlet-body padding-0">\n' +
-            '            <a href="{{$link}}" class="product-image">\n' +
+            '            <a href="/shopping/{{$sku}}" class="product-image">\n' +
             '                <img src="{{$image}}" data-sku="{{$sku}}">\n' +
             '            </a>\n' +
             '        </div>\n' +
             '        <div class="portlet-title">\n' +
             '            <div class="caption">\n' +
-            '                <a href="{{$link}}" class="caption-subject uppercase">{{$title}}</a>\n' +
+            '                <a href="/shopping/{{$sku}}" class="caption-subject uppercase">{{$title}}</a>\n' +
             '            </div>\n' +
             '            <div class="m-grid">\n' +
             '                <div class="m-grid-row">\n' +
             '                    <div class="m-grid-col m-grid-col-left">\n' +
-            '                        <span class="price">${{$price}}</span>\n' +
+            '                        <span class="price">{{$price}}</span>\n' +
             '                        <br>\n' +
-            '                        <span class="pv font-grey-cascade">{{$pv}} PV</span>\n' +
+            '                        <span class="pv font-grey-cascade">{{$qv}} PV</span>\n' +
             '                    </div>\n' +
             '                    <div class="m-grid-col m-grid-col-right">\n' +
             '                        <button class="btn btn-success add-cart" data-sku="{{$sku}}" type="button">\n' +
@@ -80,7 +77,6 @@ var Products = {
             '    </div>\n' +
             '</div>';
         // Ajax request data flag
-        var loading = false;
         // On scroll bottom request more data
         var onScrollBottom = function () {
             $(window).scroll(function () {
@@ -130,16 +126,14 @@ var Products = {
         }
         // render items list html
         var render = function (items) {
-            console.log(items);
             var html = '';
             $.each(items, function (k, v) {
                 var item = ui;
                 // /{{\$link}}/g RegExp replace all
-                item = item.replace(/{{\$link}}/g, '/product/' + v['sku']);
                 item = item.replace('{{$image}}', v['image']);
                 item = item.replace('{{$title}}', v['title']);
                 item = item.replace('{{$price}}', v['price']);
-                item = item.replace('{{$pv}}', v['pv']);
+                item = item.replace('{{$qv}}', v['qv']);
                 item = item.replace(/{{\$sku}}/g, v['sku']);
                 html += item;
             });
@@ -153,10 +147,9 @@ var Products = {
         };
         // ajax request items
         var getItems = function (firstLoad) {
-            if (!loading) {
+            if (Items.loadable) {
                 Ajax.get("/a/item/items", null, {
                     ok: function (res) {
-                        loading = false;
                         render(res);
                         if (firstLoad) {
                             onScrollBottom();
@@ -166,20 +159,51 @@ var Products = {
                         console.log(err);
                     },
                     before: function () {
-                        loading = true;
+                        Items.loadable = false;
                         if (!firstLoad) {
                             $("#products").append('<div class="products-loader"><div class="loader"></div></div>');
                         }
                     },
                     end: function () {
+                        Items.loadable = true;
                         $("#products #svg").remove();
                         $(".products-loader").remove();
                     }
                 });
             }
         };
+
+        var refresh = function (category = 0, search = '', sorting = 'id') {
+            if (Items.loadable) {
+                Ajax.get("/a/item", {
+                    category: category,
+                    search: search,
+                    sorting: sorting,
+                }, {
+                    ok: function (items, meta) {
+                        console.log(meta);
+                        console.log(items);
+                        render(items);
+                    },
+                    no: function (err) {
+                        console.log(err);
+                    },
+                    before: function () {
+                        Items.loadable = false;
+                    },
+                    end: function () {
+                        Items.loadable = true;
+                        // UI.noResult("#products");
+                        $("#products #svg").remove();
+                        $(".products-loader").remove();
+                    }
+                });
+            }
+
+        }
         // first request
-        getItems(true);
+        // getItems(true);
+        refresh();
     },
     initSearch: function () {
         var q = Get.get('query');
@@ -192,7 +216,7 @@ var Products = {
             var q = $("#product-search-input").val();
             var c = $("#category-mobi").attr("data-selected");
             var s = $("#product-order-by").val();
-            var loc = '/products'
+            var loc = '/shopping'
             if (c) {
                 loc += '/' + c;
             }
@@ -225,5 +249,5 @@ var Products = {
 }
 
 window.onload = function () {
-    Products.init();
+    Items.init();
 };

@@ -10,50 +10,48 @@ namespace App\Repositories;
 
 
 /**
- * @property mixed id
  * @property mixed sku
  * @property mixed country
  * @property mixed title
  * @property mixed image
  * @property mixed price
- * @property mixed pv
+ * @property mixed cv
+ * @property mixed qv
+ * @property mixed freeshipping
  */
-class Item implements IRepository {
-    public function transfer($unit) {
-        // TODO: Implement transfer() method.
-        foreach ($unit as $key => $value) {
-            switch ($key) {
-                case 'countries':
-                    $country = new Country();
-                    $country->transfer($value);
-                    $this->country = $country;
-                    break;
-                case 'legend':
-                    $this->legends = new Legend();
-                    foreach ($value as $_key => $_value) {
-                        $legend = new Legend();
-                        $legend->transfer($_value);
-                        $this->legends->$key = $legend;
-                    }
-                    break;
-                case 'currency':
-                    $currency = new Currency();
-                    $currency->transfer($value);
-                    $this->currency = $currency;
-                    break;
-                case 'prices':
-                    $this->prices = new Price();
-                    foreach ($value as $_key => $_value) {
-                        $price = new Price();
-                        $price->transfer($_value);
-                        $this->prices->$key = $price;
-                    }
-                    break;
-                default:
-                    $this->$key = $value;
-                    break;
+class Item extends RepositoryAbstract {
+
+    /**
+     * @return Item
+     */
+    public function transform() {
+        $this->sku          = $this->get('sku');
+        $this->title        = $this->get('title');
+        $this->image        = $this->get('image');
+        $this->price        = $this->get('price');
+        $this->cv           = $this->get('cv');
+        $this->qv           = $this->get('qv');
+        $this->freeshipping = $this->get('free_shipping');
+        return $this;
+    }
+
+    /**
+     * @return CategoryTranslate
+     */
+    public function translate() {
+        $translates = $this->translates();
+        foreach ($translates as $translate) {
+            if ($this->locale == $translate->locale) {
+                return $translate;
             }
         }
-        return $this;
+        return null;
+    }
+
+    /**
+     * @return CategoryTranslate[]
+     */
+    public function translates() {
+        return ItemTranslate::Items($this->get('translates'), false);
     }
 }

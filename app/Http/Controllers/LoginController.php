@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Config;
 
 class LoginController extends Controller {
 
+    public $skipActions = 'all';
+
     public function index() {
         if (UserPrefs::isLogin()) {
             return redirect('/');

@@ -12,7 +12,6 @@ namespace App\Http\Controllers\Ajax;
 use App\Cache\HomeCache;
 use App\Cache\RankCache;
 use App\Constants\SmartAlertType;
-use App\Http\Controllers\Controller;
 use App\Models\HomeInterface;
 use App\Models\HomeWidget;
 use App\Repositories\PureCommunity;
@@ -23,9 +22,7 @@ use App\Repositories\SmartAlert;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
-class HomeAjax extends Controller {
-
-    use Ajax;
+class HomeAjax extends AjaxController {
 
     /**
      * HomeAjax constructor.

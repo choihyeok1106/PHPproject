@@ -10,12 +10,10 @@ namespace App\Http\Controllers\Ajax;
 
 
 use App\Demos\PromotionData;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ShoppingAjax extends Controller {
+class ShoppingAjax extends AjaxController {
 
-    use Ajax;
 
     /**
      * @param Request $request

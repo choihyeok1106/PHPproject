@@ -10,20 +10,17 @@ namespace App\Http\Controllers\Ajax;
 
 
 use App\Cache\ItemCache;
+use App\Constants\ItemLegend;
+use App\Constants\ItemPriceType;
+use App\Criterias\ItemsCriteria;
 use App\Demos\ItemData;
-use App\Http\Controllers\Controller;
+use App\Repositories\Category;
+use App\Repositories\Item;
+use App\Repositories\Rank;
+use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
-class ItemAjax extends Controller {
-
-    use Ajax;
-
-    /**
-     * HomeAjax constructor.
-     */
-    public function __construct() {
-        $this->middleware('auth');
-    }
+class ItemAjax extends AjaxController {
 
     /**
      * @param Request $request
@@ -31,8 +28,8 @@ class ItemAjax extends Controller {
      */
     public function categories(Request $request) {
         if ($request->ajax()) {
-            $categories = ItemCache::getCategories();
-            return $this->ok($categories);
+            $data = ItemCache::getCategories();
+            return $this->ok(Category::Items($data));
         }
         return $this->badRequest();
     }
@@ -42,10 +39,24 @@ class ItemAjax extends Controller {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \Throwable
      */
-    public function items(Request $request) {
+    public function index(Request $request) {
         if ($request->ajax()) {
-            $data = ItemCache::getItems();
-            return $this->ok($data);
+            /** @var ItemsCriteria $c */
+            $c             = ItemsCriteria::new();
+            $c->category   = $this->int('category', 0, 0);
+            $c->search     = $this->string('search');
+            $c->sorting    = $this->string('sorting');
+            $c->tag        = '';
+            $c->limit      = 6;
+            $c->level      = Rank::IBO;
+            $c->type       = ItemPriceType::Wholesale;
+            $c->legend     = ItemLegend::Product;
+            $c->targetneed = '';
+            $c->virtual    = 0;
+            $c->enrollment = 0;
+            $c->page       = 1;
+            $data          = ItemCache::getItems($c);
+            return $this->ok(Item::Items($data));
         }
         return $this->badRequest();
     }
