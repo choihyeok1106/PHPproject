@@ -8,6 +8,8 @@
 
 namespace App\Services {
 
+    use App\Transformers\TransformerAbstract;
+    use Illuminate\Support\Facades\App;
     use Ixudra\Curl\Builder;
     use Ixudra\Curl\CurlService;
 
@@ -16,32 +18,6 @@ namespace App\Services {
      * @property array|string message
      */
     class Error {
-    }
-
-    /**
-     * @property string previous
-     * @property string next
-     */
-    class Links {
-    }
-
-    /**
-     * @property int   total
-     * @property int   count
-     * @property int   per_page
-     * @property int   current_page
-     * @property int   total_pages
-     * @property Links links
-     */
-    class Pagination {
-    }
-
-    /**
-     * @property string     prev
-     * @property Pagination pagination
-     */
-    class Meta {
-
     }
 
     class Service {
@@ -63,6 +39,8 @@ namespace App\Services {
         private $builder;
         /** @var bool $asJsonResponse */
         private $asJsonResponse = true;
+        /** @var bool $debug */
+        private $debug = false;
 
         /**
          * @param mixed $headers
@@ -96,6 +74,7 @@ namespace App\Services {
                 $builder->withHeaders([
                     'Accept: application/json',
                     'Authorization: ' . $this->getAuthorize(),
+                    'X-App-Locale: ' . App::getLocale()
                 ]);
                 if (is_array($this->headers)) {
                     foreach ($this->headers as $header) {
@@ -162,20 +141,6 @@ namespace App\Services {
         }
 
         /**
-         * @param array  $arr
-         * @param string $cls
-         * @return null
-         */
-        private function getObject(array $arr, string $cls) {
-            $obj = new $cls();
-            if (method_exists($obj, 'make')) {
-                $obj->make($arr);
-                return $obj;
-            }
-            return null;
-        }
-
-        /**
          * Parse Response
          */
         private function parseResponse() {
@@ -188,6 +153,12 @@ namespace App\Services {
                     $this->parseItems();
                     $this->parseMeta();
                 }
+            }
+            if ($this->debug) {
+                echo '<pre>';
+                print_r($this);
+                echo '</pre>';
+                exit;
             }
         }
 
@@ -213,6 +184,15 @@ namespace App\Services {
                 return $this->error->message;
             }
             return '';
+        }
+
+        /**
+         * @param bool $debug
+         * @return Service
+         */
+        public function debug(bool $debug) {
+            $this->debug = $debug;
+            return $this;
         }
 
         /**
@@ -270,75 +250,46 @@ namespace App\Services {
         }
 
         /**
-         * @param string $cls
          * @return array|mixed|null
          */
-        public function items(string $cls = '') {
-            return $this->data($cls);
+        public function items() {
+            return $this->data();
         }
 
         /**
-         * @param string $cls
          * @return array|mixed|null
          */
-        public function result(string $cls = '') {
-            return $this->data($cls);
+        public function result() {
+            return $this->data();
         }
 
         /**
-         * @param string $cls
          * @return array|mixed|null
          */
-        public function data(string $cls = '') {
-            if ($cls && class_exists($cls) && is_array($this->items)) {
-                if (isset($result[0])) {
-                    $data = null;
-                    foreach ($this->items as $v) {
-                        if (is_array($v)) {
-                            $obj = $this->getObject($v, $cls);
-                            if ($obj) {
-                                $data[] = $obj;
-                            }
-                        } else {
-                            $data = $v;
-                        }
-                    }
-                    return $data;
-                } else {
-                    return $this->getObject($this->items, $cls);
-                }
-            } else {
-                return $this->items;
-            }
+        public function data() {
+            return $this->items;
         }
 
         /**
          * Parse Meta
          */
         private function parseMeta() {
-            $meta             = new Meta();
-            $meta->pagination = new Pagination();
-            if (isset($this->body['meta']['pagination'])) {
-                $page                              = $this->body['meta']['pagination'];
-                $meta->pagination->total           = isset($page['total']) ? $page['total'] : 0;
-                $meta->pagination->count           = isset($page['count']) ? $page['count'] : 0;
-                $meta->pagination->per_page        = isset($page['per_page']) ? $page['per_page'] : 0;
-                $meta->pagination->current_page    = isset($page['current_page']) ? $page['current_page'] : 0;
-                $meta->pagination->total_pages     = isset($page['total_pages']) ? $page['total_pages'] : 0;
-                $meta->pagination->links           = new Links();
-                $meta->pagination->links->previous = isset($page['links']['previous']) ? $page['links']['previous'] : '';
-                $meta->pagination->links->next     = isset($page['links']['next']) ? $page['links']['next'] : '';
+            if (isset($this->body['meta'])) {
+                $this->meta = $this->body['meta'];
             }
-            $this->meta = $meta;
         }
 
         /**
          * @param string $uri
+         * @param null   $data
          * @return Service
          */
-        public function get(string $uri) {
-            $builder    = (new CurlService)->to($this->parseUri($uri));
-            $builder    = $this->init($builder);
+        public function get(string $uri, $data = null) {
+            $builder = (new CurlService)->to($this->parseUri($uri));
+            $builder = $this->init($builder);
+            if (is_array($data) && $data) {
+                $builder->withData($data);
+            }
             $this->body = $builder->get();
             $this->parseResponse();
             return $this;
@@ -364,7 +315,7 @@ namespace App\Services {
         public function post(string $uri, $data = null) {
             $builder = (new CurlService)->to($this->parseUri($uri));
             $builder = $this->init($builder);
-            if ($data) {
+            if (is_array($data) && $data) {
                 $builder->withData($data);
             }
             $this->body = $builder->post();
@@ -373,17 +324,16 @@ namespace App\Services {
         }
 
         /**
-         * @param string $cls
          * @return Error|array
          */
-        public function response(string $cls = '') {
+        public function response() {
             if ($this->error) {
                 $this->error->message = $this->error();
                 return [
                     'error' => $this->error
                 ];
             } else {
-                $return['data'] = $this->data($cls);
+                $return['data'] = $this->data();
                 if ($this->meta) {
                     $return['meta'] = $this->meta;
                 }

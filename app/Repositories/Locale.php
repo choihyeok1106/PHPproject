@@ -9,14 +9,8 @@
 namespace App\Repositories;
 
 
-class Locale implements IRepository
-{
-    public function transfer($unit)
-    {
-        // TODO: Implement transfer() method.
-        foreach ($unit as $key => $value) {
-            $this->$key = $value;
-        }
-        return $this;
-    }
+class Locale {
+
+    use Repository;
+
 }

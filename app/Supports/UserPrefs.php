@@ -12,6 +12,7 @@ namespace App\Supports;
 use App\Models\HomeInterface;
 use App\Models\HomeWidget;
 use App\Repositories\Passport;
+use App\Repositories\Rank;
 use App\Repositories\Rep;
 use App\Services\AuthenticateService;
 
@@ -79,7 +80,7 @@ class UserPrefs {
      * @return string
      */
     public static function getNumber() {
-        return self::get('repNumber');
+        return self::get('number');
     }
 
     /**
@@ -92,7 +93,7 @@ class UserPrefs {
     /**
      * @return string
      */
-    public static function getCountryLow() {
+    public static function country() {
         return strtolower(self::get('country'));
     }
 
@@ -100,7 +101,7 @@ class UserPrefs {
      * @param Passport $pass
      */
     public static function setPassport(Passport $pass) {
-        self::set('passport', $pass->vars());
+        self::set('passport', $pass->getAttrs());
     }
 
     /**
@@ -111,10 +112,20 @@ class UserPrefs {
     }
 
     /**
+     * @return int
+     */
+    public static function level() {
+        if (self::get('cancelled')) {
+            return Rank::IBO;
+        }
+        return self::get('lifetime_rank_id');
+    }
+
+    /**
      * @return array
      */
     public static function pass() {
-        $pass = (new Passport)->make(self::get('passport'));
+        $pass = Passport::make(self::get('passport'));
         if ($pass->expired()) {
             $svc = AuthenticateService::refresh($pass->passport, $pass->number);
             if ($svc->succeed()) {

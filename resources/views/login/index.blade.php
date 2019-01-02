@@ -10,10 +10,8 @@
             </div>
             <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
                 <div class="login-content">
-                    <h1>Virtual Back Office Login</h1>
-                    <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam
-                        erat volutpat. Lorem ipsum dolor
-                        sit amet, coectetuer adipiscing. </p>
+                    <h1>{{ __('login/index.login_title') }}</h1>
+                    <p class="desc"> {!! trans('login/index.login_description')  !!}</p>
                     <div class="login-form">
                         <div class="alert alert-danger display-hide">
                             <button class="close" data-close="alert"></button>
@@ -72,10 +70,7 @@
                 <div class="login-footer">
                     <ul class="login-social">
                         <li>
-                            <select id="locale">
-                                <option>English</option>
-                                <option>Korean</option>
-                            </select>
+                            <select id="locale"></select>
                         </li>
                     </ul>
                     <div class="login-copyright margin-top-5">

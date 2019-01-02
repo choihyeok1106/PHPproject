@@ -26,7 +26,7 @@ function login() {
                 if (re.hasOwnProperty("error")) {
                     show_danger(re["error"])
                 } else {
-                    var redirectUrl = Get.get('redirect');
+                    var redirectUrl = Get.get('redirect', '/');
                     location.replace(redirectUrl)
                 }
             },
@@ -52,9 +52,7 @@ function send() {
         email: $("email").val()
     }, {
         ok: function (re) {
-            if (re.hasOwnProperty("error")) {
-
-            }
+            console.log(re);
         },
         no: function (e, i, t) {
 
@@ -68,6 +66,24 @@ function send() {
             $(btn).attr("disabled", false)
         }
     })
+}
+
+function initLocale() {
+    Ajax.get("/a/locales", null, {
+        ok: function (items, meta) {
+            console.log(items);
+            console.log(meta);
+            var elm = $("#locale");
+            $.each(items, function (k, v) {
+                var select = v.code === meta.locale ? 'selected' : '';
+                elm.append('<option value="' + v.code + '" ' + select + '>' + v.name + '</option>');
+            });
+            elm.show();
+            elm.change(function () {
+                location.href = '/locale/' + $(this).val();
+            });
+        }
+    });
 }
 
 var Login = function () {
@@ -109,12 +125,13 @@ var Login = function () {
                     }
                 );
             }
-            $('.forget-form').hide()
+            $('.forget-form').hide();
+            initLocale();
         }
     };
 
 }();
 
 jQuery(document).ready(function () {
-    Login.init()
+    Login.init();
 });

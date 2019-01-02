@@ -7,8 +7,16 @@
             <i class="fa fa-angle-right"></i>
             <span>My business</span>
             <i class="fa fa-angle-right"></i>
+            <span>Genealogy</span>
+            <i class="fa fa-angle-right"></i>
             <span>Binary tree</span>
         </small>
+        <div class="actions">
+            <select id="tree-select" class="bs-select form-control input-small default">
+                <option value="binary">Binary tree</option>
+                <option value="sponsor">Sponsor tree</option>
+            </select>
+        </div>
     </h1>
     <div class="page-bar hidden">
         <ul class="page-breadcrumb">
@@ -32,11 +40,11 @@
 
     <div id="binary-tree" class="OrgChart"></div>
 
-    @include('genealogy.side')
+    @include('genealogy.include')
 @endsection
 
 
 @section('script.plugins')
-    <script src="<?= js('/vendors/OrgChartJS/orgchart.js') ?>" type="text/javascript"></script>
+    <script src="<?= js('/assets/OrgChartJS/orgchart.js') ?>" type="text/javascript"></script>
     <script src="<?= js('/js/pages/genealogy.js') ?>" type="text/javascript"></script>
 @endsection

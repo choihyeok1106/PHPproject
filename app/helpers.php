@@ -81,7 +81,19 @@ function islocal() {
  * @return bool
  */
 function islist($obj) {
-    return is_array($obj) && isset($obj[0]);
+    if (is_array($obj)) {
+        $prev = -1;
+        foreach ($obj as $k => $v) {
+            if (is_int($k) && ($k - 1) == $prev) {
+                $prev = $k;
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
 }
 
 /**
@@ -140,5 +152,18 @@ function include_routes(array $dirs) {
                 }
             }
         }
+    }
+}
+
+function locale(){
+    switch (\Illuminate\Support\Facades\App::getLocale()) {
+        case 'en':
+            return 'en-US';
+            break;
+        case 'kr':
+            return 'ko-KR';
+            break;
+        default:
+            return \Illuminate\Support\Facades\App::getLocale();
     }
 }

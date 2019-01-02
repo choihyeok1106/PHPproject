@@ -5,7 +5,7 @@ var Cart = {
     },
     initItems: function () {
         var update = function (elm, sku, qty) {
-            App.a.post("/a/cart/update", {
+            Ajax.post("/a/cart/update", {
                 sku: sku,
                 qty: qty
             }, {
@@ -25,11 +25,11 @@ var Cart = {
                 }
             });
         };
-        App.a.get("/a/cart/items", null, {
+        Ajax.get("/a/cart/items", null, {
             ok: function (res) {
                 console.log(res);
                 var delItem = function (btn, sku) {
-                    App.a.post("/a/cart/delete", {
+                    Ajax.post("/a/cart/delete", {
                         sku: sku
                     }, {
                         ok: function (res) {
@@ -129,7 +129,7 @@ var Cart = {
         });
     },
     initPromotions: function () {
-        App.a.get("/a/shopping/promotions", null, {
+        Ajax.get("/a/shopping/promotions", null, {
             ok: function (res) {
                 if (!res.hasOwnProperty("error")) {
                     console.log(res);
