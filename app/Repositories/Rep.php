@@ -17,6 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed first_name
  * @property mixed last_name
  */
-class Rep {
+class Rep extends RepositoryAbstract{
 
 }

@@ -9,8 +9,6 @@
 namespace App\Repositories;
 
 
-class Locale {
-
-    use Repository;
+class Locale extends RepositoryAbstract{
 
 }

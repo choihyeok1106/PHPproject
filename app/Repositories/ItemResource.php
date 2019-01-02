@@ -20,6 +20,6 @@ namespace App\Repositories;
  * @property mixed height
  * @property mixed size
  */
-class ItemResource {
+class ItemResource extends RepositoryAbstract{
 
 }

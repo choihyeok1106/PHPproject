@@ -9,14 +9,6 @@
 namespace App\Repositories;
 
 
-class Country implements IRepository
-{
-    public function transfer($unit)
-    {
-        // TODO: Implement transfer() method.
-        foreach ($unit as $key => $value) {
-            $this->$key = $value;
-        }
-        return $this;
-    }
+class Country extends RepositoryAbstract {
+
 }

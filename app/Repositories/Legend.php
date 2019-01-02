@@ -9,14 +9,6 @@
 namespace App\Repositories;
 
 
-class legend implements IRepository
-{
-    public function transfer($unit)
-    {
-        // TODO: Implement transfer() method.
-        foreach ($unit as $key => $value) {
-            $this->$key = $value;
-        }
-        return $this;
-    }
+class legend extends RepositoryAbstract {
+
 }

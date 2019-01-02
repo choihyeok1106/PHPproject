@@ -28,6 +28,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed start_date
  * @property mixed end_date
  */
-class ItemPrice  {
+class ItemPrice  extends RepositoryAbstract{
 
 }

@@ -17,14 +17,6 @@ namespace App\Repositories;
  * @property mixed link
  * @property mixed created_at
  */
-class Content implements IRepository {
-
-    public function transfer($unit) {
-        // TODO: Implement transfer() method.
-        foreach ($unit as $key => $value) {
-            $this->$key = $value;
-        }
-        return $this;
-    }
+class Content extends RepositoryAbstract {
 
 }
