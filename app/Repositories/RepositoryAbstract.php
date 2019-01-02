@@ -11,7 +11,7 @@ namespace App\Repositories;
 /**
  * @property mixed locale
  */
-class RepositoryAbstract {
+abstract class RepositoryAbstract {
 
     /** @var mixed $locale */
     private $_data;

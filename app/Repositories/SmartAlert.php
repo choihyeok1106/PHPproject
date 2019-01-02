@@ -14,6 +14,6 @@ namespace App\Repositories;
  * @property mixed title
  * @property mixed content
  */
-class SmartAlert {
+class SmartAlert extends RepositoryAbstract{
 
 }
