@@ -14,11 +14,11 @@ use App\Supports\UserPrefs;
 class ItemService {
 
     public static function getCategories() {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/items/categories");
+        return Service::make()->get("/v1/vbo/items/categories");
     }
 
     public static function getItems(ItemsCriteria $c) {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/items", $c->vars());
+        return Service::make()->get("/v1/vbo/items", $c->vars());
     }
 
 }

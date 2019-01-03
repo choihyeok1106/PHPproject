@@ -6,30 +6,26 @@
 @endsection
 
 @section('content')
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <a href="{{route('products.index')}}">Shopping</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Weight Loss</span>
-            </li>
-        </ul>
-    </div>
+
+    <h1 class="page-title" data-menu="orders" data-sku="{{$sku}}"> {{$sku}}
+        <small>
+            <a href="/">Home</a>
+            <i class="fa fa-angle-right"></i>
+            Dashboard
+        </small>
+        <div class="actions">
+            <button type="button" id="settings-show" class="btn btn-icon-only blue">
+                <i class="fa fa-cog"></i>
+            </button>
+        </div>
+    </h1>
 
     <div class="portlet light">
         <div class="portlet-title">
             <div class="caption">
-                        <span class="caption-subject sbold font-grey-gallery uppercase">
-                            HEALTHTRIM MATCHA VEGAN SHAKE
-                        </span>
-                <span id="item-sku" class="caption-helper">{{$sku}}</span>
+                <span id="item-title" class="caption-subject sbold font-grey-gallery uppercase">
+                    HEALTHTRIM MATCHA VEGAN SHAKE
+                </span>
             </div>
         </div>
         <div class="portlet-body">
@@ -222,25 +218,25 @@
                     <?php for ($i = 0; $i < 12; $i++) { ?>
                     <li>
                         <div class="card social-card share share-other card-product" data-social="item">
-<<<<<<< HEAD
+                            <<<<<<< HEAD
                             <div class="card-content full-height">
-                                <a href="{{route('products.show',123456)}}" class="thumbnail">
+                                <a href="{{route('item.view',123456)}}" class="thumbnail">
                                     <img alt="Person photo"
                                          src="https://shop.livepure.co.kr/upfiles/product/main_4008_gs557k1_2.jpg">
-=======
-                            <div class="card-content">
-                                <a href="/product/LP11550" class="thumb" data-toggle="res-box">
-                                    <img src="https://extranet.securefreedom.com/GenesisPure/Shopping/Images/144_GoYin-single-150-blue_1.jpg">
->>>>>>> 3980d62a486a68b8cb773c44b590c4825a83b0e7
-                                </a>
+                                    =======
+                                    <div class="card-content">
+                                        <a href="/product/LP11550" class="thumb" data-toggle="res-box">
+                                            <img src="https://extranet.securefreedom.com/GenesisPure/Shopping/Images/144_GoYin-single-150-blue_1.jpg">
+                                            >>>>>>> 3980d62a486a68b8cb773c44b590c4825a83b0e7
+                                        </a>
+                                    </div>
+                                    <a href="product.php" class="card-header clearfix last">
+                                        <h5>PURE BlenderBottle<?= $i + 1 ?></h5>
+                                    </a>
+                                    <div class="card-price">
+                                        $114.95
+                                    </div>
                             </div>
-                            <a href="product.php" class="card-header clearfix last">
-                                <h5>PURE BlenderBottle<?= $i + 1 ?></h5>
-                            </a>
-                            <div class="card-price">
-                                $114.95
-                            </div>
-                        </div>
                     </li>
                     <?php } ?>
                 </ul>
@@ -262,7 +258,8 @@
                                 </div>
                             </td>
                             <td class="lst">
-                                <h3>Cart subtotal <span>(<span class="count">2</span> items)</span>: <b class="price text-danger">$218.99</b></h3>
+                                <h3>Cart subtotal <span>(<span class="count">2</span> items)</span>: <b
+                                            class="price text-danger">$218.99</b></h3>
                                 <div>
                                     <a href="/shopping/cart" class="btn dark btn-outline">Cart</a>
                                     <button type="button" class="btn green">Proceed to checkout</button>
@@ -279,5 +276,5 @@
 @section('script.plugins')
     <script src="<?= STATIC_SERVER ?>/vendors/flexslider/shCore.js"></script>
     <script src="<?= STATIC_SERVER ?>/vendors/flexslider/jquery.flexslider-min.js"></script>
-    <script src="{{js('/js/pages/product.js')}}" type="text/javascript"></script>
+    <script src="{{js('/js/pages/item.js')}}" type="text/javascript"></script>
 @endsection

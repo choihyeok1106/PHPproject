@@ -15,15 +15,28 @@ abstract class CriteriaAbstract {
     use Requests;
 
     /**
+     * @param array|null $data
      * @return $this
      */
-    public static function new() {
+    public static function new(array $data = null) {
         $called_class = get_called_class();
-        $cls          = new $called_class;
+        $cls          = new $called_class($data);
         if (method_exists($cls, 'build')) {
             $cls->build();
         }
         return $cls;
+    }
+
+    /**
+     * CriteriaAbstract constructor.
+     * @param array|null $data
+     */
+    public function __construct(array $data = null) {
+        if (is_array($data)) {
+            foreach ($data as $k => $v) {
+                $this->$k = $v;
+            }
+        }
     }
 
     /**
@@ -42,10 +55,13 @@ abstract class CriteriaAbstract {
     }
 
     /**
-     * @return array
+     * @param mixed $key
+     * @param mixed $val
+     * @return $this
      */
-    public function vars(){
-        return get_object_vars($this);
+    public function set($key, $val) {
+        $this->$key = $val;
+        return $this;
     }
 
 }

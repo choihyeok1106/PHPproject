@@ -2,7 +2,7 @@
     <div class="portlet light portlet-fit portlet-product">
         <div class="portlet-body padding-0">
             <a href="/shopping/{{$sku}}" class="product-image">
-                <img src="{{$image}}" data-sku="{{$sku}}">
+                <img src="/img/transparent.png" style="background-image: url({{$image}})" data-image="{{$image}}" data-sku="{{$sku}}">
             </a>
         </div>
         <div class="portlet-title">

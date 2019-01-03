@@ -20,9 +20,22 @@ class CartAjax extends AjaxController {
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
+    public function count(Request $request) {
+        if ($request->ajax()) {
+            return $this->ok([
+                'count' => CartItem::count(UserPrefs::id())
+            ]);
+        }
+        return $this->badRequest();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function items(Request $request) {
         if ($request->ajax()) {
-            $items = CartItem::where('user_id', UserPrefs::getID())->get()->toArray();;
+            $items = CartItem::where('user_id', UserPrefs::id())->get()->toArray();;
             return $this->ok([
                 'items' => $items,
                 'total' => ItemData::getTotal()
@@ -37,31 +50,37 @@ class CartAjax extends AjaxController {
      */
     public function add(Request $request) {
         if ($request->ajax()) {
-            $sku      = $request->get('sku');
-            $qty      = intval($request->get('qty'));
-            $customer = intval($request->get('customer', 0));
+            $sku      = $this->string('sku');
+            $qty      = $this->int('quantity', 1, 1);
+            $customer = $this->int('customer', 0, 0);
+            $price    = $this->float('price', 0, 0);
+            $qv       = $this->float('qv', 0, 0);
+            $cv       = $this->float('cv', 0, 0);
+            $title    = $this->string('title');
+            $image    = $this->string('image');
             /** @var CartItem $i */
-            $i = CartItem::where('user_id', UserPrefs::getID())->where('sku', $sku)->first();
+            $i = CartItem::where('user_id', UserPrefs::id())->where('sku', $sku)->first();
             if ($i) {
                 $i->quantity += $qty;
             } else {
                 $i = new CartItem();
 
-                $i->user_id     = UserPrefs::getID();
-                $i->user_number = UserPrefs::getNumber();
+                $i->user_id     = UserPrefs::id();
+                $i->user_number = UserPrefs::number();
                 $i->customer_id = $customer;
-                $i->title       = 'Webarch UI Framework Dashboard UI Pack' . rand(1, 99);
-                $i->thumbnail   = 'https://extranet.securefreedom.com/GenesisPure/Shopping/Images/144_GoYin-single-150-blue_1.jpg';
-                $i->sku         = $sku;
-                $i->quantity    = $qty;
-                $i->price       = rand(10, 999);
-                $i->qv          = $i->price / 10;
-                $i->cv          = $i->qv;
+
+                $i->sku      = $sku;
+                $i->quantity = $qty;
             }
+            $i->price = $price;
+            $i->qv    = $qv;
+            $i->cv    = $cv;
+            $i->title = $title;
+            $i->image = $image;
+
             if ($i->save()) {
                 return $this->ok([
-                    'total' => ItemData::getTotal(),
-                    'item'  => ItemData::getItem($sku)
+                    'count' => CartItem::count(UserPrefs::id())
                 ]);
             }
             return $this->no('Add cart item error');
@@ -78,7 +97,7 @@ class CartAjax extends AjaxController {
             $sku = $request->get('sku');
             $qty = intval($request->get('qty'));
             /** @var CartItem $i */
-            $i = CartItem::where('user_id', UserPrefs::getID())->where('sku', $sku)->first();
+            $i = CartItem::where('user_id', UserPrefs::id())->where('sku', $sku)->first();
             if ($i) {
                 $i->quantity = $qty;
                 if ($i->save()) {
@@ -95,7 +114,7 @@ class CartAjax extends AjaxController {
         if ($request->ajax()) {
             $sku = $request->get('sku');
             /** @var CartItem $i */
-            $i = CartItem::where('user_id', UserPrefs::getID())->where('sku', $sku)->first();
+            $i = CartItem::where('user_id', UserPrefs::id())->where('sku', $sku)->first();
             if ($i) {
                 if ($i->delete()) {
                     return $this->ok();

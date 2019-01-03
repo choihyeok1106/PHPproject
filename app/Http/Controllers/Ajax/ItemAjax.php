@@ -41,22 +41,27 @@ class ItemAjax extends AjaxController {
      */
     public function index(Request $request) {
         if ($request->ajax()) {
+            $query = $this->string('query');
             /** @var ItemsCriteria $c */
-            $c             = ItemsCriteria::new();
-            $c->category   = $this->int('category', 0, 0);
-            $c->search     = $this->string('search');
-            $c->sorting    = $this->string('sorting');
-            $c->tag        = '';
-            $c->limit      = 6;
+            $c = ItemsCriteria::new();
+            if ($query) {
+                $c->query($query);
+            } else {
+                $c->category   = $this->int('category', 0, 0);
+                $c->search     = $this->string('search');
+                $c->sorting    = $this->string('sorting');
+                $c->tag        = '';
+                $c->targetneed = '';
+                $c->page       = 1;
+            }
+            $c->limit      = env('ITEMS_PAGE_PER', 24);
             $c->level      = Rank::IBO;
             $c->type       = ItemPriceType::Wholesale;
             $c->legend     = ItemLegend::Product;
-            $c->targetneed = '';
             $c->virtual    = 0;
             $c->enrollment = 0;
-            $c->page       = 1;
             $data          = ItemCache::getItems($c);
-            return $this->ok(Item::Items($data));
+            return $this->ok(Item::Items($data, true, $c->set('level', UserPrefs::level())));
         }
         return $this->badRequest();
     }

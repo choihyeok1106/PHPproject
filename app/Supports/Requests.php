@@ -42,6 +42,28 @@ trait Requests {
     }
 
     /**
+     * @param string $key
+     * @param float  $deft
+     * @param null   $min
+     * @param null   $max
+     * @return float
+     */
+    function float(string $key, float $deft = 0, $min = null, $max = null) {
+        $val = $this->_request($key);
+        if (!is_numeric($val)) {
+            $val = $deft;
+        }
+        $val = floatval($val);
+        if (is_numeric($min) && $val < intval($min)) {
+            $val = $min;
+        }
+        if (is_numeric($max) && $val > intval($max)) {
+            $val = $max;
+        }
+        return $val;
+    }
+
+    /**
      * @param string $name
      * @param string $deft
      * @return string

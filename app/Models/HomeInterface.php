@@ -36,9 +36,9 @@ class HomeInterface extends Model {
     public function render() {
         if ($this->enable) {
             try {
-                echo view("home.widgets.{$this->widget->widget}")->with('id', $this->widget_id)->render();
+                return view("home.widgets.{$this->widget->widget}")->with('id', $this->widget_id)->render();
             } catch (\Throwable $e) {
-
+                return '';
             }
         }
     }
