@@ -9,6 +9,7 @@
 namespace App\Supports;
 
 
+use App\Constants\UserType;
 use App\Models\HomeInterface;
 use App\Models\HomeWidget;
 use App\Repositories\Passport;
@@ -91,6 +92,13 @@ class UserPrefs {
     }
 
     /**
+     * @return int
+     */
+    public static function type() {
+        return UserType::REP;
+    }
+
+    /**
      * @return string
      */
     public static function number() {
@@ -125,6 +133,13 @@ class UserPrefs {
     public static function phone($k = 0) {
         $phones = self::phones();
         return isset($phones[$k]) ? $phones[$k] : '';
+    }
+
+    /**
+     * @return bool
+     */
+    public static function passport() {
+        return isset($_SESSION[self::PASS]);
     }
 
     /**
