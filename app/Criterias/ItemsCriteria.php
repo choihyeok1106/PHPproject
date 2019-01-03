@@ -32,6 +32,8 @@ class ItemsCriteria extends CriteriaAbstract {
                 return 'name';
             case 'q':
                 return 'qv';
+            case 'c':
+                return 'cv';
             case 'p':
                 return 'price';
             default:
@@ -43,4 +45,33 @@ class ItemsCriteria extends CriteriaAbstract {
         return substr($this->sorting, -1) === 'd' ? 'desc' : 'asc';
     }
 
+    public function query($query) {
+        $query   = str_replace('?', '', $query);
+        $queries = explode('&', $query);
+        foreach ($queries as $q) {
+            list($k, $v) = explode('=', $q);
+            $this->$k = $v;
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function vars() {
+        return [
+            'category'   => $this->category,
+            'search'     => $this->search,
+            'order'      => $this->order,
+            'by'         => $this->by,
+            'tag'        => $this->tag,
+            'targetneed' => $this->targetneed,
+            'limit'      => $this->limit,
+            'level'      => $this->level,
+            'type'       => $this->type,
+            'legend'     => $this->legend,
+            'virtual'    => $this->virtual,
+            'enrollment' => $this->enrollment,
+            'page'       => $this->page,
+        ];
+    }
 }

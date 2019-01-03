@@ -1,17 +1,17 @@
-var Product = {
+var Item = {
     sku: null,
     curr: null,
     init: function () {
-        this.sku = $("#item-sku").text();
+        this.sku = $(".page-title").attr("data-sku");
         if (this.sku) {
-            setTimeout(Product.initUI());
-            setTimeout(Product.initProduct());
-            setTimeout(Product.initResource);
-            setTimeout(Product.initPrice);
-            setTimeout(Product.initOptions);
-            setTimeout(Product.initQtyCount());
-            setTimeout(Product.initRelates);
-            setTimeout(Product.initActions);
+            setTimeout(Item.initUI);
+            setTimeout(Item.initItem);
+            setTimeout(Item.initResource);
+            setTimeout(Item.initPrice);
+            setTimeout(Item.initOptions);
+            setTimeout(Item.initQtyCount);
+            setTimeout(Item.initRelates);
+            setTimeout(Item.initActions);
         }
     },
     initUI: function () {
@@ -57,8 +57,8 @@ var Product = {
             }
         });
     },
-    initProduct: function () {
-        Ajax.get("/a/item/" + Product.sku, null, {
+    initItem: function () {
+        Ajax.get("/a/item/" + Item.sku, null, {
             ok: function (res) {
                 if (!res.hasOwnProperty("error")) {
                     console.log(res)
@@ -70,7 +70,7 @@ var Product = {
         });
     },
     initPrice: function () {
-        Ajax.get("/a/item/" + Product.sku + '/price', null, {
+        Ajax.get("/a/item/" + Item.sku + '/price', null, {
             ok: function (res) {
                 if (!res.hasOwnProperty("error")) {
                     console.log("initPrice", res)
@@ -82,7 +82,7 @@ var Product = {
         });
     },
     initResource: function () {
-        Ajax.get("/a/item/" + Product.sku + '/resource', null, {
+        Ajax.get("/a/item/" + Item.sku + '/resource', null, {
             ok: function (res) {
                 var ui = '<li><img src="{{$url}}" data-url="{{$url}}"></li>';
                 if (!res.hasOwnProperty("error")) {
@@ -114,11 +114,11 @@ var Product = {
             $("#options a").click(function () {
                 $("#options a").removeClass("active");
                 $(this).addClass("active");
-                Product.curr = $(this).attr("data-sku");
+                Item.curr = $(this).attr("data-sku");
             });
         };
 
-        Ajax.get("/a/item/" + Product.sku + '/options', null, {
+        Ajax.get("/a/item/" + Item.sku + '/options', null, {
             ok: function (res) {
                 var ui = '<a href="javascript:void (0);" title="{{$title}}" data-sku="{{$sku}}">\n' +
                     '    <div class="opt-img">\n' +
@@ -130,7 +130,7 @@ var Product = {
                     var html = '';
                     $.each(res, function (k, v) {
                         if (k === 0) {
-                            Product.curr = v['sku'];
+                            Item.curr = v['sku'];
                         }
                         var li = ui;
                         li = li.replace('{{$title}}', v['title']);
@@ -242,7 +242,7 @@ var Product = {
             // slider.flexslider(0);
         });
 
-        Ajax.get("/a/item/" + Product.sku + '/relates', null, {
+        Ajax.get("/a/item/" + Item.sku + '/relates', null, {
             ok: function (res) {
                 var ui = '<li>\n' +
                     '    <div class="card social-card share share-other card-product" data-social="item">\n' +
@@ -285,9 +285,9 @@ var Product = {
     initActions: function () {
         var btn = $("#add-cart");
         btn.click(function () {
-            if (Product.curr) {
+            if (Item.curr) {
                 Ajax.post("/a/cart/add", {
-                    sku: Product.curr,
+                    sku: Item.curr,
                     qty: $("#qty").val()
                 }, {
                     ok: function (res) {
@@ -314,5 +314,5 @@ var Product = {
 };
 
 window.onload = function () {
-    Product.init();
+    Item.init();
 };

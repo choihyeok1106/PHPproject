@@ -180,12 +180,16 @@
 }
 
 .portlet-product .product-image img {
-    width: 92%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: #f8f8f8;
 }
 
 .portlet-product .caption-subject {
     display: block;
-    min-height: 20px;
+    min-height: 40px;
     max-height: 40px;
     line-height: 20px;
     overflow: hidden;
@@ -200,10 +204,10 @@
 }
 
 .portlet-product.portlet.light.portlet-fit > .portlet-title {
-    padding: 10px 15px;
+    padding: 0 15px 10px;
     border-bottom: 0;
     margin-bottom: 0;
-    height: 123px;
+    height: 110px;
 }
 
 .shopping .inbox .inbox-nav {
@@ -520,6 +524,9 @@
     -o-transition: all .75s ease-in;
     transition: all .75s ease-in;
     z-index: 9999;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .float-product.floating {

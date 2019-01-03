@@ -10,6 +10,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 
 /**
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed user_number
  * @property mixed customer_id
  * @property mixed title
- * @property mixed thumbnail
+ * @property mixed image
  * @property mixed sku
  * @property mixed quantity
  * @property mixed price
@@ -28,5 +29,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed updated_at
  */
 class CartItem extends Model {
+
+    public static function count(int $userId) {
+        /** @var Builder $query */
+        $query = parent::query();
+        $query->where('user_id', $userId);
+        return $query->sum('quantity');
+    }
 
 }

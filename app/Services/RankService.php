@@ -16,7 +16,7 @@ class RankService {
      * @return Service
      */
     public static function getRanks() {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/ranks");
+        return Service::make()->get("/v1/vbo/ranks");
     }
 
 }

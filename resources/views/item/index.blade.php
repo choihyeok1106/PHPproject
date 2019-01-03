@@ -4,7 +4,7 @@
     <link href="{{css('/css/pages/shopping.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
-    <h1 class="page-title" data-menu="my-business">Shopping
+    <h1 class="page-title" data-menu="orders">Shopping
         <small>
             <a href="/">Home</a>
             <i class="fa fa-angle-right"></i>
@@ -56,8 +56,6 @@
                         <div class="m-grid-col m-grid-col-lg-6 m-grid-col-right m-grid-col-md-4">
                             <select id="product-order-by" class="bs-select form-control input-small default">
                                 <option value="id">New Item</option>
-                                <option value="na">Item Name: A-Z</option>
-                                <option value="nd">Item Name: Z-A</option>
                                 <option value="qd">PV: High to low</option>
                                 <option value="qa">PV: Low to high</option>
                                 <option value="pd">Price: High to low</option>

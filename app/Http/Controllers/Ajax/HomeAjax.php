@@ -58,7 +58,7 @@ class HomeAjax extends AjaxController {
             /** @var HomeWidget[] $widgets */
             $widgets = HomeWidget::where('active', 1)->orderBy('sorting', 'asc')->get();
             foreach ($widgets as $widget) {
-                $interface       = HomeInterface::where('user_id', UserPrefs::getID())->where('widget_id', $widget->id)->where('enable', 1)->first();
+                $interface       = HomeInterface::where('user_id', UserPrefs::id())->where('widget_id', $widget->id)->where('enable', 1)->first();
                 $widget->checked = $interface ? 1 : 0;
                 $data[]          = $widget;
             }
@@ -78,10 +78,10 @@ class HomeAjax extends AjaxController {
             if (is_array($widgets)) {
                 foreach ($widgets as $id => $enable) {
                     /** @var HomeInterface $interface */
-                    $interface = HomeInterface::where('user_id', UserPrefs::getID())->where('widget_id', $id)->first();
+                    $interface = HomeInterface::where('user_id', UserPrefs::id())->where('widget_id', $id)->first();
                     if (!$interface) {
                         $interface            = new HomeInterface;
-                        $interface->user_id   = UserPrefs::getID();
+                        $interface->user_id   = UserPrefs::id();
                         $interface->widget_id = $id;
 
                         $interface->sorting = $interface->resort();
