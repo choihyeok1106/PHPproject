@@ -105,6 +105,29 @@ class UserPrefs {
     }
 
     /**
+     * @return string
+     */
+    public static function email() {
+        return self::get('email');
+    }
+
+    /**
+     * @return array
+     */
+    public static function phones() {
+        return self::get('phones', []);
+    }
+
+    /**
+     * @param int $k
+     * @return string
+     */
+    public static function phone($k = 0) {
+        $phones = self::phones();
+        return isset($phones[$k]) ? $phones[$k] : '';
+    }
+
+    /**
      * @param Passport $pass
      */
     public static function setPassport(Passport $pass) {
