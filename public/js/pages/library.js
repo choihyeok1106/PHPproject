@@ -11,7 +11,7 @@ var Tool_Library = {
             '{{$children_ui}} \n' +
             '</ul>';
 
-        var libraries_children_ui = '<li class="list-group-item">\n' +
+        var libraries_children_ui = '<li class="list-group-item padding-0">\n' +
             '        <div class="mt-comment" style="border: 0px">\n' +
             '            <div class="mt-comment-img">\n' +
             '                <img src="/img/files/{{$fileimg}}.svg" class="file-icon">\n' +
@@ -19,7 +19,7 @@ var Tool_Library = {
             '            <div class="mt-comment-body">\n' +
             '                <div class="mt-comment-info">\n' +
             '                                        <span class="mt-comment-author">\n' +
-            '                                            <a href="#">Michael Baker</a>\n' +
+            '                                            <a>{{$title}}</a>\n' +
             '                                        </span>\n' +
             '                    <span class="mt-comment-date">{{$comment_date}}</span>\n' +
             '                </div>\n' +
@@ -28,7 +28,7 @@ var Tool_Library = {
             '                <div class="mt-comment-details">\n' +
             '                    <ul class="mt-comment-actions">\n' +
             '                        <li>\n' +
-            '                            <a href="#" data-toggle="view" title="Preview"> <i class="icon-eye"></i>\n' +
+            '                            <a href="#" data-toggle="view" data-view="{{$view}}" title="Preview"> <i class="icon-eye"></i>\n' +
             '                                View</a>\n' +
             '                        </li>\n' +
             '                        <li>\n' +
@@ -51,30 +51,34 @@ var Tool_Library = {
         var loading = false;
         var render = function (library) {
             var libraries = '';
-            $.each(library,function(k,v){
+            $.each(library, function (k, v) {
                 var libraries_section = libraries_section_ui;
                 var libraries_children = libraries_children_ui;
                 libraries_section = libraries_section_ui;
-                libraries_section = libraries_section.replace('{{$category}}',k);
+                libraries_section = libraries_section.replace('{{$category}}', k);
                 var html_children = '';
-                $.each(v,function(_k,_v){
-                    console.log(_v);
+                $.each(v, function (_k, _v) {
                     libraries_children = libraries_children_ui;
-                    libraries_children = libraries_children.replace('{{$fileimg}}',_v['type']);
-                    libraries_children = libraries_children.replace('{{$comment_date}}',_v['created_at'])
-                    libraries_children = libraries_children.replace('{{$comment_text}}',_v['description'])
-                    libraries_children = libraries_children.replace('{{$link}}',_v['url'])
+                    libraries_children = libraries_children.replace('{{$title}}', _v['title']);
+                    libraries_children = libraries_children.replace('{{$fileimg}}', _v['type']);
+                    libraries_children = libraries_children.replace('{{$comment_date}}', _v['created_at'])
+                    libraries_children = libraries_children.replace('{{$comment_text}}', _v['description'])
+                    libraries_children = libraries_children.replace('{{$link}}', _v['url'])
+                    libraries_children = libraries_children.replace('{{$view}}', _v['url'])
                     html_children += libraries_children;
                 });
-                libraries_section = libraries_section.replace('{{$children_ui}}',html_children);
+                libraries_section = libraries_section.replace('{{$children_ui}}', html_children);
                 libraries += libraries_section;
             });
             $('#library_context').append(libraries);
+            $("[data-toggle='view']").click(function () {
+                var link = $(this).data('view');
+                window.open(link);
+            });
 
             $("[data-toggle='copy']").tooltip();
             $("[data-toggle='view']").tooltip();
             $("[data-toggle='send']").tooltip();
-
 
             $("[data-toggle='copy']").hover(
                 function () {
@@ -97,7 +101,7 @@ var Tool_Library = {
                     $(this).attr('data-original-title', 'Send to email').tooltip('hide');
                 });
 
-            $("[data-toggle='copy']").click(function (){
+            $("[data-toggle='copy']").click(function () {
                 var $this = $(this);
                 $('#input_clipboard').val($this.data('copy'));
                 $(this).attr('data-original-title', 'Copied!').tooltip('show');
@@ -216,26 +220,100 @@ var Tool_Library = {
         getCategories(true);
     },
     initSearch: function () {
+        var libraries_section_ui = '<ul class="list-group list-group-flush">\n' +
+            '    <h3 class="margin-bottom-5 library-title">{{$category}}</h3>\n' +
+            '{{$children_ui}} \n' +
+            '</ul>';
+
+        var libraries_children_ui = '<li class="list-group-item">\n' +
+            '        <div class="mt-comment" style="border: 0px">\n' +
+            '            <div class="mt-comment-img">\n' +
+            '                <img src="/img/files/{{$fileimg}}.svg" class="file-icon">\n' +
+            '            </div>\n' +
+            '            <div class="mt-comment-body">\n' +
+            '                <div class="mt-comment-info">\n' +
+            '                                        <span class="mt-comment-author">\n' +
+            '                                            <a href="#">{{$title}}</a>\n' +
+            '                                        </span>\n' +
+            '                    <span class="mt-comment-date">{{$comment_date}}</span>\n' +
+            '                </div>\n' +
+            '                <div class="mt-comment-text">{{$comment_text}}\n' +
+            '                </div>\n' +
+            '                <div class="mt-comment-details">\n' +
+            '                    <ul class="mt-comment-actions">\n' +
+            '                        <li>\n' +
+            '                            <a href="#" data-toggle="view" title="Preview"> <i class="icon-eye"></i>\n' +
+            '                                View</a>\n' +
+            '                        </li>\n' +
+            '                        <li>\n' +
+            '                            <a href="#" data-toggle="copy" title="Copy to clipboard"\n' +
+            '                               data-copy="{{$link}}"> <i\n' +
+            '                                        class="icon-link"></i> Copy link </a>\n' +
+            '                        </li>\n' +
+            '                        <li>\n' +
+            '                            <a href="mailto:" data-toggle="send"\n' +
+            '                               title="Send to email"> <i\n' +
+            '                                        class="icon-envelope"></i> Send to Email\n' +
+            '                            </a>\n' +
+            '                        </li>\n' +
+            '                    </ul>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '    </li>';
 
         var loading = false;
 
         var render = function (Search) {
 
-            var projects = [
-                {
-                    value: "jquery",
-                    label: "jQuery",
-                    desc: "the write less, do more, JavaScript library",
-                    icon: "/img/files/css.svg"
-                },
-            ];
+            $('#librarySearch').on('keyup', function () {
+                var search_result = '';
+                $.each(Search, function (k, v) {
+                    var libraries_section = libraries_section_ui;
+                    var libraries_children = libraries_children_ui;
+                    libraries_section = libraries_section_ui;
+                    libraries_section = libraries_section.replace('{{$category}}', k);
+                    var html_children = '';
+                    $.each(v, function (_k, _v) {
+                        var search = $('#librarySearch').val();
+                        var result = v[_k]['title'].search(new RegExp(search, "i"));
+                        ;
+                        if (result > -1) {
+                            libraries_children = libraries_children_ui;
+                            libraries_children = libraries_children.replace('{{$title}}', _v['title']);
+                            libraries_children = libraries_children.replace('{{$fileimg}}', _v['type']);
+                            libraries_children = libraries_children.replace('{{$comment_date}}', _v['created_at'])
+                            libraries_children = libraries_children.replace('{{$comment_text}}', _v['description'])
+                            libraries_children = libraries_children.replace('{{$link}}', _v['url'])
+                            html_children += libraries_children;
+                        }
+                    })
+                    libraries_section = libraries_section.replace('{{$children_ui}}', html_children);
+                    search_result += libraries_section;
+                });
+                $('#library_context').children().remove();
+                $('.library-title').siblings()
+                $('#library_context').append(search_result);
+            });
 
-            j$("#file").autocomplete({
+
+            //autocomplete ul
+            var projects = [];
+            $.each(Search, function (k, v) {
+                $.each(v, function (_k, _v) {
+                    projects.push({value: _v["title"], label: _v['title'], icon: "/img/files/" + _v['type'] + ".svg"});
+                    /*Object.assign(result,{value:_v['title']});
+                    Object.assign(result,{label:_v['title']});
+                    Object.assign(result,{icon:"/img/files/"+_v['type']});*/
+                });
+            });
+
+            j$("#librarySearch").autocomplete({
                 minLength: 0,
                 source: projects
             }).autocomplete("instance")._renderItem = function (ul, item) {
-                return $("<li>")
-                    .append("<div> <img src=' " + item.icon + " ' style='width:30px;'>" + item.label + "<br>" + item.desc + "</div>")
+                return j$("<li>")
+                    .append("<div> <img src=' " + item.icon + " ' style='width:30px;'>" + item.label + "</div>")
                     .appendTo(ul);
             };
         }

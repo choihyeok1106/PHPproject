@@ -11,10 +11,10 @@ namespace App\Http\Controllers\Ajax;
 use App\Cache\ToolCache;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class ToolAjax extends Controller
+class ToolAjax extends AjaxController
 {
-    use Ajax;
 
     public function __construct()
     {
@@ -44,8 +44,8 @@ class ToolAjax extends Controller
     {
         $tmp = [];
         foreach ($data as $key => $value) {
-            if($key == 'data'){
-                foreach($value as $v){
+            if ($key == 'data') {
+                foreach ($value as $v) {
                     $tmp[$v['category']][] = $v;
                 }
             }

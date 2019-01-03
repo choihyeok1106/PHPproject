@@ -7,15 +7,12 @@
 
 namespace App\Cache;
 
-
-use App\Services\FaqService;
 use App\Services\ToolService;
-use App\Supports\UserPrefs;
 
 class ToolCache
 {
     public static function getLibrary(){
-        $key = UserPrefs::getCountryLow().":resources";
+        $key        = Cache::key(':items');
         $libraries = Cache::get($key);
         if(!$libraries){
             $service = ToolService::getLibrary();
@@ -25,7 +22,7 @@ class ToolCache
     }
 
     public static function getCategory(){
-        $key = UserPrefs::getCountryLow().":resource/categories";
+        $key        = Cache::key(':items');
         $categories = Cache::get($key);
         if(!$categories){
             $service = ToolService::getCategories();

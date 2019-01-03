@@ -49,12 +49,11 @@
                     <span class="glyphicon glyphicon-search"></span>
                 </div>
                 <input type="text" placeholder="Search ..." class="form-control"
-                       style="border:0; background-color:#e0e0e0; border-color: #e0e0e0" id="file">
+                       style="border:0; background-color:#e0e0e0; border-color: #e0e0e0" id="librarySearch">
                 <div class="input-group-btn">
                     <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button"
-                            style="border:1px; background-color:#e0e0e0;">
+                            style="border:1px solid #e0e0e0; background-color:#e0e0e0;">
                         <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu pull-right">
                         <li><a href="#">Action</a></li>
@@ -63,18 +62,20 @@
             </div>
         </div>
         <hr>
+
         <div class="row">
             {{--sidebar start--}}
             <ul class="ver-inline-menu tabbable margin-bottom-10 col-md-3" id="library_category">
             </ul>
+
             <input type="text" value="" id="input_clipboard"
                    style="position: absolute;opacity: 0">
             <div class="col-md-9">
+
                 {{--library start--}}
                 <div class="mt-comments libs"id="library_context">
-                    <input type="text" value="" id="input_clipboard"
-                           style="position:absolute;opacity: 0">
                 </div>
+
             </div>
         </div>
     </div>

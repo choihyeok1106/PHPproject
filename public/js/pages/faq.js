@@ -27,7 +27,7 @@ var Support_Faq = {
 
         var faq_left_ui = '<div class="col-md-6 faq-col">{{left_col}}</div>';
 
-        var faq_right_ui = '<div class="col-md-6 faq-col">{{right_col}}</div>';x3
+        var faq_right_ui = '<div class="col-md-6 faq-col">{{right_col}}</div>';
 
         // Ajax request data flag
         var loading = false;
@@ -115,7 +115,6 @@ var Support_Faq = {
                                     $("[data-value='"+ _v.name +"']").parents('.panel-default').show();
                                 }else{
                                     $("[data-value='"+ _v.name +"']").parents('.panel-default').hide();
-
                                 }
                             });
                         }
