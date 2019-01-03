@@ -76,7 +76,7 @@ namespace App\Services {
                     'Authorization: ' . $this->getAuthorize(),
                     'X-App-Locale: ' . App::getLocale()
                 ]);
-                if(UserPrefs::login()){
+                if(UserPrefs::passport()){
                     $this->headers(UserPrefs::pass());
                 }
                 if (is_array($this->headers)) {
