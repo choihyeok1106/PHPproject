@@ -19,11 +19,11 @@ class ItemCache {
     /**
      * @return Category[]
      */
-    public static function getCategories() {
+    public static function categories() {
         $key        = Cache::key(':item:categories');
         $categories = Cache::get($key);
         if (!$categories) {
-            $svc = ItemService::getCategories();
+            $svc = ItemService::categories();
             return Cache::set($key, $svc->response());
         }
         return $categories;
@@ -33,7 +33,7 @@ class ItemCache {
      * @param ItemsCriteria $c
      * @return mixed
      */
-    public static function getItems(ItemsCriteria $c) {
+    public static function search(ItemsCriteria $c) {
         $key   = Cache::key([
             'item',
             $c->category,
@@ -52,17 +52,22 @@ class ItemCache {
         ]);
         $items = Cache::get($key);
         if (!$items) {
-            $svc = ItemService::getItems($c);
+            $svc = ItemService::search($c);
             return Cache::set($key, $svc->response());
         }
         return $items;
     }
 
-    public static function getItem($sku) {
-        $key       = Cache::key(":item:{$sku}");
+    /**
+     * @param $sku
+     * @return mixed
+     */
+    public static function item($sku) {
+        $key       = Cache::key(":item:{$sku}", false);
         $resources = Cache::get($key);
         if (!$resources) {
-            $resources = ItemData::getItem($sku);
+            $svc = ItemService::item($sku);
+            return Cache::set($key, $svc->data());
         }
         return $resources;
     }

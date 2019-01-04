@@ -9,6 +9,7 @@
 Route::get('/a/item', 'Ajax\ItemAjax@index');
 Route::get('/a/item/categories', 'Ajax\ItemAjax@categories');
 Route::get('/a/item/{sku}', 'Ajax\ItemAjax@item');
+Route::get('/a/item/{sku}/stocks', 'Ajax\ItemAjax@stocks');
 Route::get('/a/item/{sku}/price', 'Ajax\ItemAjax@price');
 Route::get('/a/item/{sku}/resource', 'Ajax\ItemAjax@resource');
 Route::get('/a/item/{sku}/options', 'Ajax\ItemAjax@options');

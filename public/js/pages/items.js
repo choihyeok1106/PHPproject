@@ -202,7 +202,7 @@ var Items = {
             // /{{\$link}}/g RegExp replace all
             item = item.replace(/{{\$image}}/g, v['image']);
             item = item.replace('{{$title}}', v['title']);
-            item = item.replace('{{$price}}', v['format']);
+            item = item.replace('{{$price}}', v['price_format']);
             item = item.replace('{{$qv}}', v['qv']);
             item = item.replace(/{{\$sku}}/g, v['sku']);
             html += item;

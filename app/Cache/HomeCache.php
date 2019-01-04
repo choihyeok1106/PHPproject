@@ -10,7 +10,6 @@ namespace App\Cache;
 
 
 use App\Services\NewsService;
-use App\Supports\UserPrefs;
 
 class HomeCache {
 
@@ -22,7 +21,6 @@ class HomeCache {
         $news = Cache::get($key);
         if (!$news) {
             $svc = NewsService::getLatest(3);
-            pe($svc);
             return Cache::set($key, $svc->response());
         }
         return $news;

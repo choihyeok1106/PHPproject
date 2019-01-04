@@ -13,11 +13,19 @@ use App\Supports\UserPrefs;
 
 class ItemService {
 
-    public static function getCategories() {
+    public static function categories() {
         return Service::make()->get("/v1/vbo/items/categories");
     }
 
-    public static function getItems(ItemsCriteria $c) {
+    public static function item(string $sku) {
+        return Service::make()->get("/v1/vbo/items/{$sku}");
+    }
+
+    public static function stocks(string $sku) {
+        return Service::make()->get("/v1/vbo/items/{$sku}/stocks");
+    }
+
+    public static function search(ItemsCriteria $c) {
         return Service::make()->get("/v1/vbo/items", $c->vars());
     }
 

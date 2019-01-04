@@ -18,7 +18,7 @@ abstract class RepositoryAbstract {
     /** @var mixed $locale */
     private $_data;
     /** @var CriteriaAbstract $_params */
-    private $_params;
+    protected $_params;
 
     /**
      * @return mixed
@@ -97,9 +97,6 @@ abstract class RepositoryAbstract {
         // TODO: Implement __get() method.
         if (isset($this->$name)) {
             return $this->$name;
-        }
-        if ($name === 'locale') {
-            return locale();
         }
         return null;
     }
