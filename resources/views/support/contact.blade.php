@@ -42,15 +42,12 @@
                     <div class="c-content-title-1">
                         <h3 class="uppercase">Have a question?</h3>
                         <div class="c-line-left bg-dark"></div>
+
                         <form>
-                            <div class="input-group input-group-lg c-square">
-                                <input type="text" class="form-control c-square" placeholder="Ask a question">
-                                <span class="input-group-btn">
-                                                    <button onclick="location.href='faq.php?q=question'"
-                                                            class="btn uppercase"
-                                                            type="button">Go!</button>
-                                                </span>
-                            </div>
+                            <span class="input-group-btn">
+                                <button onclick="location.href='faqs'"
+                                        class="btn uppercase grey" type="button">Go!</button>
+                            </span>
                         </form>
                         <p>Ask your questions away and let our dedicated customer service help you look through our FAQs
                             to get your questions
