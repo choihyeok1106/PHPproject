@@ -82,7 +82,7 @@ class Cache {
     public static function key($fields, $countryKey = true) {
         $keys = [];
         if ($countryKey) {
-            $keys[] = UserPrefs::country();
+            $keys[] = strtolower(UserPrefs::country());
         }
         if (is_string($fields)) {
             if (substr($fields, 0, 1) === ':') {

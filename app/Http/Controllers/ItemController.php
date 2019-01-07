@@ -10,7 +10,7 @@ class ItemController extends Controller {
         return view('item.index');
     }
 
-    public function show($sku) {
-        return view('item.show', ['sku' => $sku]);
+    public function view($sku) {
+        return view('item.view', ['sku' => $sku]);
     }
 }

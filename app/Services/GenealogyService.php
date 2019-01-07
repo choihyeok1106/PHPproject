@@ -18,7 +18,7 @@ class GenealogyService {
      * @return Service
      */
     public static function getBinary(string $repNumber, int $depth = 2) {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/genealogy/{$repNumber}/binary?depth={$depth}");
+        return Service::make()->get("/v1/vbo/genealogy/{$repNumber}/binary?depth={$depth}");
     }
 
 }

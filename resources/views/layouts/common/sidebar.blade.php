@@ -39,6 +39,11 @@
                         </a>
                     </li>
                     <li class="nav-item  ">
+                        <a href="/customers" class="nav-link ">
+                            <span class="title">Customers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
                         <a href="/commissions" class="nav-link ">
                             <span class="title">Commissions</span>
                         </a>

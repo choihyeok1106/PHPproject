@@ -9,16 +9,18 @@
 namespace App\Supports;
 
 
+use App\Constants\UserType;
 use App\Models\HomeInterface;
 use App\Models\HomeWidget;
 use App\Repositories\Passport;
 use App\Repositories\Rank;
-use App\Repositories\Rep;
 use App\Services\AuthenticateService;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class UserPrefs {
 
-    const FIELD = '__USER__';
+    const USER = '__USER__';
+    const PASS = '__PASS__';
 
     /**
      * @param array $rep
@@ -36,24 +38,27 @@ class UserPrefs {
      * @param mixed  $val
      */
     public static function set(string $key, $val) {
-        $_SESSION[self::FIELD][$key] = $val;
+        $_SESSION[self::USER][$key] = $val;
     }
 
     /**
      * clear user session
      */
     public static function clear() {
-        if (isset($_SESSION[self::FIELD])) {
-            unset($_SESSION[self::FIELD]);
-            session_unset();
+        if (isset($_SESSION[self::USER])) {
+            unset($_SESSION[self::USER]);
         }
+        if (isset($_SESSION[self::PASS])) {
+            unset($_SESSION[self::PASS]);
+        }
+        session_unset();
     }
 
     /**
      * @return bool
      */
-    public static function isLogin() {
-        return isset($_SESSION[self::FIELD]);
+    public static function login() {
+        return isset($_SESSION[self::USER]);
     }
 
     /**
@@ -63,52 +68,92 @@ class UserPrefs {
      */
     public static function get(string $key = '', $deft = null) {
         if (trim($key)) {
-            return isset($_SESSION[self::FIELD][$key]) ? $_SESSION[self::FIELD][$key] : $deft;
+            return isset($_SESSION[self::USER][$key]) ? $_SESSION[self::USER][$key] : $deft;
         } else {
-            return isset($_SESSION[self::FIELD]) ? $_SESSION[self::FIELD] : $deft;
+            return isset($_SESSION[self::USER]) ? $_SESSION[self::USER] : $deft;
         }
+    }
+
+    /**
+     * @param string $key
+     * @param int    $deft
+     * @return int
+     */
+    public static function int(string $key, $deft = 0) {
+        $val = self::get($key);
+        return is_numeric($val) ? intval($val) : $deft;
     }
 
     /**
      * @return int
      */
-    public static function getID() {
+    public static function id() {
         return self::get('id');
+    }
+
+    /**
+     * @return int
+     */
+    public static function type() {
+        return UserType::REP;
     }
 
     /**
      * @return string
      */
-    public static function getNumber() {
+    public static function number() {
         return self::get('number');
     }
 
     /**
      * @return string
      */
-    public static function getCountry() {
+    public static function country() {
         return self::get('country');
     }
 
     /**
      * @return string
      */
-    public static function country() {
-        return strtolower(self::get('country'));
+    public static function email() {
+        return self::get('email');
+    }
+
+    /**
+     * @return array
+     */
+    public static function phones() {
+        return self::get('phones', []);
+    }
+
+    /**
+     * @param int $k
+     * @return string
+     */
+    public static function phone($k = 0) {
+        $phones = self::phones();
+        return isset($phones[$k]) ? $phones[$k] : '';
+    }
+
+    /**
+     * @return bool
+     */
+    public static function passport() {
+        return isset($_SESSION[self::PASS]);
     }
 
     /**
      * @param Passport $pass
      */
     public static function setPassport(Passport $pass) {
-        self::set('passport', $pass->getAttrs());
+        $_SESSION[self::PASS] = $pass->vars();
     }
 
     /**
      * @return Passport
      */
     public static function getPassport() {
-        return (new Passport())->transfer(self::get('passport'));
+        return isset($_SESSION[self::PASS]) ? Passport::Item($_SESSION[self::PASS], false) : null;
     }
 
     /**
@@ -118,14 +163,16 @@ class UserPrefs {
         if (self::get('cancelled')) {
             return Rank::IBO;
         }
-        return self::get('lifetime_rank_id');
+        $lifetime_rank = self::int('lifetime_rank_id');
+        $force_rank_id = self::int('force_rank_id');
+        return $force_rank_id > $lifetime_rank ? $force_rank_id : $lifetime_rank;
     }
 
     /**
      * @return array
      */
     public static function pass() {
-        $pass = Passport::make(self::get('passport'));
+        $pass = self::getPassport();
         if ($pass->expired()) {
             $svc = AuthenticateService::refresh($pass->passport, $pass->number);
             if ($svc->succeed()) {
@@ -147,15 +194,15 @@ class UserPrefs {
     /**
      * @return HomeInterface[]
      */
-    public static function getInterfaces() {
+    public static function homeInterfaces() {
         /** @var HomeInterface[] $interfaces */
-        $interfaces = HomeInterface::where('user_id', UserPrefs::getID())->orderBy('sorting', 'asc')->get();
+        $interfaces = HomeInterface::where('user_id', UserPrefs::id())->orderBy('sorting', 'asc')->get();
         if (!count($interfaces)) {
             /** @var HomeWidget[] $widgets */
             $widgets = HomeWidget::where('active', 1)->orderBy('sorting', 'asc')->get();
             foreach ($widgets as $k => $widget) {
                 $interface            = new HomeInterface();
-                $interface->user_id   = UserPrefs::getID();
+                $interface->user_id   = UserPrefs::id();
                 $interface->widget_id = $widget->id;
                 $interface->enable    = 1;
                 $interface->sorting   = $k;

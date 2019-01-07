@@ -45,7 +45,7 @@ class GenealogyAjax extends AjaxController {
     public function binary(Request $request, string $repNumber = '') {
         if ($request->ajax()) {
             if (!$repNumber) {
-                $repNumber = UserPrefs::getNumber();
+                $repNumber = UserPrefs::number();
             }
             $reps = GenealogyCache::getBinary($repNumber);
             return $this->ok(GenealogyNode::make()->binary($reps));

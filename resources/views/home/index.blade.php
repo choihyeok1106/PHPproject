@@ -54,10 +54,9 @@
 
     <div class="grid">
         <?php
-        /** @var \App\Models\HomeInterface $interface */
-        $interfaces = \App\Supports\UserPrefs::getInterfaces();
+        /** @var \App\Models\HomeInterface[] $interfaces */
         foreach ($interfaces as $interface) {
-            $interface->render();
+            echo $interface->render();
         }
         ?>
     </div>

@@ -8,7 +8,7 @@
 
 namespace App\Services {
 
-    use App\Transformers\TransformerAbstract;
+    use App\Supports\UserPrefs;
     use Illuminate\Support\Facades\App;
     use Ixudra\Curl\Builder;
     use Ixudra\Curl\CurlService;
@@ -26,18 +26,18 @@ namespace App\Services {
     {
 
         /** @var string $authorization */
-        const AUTHORIZE = '__AUTHORIZATION__';
+        const AUTHORIZE = '__AUTH__';
 
         /** @var Error $error */
         private $error;
-        /** @var Meta result */
-        private $meta;
         /** @var mixed $items */
         private $items;
         /** @var array $passport */
         private $headers;
         /** @var mixed $body */
         private $body;
+        /** @var mixed $meta */
+        private $meta;
         /** @var Builder $builder */
         private $builder;
         /** @var bool $asJsonResponse */
@@ -82,6 +82,9 @@ namespace App\Services {
                     'Authorization: ' . $this->getAuthorize(),
                     'X-App-Locale: ' . App::getLocale()
                 ]);
+                if(UserPrefs::passport()){
+                    $this->headers(UserPrefs::pass());
+                }
                 if (is_array($this->headers)) {
                     foreach ($this->headers as $header) {
                         $builder->withHeader($header);

@@ -16,7 +16,9 @@ use App\Criterias\ItemsCriteria;
 use App\Demos\ItemData;
 use App\Repositories\Category;
 use App\Repositories\Item;
+use App\Repositories\Items;
 use App\Repositories\Rank;
+use App\Services\ItemService;
 use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
@@ -28,7 +30,7 @@ class ItemAjax extends AjaxController {
      */
     public function categories(Request $request) {
         if ($request->ajax()) {
-            $data = ItemCache::getCategories();
+            $data = ItemCache::categories();
             return $this->ok(Category::Items($data));
         }
         return $this->badRequest();
@@ -41,22 +43,27 @@ class ItemAjax extends AjaxController {
      */
     public function index(Request $request) {
         if ($request->ajax()) {
+            $query = $this->string('query');
             /** @var ItemsCriteria $c */
-            $c             = ItemsCriteria::new();
-            $c->category   = $this->int('category', 0, 0);
-            $c->search     = $this->string('search');
-            $c->sorting    = $this->string('sorting');
-            $c->tag        = '';
-            $c->limit      = 6;
+            $c = ItemsCriteria::new();
+            if ($query) {
+                $c->query($query);
+            } else {
+                $c->category   = $this->int('category', 0, 0);
+                $c->search     = $this->string('search');
+                $c->sorting    = $this->string('sorting');
+                $c->tag        = '';
+                $c->targetneed = '';
+                $c->page       = 1;
+            }
+            $c->limit      = env('ITEMS_PAGE_PER', 24);
             $c->level      = Rank::IBO;
             $c->type       = ItemPriceType::Wholesale;
             $c->legend     = ItemLegend::Product;
-            $c->targetneed = '';
             $c->virtual    = 0;
             $c->enrollment = 0;
-            $c->page       = 1;
-            $data          = ItemCache::getItems($c);
-            return $this->ok(Item::Items($data));
+            $data          = ItemCache::search($c);
+            return $this->ok(Items::Items($data, true, $c->set('level', UserPrefs::level())));
         }
         return $this->badRequest();
     }
@@ -68,7 +75,19 @@ class ItemAjax extends AjaxController {
      */
     public function item(Request $request, $sku) {
         if ($request->ajax()) {
-            return $this->ok(['sku' => $sku]);
+            $data     = ItemCache::item($sku);
+            $c        = ItemsCriteria::new();
+            $c->level = UserPrefs::level();
+            $c->type  = ItemPriceType::Wholesale;
+            return $this->ok(Item::Item($data, false, $c));
+        }
+        return $this->badRequest();
+    }
+
+    public function stocks(Request $request, $sku) {
+        if ($request->ajax()) {
+            $svc = ItemService::stocks($sku);
+            return $this->ok($svc->data());
         }
         return $this->badRequest();
     }

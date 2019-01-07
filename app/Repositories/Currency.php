@@ -9,6 +9,13 @@
 namespace App\Repositories;
 
 
+/**
+ * @property mixed abbreviation
+ * @property mixed decimals
+ * @property mixed formats
+ * @property mixed name
+ * @property mixed symbol
+ */
 class Currency extends RepositoryAbstract {
 
 }

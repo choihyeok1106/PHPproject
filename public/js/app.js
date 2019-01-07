@@ -2261,7 +2261,7 @@ var Common = {
     // Get user cart items count
     cartCount: function () {
         if ($("#head-cart-count").length) {
-            Ajax.get('/a/common/cart-count', null, {
+            Ajax.get('/a/cart/count', null, {
                 ok: function (res) {
                     if (res.hasOwnProperty('count') && res['count']) {
                         $("#head-cart-count").text(res['count']).show();
