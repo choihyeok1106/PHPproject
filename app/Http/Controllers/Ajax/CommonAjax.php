@@ -13,14 +13,6 @@ use Illuminate\Http\Request;
 
 class CommonAjax extends AjaxController {
 
-    /**
-     * CommonAjax constructor.
-     * @param Request $request
-     */
-    public function __construct(Request $request) {
-        $this->middleware('auth');
-    }
-
     public function lang(Request $request) {
         if ($request->ajax()) {
             return $this->ok(__('common'));

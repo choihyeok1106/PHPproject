@@ -5,10 +5,4 @@
  * File: test.php
  */
 
-Route::get('/test', function () {
-    return view ('customers.index');
-});
-
-Route::get('/test2', function () {
-    return view ('customers.test');
-});
+Route::get('/test', 'TestController@index');

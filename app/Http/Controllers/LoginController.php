@@ -11,7 +11,7 @@ class LoginController extends Controller {
     public $skipActions = 'all';
 
     public function index() {
-        if (UserPrefs::isLogin()) {
+        if (UserPrefs::login()) {
             return redirect('/');
         }
 

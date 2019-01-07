@@ -10,7 +10,6 @@ namespace App\Cache;
 
 
 use App\Services\NewsService;
-use App\Supports\UserPrefs;
 
 class HomeCache {
 

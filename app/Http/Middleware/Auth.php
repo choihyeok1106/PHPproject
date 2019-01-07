@@ -15,7 +15,7 @@ class Auth {
      * @return mixed
      */
     public function handle(Request $request, Closure $next) {
-        if (UserPrefs::isLogin()) {
+        if (UserPrefs::login()) {
             return $next($request);
         }
         $controller = $request->route()->getController();

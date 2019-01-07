@@ -17,7 +17,7 @@ class NewsService {
      * @return Service
      */
     public static function getLatest(int $limit) {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/news?limit={$limit}");
+        return Service::make()->get("/v1/vbo/news?limit={$limit}");
     }
 
     /**
@@ -25,7 +25,7 @@ class NewsService {
      * @return Service
      */
     public static function getNews($page = 1) {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/news?page={$page}");
+        return Service::make()->get("/v1/vbo/news?page={$page}");
     }
 
 }

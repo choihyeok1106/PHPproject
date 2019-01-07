@@ -19,6 +19,6 @@ class RepService extends Service {
      * @return Service
      */
     public static function getRep(string $repNumber) {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/reps/{$repNumber}");
+        return Service::make()->get("/v1/vbo/reps/{$repNumber}");
     }
 }
