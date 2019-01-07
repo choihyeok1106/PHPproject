@@ -67,19 +67,29 @@
                             Please feel free to drop
                             us an email from the form below and we will get back to you as soon as we can.</p>
                     </div>
-                    <form action="#">
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" class="form-control input-md"></div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Email" class="form-control input-md"></div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Contact Phone" class="form-control input-md"></div>
-                        <div class="form-group">
-                            <textarea rows="8" name="message" placeholder="Write comment here ..."
-                                      class="form-control input-md"></textarea>
-                        </div>
-                        <button type="submit" class="btn grey">Submit</button>
-                    </form>
+                        <form action="{{route('support.contact')}}" method="post">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" id="name" name="name"
+                                       class="form-control input-md" required></div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" id="email" name="email"
+                                       class="form-control input-md" required></div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Contact Phone" id="phone" name="phone"
+                                       class="form-control input-md" required></div>
+                            <div class="form-group">
+                            <textarea rows="8" id="content" name="content" placeholder="Write comment here ..."
+                                      class="form-control input-md" required></textarea>
+                            </div>
+                                <div class="form-group alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            <button type="submit" class="btn grey" id="btn_contact_store">Submit</button>
+                        </form>
                 </div>
             </div>
         </div>
@@ -160,7 +170,7 @@
     </div>
 @endsection
 @section('script.plugins')
-    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>/vendors/gmaps/gmaps.min.js" type="text/javascript"></script>
-    <script src="/js/pages/contact.js?<?= v() ?>" type="text/javascript"></script>
+    <script src="<?= js('/js/pages/support.js')?>" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_9Kme8aUoqf7yWaF81LLAiATmy1fzn_w&callback=initMap"
+            type="text/javascript"></script>
 @endsection
