@@ -381,8 +381,3 @@
 
 
 @endsection
-
-
-@section('script.plugins')
-
-@endsection

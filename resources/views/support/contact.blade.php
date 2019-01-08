@@ -78,14 +78,8 @@
                             <textarea rows="8" id="content" name="content" placeholder="Write comment here ..."
                                       class="form-control input-md" required></textarea>
                             </div>
-                                <div class="form-group alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            <button type="submit" class="btn grey" id="btn_contact_store">Submit</button>
+                            <div class="alert alert-danger" style="display:none"></div>
+                            <button type="button" class="btn grey" id="btn_contact_store">Submit</button>
                         </form>
                 </div>
             </div>
