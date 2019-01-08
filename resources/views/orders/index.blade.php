@@ -4,20 +4,12 @@
 @endsection
 @section('content')
     <h1 class="page-title">Order History
-        <small></small>
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Order History</span>
+        </small>
     </h1>
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Order History</span>
-            </li>
-        </ul>
-    </div>
 
     <div class="btn-toolbar margin-bottom-15" role="toolbar">
         <div class="btn-group btn-group-sm">

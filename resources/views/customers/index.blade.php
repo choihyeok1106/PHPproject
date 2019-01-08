@@ -118,17 +118,7 @@
             <span>Customers</span>
         </small>
     </h1>
-    <div class="page-bar">
-        <ul class="page-breadcrumb customers-warning">
-            <li style="padding: 10px;">
-                <i class="fa fa-warning font-green" style="zoom: 1.5;vertical-align: bottom;
-            color: #28C3B9;"></i>
-            </li>
-            <li>
-                <span>Contact Information only available for those that belong to your Sponsor Tree Organization</span>
-            </li>
-        </ul>
-    </div>
+
     <!-- END PAGE HEADER-->
 
     <div class="row">

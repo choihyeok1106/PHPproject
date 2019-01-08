@@ -4,24 +4,16 @@
 @endsection
 @section('content')
     <h1 class="page-title"> FAQ
-        <small>general faq page</small>
+        <small>
+            {{--general faq page--}}
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Support</span>
+            <i class="fa fa-angle-right"></i>
+            <span>FAQ</span>
+        </small>
     </h1>
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/home">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Support</span>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <a href="/support/faqs">FAQ</a>
-            </li>
-        </ul>
-    </div>
+    
     <!-- END PAGE HEADER-->
     <div class="faq-page faq-content-1">
         <div class="search-bar ">

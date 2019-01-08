@@ -78,20 +78,27 @@
 @endsection
 @section('content')
     <!-- BEGIN PAGE HEADER-->
-    <h1 class="page-title">Genealogy
-        <small></small>
+    <h1 class="page-title">Sponsor
+        <small>
+            <a href="/">Home</a>
+            <i class="fa fa-angle-right"></i>
+            {{--<span>Genealogy</span>--}}
+            {{--<i class="fa fa-angle-right"></i>--}}
+            <span>Sponsor</span>
+        </small>
     </h1>
+
     <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Genealogy</span>
-            </li>
-        </ul>
+        {{--<ul class="page-breadcrumb">--}}
+            {{--<li>--}}
+                {{--<i class="icon-home"></i>--}}
+                {{--<a href="/html">Home</a>--}}
+                {{--<i class="fa fa-angle-right"></i>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<span>Genealogy</span>--}}
+            {{--</li>--}}
+        {{--</ul>--}}
         <div class="page-toolbar">
             <div class="btn-group pull-right">
                 <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown"

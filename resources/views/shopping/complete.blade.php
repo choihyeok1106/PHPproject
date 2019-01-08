@@ -1,18 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Order Complete</span>
-            </li>
-        </ul>
-    </div>
+    <h1 class="page-title"> Order Complete
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Order Complete</span>
+        </small>
+    </h1>
+
 
     <div class="row">
         <div class="col-md-3"></div>

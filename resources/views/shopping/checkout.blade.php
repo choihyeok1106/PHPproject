@@ -5,19 +5,13 @@
 @endsection
 
 @section('content')
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="{{route('home.index')}}">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Checkout</span>
-            </li>
-        </ul>
-
-    </div>
+    <h1 class="page-title"> Checkout
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Checkout</span>
+        </small>
+    </h1>
 
     <div class="row">
         <div class="col-lg-5">

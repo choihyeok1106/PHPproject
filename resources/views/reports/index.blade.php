@@ -5,20 +5,12 @@
 @section('content')
     <!-- BEGIN PAGE HEADER-->
     <h1 class="page-title"> Reports
-        <small></small>
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Reports</span>
+        </small>
     </h1>
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Reports</span>
-            </li>
-        </ul>
-    </div>
     <!-- END PAGE HEADER-->
     <div class="profile">
         <div class="row">

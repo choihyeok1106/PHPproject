@@ -5,18 +5,13 @@
 @endsection
 
 @section('content')
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Profile</span>
-            </li>
-        </ul>
-    </div>
+    <h1 class="page-title"> Profile
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Profile</span>
+        </small>
+    </h1>
 
     <div class="portlet light profile">
         <div class="portlet-title">

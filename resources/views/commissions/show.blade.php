@@ -2,21 +2,12 @@
 
 @section('content')
     <h1 class="page-title"> PURE Commission Statement
-        <small></small>
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>PURE Commission Statement</span>
+        </small>
     </h1>
-
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Commissions</span>
-            </li>
-        </ul>
-    </div>
 
     <div class="portlet light">
         <div class="portlet-title">

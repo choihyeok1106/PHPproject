@@ -4,24 +4,14 @@
 @endsection
 @section('content')
     <h1 class="page-title"> Contact Us
-        <small></small>
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Support</span>
+            <i class="fa fa-angle-right"></i>
+            <span>Contact Us</span>
+        </small>
     </h1>
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Support</span>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Contact Us</span>
-            </li>
-        </ul>
-    </div>
     <!-- END PAGE HEADER-->
 
     <div class="c-content-feedback-1 c-option-1">

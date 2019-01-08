@@ -4,20 +4,13 @@
 @endsection
 @section('content')
     <h1 class="page-title"> Commissions
-        <small></small>
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Commissions</span>
+        </small>
     </h1>
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Commissions</span>
-            </li>
-        </ul>
-    </div>
+
     <!-- END PAGE HEADER-->
     <div class="portlet light">
         <div class="portlet-title">

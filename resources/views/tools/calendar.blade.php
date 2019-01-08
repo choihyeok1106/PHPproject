@@ -3,22 +3,15 @@
     <link href="<?= STATIC_SERVER ?>/vendors/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Tools</span>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Calendar</span>
-            </li>
-        </ul>
-    </div>
+    <h1 class="page-title"> Calendar
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Tools</span>
+            <i class="fa fa-angle-right"></i>
+            <span>Calendar</span>
+        </small>
+    </h1>
 
     <div class="row">
         <div class="col-md-12">

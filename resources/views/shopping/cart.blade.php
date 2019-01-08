@@ -5,19 +5,13 @@
 @endsection
 
 @section('content')
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/home">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Shopping Cart</span>
-            </li>
-        </ul>
-
-    </div>
+    <h1 class="page-title"> Shopping Cart
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Shopping Cart</span>
+        </small>
+    </h1>
 
     <div class="row cart">
         <!--Products-->

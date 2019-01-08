@@ -4,24 +4,14 @@
 @endsection
 @section('content')
     <h1 class="page-title"> Library
-        <small></small>
+        <small>
+            <a href="/html">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Tools</span>
+            <i class="fa fa-angle-right"></i>
+            <span>Library</span>
+        </small>
     </h1>
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="/html">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Tools</span>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Library</span>
-            </li>
-        </ul>
-    </div>
     <!-- END PAGE HEADER-->
     <div class="profile">
         <div class="row">
