@@ -4,7 +4,7 @@ var Support_Faq = {
         setTimeout(Support_Faq.initFaqSearch);
     },
     initFaqs: function () {
-        var chilren_ui =
+        var children_ui =
             '                    <div class="panel panel-default">\n' +
             '                        <div class="panel-heading">\n' +
             '                            <h4 class="panel-title">\n' +
@@ -37,11 +37,11 @@ var Support_Faq = {
             var html_right = '';
             $.each(faqs, function (k, v) {
                 var faqs_section = faq_section_ui;
-                var faqs_children = chilren_ui;
+                var faqs_children = children_ui;
                 if (v['children'].length != 0) {
                     var html_children = '';
                     $.each(v['children'], function (children_k, children_v) {
-                        faqs_children = chilren_ui;
+                        faqs_children = children_ui;
                         faqs_children = faqs_children.replace('{{$id}}', v['id']);
                         faqs_children = faqs_children.replace('{{$children->id}}', children_v['id']);
                         faqs_children = faqs_children.replace('{{$children->name}}', children_v['name']);
@@ -115,7 +115,6 @@ var Support_Faq = {
                                     $("[data-value='"+ _v.name +"']").parents('.panel-default').show();
                                 }else{
                                     $("[data-value='"+ _v.name +"']").parents('.panel-default').hide();
-
                                 }
                             });
                         }

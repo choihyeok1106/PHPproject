@@ -15,7 +15,7 @@ use App\Supports\UserPrefs;
 class FaqCache
 {
     public static function getFaq(){
-        $key = UserPrefs::getCountryLow().":faqs";
+        $key = Cache::key('item:');
         $faqs = Cache::get($key);
         if(!$faqs){
             $service = FaqService::getFaq();

@@ -11,16 +11,11 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Cache\FaqCache;
 use App\Http\Controllers\Controller;
+use App\Supports\UserPrefs;
 use Illuminate\Http\Request;
 
-class FaqAjax extends Controller
+class FaqAjax extends AjaxController
 {
-    use Ajax;
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function faqs(Request $request)
     {
