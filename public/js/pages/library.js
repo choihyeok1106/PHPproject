@@ -140,16 +140,16 @@ var Tool_Library = {
         var categories_section_ui = '<li style="line-height:37px;">\n' +
             '                        <a data-toggle="collapse" href="#" data-target="#collapse{{$id}}" aria-expanded="false"\n' +
             '                           style="padding-left: 5px;"\n' +
-            '                           class="pl-5">{{$name}}<i class="icon-action fa fa-chevron-down pull-right margin-0"></i></a>\n' +
+            '                           class="pl-5">{{$name}}<i class="icon-action fa fa-chevron-down pull-right margin-0" style="background-color: #ffffff !important;color:#b9cbd5 !important;"></i></a>\n' +
             '                           {{$categories_children}}' +
             '                    </li>';
 
-        var categories_children_ui = '<ul class="margin-bottom-10 margin-top-5 collapse padding-left-17" id="collapse{{$id}}">\n' +
+        var categories_children_ui = '<ul class="margin-bottom-10 margin-top-5 collapse" style="padding-left:0;" id="collapse{{$id}}">\n' +
             '                          {{$children_ui}}' +
             '                      </ul>';
 
-        var children_ui = '<li style="line-height:37px;">\n' +
-            '              <a class="padding-left-5" href="#">{{$name}}</a>\n' +
+        var children_ui = '<li class="list-dot children-hover" style="line-height:37px;">\n' +
+            '              <a class="" href="#" >{{$name}}</a>\n' +
             '           </li>';
 
         var loading = false;

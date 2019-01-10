@@ -2,7 +2,9 @@
 @section('style.plugins')
 
     <style>
-
+        a, a:visited, a:hover, a:link {
+            text-decoration: none;
+        }
         .customers-warning li span {
             display: inline-block;
             vertical-align: top;
@@ -78,22 +80,38 @@
         }
 
         table tr td {
-            padding: 10px 15px;
+            padding: 7px 10px;
         }
 
         table tr td:first-child {
-            padding: 10px 5px;
+            padding: 7px 5px;
+        }
+        .m-datatable__detail table tr td {
+            padding:10px 15px;
+        }
+        .m-datatable__head > tr > td span {
+            vertical-align: middle;
+            display: inline-block;
+            padding-top:2px;
         }
 
-        .m-datatable__head > tr > td a {
+        .m-datatable__head > tr > td  a {
             float: right;
             color: #bebebe;
+            margin-top:-2px;
+            padding:3px;
+        }
+        .m-datatable__head > tr > td i {
+            zoom:1;
+            display: block !important;
+        }
+        .m-datatable__head > tr > td i:first-child {
+            margin-bottom: -5px;
+        }
+        .m-datatable__head > tr > td i:last-child {
+            margin-top: -5px;
         }
 
-        .m-datatable__head > tr > td i {
-            padding: 3px 7px;
-            background-color: #fff;
-        }
 
         .m-datatable__pager-nav {
             font-size: 0;
@@ -104,6 +122,20 @@
             font-size: 12px;
             padding: 3px 10px;
             border: 1px solid #ccc;
+        }
+
+        .icon-hover {
+            color:#92a2d9;
+            padding:3px;
+            background-color:transparent;
+        }
+        .icon-hover:hover {
+            color:#377BB3;
+            background-color:#EFF3FE;
+        }
+
+        .dropdown-menu {
+            font-size:13px;
         }
     </style>
 @endsection
@@ -178,26 +210,69 @@
                          id="auto_column_hide" style="">
                         <table data-toggle="table" class="m-datatable__table"
                                style="width:100%; overflow-x: auto; margin-top:20px;">
-                            <thead class="m-datatable__head" style="background-color:#faf9fc;font-size:13px;">
+                            <thead class="m-datatable__head" style="background-color:#faf9fc;font-size:13px;font-weight: 600;">
                             <tr class="m-datatable__row" style="left: 0px;">
                                 <td data-field=""
                                     class="m-datatable__cell m-datatable__toggle-detail m-datatable__cell--sort"></td>
-                                <td data-field="">Level <a href="#" style="float:right;"><i
-                                                class="glyphicon glyphicon-sort-by-attributes-alt"></i></a></td>
-                                <td data-field="">Cust # <a href="#"><i class="fa fa-arrows-v"></i></a></td>
-                                <td data-field="">Name<a href="#" style="float:right;"><i
-                                                class="fa fa-arrows-v"></i></a></td>
-                                <td data-field="">Phone<a href="#" style="float:right;"><i
-                                                class="fa fa-arrows-v"></i></a></td>
-                                <td data-field="">Join Date<a href="#" style="float:right;"><i
-                                                class="fa fa-arrows-v"></i></a></td>
-                                <td data-field="">Type<a href="#" style="float:right;"><i
-                                                class="fa fa-arrows-v"></i></a></td>
-                                <td data-field="">Email<a href="#" style="float:right;"><i
-                                                class="fa fa-arrows-v"></i></a></td>
-                                <td data-field="">Referrer #<a href="#" style="float:right;"><i
-                                                class="fa fa-arrows-v"></i></a></td>
-                                <td data-field="" style="text-align: center;">Actions</td>
+                                <td data-field="">
+                                    <span>Level</span>
+                                    <a href="#" style="float:right;">
+                                        <i class="fa fa-angle-up" style="visibility: hidden;"></i>
+                                        <i class="fa fa-angle-down font-blue-madison""></i>
+                                    </a>
+                                </td>
+
+                                <td data-field="">
+                                    <span>Cust #</span>
+                                    <a href="#">
+                                        <i class="fa fa-angle-up"></i>
+                                        <i class="fa fa-angle-down"></i>
+                                    </a>
+                                </td>
+                                <td data-field="">
+                                    <span>Name</span>
+                                    <a href="#" style="float:right;">
+                                        <i class="fa fa-angle-up""></i>
+                                        <i class="fa fa-angle-down""></i>
+                                    </a>
+                                </td>
+                                <td data-field="">
+                                    <span>Phone</span>
+                                    <a href="#" style="float:right;">
+                                        <i class="fa fa-angle-up"></i>
+                                        <i class="fa fa-angle-down""></i>
+                                    </a></td>
+                                <td data-field="">
+                                    <span>Join Date</span>
+                                    <a href="#" style="float:right;">
+                                        <i class="fa fa-angle-up"></i>
+                                        <i class="fa fa-angle-down"></i>
+                                    </a></td>
+                                <td data-field="">
+                                    <span>Type</span>
+                                    <a href="#" style="float:right;">
+                                        <i class="fa fa-angle-up"></i>
+                                        <i class="fa fa-angle-down"></i>
+                                    </a></td>
+                                <td data-field="">
+                                    <span>Email</span>
+                                    <a href="#" style="float:right;">
+                                        <i class="fa fa-angle-up"></i>
+                                        <i class="fa fa-angle-down"></i>
+                                    </a></td>
+                                <td data-field="">
+                                    <span>Referrer #</span>
+                                    <a href="#" style="float:right;">
+                                        <i class="fa fa-angle-up"></i>
+                                        <i class="fa fa-angle-down"></i>
+                                    </a></td>
+                                <td data-field="" style="text-align: center;">
+                                    <span>Actions</span>
+                                    <a href="#" style="visibility: hidden;">
+                                        <i class="fa fa-angle-up"></i>
+                                        <i class="fa fa-angle-down"></i>
+                                    </a>
+                                </td>
                             </tr>
                             </thead>
                             <tbody class="m-datatable__body" style="font-size:12px;font-weight:200;">
@@ -210,15 +285,15 @@
                                 <td class="m-datatable__cell">Carroll Maharrty</td>
                                 <td class="m-datatable__cell">4209350970</td>
                                 <td class="m-datatable__cell">1/18/2018</td>
-                                <td class="m-datatable__cell">Preferred</td>
+                                <td class="m-datatable__cell font-blue-madison"><span style="font-weight: bold;">&#8226;</span> Preferred</td>
                                 <td class="m-datatable__cell">mahally1234@gmail.com</td>
                                 <td class="m-datatable__cell">kr1097118</td>
-                                <td class="m-datatable__cell" style="text-align: right;">
-                                    <div class="btn-group">
-                                        <a href="" data-toggle="dropdown"><i class="la la-ellipsis-h"
-                                                                             style="zoom:1.5;margin-right:5px;"></i></a>
+                                <td class="m-datatable__cell" style="text-align: right;padding-right:20px;">
+                                    <div class="btn-group" style="margin:0 5px;">
+                                        <a href="" data-toggle="dropdown"><i class="la la-ellipsis-h icon-hover"
+                                                                             style="zoom:1.3;"></i></a>
                                         <ul class="dropdown-menu dropdown-menu-default pull-left"
-                                            style="right: 0;left: auto;" data-toggle="dropdown" aria-haspopup="false"
+                                            style="right: -5px;left: auto;" data-toggle="dropdown" aria-haspopup="false"
                                             aria-expanded="false">
                                             <li><a href="javascript:;"><i class="fa fa-user"></i> Edit Profile</a></li>
                                             <li><a href="javascript:;"><i class="fa fa-shopping-cart"></i> View
@@ -227,9 +302,11 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="btn-group open">
-                                        <a href="#"><i class="la la-cart-arrow-down"
-                                                       style="zoom:1.5;margin-right:5px;;"></i></a>
+                                    <div class="btn-group">
+                                        <a href="#" data-toggle="tooltip" style="width:200px;" title="Create&nbsp;New&nbsp;Order">
+                                            <i class="la la-cart-arrow-down icon-hover"
+                                                       style="zoom:1.5;"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -374,5 +451,7 @@
 
 
 @section('script.plugins')
-
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
 @endsection

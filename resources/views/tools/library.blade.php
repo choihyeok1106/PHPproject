@@ -9,6 +9,12 @@
         var j$ = jQuery.noConflict();
     </script>
     <style>
+
+        a, a:hover, a:visited, a:link {
+            outline: none;
+            text-decoration:none;
+        }
+
         .ui-autocomplete {
             max-height: 200px;
             overflow-y: auto;
@@ -18,6 +24,36 @@
         .padding-left-17 {
             padding-left: 17px;
         }
+
+        ul li {
+            list-style: none;
+        }
+        .list-dot {
+            position: relative;
+        }
+        .list-dot::before {
+            content: "• ";
+            font-size: 12px;
+            position: absolute;
+            top: 1px;
+            left: 15px;
+        }
+        .list-dot a {
+            padding-left:25px;
+        }
+        .ver-inline-menu li a {
+            background-color: #ffffff !important;
+            border:none !important;
+            font-size:13px !important;
+        }
+        .ver-inline-menu li.children-hover a:hover {
+            background-color:#f9f9f9 !important;
+            color:#337ab7;
+            border-radius: 25px !important;
+        }
+
+
+
     </style>
 @endsection
 @section('content')
@@ -55,7 +91,8 @@
 
         <div class="row">
             {{--sidebar start--}}
-            <ul class="ver-inline-menu tabbable margin-bottom-10 col-md-3" id="library_category">
+            <ul class="ver-inline-menu tabbable margin-bottom-10 col-md-3" id="library_category" style="padding:0 20px;">
+
             </ul>
 
             <input type="text" value="" id="input_clipboard"
