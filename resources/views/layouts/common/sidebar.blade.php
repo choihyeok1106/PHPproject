@@ -134,7 +134,7 @@
                     </li>
                     <li class="nav-item  ">
                         <a href="/support/contact" class="nav-link ">
-                            <span class="title">Contact us</span>
+                            <span class="title">Contact Pure</span>
                         </a>
                     </li>
                 </ul>

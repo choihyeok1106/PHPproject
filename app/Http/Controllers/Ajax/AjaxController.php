@@ -84,6 +84,10 @@ class AjaxController extends BaseController {
         ]);
     }
 
+    protected function validate($error){
+        return $this->response($error);
+    }
+
     /**
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */

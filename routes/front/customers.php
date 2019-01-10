@@ -1,4 +1,4 @@
 <?php
 
-Route::get('/customers', 'Ajax\customersAjax@index');
+Route::resource('customers', 'CustomerController');
 ?>
