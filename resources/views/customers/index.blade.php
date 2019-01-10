@@ -192,7 +192,7 @@
                             <div>
                                 <div class="customers-border">
                                     <select name="" id="#"
-                                            style="border:none;outline:none;width:100%;color:#aaaaaa">
+                                            style="border:none;outline:none;width:100%;color:#aaaaaa;background: #ffffff">
                                         <option selected>All</option>
                                     </select>
                                 </div>
@@ -374,7 +374,7 @@
                 <div class="modal-dialog" role="document" style="width:30%;font-size:12px;">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel" style="float:left;">New Note</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" style="float:left;">Edit Note</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
