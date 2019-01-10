@@ -118,17 +118,7 @@
             <span>Customers</span>
         </small>
     </h1>
-    <div class="page-bar">
-        <ul class="page-breadcrumb customers-warning">
-            <li style="padding: 10px;">
-                <i class="fa fa-warning font-green" style="zoom: 1.5;vertical-align: bottom;
-            color: #28C3B9;"></i>
-            </li>
-            <li>
-                <span>Contact Information only available for those that belong to your Sponsor Tree Organization</span>
-            </li>
-        </ul>
-    </div>
+
     <!-- END PAGE HEADER-->
 
     <div class="row">
@@ -170,7 +160,7 @@
                             <div>
                                 <div class="customers-border">
                                     <select name="" id="#"
-                                            style="border:none;outline:none;width:100%;color:#aaaaaa">
+                                            style="border:none;outline:none;width:100%;color:#aaaaaa;background: #ffffff">
                                         <option selected>All</option>
                                     </select>
                                 </div>
@@ -307,7 +297,7 @@
                 <div class="modal-dialog" role="document" style="width:30%;font-size:12px;">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel" style="float:left;">New Note</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" style="float:left;">Edit Note</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>

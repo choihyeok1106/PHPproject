@@ -1,6 +1,35 @@
 @extends('layouts.app')
 @section('style.plugins')
     <link href="/css/pages/contact.min.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+        .tab-nav li {
+            display: inline-block;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 7px;
+        }
+
+        #map {
+            z-index: 3;
+            position: absolute;
+            width: 100%;
+            padding: 0px;
+            border-width: 0px;
+            margin: 0px;
+            left: 0px;
+            top: 0px;
+            touch-action: pan-x pan-y;
+        }
+
+        a[data-country] {
+            text-decoration: none;
+        }
+
+       .c-content-iconlist-1 > li{
+            margin: 2px;
+        }
+    </style>
 @endsection
 @section('content')
     <h1 class="page-title"> Contact Us
@@ -64,100 +93,115 @@
                             Please feel free to drop
                             us an email from the form below and we will get back to you as soon as we can.</p>
                     </div>
-                        <form action="{{route('support.contact')}}" method="post">
-                            <div class="form-group">
-                                <input type="text" placeholder="Your Name" id="name" name="name"
-                                       class="form-control input-md" required></div>
-                            <div class="form-group">
-                                <input type="email" placeholder="Your Email" id="email" name="email"
-                                       class="form-control input-md" required></div>
-                            <div class="form-group">
-                                <input type="text" placeholder="Contact Phone" id="phone" name="phone"
-                                       class="form-control input-md" required></div>
-                            <div class="form-group">
+                    <form action="{{route('support.contact')}}" method="post">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" id="name" name="name"
+                                   class="form-control input-md" required></div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" id="email" name="email"
+                                   class="form-control input-md" required></div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Contact Phone" id="phone" name="phone"
+                                   class="form-control input-md" required></div>
+                        <div class="form-group">
                             <textarea rows="8" id="content" name="content" placeholder="Write comment here ..."
                                       class="form-control input-md" required></textarea>
-                            </div>
-                            <div class="alert alert-danger" style="display:none"></div>
-                            <button type="button" class="btn grey" id="btn_contact_store">Submit</button>
-                        </form>
+                        </div>
+                        <div class="alert alert-danger" style="display:none"></div>
+                        <button type="button" class="btn grey" id="btn_contact_store">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="text-center margin-top-30 margin-bottom-15">
-        <button type="button" class="btn dark">
-            <img alt="" src="/img/flags/us.png"> USA
-        </button>
-        <button type="button" class="btn dark btn-outline">
-            <img alt="" src="/img/flags/kr.png"> KOREA
-        </button>
-        <button type="button" class="btn dark btn-outline">
-            <img alt="" src="/img/flags/jp.png"> JAPAN
-        </button>
-        <button type="button" class="btn dark btn-outline">
-            <img alt="" src="/img/flags/tw.png"> TAIWAN
-        </button>
-        <button type="button" class="btn dark btn-outline">
-            <img alt="" src="/img/flags/th.png"> Thailand
-        </button>
-        <button type="button" class="btn dark btn-outline">
-            <img alt="" src="/img/flags/us.png"> HAWAII
-        </button>
+        <a href="#tab-us" data-country="us" data-toggle="tab">
+            <button type="button" class="btn dark btn-outline btn_tab active">
+                <img alt="" src="/img/flags/en.png"> USA
+            </button>
+        </a>
+        <a href="#tab-kr" data-country="kr" data-toggle="tab">
+            <button type="button" class="btn dark btn-outline btn_tab">
+                <img alt="" src="/img/flags/kr.png"> KOREA
+            </button>
+        </a>
+        <a href="#tab-jp" data-country="jp" data-toggle="tab">
+            <button type="button" class="btn dark btn-outline btn_tab">
+                <img alt="" src="/img/flags/jp.png"> JAPAN
+            </button>
+        </a>
+        <a href="#tab-ta" data-country="ta" data-toggle="tab">
+            <button type="button" class="btn dark btn-outline btn_tab">
+                <img alt="" src="/img/flags/tw.png"> TAIWAN
+            </button>
+        </a>
+        <a href="#tab-ha" data-country="ha" data-toggle="tab">
+            <button type="button" class="btn dark btn-outline btn_tab">
+                <img alt="" src="/img/flags/en.png"> HAWAII
+            </button>
+        </a>
+    </div>
+    <div id="tab-nav" class="tab-content text-center">
+        <ul class="tab-nav tab-sub tab-pane fade in active" id="tab-us">
+            <li>
+                <button class="btn btn-circle green active first" data-area="US_UT">UTAH <i
+                            class="glyphicon glyphicon-map-marker"></i></button>
+            </li>
+            <li>
+                <button class="btn btn-circle green" data-area="US_TA">TEXAS <i
+                            class="glyphicon glyphicon-map-marker"></i></button>
+            </li>
+        </ul>
+        <ul class="tab-nav tab-sub tab-pane fade" id="tab-kr">
+            <li>
+                <button class="btn btn-circle green active first" data-area="KR_SE">서울본사 <i
+                            class="glyphicon glyphicon-map-marker"></i></button>
+            </li>
+            <li>
+                <button class="btn btn-circle green" data-area="KR_GA">광주지사 <i
+                            class="glyphicon glyphicon-map-marker"></i></button>
+            </li>
+            <li>
+                <button class="btn btn-circle green" data-area="KR_DA">대구지사 <i
+                            class="glyphicon glyphicon-map-marker"></i></button>
+            </li>
+            <li>
+                <button class="btn btn-circle green" data-area="KR_BU">부산지사 <i
+                            class="glyphicon glyphicon-map-marker"></i></button>
+            </li>
+        </ul>
+        <ul class="tab-nav tab-sub tab-pane fade" id="tab-jp">
+            <li>
+                <button class="btn btn-circle green active first" data-area="JP">Live PURE™ Japan Inc <i
+                            class="glyphicon glyphicon-map-marker"></i></button>
+            </li>
+        </ul>
+        <ul class="tab-nav tab-sub tab-pane fade" id="tab-ta">
+            <li>
+                <button class="btn btn-circle green active first" data-area="TA">Live PURE™ TAIWAN <i
+                            class="glyphicon glyphicon-map-marker"></i></button>
+            </li>
+        </ul>
+        <ul class="tab-nav tab-sub tab-pane fade" id="tab-ha">
+            <li>
+                <button class="btn btn-circle green first" data-area="HA">Live PURE™ HAWAII <i
+                            class="glyphicon glyphicon-map-marker"></i></button>
+            </li>
+        </ul>
     </div>
 
     <div class="c-content-contact-1 c-opt-1">
         <div class="row" data-auto-height=".c-height">
-            <div class="col-lg-8 col-md-6 c-desktop"></div>
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-8 col-md-7 c-desktop"></div>
+            <div class="col-lg-4 col-md-5">
                 <div class="c-body">
-                    <div class="c-section">
-                        <h3>Metronic Inc.</h3>
-                    </div>
-                    <div class="c-section">
-                        <div class="c-content-label uppercase bg-blue">Address</div>
-                        <p>25, Lorem Lis Street,
-                            <br/>Orange C, California,
-                            <br/>United States of America</p>
-                    </div>
-                    <div class="c-section">
-                        <div class="c-content-label uppercase bg-blue">Contacts</div>
-                        <p>
-                            <strong>T</strong> 800 123 0000
-                            <br/>
-                            <strong>F</strong> 800 123 8888</p>
-                    </div>
-                    <div class="c-section">
-                        <div class="c-content-label uppercase bg-blue">Social</div>
-                        <br/>
-                        <ul class="c-content-iconlist-1 ">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-youtube-play"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-linkedin"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    {{-- c_section --}}
                 </div>
             </div>
         </div>
-        <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 615px;"></div>
+        {{-- <div id="gmapbg" class="c-content-contact-1-gmap" style="height: 615px;"></div>--}}
+        <div id="map" style="height: 615px;"></div>
     </div>
 @endsection
 @section('script.plugins')
