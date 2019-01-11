@@ -5,13 +5,13 @@ var Item = {
     init: function () {
         this.sku = $(".page-title").attr("data-sku");
         if (this.sku) {
-            setTimeout(Item.initUI);
+            setTimeout(Item.initImgBox);
             setTimeout(Item.initItem);
-            setTimeout(Item.initStocks);
+            // setTimeout(Item.initStocks);
             setTimeout(Item.initActions);
         }
     },
-    initUI: function () {
+    initImgBox: function () {
         function initHeight() {
             var elm = $(".img-wrapper");
             var w = elm.outerWidth();
@@ -32,7 +32,7 @@ var Item = {
         });
     },
     initQtyCount: function () {
-        if (Item.stocks > 0) {
+        if (Item.item && Item.stocks > Item.item.out_stock_level) {
             $("[data-toggle=mathf-count]").click(function () {
                 var target = $(this).attr("data-target");
                 if (target) {
@@ -54,14 +54,24 @@ var Item = {
                     $(target).val(qty);
                 }
             });
+            // set low stock message
+            if (Item.stocks < Item.item.low_stock_level) {
+                $("#item-counting .text-danger").text(Item.item.low_stock_msg);
+            }
+
         } else {
-            alert('No stocks');
+            var ui = '<button class="btn btn-danger" type="button" disabled>\n' +
+                '<span class="bold">SOLD OUT</span>\n' +
+                ' </button>';
+            $("#item-counting").html(ui);
         }
+        $("#item-counting").show();
     },
     initItem: function () {
         Ajax.get("/a/item/" + Item.sku, null, {
             ok: function (item) {
                 console.log(item)
+                Item.initStocks();
                 Item.item = item;
                 Item.Make();
             },
@@ -87,18 +97,17 @@ var Item = {
     initActions: function () {
         var btn = $("#add-cart");
         btn.click(function () {
-            if (Item.curr) {
+            if (Item.item) {
                 Ajax.post("/a/cart/add", {
-                    sku: Item.curr,
+                    sku: Item.sku,
                     qty: $("#qty").val()
                 }, {
                     ok: function (res) {
-                        if (!res.hasOwnProperty("error")) {
-                            $("#modal-cart").modal({
-                                show: 'true'
-                            });
-                            $("#qty").val(1)
-                        }
+                        Common.cartCount();
+                        $("#modal-cart").modal({
+                            show: 'true'
+                        });
+                        $("#qty").val(1);
                     },
                     no: function (err) {
                         console.log(err);
@@ -127,7 +136,9 @@ var Item = {
             $("#item-retail").text(Item.item.retail_format);
         }
         $("#item-qv").text(Item.item.qv + " PV");
-        $("#item-explanation").html(Item.item.explanation);
+        if (Item.item.explanation) {
+            $("#item-explanation").html(Item.item.explanation).show();
+        }
         $("#item-long_explanation").html(Item.item.long_explanation);
         $("#item-recommended_use").html(Item.item.recommended_use);
         $("#item-shipping_return").html(Item.item.shipping_return);

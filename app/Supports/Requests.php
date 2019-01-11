@@ -21,6 +21,15 @@ trait Requests {
 
     /**
      * @param string $key
+     * @param null   $deft
+     * @return mixed
+     */
+    function get(string $key, $deft = null) {
+        return $this->_request($key, $deft);
+    }
+
+    /**
+     * @param string $key
      * @param int    $deft
      * @param null   $min
      * @param null   $max
@@ -76,13 +85,28 @@ trait Requests {
         return trim($val);
     }
 
+    function array(string $name, array $deft = []) {
+        $val = $this->_request($name);
+        if (!is_array($val)) {
+            $val = $deft;
+        }
+        return $val;
+    }
+
     /**
      * @param null $key
      * @param null $deft
      * @return mixed
      */
-    public function header($key = null, $deft = null) {
+    function header($key = null, $deft = null) {
         return app('request')->header($key, $deft);
+    }
+
+    /**
+     * @return bool
+     */
+    function ajax() {
+        return app('request')->ajax();
     }
 
 }

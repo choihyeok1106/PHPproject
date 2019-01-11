@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 
 use App\Constants\ItemPriceType;
+use App\Constants\Nopic;
 
 
 /**
@@ -26,14 +27,14 @@ use App\Constants\ItemPriceType;
  * @property Currency      _currency
  * @property string        price_format
  */
-class Items extends RepositoryAbstract {
+class ItemsSearch extends RepositoryAbstract {
 
     private $_translate;
     private $_price;
     private $_currency;
 
     /**
-     * @return Items
+     * @return ItemsSearch
      */
     public function transform() {
         $this->_currency  = $this->_currency();
@@ -68,7 +69,7 @@ class Items extends RepositoryAbstract {
             if ($this->_currency->formats) {
                 return str_replace('{N}', $price, $this->_currency->formats);
             } else {
-                return "{$this->_currency->symbol} {$price}";
+                return "{$this->_currency->symbol}{$price}";
             }
         } else {
             return '$' . number_format($this->_price->price, 2);
@@ -147,6 +148,6 @@ class Items extends RepositoryAbstract {
      * @return string
      */
     private function image() {
-        return $this->get('image') ? $this->get('image') : '/img/nopic_product.jpg';
+        return $this->get('image') ? $this->get('image') : Nopic::ITEM;
     }
 }

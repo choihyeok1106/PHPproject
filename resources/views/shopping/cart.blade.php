@@ -5,11 +5,13 @@
 @endsection
 
 @section('content')
-    <h1 class="page-title"> Shopping Cart
+    <h1 class="page-title" data-menu="orders">Shopping Cart
         <small>
-            <a href="/html">Home</a>
+            <a href="/">Home</a>
             <i class="fa fa-angle-right"></i>
-            <span>Shopping Cart</span>
+            <span>Shopping</span>
+            <i class="fa fa-angle-right"></i>
+            <span>cart</span>
         </small>
     </h1>
 
@@ -17,10 +19,14 @@
         <!--Products-->
         <div class="col-lg-8">
             <div class="portlet light">
+                <div class="portlet-title cart-title">
+                    <div class="caption">
+                        <span class="caption-subject sbold font-grey-gallery uppercase">Shopping Cart</span>
+                    </div>
+                </div>
                 <div class="portlet-body">
-
                     <table class="table">
-                        <thead>
+                        <thead class="hide">
                         <tr>
                             <th width="50" class="text-center thumb">Image</th>
                             <th>
@@ -53,19 +59,24 @@
                 <div class="portlet-body">
                     <div class="m-grid">
                         <div class="m-grid-row total-top">
-                            <div class="m-grid-col m-grid-col-md-6">PV total</div>
-                            <div id="pv-total" class="m-grid-col m-grid-col-md-6">0</div>
+                            <div class="m-grid-col m-grid-col-md-6 caption-subject sbold font-grey-gallery">PV total
+                            </div>
+                            <div id="pv-total"
+                                 class="m-grid-col m-grid-col-md-6 caption-subject sbold font-grey-gallery">0
+                            </div>
                         </div>
                         <div class="m-grid-row total-bot">
                             <div class="m-grid-col m-grid-col-md-6">Estimated Subtotal</div>
-                            <div id="sub-total" class="m-grid-col m-grid-col-md-6 font-purple">$0</div>
+                            <div id="items-total" class="m-grid-col m-grid-col-md-6 font-purple"></div>
                         </div>
                     </div>
 
+                    <div id="alert-danger" class="alert alert-danger">The daily cronjob has failed.</div>
+
                     <div class="total-act">
-                        <a href="{{route('shopping.checkout')}}" class="btn green-meadow btn-lg btn-block">
+                        <button type="button" id="check-out" class="btn green-meadow btn-lg btn-block" disabled>
                             <i class="icon-credit-card"></i> &nbsp; Proceed to checkout
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

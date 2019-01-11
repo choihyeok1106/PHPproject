@@ -8,6 +8,7 @@
 
 namespace App\Services {
 
+    use App\Cache\Cache;
     use App\Supports\UserPrefs;
     use Illuminate\Support\Facades\App;
     use Ixudra\Curl\Builder;
@@ -82,7 +83,7 @@ namespace App\Services {
                     'Authorization: ' . $this->getAuthorize(),
                     'X-App-Locale: ' . App::getLocale()
                 ]);
-                if(UserPrefs::passport()){
+                if (UserPrefs::passport()) {
                     $this->headers(UserPrefs::pass());
                 }
                 if (is_array($this->headers)) {

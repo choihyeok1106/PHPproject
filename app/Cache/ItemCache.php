@@ -39,7 +39,6 @@ class ItemCache {
             $c->category,
             $c->legend,
             $c->type,
-            $c->level,
             $c->virtual,
             $c->enrollment,
             $c->search,
@@ -67,7 +66,7 @@ class ItemCache {
         $resources = Cache::get($key);
         if (!$resources) {
             $svc = ItemService::item($sku);
-            return Cache::set($key, $svc->data());
+            return Cache::set($key, $svc->response());
         }
         return $resources;
     }
