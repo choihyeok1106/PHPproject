@@ -12,7 +12,5 @@ namespace App\Http\Controllers\Ajax;
 
 class RepAjax extends AjaxController {
 
-    public function __construct() {
-        $this->middleware('auth');
-    }
+
 }

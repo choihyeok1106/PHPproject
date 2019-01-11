@@ -26,39 +26,36 @@ class LoginAjax extends AjaxController {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request) {
-        if ($request->ajax()) {
-            //            session()->put('locale', $locale);
-            $id       = trim($request->get("id"));
-            $pwd      = trim($request->get("pwd"));
-            $remember = $request->get("remember") ? true : false;
-            if (!$id || !$pwd) {
-                return $this->no("This username/password combination is not quite correct");
-            }
-            $svc = AuthenticateService::login($id, $pwd);
+        //            session()->put('locale', $locale);
+        $id       = trim($request->get("id"));
+        $pwd      = trim($request->get("pwd"));
+        $remember = $request->get("remember") ? true : false;
+        if (!$id || !$pwd) {
+            return $this->no("This username/password combination is not quite correct");
+        }
+        $svc = AuthenticateService::login($id, $pwd);
+        if (!$svc->succeed()) {
+            return $this->no($svc->error());
+        }
+        /** @var Passport $pass */
+        $pass = Passport::Item($svc->data(),false);
+        if ($pass) {
+            UserPrefs::setPassport($pass);
+            $svc = RepService::getRep($pass->number);
             if (!$svc->succeed()) {
+                UserPrefs::clear();
                 return $this->no($svc->error());
             }
-            /** @var Passport $pass */
-            $pass = Passport::Item($svc->data(),false);
-            if ($pass) {
-                UserPrefs::setPassport($pass);
-                $svc = RepService::getRep($pass->number);
-                if (!$svc->succeed()) {
-                    UserPrefs::clear();
-                    return $this->no($svc->error());
-                }
-                UserPrefs::setRep($svc->data());
-                if ($remember) {
-                    cookieset('username', $pass->number, 60 * 24 * 30);
-                } else {
-                    cookiedel('username');
-                }
-                return $this->ok();
+            UserPrefs::setRep($svc->data());
+            if ($remember) {
+                cookieset('username', $pass->number, 60 * 24 * 30);
+            } else {
+                cookiedel('username');
             }
-
-            return $this->no('This username/password combination is not quite correct');
+            return $this->ok();
         }
-        return $this->badRequest();
+
+        return $this->no('This username/password combination is not quite correct');
     }
 
     /**
@@ -67,9 +64,6 @@ class LoginAjax extends AjaxController {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function forgotPassword(Request $request) {
-        if ($request->ajax()) {
-            return response(["error" => "Bad Request"]);
-        }
         return response(["error" => "Bad Request"]);
     }
 

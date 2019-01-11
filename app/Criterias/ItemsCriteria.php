@@ -9,20 +9,20 @@ namespace App\Criterias;
 
 
 /**
- * @property int    category
- * @property string search
- * @property string sorting
- * @property string order
- * @property string by
- * @property int    page
- * @property string tag
- * @property int    limit
- * @property int    level
- * @property int    type
- * @property int    legend
- * @property string targetneed
- * @property int    virtual
- * @property int    enrollment
+ * @property mixed category
+ * @property mixed search
+ * @property mixed sorting
+ * @property mixed order
+ * @property mixed by
+ * @property mixed page
+ * @property mixed tag
+ * @property mixed limit
+ * @property mixed level
+ * @property mixed type
+ * @property mixed legend
+ * @property mixed targetneed
+ * @property mixed virtual
+ * @property mixed enrollment
  */
 class ItemsCriteria extends CriteriaAbstract {
 
@@ -57,7 +57,7 @@ class ItemsCriteria extends CriteriaAbstract {
     /**
      * @return array
      */
-    public function vars() {
+    public function search() {
         return [
             'category'   => $this->category,
             'search'     => $this->search,
@@ -72,6 +72,14 @@ class ItemsCriteria extends CriteriaAbstract {
             'virtual'    => $this->virtual,
             'enrollment' => $this->enrollment,
             'page'       => $this->page,
+        ];
+    }
+
+    public function items() {
+        return [
+            'type'   => $this->type,
+            'legend' => $this->legend,
+            'sku'    => is_array($this->search) ? implode(',', $this->search) : '',
         ];
     }
 }

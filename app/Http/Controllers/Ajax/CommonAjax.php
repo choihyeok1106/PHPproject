@@ -9,67 +9,47 @@
 namespace App\Http\Controllers\Ajax;
 
 
-use Illuminate\Http\Request;
 
 class CommonAjax extends AjaxController {
 
-    public function lang(Request $request) {
-        if ($request->ajax()) {
-            return $this->ok(__('common'));
-        }
-        return $this->badRequest();
+    public function lang() {
+        return $this->ok(__('common'));
     }
 
     /**
      * get cart item count
-     * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function cartCount(Request $request) {
-        if ($request->ajax()) {
-            $count = rand(0, 99);
-            return $this->ok(['count' => $count]);
-        }
-        return $this->badRequest();
+    public function cartCount() {
+        $count = rand(0, 99);
+        return $this->ok(['count' => $count]);
     }
 
     /**
      * get unread alert count
-     * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function alertCount(Request $request) {
-        if ($request->ajax()) {
-            $count = rand(0, 99);
-            return $this->ok(['count' => $count]);
-        }
-        return $this->badRequest();
+    public function alertCount() {
+        $count = rand(0, 99);
+        return $this->ok(['count' => $count]);
     }
 
     /**
      * get unread notice count
-     * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function noticeCount(Request $request) {
-        if ($request->ajax()) {
-            $count = rand(0, 99);
-            return $this->ok(['count' => $count]);
-        }
-        return $this->badRequest();
+    public function noticeCount() {
+        $count = rand(0, 99);
+        return $this->ok(['count' => $count]);
     }
 
     /**
      * get unread message count
-     * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function messageCount(Request $request) {
-        if ($request->ajax()) {
-            $count = rand(0, 99);
-            return $this->ok(['count' => $count]);
-        }
-        return $this->badRequest();
+    public function messageCount() {
+        $count = rand(0, 99);
+        return $this->ok(['count' => $count]);
     }
 
 }

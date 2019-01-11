@@ -11,7 +11,7 @@ namespace App\Demos;
 
 use App\Models\Total;
 use App\Repositories\Category;
-use App\Repositories\Items;
+use App\Repositories\ItemsSearch;
 use App\Repositories\ItemPrice;
 use App\Repositories\ItemResource;
 
@@ -83,7 +83,7 @@ class ItemData {
     public static function getProducts(int $ln = 24) {
         $data = [];
         for ($i = 0; $i < $ln; $i++) {
-            $item = new Items();
+            $item = new ItemsSearch();
 
             $item->id    = $i;
             $item->sku   = 'LP' . rand(1000, 9999) . $i;
@@ -109,10 +109,10 @@ class ItemData {
 
     /**
      * @param string $sku
-     * @return Items
+     * @return ItemsSearch
      */
     public static function getItem($sku = '') {
-        $item        = new Items();
+        $item        = new ItemsSearch();
         $i           = rand(1, 9);
         $item->id    = $i;
         $item->sku   = $sku ? $sku : 'LP' . rand(1000, 9999) . $i;

@@ -122,11 +122,12 @@ var Items = {
                 quantity: 1
             }, {
                 ok: function (items) {
-                    if (items.hasOwnProperty('count') && items.count) {
-                        $("#head-cart-count").text(items.count).show();
-                    } else {
-                        $("#head-cart-count").text(0).hide();
-                    }
+                    Common.cartCount();
+                    // if (items.hasOwnProperty('count') && items.count) {
+                    //     $("#head-cart-count").text(items.count).show();
+                    // } else {
+                    //     $("#head-cart-count").text(0).hide();
+                    // }
                 }
             });
         }

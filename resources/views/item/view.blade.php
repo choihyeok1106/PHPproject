@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="share margin-top-30">
+                    <div class="share margin-top-30 hide">
                         <label>SHARE THIS</label>
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -63,7 +63,7 @@
 
                     <div id="item-groups" class="options"></div>
 
-                    <div class="actions">
+                    <div id="item-counting" class="actions">
                         <div class="qty">
                             <a href="javascript:;" data-toggle="mathf-count" data-target="#qty" data-action="-1"
                                class="minus">
@@ -79,6 +79,7 @@
                                 <i class="fa fa-shopping-cart"></i> <span class="bold"> Add to Cart</span>
                             </button>
                         </div>
+                        <p class="text-danger"></p>
                     </div>
                 </div>
             </div>

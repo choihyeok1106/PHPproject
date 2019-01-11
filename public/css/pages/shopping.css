@@ -24,14 +24,40 @@
 }
 
 .shopping .list-name {
-    color: #333;
+    color: #444;
     text-decoration: none;
     padding-top: 5px;
 }
 
+.table > tbody > tr.product-row:first-child > td {
+    border-top: 0;
+}
+
+.portlet > .portlet-title.cart-title {
+    margin-bottom: 0;
+}
+
 .shopping .list-name a {
     color: inherit;
+    font-weight: 600;
     text-decoration: inherit;
+}
+
+.shopping .list-name a > span.unavailable {
+    color: #999;
+}
+
+.cart .table p.stock-error {
+    color: #ed6b75;
+    font-size: 13px;
+}
+
+.cart .table td.item-check {
+    padding-top: 15px;
+}
+
+.cart .table p.stock-in {
+    color: #36c6d3;
 }
 
 .shopping .list-price {
@@ -51,6 +77,11 @@
 
 .shopping .product-row td {
     position: relative;
+}
+
+.shopping .product-row td .list-action {
+    clear: both;
+    padding: 5px 0 0 15px;
 }
 
 .shopping div.category-select {
@@ -139,7 +170,7 @@
 
 .totals .m-grid-row > div {
     padding: 0 0 15px 0;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .totals .m-grid-row > div:first-child {
@@ -337,9 +368,11 @@
 
 .product-detail .property .explanation {
     border-top: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
     padding: 15px 0;
     font-size: 16px;
     opacity: .7;
+    display: none;
 }
 
 .product-detail .property .options {
@@ -616,7 +649,7 @@
     font-weight: 600;
 }
 
-#products{
+#products {
     min-height: 240px;
 }
 
@@ -684,9 +717,10 @@
 }
 
 .cart p.pv {
-    color: #888;
-    font-size: 13px;
+    color: #555;
+    font-size: 14px;
     margin-top: 5px;
+    text-align: right;
 }
 
 .cart .col-md-2.list-qty {
@@ -699,7 +733,7 @@
 }
 
 .cart select.qty {
-    min-width: 48px;
+    min-width: 64px;
     height: 24px;
 }
 
@@ -740,8 +774,37 @@
         /*margin-top: 6px;*/
         margin-top: 5px;
     }
+
+    .cart p.pv {
+        text-align: left;
+    }
 }
 
 .promotions {
     display: none;
+}
+
+#item-counting {
+    display: none;
+}
+
+#item-counting .text-danger {
+    margin-top: 4px;
+}
+
+.cart #alert-danger {
+    display: none;
+}
+
+.cart #check-out{
+    /*display: none;*/
+}
+
+.checkout #shipping-methods label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.checkout #shipping-methods label:last-child{
+    margin-bottom: 0;
 }

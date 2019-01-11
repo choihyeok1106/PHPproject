@@ -12,46 +12,28 @@ use App\Cache\GenealogyCache;
 use App\Cache\RepCache;
 use App\Supports\GenealogyNode;
 use App\Supports\UserPrefs;
-use Illuminate\Http\Request;
 
 class GenealogyAjax extends AjaxController {
 
     /**
-     * HomeAjax constructor.
+     * @param string $repNumber
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function __construct() {
-        $this->middleware('auth');
+    public function view(string $repNumber) {
+        $rep = RepCache::getRep($repNumber);
+        return $this->ok($rep);
     }
 
     /**
-     * @param Request $request
-     * @param string  $repNumber
+     * @param string $repNumber
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function view(Request $request, string $repNumber) {
-        if ($request->ajax()) {
-            $rep = RepCache::getRep($repNumber);
-            return $this->ok($rep);
+    public function binary(string $repNumber = '') {
+        if (!$repNumber) {
+            $repNumber = UserPrefs::number();
         }
-
-        return $this->badRequest();
-    }
-
-    /**
-     * @param Request $request
-     * @param string  $repNumber
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
-     */
-    public function binary(Request $request, string $repNumber = '') {
-        if ($request->ajax()) {
-            if (!$repNumber) {
-                $repNumber = UserPrefs::number();
-            }
-            $reps = GenealogyCache::getBinary($repNumber);
-            return $this->ok(GenealogyNode::make()->binary($reps));
-        }
-
-        return $this->badRequest();
+        $reps = GenealogyCache::getBinary($repNumber);
+        return $this->ok(GenealogyNode::make()->binary($reps));
     }
 
 }

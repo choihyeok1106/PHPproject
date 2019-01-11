@@ -9,6 +9,7 @@ namespace App\Repositories;
 
 
 use App\Constants\ItemPriceType;
+use App\Constants\Nopic;
 
 /**
  * @property ItemTranslate _translate
@@ -32,6 +33,7 @@ use App\Constants\ItemPriceType;
  * @property mixed         price_format
  * @property float         retail_price
  * @property string        retail_format
+ * @property string        low_stock_msg
  */
 class Item extends RepositoryAbstract {
 
@@ -64,7 +66,8 @@ class Item extends RepositoryAbstract {
         $this->shipping_return  = $this->translate('shipping_return');
         $this->low_stock_level  = $this->get('low_stock_level');
         $this->out_stock_level  = $this->get('out_stock_level');
-        $this->images           = $this->get('images');
+        $this->low_stock_msg    = 'This item is low on stock. Hurry! Place your orders quickly before we are completely out.';
+        $this->images           = $this->images();
         $this->groups           = $this->groups();
         return $this;
     }
@@ -126,8 +129,16 @@ class Item extends RepositoryAbstract {
         }
     }
 
-    public function groups(){
+    public function groups() {
         return ItemRelationGroups::Items($this->get('groups'), false);
+    }
+
+    public function images() {
+        $images = $this->get('images');
+        if (!$images) {
+            $images[] = Nopic::ITEM;
+        }
+        return $images;
     }
 
     /**

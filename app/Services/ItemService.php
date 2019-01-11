@@ -26,7 +26,8 @@ class ItemService {
     }
 
     public static function search(ItemsCriteria $c) {
-        return Service::make()->get("/v1/vbo/items", $c->vars());
+        return Service::make()->get("/v1/vbo/items", $c->search());
     }
+
 
 }
