@@ -1,30 +1,26 @@
+<?php /** @var \App\Models\CartItem[]|\Illuminate\Support\Collection $items */?>
 @extends('layouts.app')
 
 @section('style.plugins')
     <link href="{{css('/css/pages/shopping.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
-
 @section('content')
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="{{route('home.index')}}">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span>Checkout</span>
-            </li>
-        </ul>
+    <h1 class="page-title" data-menu="orders">Shopping Cart
+        <small>
+            <a href="/">Home</a>
+            <i class="fa fa-angle-right"></i>
+            <span>Shopping</span>
+            <i class="fa fa-angle-right"></i>
+            <span>Checkout</span>
+        </small>
+    </h1>
 
-    </div>
-
-    <div class="row">
+    <div class="row checkout">
         <div class="col-lg-5">
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-shopping-cart"></i>
+                        <i class="fa fa-shopping-cart hide"></i>
                         <span class="caption-subject bold uppercase"> Your Cart</span>
                     </div>
                 </div>
@@ -37,18 +33,18 @@
                         <th>PV</th>
                         </thead>
                         <tbody>
-                        <?php for ($i = 0; $i < 4; $i++) { ?>
-                        <tr>
-                            <td>Webarch UI Framework Dashboard UI Pack</td>
-                            <td>1</td>
-                            <td>$24.95</td>
-                            <td>10</td>
-                        </tr>
-                        <?php } ?>
+                        @foreach($items as $item)
+                            <tr>
+                                <td>{{$item->title}}</td>
+                                <td>{{$item->quantity}}</td>
+                                <td>{{$item->price()}}</td>
+                                <td>{{$item->qv()}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
 
-                    <table class="table">
+                    <table class="table hide">
                         <thead>
                         <th>Bulk Pack Promotion</th>
                         <th class="text-right">
@@ -76,7 +72,7 @@
                         </tbody>
                     </table>
 
-                    <table class="table">
+                    <table class="table hide">
                         <thead>
                         <th>Promotions</th>
                         <th class="text-right"></th>
@@ -91,29 +87,34 @@
                 </div>
             </div>
         </div>
-        <!--Products-->
+        <!--Shippint methods-->
         <div class="col-lg-4">
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-truck"></i>
-                        <span class="caption-subject bold uppercase"> Shipping Method</span>
+                        <i class="fa fa-truck hide"></i>
+                        <span class="caption-subject bold uppercase">Choose a delivery option</span>
                     </div>
-                    <div class="actions">
+                    <div class="actions hide">
                         <a href="javascript:;" class="btn btn-circle btn-default">
                             <i class="fa fa-pencil"></i> Change
                         </a>
                     </div>
                 </div>
-                <div class="portlet-body">
-                    GROUND
+                <div id="shipping-methods" class="portlet-body">
+                    <label>
+                        <input type="radio" name="shipping-method" value="1"> 우체국택배(Korea Ground)
+                    </label>
+                    <label>
+                        <input type="radio" name="shipping-method" value="1"> 우체국택배(Korea Ground)
+                    </label>
                 </div>
             </div>
 
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-credit-card "></i>
+                        <i class="fa fa-credit-card hide"></i>
                         <span class="caption-subject bold uppercase"> Payment</span>
                     </div>
                     <div class="actions">
@@ -147,7 +148,7 @@
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-map-pin"></i>
+                        <i class="la la-map-pin hide"></i>
                         <span class="caption-subject bold uppercase"> Shipping Address</span>
                     </div>
                     <div class="actions">
@@ -197,7 +198,7 @@
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-file-text-o"></i>
+                        <i class="fa fa-file-text-o hide"></i>
                         <span class="caption-subject bold uppercase"> Billing Address</span>
                     </div>
                     <div class="actions">

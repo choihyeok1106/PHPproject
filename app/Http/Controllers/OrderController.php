@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Item;
+use App\Repositories\ItemsSearch;
 use Illuminate\Http\Request;
 use App\Services\ItemService;
 

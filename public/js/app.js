@@ -2158,13 +2158,8 @@ var Ajax = {
                         if (t.hasOwnProperty("status")) {
                             error.code = t['status'];
                         }
-                        if (t.hasOwnProperty("statusText")) {
-                            error.message = t['statusText'];
-                        }
                     }
-                    if (!error.message) {
-                        error.message = m;
-                    }
+                    error.message = e;
                     no(error, Ajax.parseMeta(null));
                 }
             },

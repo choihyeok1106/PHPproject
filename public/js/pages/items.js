@@ -122,11 +122,12 @@ var Items = {
                 quantity: 1
             }, {
                 ok: function (items) {
-                    if (items.hasOwnProperty('count') && items.count) {
-                        $("#head-cart-count").text(items.count).show();
-                    } else {
-                        $("#head-cart-count").text(0).hide();
-                    }
+                    Common.cartCount();
+                    // if (items.hasOwnProperty('count') && items.count) {
+                    //     $("#head-cart-count").text(items.count).show();
+                    // } else {
+                    //     $("#head-cart-count").text(0).hide();
+                    // }
                 }
             });
         }
@@ -202,7 +203,7 @@ var Items = {
             // /{{\$link}}/g RegExp replace all
             item = item.replace(/{{\$image}}/g, v['image']);
             item = item.replace('{{$title}}', v['title']);
-            item = item.replace('{{$price}}', v['format']);
+            item = item.replace('{{$price}}', v['price_format']);
             item = item.replace('{{$qv}}', v['qv']);
             item = item.replace(/{{\$sku}}/g, v['sku']);
             html += item;

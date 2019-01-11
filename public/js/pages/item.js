@@ -1,20 +1,17 @@
 var Item = {
     sku: null,
-    curr: null,
+    stocks: 0,
+    item: null,
     init: function () {
         this.sku = $(".page-title").attr("data-sku");
         if (this.sku) {
-            setTimeout(Item.initUI);
+            setTimeout(Item.initImgBox);
             setTimeout(Item.initItem);
-            setTimeout(Item.initResource);
-            setTimeout(Item.initPrice);
-            setTimeout(Item.initOptions);
-            setTimeout(Item.initQtyCount);
-            setTimeout(Item.initRelates);
+            // setTimeout(Item.initStocks);
             setTimeout(Item.initActions);
         }
     },
-    initUI: function () {
+    initImgBox: function () {
         function initHeight() {
             var elm = $(".img-wrapper");
             var w = elm.outerWidth();
@@ -35,81 +32,147 @@ var Item = {
         });
     },
     initQtyCount: function () {
-        $("[data-toggle=mathf-count]").click(function () {
-            var target = $(this).attr("data-target");
-            if (target) {
-                var qty = parseInt($(target).val());
-                if (isNaN(qty)) {
-                    qty = 1;
+        if (Item.item && Item.stocks > Item.item.out_stock_level) {
+            $("[data-toggle=mathf-count]").click(function () {
+                var target = $(this).attr("data-target");
+                if (target) {
+                    var qty = parseInt($(target).val());
+                    if (isNaN(qty)) {
+                        qty = 1;
+                    }
+                    var action = parseInt($(this).attr("data-action"));
+                    if (isNaN(action)) {
+                        action = 0;
+                    }
+                    qty += action;
+                    if (qty < 1) {
+                        qty = 1;
+                    }
+                    if (qty > Item.stocks) {
+                        qty = Item.stocks;
+                    }
+                    $(target).val(qty);
                 }
-                var action = parseInt($(this).attr("data-action"));
-                if (isNaN(action)) {
-                    action = 0;
-                }
-                qty += action;
-                if (qty < 1) {
-                    qty = 1;
-                }
-                if (qty > 9999) {
-                    qty = 9999;
-                }
-                $(target).val(qty);
+            });
+            // set low stock message
+            if (Item.stocks < Item.item.low_stock_level) {
+                $("#item-counting .text-danger").text(Item.item.low_stock_msg);
             }
-        });
+
+        } else {
+            var ui = '<button class="btn btn-danger" type="button" disabled>\n' +
+                '<span class="bold">SOLD OUT</span>\n' +
+                ' </button>';
+            $("#item-counting").html(ui);
+        }
+        $("#item-counting").show();
     },
     initItem: function () {
         Ajax.get("/a/item/" + Item.sku, null, {
-            ok: function (res) {
-                if (!res.hasOwnProperty("error")) {
-                    console.log(res)
-                }
+            ok: function (item) {
+                console.log(item)
+                Item.initStocks();
+                Item.item = item;
+                Item.Make();
             },
             no: function (err) {
                 console.log(err);
             }
         });
     },
-    initPrice: function () {
-        Ajax.get("/a/item/" + Item.sku + '/price', null, {
+    initStocks: function () {
+        Ajax.get("/a/item/" + Item.sku + '/stocks', null, {
             ok: function (res) {
-                if (!res.hasOwnProperty("error")) {
-                    console.log("initPrice", res)
+                Item.stocks = res.hasOwnProperty("stocks") ? parseInt(res.stocks) : 0;
+                if (isNaN(Item.stocks)) {
+                    Item.stocks = 0;
                 }
+                Item.initQtyCount();
             },
             no: function (err) {
-                console.log(err);
+                Item.initQtyCount();
             }
         });
     },
-    initResource: function () {
-        Ajax.get("/a/item/" + Item.sku + '/resource', null, {
-            ok: function (res) {
-                var ui = '<li><img src="{{$url}}" data-url="{{$url}}"></li>';
-                if (!res.hasOwnProperty("error")) {
-
-                    var html = '';
-                    $.each(res, function (k, v) {
-                        if (k === 0) {
-                            $("#thumb").attr("src", v['url']);
-                        }
-                        html += ui.replace(/{{\$url}}/g, v['url']);
-                    });
-                    if (res.length > 1) {
-                        $("#thums").html(html);
-                        $("#thums li").click(function () {
-                            $("#thums li").removeClass("active");
-                            $(this).addClass("active");
-                            $("#thumb").attr("src", $(this).find("img").attr("data-url"));
-                        }).eq(0).addClass("active");
+    initActions: function () {
+        var btn = $("#add-cart");
+        btn.click(function () {
+            if (Item.item) {
+                Ajax.post("/a/cart/add", {
+                    sku: Item.sku,
+                    qty: $("#qty").val()
+                }, {
+                    ok: function (res) {
+                        Common.cartCount();
+                        $("#modal-cart").modal({
+                            show: 'true'
+                        });
+                        $("#qty").val(1);
+                    },
+                    no: function (err) {
+                        console.log(err);
+                    },
+                    before: function () {
+                        btn.attr("disabled", 'true');
+                    },
+                    end: function () {
+                        btn.removeAttr("disabled");
                     }
-                }
-            },
-            no: function (err) {
-                console.log(err);
+                });
             }
         });
     },
-    initOptions: function () {
+    Make: function () {
+        if (Item.item) {
+            setTimeout(Item.Info);
+            setTimeout(Item.Image);
+            setTimeout(Item.Options);
+        }
+    },
+    Info: function () {
+        $("#item-title").text(Item.item.title);
+        $("#item-price").text(Item.item.price_format);
+        if (Item.item.retail_price > Item.item.price) {
+            $("#item-retail").text(Item.item.retail_format);
+        }
+        $("#item-qv").text(Item.item.qv + " PV");
+        if (Item.item.explanation) {
+            $("#item-explanation").html(Item.item.explanation).show();
+        }
+        $("#item-long_explanation").html(Item.item.long_explanation);
+        $("#item-recommended_use").html(Item.item.recommended_use);
+        $("#item-shipping_return").html(Item.item.shipping_return);
+        $("#item-supplement_facts").html(Item.item.supplement_facts);
+    },
+    Image: function () {
+        var html = '';
+        var ui = '<li><img src="{{$url}}" data-url="{{$url}}"></li>';
+        $.each(Item.item.images, function (k, v) {
+
+            if (k === 0) {
+                $("#item-image").attr("src", v);
+            }
+            html += ui.replace(/{{\$url}}/g, v);
+        });
+        if (html) {
+            $("#thums").html(html);
+            $("#thums li").click(function () {
+                $("#thums li").removeClass("active");
+                $(this).addClass("active");
+                $("#thumb").attr("src", $(this).find("img").attr("data-url"));
+            }).eq(0).addClass("active");
+        }
+    },
+    Options: function () {
+        $.each(Item.item.groups, function (k, v) {
+            var append = '<label>' + v.name + '</label><div id="item-group-' + v.id + '" class="opt-list"></div>';
+            $("#item-groups").append(append);
+            $.each(v.items, function (i, item) {
+                setTimeout(Item.OptionItem(item, v.id));
+            });
+        });
+        return;
+
         var selectOption = function () {
             $("#options a").click(function () {
                 $("#options a").removeClass("active");
@@ -150,167 +213,24 @@ var Item = {
             }
         });
     },
-    initRelates: function () {
-        var count = 0;
-        var slider = null;
-        /// tiny helper function to add breakpoints
-        var getGridSize = function () {
-            var w = $(".flexslider").outerWidth();
-            if (w < 560) {
-                return 2;
-            }
-            if (w >= 560 && w < 720) {
-                return 3
-            }
-            if (w >= 720 && w < 1000) {
-                return 4;
-            }
-            return 6;
-        };
-        var initMax = function () {
-            var max = parseInt(count / getGridSize());
-            if (count % getGridSize() > 0) {
-                max += 1;
-            }
-            $("#current-slide").text(1);
-            $("#max-slide").text(max);
-        };
-        var initSilde = function () {
-            count = $(".slides>li").length;
-
-            $(function () {
-                SyntaxHighlighter.all();
-            });
-
-            slider = $('.flexslider').flexslider({
-                animation: "slide",
-                animationLoop: false,
-                slideshow: false,
-                // controlNav: false,
-                directionNav: false,
-                touch: false,
-                rtl: true,
-                mousewheel: false,
-                itemWidth: 210,
-                itemMargin: 15,
-                minItems: getGridSize(), // use function to pull in initial value
-                maxItems: getGridSize(), // use function to pull in initial value
-                init: function () {
-                    initMax();
-                },
-                end: function () {
-                    slideNumbering();
-                },
-                after: function (slide) {
-                    slideNumbering();
-                    // $("#current-slide").text(slide.currentSlide + 1);
-                }
-            });
-
-            console.log(slider);
-
-            // slider.flexslider(0);
-
-            $('.toggle-next').on('click', function () {
-                slider.flexslider('next');
-            })
-
-            $('.toggle-prev').on('click', function () {
-                slider.flexslider('prev');
-            })
-        }
-
-        var slideNumbering = function () {
-            var index = $('li:has(.flex-active)').index('.flex-control-nav li') + 1;
-            var total = $('.flex-control-nav li').length;
-            $("#current-slide").text(index);
-            $("#max-slide").text(total);
-        };
-
-        // check grid size on resize event
-        $(window).resize(function () {
-            if (slider) {
-                // slider.removeData("flexslider");
-                // initSilde();
-            }
-            // slideNumbering();
-            // initMax();
-            // slider.flexslider({
-            //     minItems: getGridSize(),
-            //     maxItems: getGridSize(),
-            // });
-            // slider.flexslider(0);
-        });
-
-        Ajax.get("/a/item/" + Item.sku + '/relates', null, {
-            ok: function (res) {
-                var ui = '<li>\n' +
-                    '    <div class="card social-card share share-other card-product" data-social="item">\n' +
-                    '        <div class="card-content">\n' +
-                    '            <a href="/product/{{$sku}}" class="thumb" data-toggle="res-box">\n' +
-                    '                <img src="{{$image}}">\n' +
-                    '            </a>\n' +
-                    '        </div>\n' +
-                    '        <a href="/product/{{$sku}}"  title="{{$title}}" class="card-header clearfix last">\n' +
-                    '            <h5>{{$title}}</h5>\n' +
-                    '        </a>\n' +
-                    '        <div class="card-price">\n' +
-                    '            ${{$price}}\n' +
-                    '        </div>\n' +
-                    '    </div>\n' +
-                    '</li>';
-                if (!res.hasOwnProperty("error")) {
-                    var html = '';
-                    $.each(res, function (k, v) {
-                        var li = ui;
-                        li = li.replace(/{{\$sku}}/g, v['sku']);
-                        li = li.replace('{{$image}}', v['image']);
-                        li = li.replace(/{{\$title}}/g, v['title']);
-                        li = li.replace('{{$price}}', v['price']);
-                        html += li;
-                    });
-                    if (html) {
-                        $("#related").show();
-                        $("#related-list").html(html);
-                        Util.toggleResponse();
-                        initSilde();
-                    }
-                }
-            },
-            no: function (err) {
-                console.log(err);
+    OptionItem: function (item, group_id) {
+        var ui = '<a href="/shopping/{{$sku}}" title="{{$title}}" data-sku="{{$sku}}">\n' +
+            '    <div class="opt-img">\n' +
+            '        <img src="{{$image}}">\n' +
+            '    </div>\n' +
+            '    <div class="price">{{$price}}</div>\n' +
+            '</a>';
+        Ajax.get("/a/item/" + item.sku, null, {
+            ok: function (v) {
+                console.log(v);
+                ui = ui.replace('{{$title}}', v.title);
+                ui = ui.replace(/{{\$sku}}/g, v.sku);
+                ui = ui.replace('{{$image}}', item.image);
+                ui = ui.replace('{{$price}}', v.price_format);
+                $("#item-group-" + group_id).html(ui);
             }
         });
     },
-    initActions: function () {
-        var btn = $("#add-cart");
-        btn.click(function () {
-            if (Item.curr) {
-                Ajax.post("/a/cart/add", {
-                    sku: Item.curr,
-                    qty: $("#qty").val()
-                }, {
-                    ok: function (res) {
-                        if (!res.hasOwnProperty("error")) {
-                            $("#modal-cart").modal({
-                                show: 'true'
-                            });
-                            $("#qty").val(1)
-                        }
-                    },
-                    no: function (err) {
-                        console.log(err);
-                    },
-                    before: function () {
-                        btn.attr("disabled", 'true');
-                    },
-                    end: function () {
-                        btn.removeAttr("disabled");
-                    }
-                });
-            }
-        });
-    }
 };
 
 window.onload = function () {

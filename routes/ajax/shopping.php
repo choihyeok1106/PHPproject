@@ -10,4 +10,8 @@ Route::get('/a/cart/items', 'Ajax\CartAjax@items');
 Route::post('/a/cart/add', 'Ajax\CartAjax@add');
 Route::post('/a/cart/update', 'Ajax\CartAjax@update');
 Route::post('/a/cart/delete', 'Ajax\CartAjax@delete');
-Route::get('/a/shopping/promotions', 'Ajax\ShoppingAjax@promotions');
+Route::post('/a/cart/totals', 'Ajax\CartAjax@totals');
+Route::post('/a/cart/checkout', 'Ajax\CartAjax@checkout');
+
+Route::get('/a/checkout/shippings', 'Ajax\CheckoutAjax@shippings');
+Route::get('/a/checkout/items/{id}', 'Ajax\CheckoutAjax@items');

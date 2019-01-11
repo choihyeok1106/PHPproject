@@ -18,7 +18,7 @@ abstract class RepositoryAbstract {
     /** @var mixed $locale */
     private $_data;
     /** @var CriteriaAbstract $_params */
-    private $_params;
+    protected $_params;
 
     /**
      * @return mixed
@@ -98,9 +98,6 @@ abstract class RepositoryAbstract {
         if (isset($this->$name)) {
             return $this->$name;
         }
-        if ($name === 'locale') {
-            return locale();
-        }
         return null;
     }
 
@@ -114,12 +111,49 @@ abstract class RepositoryAbstract {
     }
 
     /**
+     * @param string $key
+     * @param int    $deft
+     * @return int
+     */
+    protected function int(string $key, int $deft = 0) {
+        $val = $this->get($key);
+        if (!is_numeric($val)) {
+            $val = $deft;
+        }
+        return intval($val);
+    }
+
+    /**
+     * @param string $key
+     * @param float  $deft
+     * @return float
+     */
+    protected function float(string $key, float $deft = 0) {
+        $val = $this->get($key);
+        if (!is_numeric($val)) {
+            $val = $deft;
+        }
+        return floatval($val);
+    }
+
+    protected function string(string $key, string $deft = '') {
+        $val = $this->get($key);
+        if (!is_string($val)) {
+            $val = $deft;
+        }
+        return $val;
+    }
+
+    /**
      * @param mixed $result
      * @param bool  $resourceKey
      * @param mixed $params
      * @return array
      */
     public static function Items($result, bool $resourceKey = true, $params = null) {
+        if (is_array($result) && isset($result['error'])) {
+            return $result;
+        }
         $data  = [];
         $items = isset($result['data']) ? $result['data'] : $result;
         $meta  = isset($result['meta']) ? $result['meta'] : [];
@@ -148,6 +182,9 @@ abstract class RepositoryAbstract {
      * @return null
      */
     public static function Item($result, $resourceKey = true, $params = null) {
+        if (is_array($result) && isset($result['error'])) {
+            return $result;
+        }
         $obj  = null;
         $cls  = get_called_class();
         $data = isset($result['data']) ? $result['data'] : $result;

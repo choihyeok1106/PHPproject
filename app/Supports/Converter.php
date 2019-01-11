@@ -16,6 +16,7 @@ class Converter {
      * @return array|object|null
      */
     public static function convert($arr, $cls) {
+
         if ($arr && $cls && is_array($arr) && class_exists($cls)) {
             if (isset($arr[0])) {
                 $data = [];

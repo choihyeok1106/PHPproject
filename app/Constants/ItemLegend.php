@@ -10,9 +10,9 @@ namespace App\Constants;
 
 class ItemLegend {
 
-    const Product         = 1;
+    const Catalog         = 1;
     const Autoship        = 2;
-    const EnrollmentProduct  = 3;
+    const EnrollmentCatalog  = 3;
     const EnrollmentAutoship = 4;
     const CustomerService    = 5;
 
