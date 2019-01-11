@@ -5,6 +5,7 @@
         a, a:visited, a:hover, a:link {
             text-decoration: none;
         }
+
         .customers-warning li span {
             display: inline-block;
             vertical-align: top;
@@ -86,32 +87,36 @@
         table tr td:first-child {
             padding: 7px 5px;
         }
+
         .m-datatable__detail table tr td {
-            padding:10px 15px;
+            padding: 10px 15px;
         }
+
         .m-datatable__head > tr > td span {
             vertical-align: middle;
             display: inline-block;
-            padding-top:2px;
+            padding-top: 2px;
         }
 
-        .m-datatable__head > tr > td  a {
+        .m-datatable__head > tr > td a {
             float: right;
             color: #bebebe;
-            margin-top:-2px;
-            padding:3px;
+            margin-top: -2px;
+            padding: 3px;
         }
+
         .m-datatable__head > tr > td i {
-            zoom:1;
+            zoom: 1;
             display: block !important;
         }
+
         .m-datatable__head > tr > td i:first-child {
             margin-bottom: -5px;
         }
+
         .m-datatable__head > tr > td i:last-child {
             margin-top: -5px;
         }
-
 
         .m-datatable__pager-nav {
             font-size: 0;
@@ -125,17 +130,18 @@
         }
 
         .icon-hover {
-            color:#92a2d9;
-            padding:3px;
-            background-color:transparent;
+            color: #92a2d9;
+            padding: 3px;
+            background-color: transparent;
         }
+
         .icon-hover:hover {
-            color:#377BB3;
-            background-color:#EFF3FE;
+            color: #377BB3;
+            background-color: #EFF3FE;
         }
 
         .dropdown-menu {
-            font-size:13px;
+            font-size: 13px;
         }
     </style>
 @endsection
@@ -210,7 +216,8 @@
                          id="auto_column_hide" style="">
                         <table data-toggle="table" class="m-datatable__table"
                                style="width:100%; overflow-x: auto; margin-top:20px;">
-                            <thead class="m-datatable__head" style="background-color:#faf9fc;font-size:13px;font-weight: 600;">
+                            <thead class="m-datatable__head"
+                                   style="background-color:#faf9fc;font-size:13px;font-weight: 600;">
                             <tr class="m-datatable__row" style="left: 0px;">
                                 <td data-field=""
                                     class="m-datatable__cell m-datatable__toggle-detail m-datatable__cell--sort"></td>
@@ -277,7 +284,8 @@
                             </thead>
                             <tbody class="m-datatable__body" style="font-size:12px;font-weight:200;">
                             <tr data-row="0" class="m-datatable__row" style="left: 0px;">
-                                <td class="m-datatable__cell m-datatable__toggle--detail" style="text-align: center;"><a href="#" class="font-green" data-toggle="icon_tr"><i
+                                <td class="m-datatable__cell m-datatable__toggle--detail" style="text-align: center;"><a
+                                            href="#" class="font-green" data-toggle="icon_tr"><i
                                                 class="fa fa-caret-right"
                                                 style="zoom:1.5;"></i></a></td>
                                 <td class="m-datatable__cell">1</td>
@@ -285,7 +293,9 @@
                                 <td class="m-datatable__cell">Carroll Maharrty</td>
                                 <td class="m-datatable__cell">4209350970</td>
                                 <td class="m-datatable__cell">1/18/2018</td>
-                                <td class="m-datatable__cell font-blue-madison"><span style="font-weight: bold;">&#8226;</span> Preferred</td>
+                                <td class="m-datatable__cell font-blue-madison"><span
+                                            style="font-weight: bold;">&#8226;</span> Preferred
+                                </td>
                                 <td class="m-datatable__cell">mahally1234@gmail.com</td>
                                 <td class="m-datatable__cell">kr1097118</td>
                                 <td class="m-datatable__cell" style="text-align: right;padding-right:20px;">
@@ -303,31 +313,37 @@
                                         </ul>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="#" data-toggle="tooltip" style="width:200px;" title="Create&nbsp;New&nbsp;Order">
+                                        <a href="#" data-toggle="tooltip" id="btn_order" style="width:200px;"
+                                           title="Create&nbsp;New&nbsp;Order">
                                             <i class="la la-cart-arrow-down icon-hover"
-                                                       style="zoom:1.5;"></i>
+                                               style="zoom:1.5;"></i>
                                         </a>
                                     </div>
                                 </td>
                             </tr>
                             <tr class="m-datatable__row-detail">
-                                <td class="m-datatable__detail" ></td>
+                                <td class="m-datatable__detail"></td>
                                 <td class="m-datatable__detail" colspan="13">
                                     <table style="width:80%;border-top:1px solid #eee;border-bottom: 1px solid #eee;">
-                                        <tr class="m-datatable__row" style="border-left:1px solid #eee;border-right:1px solid #eee;border-bottom:1px solid #eee;">
+                                        <tr class="m-datatable__row"
+                                            style="border-left:1px solid #eee;border-right:1px solid #eee;border-bottom:1px solid #eee;">
                                             <td class="m-datatable__cell" style="padding-left:15px;">Subject</td>
                                             <td class="m-datatable__cell">Products Recommendation</td>
-                                            <td class="m-datatable__cell" style="border-left:1px solid #eee;">Created</td>
+                                            <td class="m-datatable__cell" style="border-left:1px solid #eee;">Created
+                                            </td>
                                             <td class="m-datatable__cell">2/31/2018 10:30:48 PM</td>
                                         </tr>
-                                        <tr class="m-datatable__row" style="border-left:1px solid #eee;border-right:1px solid #eee;border-bottom:1px solid #eee;">
+                                        <tr class="m-datatable__row"
+                                            style="border-left:1px solid #eee;border-right:1px solid #eee;border-bottom:1px solid #eee;">
                                             <td class="m-datatable__cell" style="padding-left:15px;">Notes</td>
-                                            <td class="m-datatable__cell" colspan="3">Mr. Maharrty and his wife are interested in weight loss. I
+                                            <td class="m-datatable__cell" colspan="3">Mr. Maharrty and his wife are
+                                                interested in weight loss. I
                                                 have recommended them to the Rally28 family for their products of
                                                 interest.
                                             </td>
                                         </tr>
-                                        <tr class="m-datatable__row" style="border-left:1px solid #eee;border-right:1px solid #eee;">
+                                        <tr class="m-datatable__row"
+                                            style="border-left:1px solid #eee;border-right:1px solid #eee;">
                                             <td class="m-datatable__cell" style="padding-left:15px;">Actions</td>
                                             <td class="m-datatable__cell" colspan="3">
                                                 <button class="btn btn-circle btn-xs blue-madison" type="button"
@@ -451,7 +467,19 @@
 
 
 @section('script.plugins')
-<script>
-    $(function () { $("[data-toggle='tooltip']").tooltip(); });
-</script>
+    <script>
+        $(function () {
+            $("[data-toggle='tooltip']").tooltip();
+            $("[data-toggle='tooltip']").hover(
+                function () {
+                    $(this).attr('data-original-title', 'create new order').tooltip('show');
+                }, function () {
+                    $(this).attr('data-original-title', 'Create New Order').tooltip('hide');
+                });
+            $("[data-toggle='tooltip']").click(function () {
+                var $this = $(this);
+                $(this).attr('data-original-title', 'Clicked!').tooltip('show');
+            });
+        });
+    </script>
 @endsection

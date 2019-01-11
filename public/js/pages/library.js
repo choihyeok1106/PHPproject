@@ -149,7 +149,7 @@ var Tool_Library = {
             '                      </ul>';
 
         var children_ui = '<li class="list-dot children-hover" style="line-height:37px;">\n' +
-            '              <a class="" href="#" >{{$name}}</a>\n' +
+            '              <a href="#" data-value="{{$category_id}}">{{$name}}</a>\n' +
             '           </li>';
 
         var loading = false;
@@ -161,18 +161,20 @@ var Tool_Library = {
                 var categories_section = categories_section_ui;
                 var children = children_ui;
 
+                categories_children = categories_children.replace('{{$id}}', v['id']);
                 if (v['children'].length != 0) {
                     var html_children = '';
                     $.each(v['children'], function (children_k, children_v) {
                         children = children_ui;
                         children = children.replace('{{$name}}', children_v['name']);
+                        children = children.replace('{{$category_id}}', children_v['id']);
                         html_children += children;
                     });
-                    categories_children = categories_children.replace('{{$id}}', v['id']);
                     categories_children = categories_children.replace('{{$children_ui}}', html_children);
 
                 } else {
                     categories_section = categories_section.replace('{{$categories_children}}', "");
+                    categories_children = categories_children.replace('{{$children_ui}}', "");
                 }
                 categories_section = categories_section_ui;
                 categories_section = categories_section.replace('{{$name}}', v['name']);
@@ -302,9 +304,6 @@ var Tool_Library = {
             $.each(Search, function (k, v) {
                 $.each(v, function (_k, _v) {
                     projects.push({value: _v["title"], label: _v['title'], icon: "/img/files/" + _v['type'] + ".svg"});
-                    /*Object.assign(result,{value:_v['title']});
-                    Object.assign(result,{label:_v['title']});
-                    Object.assign(result,{icon:"/img/files/"+_v['type']});*/
                 });
             });
 
