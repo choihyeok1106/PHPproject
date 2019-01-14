@@ -24,7 +24,11 @@ class ToolAjax extends AjaxController
     public function libraries(Request $request)
     {
         if ($request->ajax()) {
-            $getLibrary = ToolCache::getLibrary();
+            $search = $request->search;
+            if ($search == "") {
+                $search = "";
+            }
+            $getLibrary = ToolCache::getLibrary($request->category, $search, $request->limit);
             $libraries = $this->sortLibraries($getLibrary);
             return $this->ok($libraries);
         }
@@ -40,16 +44,24 @@ class ToolAjax extends AjaxController
         return $this->badRequest();
     }
 
-    public function sortLibraries($data)
+    public function sortLibraries($arr)
     {
-        $tmp = [];
-        foreach ($data as $key => $value) {
+
+        $data = [];
+        $meta = [];
+        foreach ($arr as $key => $value) {
             if ($key == 'data') {
                 foreach ($value as $v) {
-                    $tmp[$v['category']][] = $v;
+                    $data[$v['category']][] = $v;
+                }
+            } else if ($key == 'meta') {
+                foreach ($value as $v){
+                    $meta['pagination']=$v;
                 }
             }
         }
-        return $tmp;
+        $result = array('data' => $data,
+            'meta' => $meta);
+        return $result;
     }
 }

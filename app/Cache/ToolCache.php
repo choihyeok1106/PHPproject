@@ -11,11 +11,11 @@ use App\Services\ToolService;
 
 class ToolCache
 {
-    public static function getLibrary(){
+    public static function getLibrary($category,$search,$limit){
         $key        = Cache::key(':items');
         $libraries = Cache::get($key);
         if(!$libraries){
-            $service = ToolService::getLibrary();
+            $service = ToolService::getLibrary($category,$search,$limit);
             return Cache::set($key,$service->response());
         }
         return $libraries;

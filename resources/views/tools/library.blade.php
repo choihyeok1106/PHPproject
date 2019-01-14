@@ -74,8 +74,8 @@
                 <div class="input-group-addon" style="border:0; background-color: #e0e0e0">
                     <span class="glyphicon glyphicon-search"></span>
                 </div>
-                <input type="text" placeholder="Search ..." class="form-control"
-                       style="border:0; background-color:#e0e0e0; border-color: #e0e0e0" id="librarySearch">
+                <input type="text" placeholder="All Search ..." class="form-control"
+                       style="border:0; background-color:#e0e0e0; border-color: #e0e0e0" id="library_search">
                 <div class="input-group-btn">
                     <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button"
                             style="border:1px solid #e0e0e0; background-color:#e0e0e0;">
@@ -91,18 +91,16 @@
 
         <div class="row">
             {{--sidebar start--}}
+            <input type="hidden" id="category-id" val="0">
             <ul class="ver-inline-menu tabbable margin-bottom-10 col-md-3" id="library_category" style="padding:0 20px;">
-
             </ul>
 
             <input type="text" value="" id="input_clipboard"
                    style="position: absolute;opacity: 0">
             <div class="col-md-9">
-
                 {{--library start--}}
                 <div class="mt-comments libs"id="library_context">
                 </div>
-
             </div>
         </div>
     </div>
