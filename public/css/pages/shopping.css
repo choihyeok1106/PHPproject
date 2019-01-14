@@ -796,15 +796,62 @@
     display: none;
 }
 
-.cart #check-out{
+.cart #check-out {
     /*display: none;*/
 }
 
-.checkout #shipping-methods label{
+.checkout #shipping-methods label {
     display: block;
     margin-bottom: 10px;
 }
 
-.checkout #shipping-methods label:last-child{
+.checkout #shipping-methods label:last-child {
     margin-bottom: 0;
+}
+
+.checkout #shipping-addr p, .checkout #billing-addr p {
+    margin-bottom: 0;
+}
+
+#address-list h4 {
+    font-weight: 700;
+    margin: 0;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#address-list p {
+    font-size: 14px;
+    margin: 2px 0 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#address-list .addrs{
+    padding: 15px;
+    /*border: 1px solid #ddd;*/
+    /*background-color: #fafafa;*/
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+
+#address-list  .addrs > div {
+    height: 90px;
+    overflow: hidden;
+}
+
+#address-list .modal-body .row > div button {
+    /*margin-top: 5px;*/
+    /*max-width: 100%;*/
+    /*width: 100%;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 -15px -15px -15px;
+    /*background-color: #e0ebf9;*/
+    /*border-color: #e0ebf9;*/
+    /*color: #327ad5;*/
 }

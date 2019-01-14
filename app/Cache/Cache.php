@@ -85,14 +85,13 @@ class Cache {
             $keys[] = strtolower(UserPrefs::country());
         }
         if (is_string($fields)) {
-            if (substr($fields, 0, 1) === ':') {
-                $fields = substr($fields, 1);
-            }
             $fields = explode(':', $fields);
         }
         if (is_array($fields)) {
             foreach ($fields as $field) {
-                $keys[] = trim($field);
+                if (trim($field)) {
+                    $keys[] = trim($field);
+                }
             }
         }
         return $keys ? ':' . implode(':', $keys) : '';
