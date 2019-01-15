@@ -1,12 +1,12 @@
-var AppCalendar = function() {
+var AppCalendar = function () {
 
     return {
         //main function to initiate the module
-        init: function() {
+        init: function () {
             this.initCalendar();
         },
 
-        initCalendar: function() {
+        initCalendar: function () {
 
             if (!jQuery().fullCalendar) {
                 return;
@@ -19,7 +19,7 @@ var AppCalendar = function() {
 
             var h = {};
 
-            if (App.isRTL()) {
+            if (Core.isRTL()) {
                 if ($('#calendar').parents(".portlet").width() <= 720) {
                     $('#calendar').addClass("mobile");
                     h = {
@@ -53,7 +53,7 @@ var AppCalendar = function() {
                 }
             }
 
-            var initDrag = function(el) {
+            var initDrag = function (el) {
                 // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
                 // it doesn't need to have a start or end
                 var eventObject = {
@@ -69,20 +69,24 @@ var AppCalendar = function() {
                 });
             };
 
-            var addEvent = function(title) {
+            var addEvent = function (title) {
                 title = title.length === 0 ? "Untitled Event" : title;
                 var html = $('<div class="external-event label label-default">' + title + '</div>');
                 jQuery('#event_box').append(html);
                 initDrag(html);
             };
 
-            $('#external-events div.external-event').each(function() {
+            $('#external-events div.external-event').each(function () {
                 initDrag($(this));
             });
 
-            $('#event_add').unbind('click').click(function() {
-                var title = $('#event_title').val();
-                addEvent(title);
+            $('#event_add').unbind('click').click(function () {
+                if ($('#event_title').val() == "") {
+                    alert('Event title Untitled');
+                } else {
+                    var title = $('#event_title').val();
+                    addEvent(title);
+                }
             });
 
             //predefined events
@@ -91,8 +95,8 @@ var AppCalendar = function() {
             addEvent("My Event 2");
             addEvent("My Event 3");
             addEvent("My Event 4");
-            addEvent("My Event 5");
-            addEvent("My Event 6");
+            addEvent("My Event 5")s;
+s            addEvent("My Event 6");
 
             $('#calendar').fullCalendar('destroy'); // destroy the calendar
             $('#calendar').fullCalendar({ //re-initialize the calendar
@@ -101,7 +105,7 @@ var AppCalendar = function() {
                 slotMinutes: 15,
                 editable: true,
                 droppable: true, // this allows things to be dropped onto the calendar !!!
-                drop: function(date, allDay) { // this function is called when something is dropped
+                drop: function (date, allDay) { // this function is called when something is dropped
 
                     // retrieve the dropped element's stored Event Object
                     var originalEventObject = $(this).data('eventObject');
@@ -126,22 +130,22 @@ var AppCalendar = function() {
                 events: [{
                     title: 'All Day Event',
                     start: new Date(y, m, 1),
-                    backgroundColor: App.getBrandColor('yellow')
+                    backgroundColor: Core.getBrandColor('yellow')
                 }, {
                     title: 'Long Event',
                     start: new Date(y, m, d - 5),
                     end: new Date(y, m, d - 2),
-                    backgroundColor: App.getBrandColor('green')
+                    backgroundColor: Core.getBrandColor('green')
                 }, {
                     title: 'Repeating Event',
                     start: new Date(y, m, d - 3, 16, 0),
                     allDay: false,
-                    backgroundColor: App.getBrandColor('red')
+                    backgroundColor: Core.getBrandColor('red')
                 }, {
                     title: 'Repeating Event',
                     start: new Date(y, m, d + 4, 16, 0),
                     allDay: false,
-                    backgroundColor: App.getBrandColor('green')
+                    backgroundColor: Core.getBrandColor('green')
                 }, {
                     title: 'Meeting',
                     start: new Date(y, m, d, 10, 30),
@@ -150,19 +154,19 @@ var AppCalendar = function() {
                     title: 'Lunch',
                     start: new Date(y, m, d, 12, 0),
                     end: new Date(y, m, d, 14, 0),
-                    backgroundColor: App.getBrandColor('grey'),
+                    backgroundColor: Core.getBrandColor('grey'),
                     allDay: false,
                 }, {
                     title: 'Birthday Party',
                     start: new Date(y, m, d + 1, 19, 0),
                     end: new Date(y, m, d + 1, 22, 30),
-                    backgroundColor: App.getBrandColor('purple'),
+                    backgroundColor: Core.getBrandColor('purple'),
                     allDay: false,
                 }, {
                     title: 'Click for Google',
                     start: new Date(y, m, 28),
                     end: new Date(y, m, 29),
-                    backgroundColor: App.getBrandColor('yellow'),
+                    backgroundColor: Core.getBrandColor('yellow'),
                     url: 'http://google.com/',
                 }]
             });
@@ -173,6 +177,6 @@ var AppCalendar = function() {
 
 }();
 
-jQuery(document).ready(function() {    
-   AppCalendar.init(); 
+jQuery(document).ready(function () {
+    AppCalendar.init();
 });

@@ -58,5 +58,5 @@
     <script src="<?= STATIC_SERVER ?>/vendors/moment.min.js" type="text/javascript"></script>
     <script src="<?= STATIC_SERVER ?>/vendors/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
     <script src="<?= STATIC_SERVER ?>/vendors/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="/js/pages/calendar.min.js" type="text/javascript"></script>
+    <script src="/js/pages/calendar.js" type="text/javascript"></script>
 @endsection
