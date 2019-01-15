@@ -64,7 +64,7 @@ class AjaxController extends BaseController {
             return $this->no($response);
         }
         if ($response === null) {
-            $response['message'] = 'ok';
+            // $response['message'] = 'ok';
         }
         $meta = [];
         $data = null;

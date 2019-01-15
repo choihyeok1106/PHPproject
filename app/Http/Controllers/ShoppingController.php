@@ -13,6 +13,7 @@ use App\Constants\ItemLegend;
 use App\Constants\ItemPriceType;
 use App\Criterias\ItemsCriteria;
 use App\Models\CartItem;
+use App\Supports\Encrypt;
 use App\Supports\UserPrefs;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -31,6 +32,18 @@ class ShoppingController extends Controller {
      * @return $this
      */
     public function checkout() {
+        $plaintext = "message to be encrypted";
+        $key       = 'abc';
+        $encrypt   = Encrypt::encode($plaintext, $key);
+        pr($encrypt);
+        pe(Encrypt::decode($encrypt, $key));
+        pe(random_bytes(32));
+        $code = Encrypt::generate();
+        pr($code);
+        $code = Encrypt::encode($code, '123');
+        pr($code);
+        $code = Encrypt::decode($code, '123');
+        pe($code);
         /** @var ItemsCriteria $c */
         $c         = ItemsCriteria::new();
         $c->type   = ItemPriceType::Wholesale;

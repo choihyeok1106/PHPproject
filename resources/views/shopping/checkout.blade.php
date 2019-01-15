@@ -118,9 +118,9 @@
                         <span class="caption-subject bold uppercase"> Payment</span>
                     </div>
                     <div class="actions">
-                        <a href="javascript:;" class="btn btn-circle btn-default">
+                        <button type="button" class="btn btn-circle btn-default">
                             <i class="fa fa-pencil"></i> Change
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -152,18 +152,13 @@
                         <span class="caption-subject bold uppercase"> Shipping Address</span>
                     </div>
                     <div class="actions">
-                        <a href="javascript:;" class="btn btn-circle btn-default">
-                            <i class="fa fa-pencil"></i> Change
-                        </a>
+                        <button type="button" id="shipping-btn" class="btn btn-circle btn-default">
+                            <i class="fa fa-pencil"></i> Edit
+                        </button>
                     </div>
                 </div>
                 <div class="portlet-body static-info">
-                    <div class="form-group value">
-                        Jhon Done<br>
-                        15627 S. Broadway st.<br>
-                        #KB45889<br>
-                        Gardena, CA 90248-2210
-                    </div>
+                    <div id="shipping-addr" class="form-group value"></div>
 
                     <div class="form-group form-md-radios">
                         <label>Trading statement</label>
@@ -202,18 +197,13 @@
                         <span class="caption-subject bold uppercase"> Billing Address</span>
                     </div>
                     <div class="actions">
-                        <a href="javascript:;" class="btn btn-circle btn-default">
+                        <button type="button" id="billing-btn" class="btn btn-circle btn-default">
                             <i class="fa fa-pencil"></i> Change
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div class="portlet-body static-info">
-                    <div class="form-group value">
-                        Jhon Done<br>
-                        15627 S. Broadway st.<br>
-                        #KB45889<br>
-                        Gardena, CA 90248-2210
-                    </div>
+                    <div id="billing-addr" class="form-group value"></div>
                 </div>
             </div>
 
@@ -262,6 +252,51 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="address-list" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Addresses</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="scroller" style="height: 360px; ">
+                        <div class="row" id="address-list-box"></div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn green">New Address</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="payment" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Addresses</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn green">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
 @endsection
 
 @section('script.plugins')

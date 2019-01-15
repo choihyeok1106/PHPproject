@@ -13,5 +13,6 @@ Route::post('/a/cart/delete', 'Ajax\CartAjax@delete');
 Route::post('/a/cart/totals', 'Ajax\CartAjax@totals');
 Route::post('/a/cart/checkout', 'Ajax\CartAjax@checkout');
 
-Route::get('/a/checkout/shippings', 'Ajax\CheckoutAjax@shippings');
+
+Route::post('/a/shipping/methods', 'Ajax\ShippingAjax@methods');
 Route::get('/a/checkout/items/{id}', 'Ajax\CheckoutAjax@items');

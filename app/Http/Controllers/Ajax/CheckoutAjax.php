@@ -8,7 +8,9 @@
 namespace App\Http\Controllers\Ajax;
 
 
+use App\Cache\AddressCache;
 use App\Cache\ShippingCache;
+use App\Constants\AddressType;
 use App\Constants\ItemLegend;
 use App\Constants\ItemPriceType;
 use App\Criterias\ItemsCriteria;
@@ -19,8 +21,13 @@ use App\Services\ShoppingService;
 
 class CheckoutAjax extends AjaxController {
 
-    public function shippings() {
+    public function deliveries() {
         $data = ShippingCache::methods();
+        return $this->ok($data);
+    }
+
+    public function billings() {
+        $data = AddressCache::addresses(AddressType::Billing, 0);
         return $this->ok($data);
     }
 

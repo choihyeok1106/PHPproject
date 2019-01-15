@@ -26,10 +26,11 @@ class UserPrefs {
      * @param array $rep
      */
     public static function setRep(array $rep) {
-        if (is_array($rep)) {
+        if (is_array($rep) && $rep) {
             foreach ($rep as $k => $v) {
                 self::set($k, $v);
             }
+//            self::set('',)
         }
     }
 
