@@ -9,10 +9,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Cache\ShoppingCache;
 use App\Constants\ItemLegend;
 use App\Constants\ItemPriceType;
 use App\Criterias\ItemsCriteria;
 use App\Models\CartItem;
+use App\Repositories\PaymentMethod;
 use App\Supports\UserPrefs;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -31,17 +33,22 @@ class ShoppingController extends Controller {
      * @return $this
      */
     public function checkout() {
+        $payments = ShoppingCache::payments();
         /** @var ItemsCriteria $c */
         $c         = ItemsCriteria::new();
         $c->type   = ItemPriceType::Wholesale;
         $c->legend = ItemLegend::Catalog;
         CartItem::syncPrices(UserPrefs::id(), 0, $c);
         /** @var Collection|CartItem[] $items */
-        $items = CartItem::where('user_id', UserPrefs::id())->where('selected', 1)->where('available', 1)->get();
+        $items = CartItem::ShoppingItems(UserPrefs::id());
         if (!$items->count()) {
             abort(404);
         }
-        return view('shopping.checkout', ['items' => $items]);
+        return view('shopping.checkout',
+            [
+                'items'    => $items,
+                'payments' => PaymentMethod::Items($payments, false),
+            ]);
     }
 
     public function complete() {

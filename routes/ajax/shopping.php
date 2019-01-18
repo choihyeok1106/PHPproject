@@ -13,5 +13,9 @@ Route::post('/a/cart/delete', 'Ajax\CartAjax@delete');
 Route::post('/a/cart/totals', 'Ajax\CartAjax@totals');
 Route::post('/a/cart/checkout', 'Ajax\CartAjax@checkout');
 
-Route::get('/a/checkout/shippings', 'Ajax\CheckoutAjax@shippings');
-Route::get('/a/checkout/items/{id}', 'Ajax\CheckoutAjax@items');
+
+Route::get('/a/address', 'Ajax\AddressAjax@index');
+Route::get('/a/address/default', 'Ajax\AddressAjax@default');
+
+Route::get('/a/shopping/shippings', 'Ajax\ShoppingAjax@shippings');
+Route::post('/a/shopping/place', 'Ajax\ShoppingAjax@place');

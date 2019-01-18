@@ -155,7 +155,10 @@ function include_routes(array $dirs) {
     }
 }
 
-function locale(){
+/**
+ * @return string
+ */
+function locale() {
     switch (\Illuminate\Support\Facades\App::getLocale()) {
         case 'en':
             return 'en-US';
@@ -166,4 +169,11 @@ function locale(){
         default:
             return \Illuminate\Support\Facades\App::getLocale();
     }
+}
+
+/**
+ * @return string
+ */
+function country() {
+    return \App\Supports\UserPrefs::country();
 }

@@ -19,17 +19,19 @@ use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class UserPrefs {
 
-    const USER = '__USER__';
-    const PASS = '__PASS__';
+    const USER   = '__USER__';
+    const PASS   = '__PASS__';
+    const CIPHER = '__CIPHER__';
 
     /**
      * @param array $rep
      */
     public static function setRep(array $rep) {
-        if (is_array($rep)) {
+        if (is_array($rep) && $rep) {
             foreach ($rep as $k => $v) {
                 self::set($k, $v);
             }
+            //            self::set('',)
         }
     }
 
@@ -211,6 +213,16 @@ class UserPrefs {
             }
         }
         return $interfaces;
+    }
+
+    /**
+     * @return string
+     */
+    public static function Secret() {
+        if (!isset($_SESSION[self::CIPHER])) {
+            $_SESSION[self::CIPHER] = sha1(uniqid());
+        }
+        return $_SESSION[self::CIPHER];
     }
 
 }

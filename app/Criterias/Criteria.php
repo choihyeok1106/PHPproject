@@ -10,7 +10,7 @@ namespace App\Criterias;
 
 use App\Supports\Requests;
 
-abstract class CriteriaAbstract {
+abstract class Criteria {
 
     use Requests;
 
@@ -20,11 +20,7 @@ abstract class CriteriaAbstract {
      */
     public static function new(array $data = null) {
         $called_class = get_called_class();
-        $cls          = new $called_class($data);
-        if (method_exists($cls, 'build')) {
-            $cls->build();
-        }
-        return $cls;
+        return new $called_class($data);
     }
 
     /**

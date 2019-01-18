@@ -30,7 +30,7 @@ class CartAjax extends AjaxController {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function items() {
-        $items = CartItem::where('user_id', UserPrefs::id())->get();
+        $items = CartItem::where('user_id', UserPrefs::id())->orderBy('id', 'asc')->get();
         return $this->ok(CartItemsTransformer::collections($items, 'carts'));
     }
 
