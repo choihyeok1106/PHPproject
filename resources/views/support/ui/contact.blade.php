@@ -1,3 +1,8 @@
+<a href="#map" data-name="{{$name}}">
+    <button type="button" class="btn dark btn-outline">{{$name}}
+    </button>
+</a>
+
 <div class="c-section">
     <h3 id="map_title">{{$title}}</h3>
 </div>
@@ -20,23 +25,28 @@
     <br/>
     <ul class="c-content-iconlist-1">
         <li>
-            <a href="https://www.facebook.com/livepureglobal/">
+            <a href="{{$twitter}}">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
         <li>
-            <a href="https://twitter.com/LivePUREGlobal">
+            <a href="{{$facebook}}">
                 <i class="fa fa-facebook"></i>
             </a>
         </li>
         <li>
-            <a href="https://www.youtube.com/user/GenesisPURECorp">
+            <a href="{{$youtube}}">
                 <i class="fa fa-youtube-play"></i>
             </a>
         </li>
         <li>
-            <a href="https://www.instagram.com/LivePUREGlobal/">
-                <i class="fa fa-linkedin"></i>
+            <a href="{{$instagram}}">
+                <i class="fa fa-instagram"></i>
+            </a>
+        </li>
+        <li>
+            <a href="{{$pinterest}}">
+                <i class="fa fa-pinterest"></i>
             </a>
         </li>
     </ul>

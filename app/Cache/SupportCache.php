@@ -10,15 +10,26 @@ namespace App\Cache;
 
 
 use App\Services\FaqService;
+use App\Services\SupportService;
 use App\Supports\UserPrefs;
 
-class FaqCache
+class SupportCache
 {
     public static function getFaq(){
         $key = Cache::key('item:');
         $faqs = Cache::get($key);
         if(!$faqs){
-            $service = FaqService::getFaq();
+            $service = SupportService::getFaq();
+            return Cache::set($key,$service->response());
+        }
+        return $faqs;
+    }
+
+    public static function getCompany(){
+        $key = Cache::key('items:');
+        $faqs = Cache::get($key);
+        if(!$faqs){
+            $service = SupportService::getCompany();
             return Cache::set($key,$service->response());
         }
         return $faqs;

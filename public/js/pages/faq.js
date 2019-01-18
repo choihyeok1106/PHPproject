@@ -109,8 +109,8 @@ var Support_Faq = {
                     $.each(faqs, function (k, v) {
                         if (v.children.length > 0) {
                             $.each(v.children, function (_k, _v) {
-                                console.log(_v.faqs[0].answer.indexOf($search));
-                                if(_v.faqs[0].answer.toLowerCase().indexOf($search) > -1){
+                                console.log(_v.faqs[0].question.indexOf($search));
+                                if(_v.faqs[0].question.toLowerCase().indexOf($search) > -1){
                                     $("[data-value='"+ _v.name +"']").parents('.panel-default').show();
                                     $("[data-value='"+ _v.name +"']").parents('.panel-default').show();
                                 }else{

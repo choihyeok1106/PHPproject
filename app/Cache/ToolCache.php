@@ -11,7 +11,7 @@ use App\Services\ToolService;
 
 class ToolCache
 {
-    public static function getLibrary($category,$search,$limit){
+    public static function getLibrary($category,string $search,$limit){
         $key        = Cache::key(':items');
         $libraries = Cache::get($key);
         if(!$libraries){

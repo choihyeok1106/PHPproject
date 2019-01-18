@@ -22,7 +22,7 @@
             touch-action: pan-x pan-y;
         }
 
-        a[data-country] {
+        a[data-name] {
             text-decoration: none;
         }
 
@@ -105,82 +105,8 @@
         </div>
     </div>
 
-    <div class="text-center margin-top-30 margin-bottom-15">
-        <a href="#tab-us" data-country="us" data-toggle="tab">
-            <button type="button" class="btn dark btn-outline btn_tab active">
-                <img alt="" src="/img/flags/en.png"> USA
-            </button>
-        </a>
-        <a href="#tab-kr" data-country="kr" data-toggle="tab">
-            <button type="button" class="btn dark btn-outline btn_tab">
-                <img alt="" src="/img/flags/kr.png"> KOREA
-            </button>
-        </a>
-        <a href="#tab-jp" data-country="jp" data-toggle="tab">
-            <button type="button" class="btn dark btn-outline btn_tab">
-                <img alt="" src="/img/flags/jp.png"> JAPAN
-            </button>
-        </a>
-        <a href="#tab-ta" data-country="ta" data-toggle="tab">
-            <button type="button" class="btn dark btn-outline btn_tab">
-                <img alt="" src="/img/flags/tw.png"> TAIWAN
-            </button>
-        </a>
-        <a href="#tab-ha" data-country="ha" data-toggle="tab">
-            <button type="button" class="btn dark btn-outline btn_tab">
-                <img alt="" src="/img/flags/en.png"> HAWAII
-            </button>
-        </a>
+    <div class="text-center margin-top-30 margin-bottom-15" id="btn_country">
     </div>
-    <div id="tab-nav" class="tab-content text-center">
-        <ul class="tab-nav tab-sub tab-pane fade in active" id="tab-us">
-            <li>
-                <button class="btn btn-circle green active first" data-area="US_UT">UTAH <i
-                            class="glyphicon glyphicon-map-marker"></i></button>
-            </li>
-            <li>
-                <button class="btn btn-circle green" data-area="US_TA">TEXAS <i
-                            class="glyphicon glyphicon-map-marker"></i></button>
-            </li>
-        </ul>
-        <ul class="tab-nav tab-sub tab-pane fade" id="tab-kr">
-            <li>
-                <button class="btn btn-circle green active first" data-area="KR_SE">서울본사 <i
-                            class="glyphicon glyphicon-map-marker"></i></button>
-            </li>
-            <li>
-                <button class="btn btn-circle green" data-area="KR_GA">광주지사 <i
-                            class="glyphicon glyphicon-map-marker"></i></button>
-            </li>
-            <li>
-                <button class="btn btn-circle green" data-area="KR_DA">대구지사 <i
-                            class="glyphicon glyphicon-map-marker"></i></button>
-            </li>
-            <li>
-                <button class="btn btn-circle green" data-area="KR_BU">부산지사 <i
-                            class="glyphicon glyphicon-map-marker"></i></button>
-            </li>
-        </ul>
-        <ul class="tab-nav tab-sub tab-pane fade" id="tab-jp">
-            <li>
-                <button class="btn btn-circle green active first" data-area="JP">Live PURE™ Japan Inc <i
-                            class="glyphicon glyphicon-map-marker"></i></button>
-            </li>
-        </ul>
-        <ul class="tab-nav tab-sub tab-pane fade" id="tab-ta">
-            <li>
-                <button class="btn btn-circle green active first" data-area="TA">Live PURE™ TAIWAN <i
-                            class="glyphicon glyphicon-map-marker"></i></button>
-            </li>
-        </ul>
-        <ul class="tab-nav tab-sub tab-pane fade" id="tab-ha">
-            <li>
-                <button class="btn btn-circle green first" data-area="HA">Live PURE™ HAWAII <i
-                            class="glyphicon glyphicon-map-marker"></i></button>
-            </li>
-        </ul>
-    </div>
-
     <div class="c-content-contact-1 c-opt-1">
         <div class="row" data-auto-height=".c-height">
             <div class="col-lg-8 col-md-7 c-desktop"></div>

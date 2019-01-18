@@ -95,8 +95,8 @@ var AppCalendar = function () {
             addEvent("My Event 2");
             addEvent("My Event 3");
             addEvent("My Event 4");
-            addEvent("My Event 5")s;
-s            addEvent("My Event 6");
+            addEvent("My Event 5");
+            addEvent("My Event 6");
 
             $('#calendar').fullCalendar('destroy'); // destroy the calendar
             $('#calendar').fullCalendar({ //re-initialize the calendar

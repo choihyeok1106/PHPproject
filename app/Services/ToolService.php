@@ -13,11 +13,11 @@ use App\Supports\UserPrefs;
 class ToolService extends Service
 
 {
-    public static function getLibrary($category,$search,$limit) {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/resources?search={$search}&category={$category}&limit={$limit}");
+    public static function getLibrary($category,string $search,$limit) {
+        return Service::make()->get("/v1/vbo/resources?search={$search}&category={$category}&limit={$limit}");
     }
 
     public static function getCategories() {
-        return Service::make(UserPrefs::pass())->get("/v1/vbo/resources/categories");
+        return Service::make()->get("/v1/vbo/resources/categories");
     }
 }

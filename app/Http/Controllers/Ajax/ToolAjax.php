@@ -28,7 +28,7 @@ class ToolAjax extends AjaxController
             if ($search == "") {
                 $search = "";
             }
-            $getLibrary = ToolCache::getLibrary($request->category, $search, $request->limit);
+            $getLibrary = ToolCache::getLibrary($request->category,$search, $request->limit);
             $libraries = $this->sortLibraries($getLibrary);
             return $this->ok($libraries);
         }
@@ -55,8 +55,8 @@ class ToolAjax extends AjaxController
                     $data[$v['category']][] = $v;
                 }
             } else if ($key == 'meta') {
-                foreach ($value as $v){
-                    $meta['pagination']=$v;
+                foreach ($value as $v) {
+                    $meta['pagination'] = $v;
                 }
             }
         }
