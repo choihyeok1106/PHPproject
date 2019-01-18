@@ -5,10 +5,14 @@
  * File: business.php
  */
 
-Route::resource('team', 'TeamController');
+//Route::resource('team', 'TeamController');
 Route::resource('commissions', 'CommissionController');
 Route::resource('reports', 'ReportController');
 Route::resource('account', 'AccountController');
 Route::resource('orders', 'OrderController');
 Route::resource('autoships', 'AutoshipController');
+
+
+Route::get('team/dashboard', 'TeamController@dashboard')->name('team.dashboard');
+
 Route::get('autoships/invoice', 'AutoshipController@invoice')->name('autoships.invoice');

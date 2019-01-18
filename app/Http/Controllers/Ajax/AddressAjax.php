@@ -22,12 +22,10 @@ class AddressAjax extends AjaxController {
     }
 
     public function default() {
+        $type    = $this->int('type', 1, 1, 2);
         $data    = AddressCache::addresses(0);
         $collect = AddressCollection::new($data);
-        return $this->ok([
-            'shipping' => $collect->default(AddressType::Shipping),
-            'billing'  => $collect->default(AddressType::Billing)
-        ]);
+        return $this->ok($collect->default($type));
     }
 
 }

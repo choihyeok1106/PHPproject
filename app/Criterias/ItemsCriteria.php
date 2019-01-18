@@ -24,7 +24,7 @@ namespace App\Criterias;
  * @property mixed virtual
  * @property mixed enrollment
  */
-class ItemsCriteria extends CriteriaAbstract {
+class ItemsCriteria extends Criteria {
 
     public function order() {
         switch (substr($this->sorting, 0, 1)) {

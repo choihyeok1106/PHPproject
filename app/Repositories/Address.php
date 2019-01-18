@@ -8,6 +8,12 @@
 namespace App\Repositories;
 
 
+use App\Supports\Crypt;
+use App\Supports\UserPrefs;
+
+/**
+ * @property mixed zipcode
+ */
 class Address extends RepositoryAbstract {
 
     public function getAddr() {
