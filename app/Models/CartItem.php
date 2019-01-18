@@ -13,7 +13,6 @@ use App\Constants\Nopic;
 use App\Criterias\ItemsCriteria;
 use App\Repositories\ShoppingItems;
 use App\Services\ShoppingService;
-use App\Supports\UserPrefs;
 use Illuminate\Database\Eloquent\Collection;
 
 
@@ -125,6 +124,11 @@ class CartItem extends BaseModel {
         return false;
     }
 
+    /**
+     * @param int           $user
+     * @param int           $customer
+     * @param ItemsCriteria $c
+     */
     public static function syncPrices(int $user, int $customer, ItemsCriteria $c) {
         /** @var CartItem[]|Collection $cartitems */
         $cartitems = parent::where('user_id', $user)->where('customer_id', $customer)->get();
@@ -188,6 +192,14 @@ class CartItem extends BaseModel {
             $this->available = 0;
         }
         return $this->save();
+    }
+
+    /**
+     * @param $user_id
+     * @return Collection&CartItem[]
+     */
+    public static function ShoppingItems($user_id) {
+        return parent::query()->where('user_id', $user_id)->where('selected', 1)->where('available', 1)->get();
     }
 
     /**

@@ -42,7 +42,7 @@ class AddressCollection {
         $data = [];
         foreach ($this->_data as $address) {
             if ($address->type == $type) {
-                $data[]          = $address->getAddr();
+                $data[] = $address;
             }
         }
         return $data;
@@ -53,14 +53,24 @@ class AddressCollection {
      * @return Address|null
      */
     public function default(int $type) {
+        $addr = null;
         if ($this->_data) {
             foreach ($this->_data as $address) {
                 if ($address->type == $type && $address->default) {
-                    return $address;
+                    $addr = $address;
+                    break;
+                }
+            }
+            if($addr == null){
+                foreach ($this->_data as $address) {
+                    if($address->type == $type){
+                        $addr = $address;
+                        break;
+                    }
                 }
             }
         }
-        return null;
+        return $addr;
     }
 
 }

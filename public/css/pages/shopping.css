@@ -169,23 +169,27 @@
 }
 
 .totals .m-grid-row > div {
-    padding: 0 0 15px 0;
-    font-size: 16px;
+    padding: 0 0 8px 0;
+    font-size: 14px;
 }
 
 .totals .m-grid-row > div:first-child {
-    color: #777;
+    color: #333;
     padding-right: 10px !important;
 }
 
 .totals .m-grid-row > div:last-child {
-    color: #111;
+    color: #333;
+    font-weight: 600;
     text-align: right;
     padding-left: 10px !important;
 }
 
-.totals .total-top > div {
+.totals .total-top {
+    margin-top: 8px;
+}
 
+.totals .total-top > div {
     border-bottom: 1px solid #a0a9b4;
 }
 
@@ -811,6 +815,18 @@
 
 .checkout #shipping-addr p, .checkout #billing-addr p {
     margin-bottom: 0;
+    font-weight: 400;
+}
+
+.checkout .shipping-info h5 {
+    font-weight: 600;
+    line-height: 22px;
+    margin-top: 0;
+}
+
+.checkout .shipping-info button {
+    margin-left: 4px;
+    vertical-align: bottom;
 }
 
 #address-list h4 {
@@ -830,7 +846,7 @@
     white-space: nowrap;
 }
 
-#address-list .addrs{
+#address-list .addrs {
     padding: 15px;
     /*border: 1px solid #ddd;*/
     /*background-color: #fafafa;*/
@@ -838,7 +854,7 @@
     border-radius: 3px;
 }
 
-#address-list  .addrs > div {
+#address-list .addrs > div {
     height: 90px;
     overflow: hidden;
 }
@@ -854,4 +870,58 @@
     /*background-color: #e0ebf9;*/
     /*border-color: #e0ebf9;*/
     /*color: #327ad5;*/
+}
+
+.checkout #alert-danger {
+    display: none;
+}
+
+.portlet.light#checkout-terms {
+    /*padding-right: 10px;*/
+    /*padding: 15px;*/
+    padding: 20px;
+}
+
+.portlet.light#checkout-terms .portlet-body {
+    padding-top: 0;
+}
+
+.portlet.light#checkout-terms .list-group-item {
+    padding: 0;
+}
+
+.portlet.light#checkout-terms .list-group {
+    margin-bottom: 0;
+}
+
+.portlet.light#checkout-terms .list-group-item label {
+    display: block;
+    padding: 10px 15px;
+}
+
+.portlet.light#checkout-terms input[type=checkbox] {
+    margin-right: 4px;
+    vertical-align: text-top;
+}
+
+.portlet.light#checkout-terms .portlet-body .slimScrollDiv {
+    /*background-color: #f1f4f7;*/
+}
+
+.portlet.light#checkout-terms .wrap {
+    /*padding: 10px;*/
+}
+
+.portlet.light#checkout-terms .portlet-footer {
+    /*margin-top: 10px;*/
+    padding-left: 16px;
+}
+
+.checkout .shipping-info .md-radio-inline label {
+    margin-right: 15px;
+    /*line-height: 20px;*/
+}
+
+.checkout .shipping-info .md-radio-inline input {
+    vertical-align: top;
 }

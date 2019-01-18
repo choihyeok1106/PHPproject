@@ -2032,12 +2032,12 @@ var Loader = {
     show: function () {
         this.hide();
         var html = '<div id="loadingLayout" class="loadingLayout" style="line-height:' + $(window).height() + 'px">' + this.loader + '</div>';
-        $("body").css({"overflow-y": "hidden"});
+        // $("body").css({"overflow-y": "hidden"});
         $("body").append(html);
     },
     hide: function () {
         $("#loadingLayout").remove();
-        $("body").css({"overflow-y": "auto"});
+        // $("body").css({"overflow-y": "auto"});
     }
 };
 

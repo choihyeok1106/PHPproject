@@ -29,7 +29,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="/team" class="nav-link ">
+                        <a href="/team/dashboard" class="nav-link ">
                             <span class="title">MY Team Dashboard</span>
                         </a>
                     </li>

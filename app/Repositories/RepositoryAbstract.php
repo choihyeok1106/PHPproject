@@ -7,17 +7,18 @@
 
 namespace App\Repositories;
 
-use App\Criterias\CriteriaAbstract;
+use App\Criterias\Criteria;
 
 
 /**
+ * @property mixed id
  * @property mixed locale
  */
 abstract class RepositoryAbstract {
 
     /** @var mixed $locale */
     private $_data;
-    /** @var CriteriaAbstract $_params */
+    /** @var Criteria $_params */
     protected $_params;
 
     /**
@@ -33,7 +34,7 @@ abstract class RepositoryAbstract {
      * @param mixed $params
      * @return $this
      */
-    public function set($data, CriteriaAbstract $params = null) {
+    public function set($data, Criteria $params = null) {
         $this->_data   = $data;
         $this->_params = $params;
         return $this;

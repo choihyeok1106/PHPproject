@@ -9,6 +9,7 @@
 namespace App\Services {
 
     use App\Cache\Cache;
+    use App\Supports\Logger;
     use App\Supports\UserPrefs;
     use Illuminate\Support\Facades\App;
     use Ixudra\Curl\Builder;
@@ -40,8 +41,8 @@ namespace App\Services {
         private $builder;
         /** @var bool $asJsonResponse */
         private $asJsonResponse = true;
-        /** @var bool $debug */
-        private $debug = false;
+        /** @var string $url */
+        private $url;
 
         /**
          * @param mixed $headers
@@ -132,7 +133,7 @@ namespace App\Services {
         private function parseUri(string $uri) {
             $pattern = '/^https?:\/\/(www\.)?\w+\.[a-z]{2,6}(\/)?$/';
             if (preg_match($pattern, $uri)) {
-                return $uri;
+                return $this->url = $uri;
             }
             $server = env('API_SERVER');
             if (substr($server, -1) !== '/') {
@@ -141,13 +142,14 @@ namespace App\Services {
             if (substr($uri, 0, 1) === '/') {
                 $uri = substr($uri, 1);
             }
-            return $server . $uri;
+            return $this->url = $server . $uri;
         }
 
         /**
          * Parse Response
+         * @param string $method
          */
-        private function parseResponse() {
+        private function parseResponse($method = '') {
             if ($this->body) {
                 if (isset($this->body['error'])) {
                     $this->error          = new Error();
@@ -158,11 +160,14 @@ namespace App\Services {
                     $this->parseMeta();
                 }
             }
-            if ($this->debug) {
-                echo '<pre>';
-                print_r($this);
-                echo '</pre>';
-                exit;
+            if (!$this->succeed()) {
+                Logger::new([
+                    'log'      => $this->body,
+                    'root'     => base_path() . '/../error_logs',
+                    'method'   => $method,
+                    'url'      => $this->url,
+                    'timezone' => env('APP_TIMEZONE'),
+                ])->write();
             }
         }
 
@@ -188,15 +193,6 @@ namespace App\Services {
                 return $this->error->message;
             }
             return '';
-        }
-
-        /**
-         * @param bool $debug
-         * @return Service
-         */
-        public function debug(bool $debug) {
-            $this->debug = $debug;
-            return $this;
         }
 
         /**
@@ -295,7 +291,7 @@ namespace App\Services {
                 $builder->withData($data);
             }
             $this->body = $builder->get();
-            $this->parseResponse();
+            $this->parseResponse('get');
             return $this;
         }
 
@@ -307,7 +303,7 @@ namespace App\Services {
             $builder    = (new CurlService)->to($this->parseUri($uri));
             $builder    = $this->init($builder);
             $this->body = $builder->delete();
-            $this->parseResponse();
+            $this->parseResponse('delete');
             return $this;
         }
 
@@ -323,7 +319,7 @@ namespace App\Services {
                 $builder->withData($data);
             }
             $this->body = $builder->post();
-            $this->parseResponse();
+            $this->parseResponse('post');
             return $this;
         }
 

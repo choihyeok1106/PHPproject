@@ -23,12 +23,8 @@ function login() {
             remember: $("#remember:checked").length
         }, {
             ok: function (re) {
-                if (re.hasOwnProperty("error")) {
-                    show_danger(re["error"])
-                } else {
-                    var redirectUrl = Get.get('redirect', '/');
-                    location.replace(redirectUrl)
-                }
+                var redirectUrl = Get.get('redirect', '/');
+                location.replace(redirectUrl)
             },
             no: function (m) {
                 alert(m);
